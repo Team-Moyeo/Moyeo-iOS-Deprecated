@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
+		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
+		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
+		F3D0DEF62C44AF1A00D5EB97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF52C44AF1A00D5EB97 /* Preview Assets.xcassets */; };
+		F3D0DF002C44AF1A00D5EB97 /* moyeoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEFF2C44AF1A00D5EB97 /* moyeoTests.swift */; };
+		F3D0DF0A2C44AF1A00D5EB97 /* moyeoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DF092C44AF1A00D5EB97 /* moyeoUITests.swift */; };
+		F3D0DF0C2C44AF1A00D5EB97 /* moyeoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DF0B2C44AF1A00D5EB97 /* moyeoUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3D0DEFC2C44AF1A00D5EB97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3D0DEE32C44AF1800D5EB97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D0DEEA2C44AF1800D5EB97;
+			remoteInfo = moyeo;
+		};
+		F3D0DF062C44AF1A00D5EB97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3D0DEE32C44AF1800D5EB97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3D0DEEA2C44AF1800D5EB97;
+			remoteInfo = moyeo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
+		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3D0DEF52C44AF1A00D5EB97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F3D0DEFB2C44AF1A00D5EB97 /* moyeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = moyeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D0DEFF2C44AF1A00D5EB97 /* moyeoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoTests.swift; sourceTree = "<group>"; };
+		F3D0DF052C44AF1A00D5EB97 /* moyeoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = moyeoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D0DF092C44AF1A00D5EB97 /* moyeoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoUITests.swift; sourceTree = "<group>"; };
+		F3D0DF0B2C44AF1A00D5EB97 /* moyeoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3D0DEE82C44AF1800D5EB97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DEF82C44AF1A00D5EB97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DF022C44AF1A00D5EB97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F3D0DEE22C44AF1800D5EB97 = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEED2C44AF1800D5EB97 /* moyeo */,
+				F3D0DEFE2C44AF1A00D5EB97 /* moyeoTests */,
+				F3D0DF082C44AF1A00D5EB97 /* moyeoUITests */,
+				F3D0DEEC2C44AF1800D5EB97 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3D0DEEC2C44AF1800D5EB97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */,
+				F3D0DEFB2C44AF1A00D5EB97 /* moyeoTests.xctest */,
+				F3D0DF052C44AF1A00D5EB97 /* moyeoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */,
+				F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */,
+				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
+				F3D0DEF42C44AF1A00D5EB97 /* Preview Content */,
+			);
+			path = moyeo;
+			sourceTree = "<group>";
+		};
+		F3D0DEF42C44AF1A00D5EB97 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEF52C44AF1A00D5EB97 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3D0DEFE2C44AF1A00D5EB97 /* moyeoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEFF2C44AF1A00D5EB97 /* moyeoTests.swift */,
+			);
+			path = moyeoTests;
+			sourceTree = "<group>";
+		};
+		F3D0DF082C44AF1A00D5EB97 /* moyeoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DF092C44AF1A00D5EB97 /* moyeoUITests.swift */,
+				F3D0DF0B2C44AF1A00D5EB97 /* moyeoUITestsLaunchTests.swift */,
+			);
+			path = moyeoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3D0DEEA2C44AF1800D5EB97 /* moyeo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D0DF0F2C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeo" */;
+			buildPhases = (
+				F3D0DEE72C44AF1800D5EB97 /* Sources */,
+				F3D0DEE82C44AF1800D5EB97 /* Frameworks */,
+				F3D0DEE92C44AF1800D5EB97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = moyeo;
+			productName = moyeo;
+			productReference = F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3D0DEFA2C44AF1A00D5EB97 /* moyeoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D0DF122C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoTests" */;
+			buildPhases = (
+				F3D0DEF72C44AF1A00D5EB97 /* Sources */,
+				F3D0DEF82C44AF1A00D5EB97 /* Frameworks */,
+				F3D0DEF92C44AF1A00D5EB97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3D0DEFD2C44AF1A00D5EB97 /* PBXTargetDependency */,
+			);
+			name = moyeoTests;
+			productName = moyeoTests;
+			productReference = F3D0DEFB2C44AF1A00D5EB97 /* moyeoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F3D0DF042C44AF1A00D5EB97 /* moyeoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D0DF152C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoUITests" */;
+			buildPhases = (
+				F3D0DF012C44AF1A00D5EB97 /* Sources */,
+				F3D0DF022C44AF1A00D5EB97 /* Frameworks */,
+				F3D0DF032C44AF1A00D5EB97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3D0DF072C44AF1A00D5EB97 /* PBXTargetDependency */,
+			);
+			name = moyeoUITests;
+			productName = moyeoUITests;
+			productReference = F3D0DF052C44AF1A00D5EB97 /* moyeoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3D0DEE32C44AF1800D5EB97 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					F3D0DEEA2C44AF1800D5EB97 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					F3D0DEFA2C44AF1A00D5EB97 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F3D0DEEA2C44AF1800D5EB97;
+					};
+					F3D0DF042C44AF1A00D5EB97 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F3D0DEEA2C44AF1800D5EB97;
+					};
+				};
+			};
+			buildConfigurationList = F3D0DEE62C44AF1800D5EB97 /* Build configuration list for PBXProject "moyeo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3D0DEE22C44AF1800D5EB97;
+			productRefGroup = F3D0DEEC2C44AF1800D5EB97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3D0DEEA2C44AF1800D5EB97 /* moyeo */,
+				F3D0DEFA2C44AF1A00D5EB97 /* moyeoTests */,
+				F3D0DF042C44AF1A00D5EB97 /* moyeoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3D0DEE92C44AF1800D5EB97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D0DEF62C44AF1A00D5EB97 /* Preview Assets.xcassets in Resources */,
+				F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DEF92C44AF1A00D5EB97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DF032C44AF1A00D5EB97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3D0DEE72C44AF1800D5EB97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DEF72C44AF1A00D5EB97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D0DF002C44AF1A00D5EB97 /* moyeoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D0DF012C44AF1A00D5EB97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D0DF0C2C44AF1A00D5EB97 /* moyeoUITestsLaunchTests.swift in Sources */,
+				F3D0DF0A2C44AF1A00D5EB97 /* moyeoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3D0DEFD2C44AF1A00D5EB97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D0DEEA2C44AF1800D5EB97 /* moyeo */;
+			targetProxy = F3D0DEFC2C44AF1A00D5EB97 /* PBXContainerItemProxy */;
+		};
+		F3D0DF072C44AF1A00D5EB97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3D0DEEA2C44AF1800D5EB97 /* moyeo */;
+			targetProxy = F3D0DF062C44AF1A00D5EB97 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F3D0DF0D2C44AF1A00D5EB97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3D0DF0E2C44AF1A00D5EB97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3D0DF102C44AF1A00D5EB97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3D0DF112C44AF1A00D5EB97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3D0DF132C44AF1A00D5EB97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/moyeo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/moyeo";
+			};
+			name = Debug;
+		};
+		F3D0DF142C44AF1A00D5EB97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/moyeo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/moyeo";
+			};
+			name = Release;
+		};
+		F3D0DF162C44AF1A00D5EB97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = moyeo;
+			};
+			name = Debug;
+		};
+		F3D0DF172C44AF1A00D5EB97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U5F437QJA7;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = moyeo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3D0DEE62C44AF1800D5EB97 /* Build configuration list for PBXProject "moyeo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D0DF0D2C44AF1A00D5EB97 /* Debug */,
+				F3D0DF0E2C44AF1A00D5EB97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D0DF0F2C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D0DF102C44AF1A00D5EB97 /* Debug */,
+				F3D0DF112C44AF1A00D5EB97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D0DF122C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D0DF132C44AF1A00D5EB97 /* Debug */,
+				F3D0DF142C44AF1A00D5EB97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D0DF152C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D0DF162C44AF1A00D5EB97 /* Debug */,
+				F3D0DF172C44AF1A00D5EB97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3D0DEE32C44AF1800D5EB97 /* Project object */;
+}
