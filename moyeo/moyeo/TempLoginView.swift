@@ -20,7 +20,7 @@ struct AppleSigninButton: View {
     var body: some View {
         
         SignInWithAppleButton(
-            .signUp,
+            .signIn,
             onRequest: { request in
                 request.requestedScopes = [.fullName, .email]
             },
