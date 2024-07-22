@@ -49,6 +49,12 @@ struct AppleSigninButton: View {
             let AuthorizationCode = String(data: appleIDCredential.authorizationCode!, encoding: .utf8)
             
             print("User ID: \(userIdentifier)")
+            if let identityToken = IdentityToken {
+                print("identityToken: \(identityToken)")
+            }
+            if let authorizationCode = AuthorizationCode {
+                print("authorizationCode: \(authorizationCode)")
+            }
             if let fullName = fullName {
                 print("Full Name: \(fullName)")
             }
