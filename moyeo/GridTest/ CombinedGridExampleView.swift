@@ -9,7 +9,7 @@ import SwiftUI
 
 import SwiftUI
 
-struct ContentView: View {
+struct CombinedGridExampleView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     let rows = [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]
 
@@ -42,6 +42,6 @@ struct ContentView: View {
 
 struct CombinedGridExampleView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CombinedGridExampleView()
     }
 }

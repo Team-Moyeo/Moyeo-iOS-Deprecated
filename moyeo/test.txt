@@ -1,0 +1,278 @@
+
+getEvents in the View 2024-08-26 15:00:00 +0000 , 2024-08-31 15:00:00 +0000
+startDate endDate in the getEvents  Optional(2024-08-26 15:00:00 +0000) endDate Optional(2024-08-31 15:00:00 +0000)
+start 2024-08-26 15:00:00 +0000 end 2024-08-31 15:00:00 +0000
+filteredEvents Count 5
+5
+start, end, timezone, Optional(2024-08-24 15:00:00 +0000) , Optional(2024-08-29 14:59:59 +0000), nil
+Stay at APA 호텔 삿포로 스스키노-에키니시 (APA Hotel Sapporo Susukino-Ekinishi) , (basicDateString) 2024-08-24 15:00:00 +0000
+UTC 시간: 2024-08-24 15:00:00 +0000
+한국 시간: 2024-08-25 00:00:00 +0900
+Stay at APA 호텔 삿포로 스스키노-에키니시 (APA Hotel Sapporo Susukino-Ekinishi) Optional(0)  2024-08-25 00:00:00 +0900
+startHourMin :  0
+endHourMin :  2359
+12:00am , 0, 2359 time slot is inside the range row index 0
+12:30am , 0, 2359 time slot is inside the range row index 1
+01:00am , 0, 2359 time slot is inside the range row index 2
+01:30am , 0, 2359 time slot is inside the range row index 3
+02:00am , 0, 2359 time slot is inside the range row index 4
+02:30am , 0, 2359 time slot is inside the range row index 5
+03:00am , 0, 2359 time slot is inside the range row index 6
+03:30am , 0, 2359 time slot is inside the range row index 7
+04:00am , 0, 2359 time slot is inside the range row index 8
+04:30am , 0, 2359 time slot is inside the range row index 9
+05:00am , 0, 2359 time slot is inside the range row index 10
+05:30am , 0, 2359 time slot is inside the range row index 11
+06:00am , 0, 2359 time slot is inside the range row index 12
+06:30am , 0, 2359 time slot is inside the range row index 13
+07:00am , 0, 2359 time slot is inside the range row index 14
+07:30am , 0, 2359 time slot is inside the range row index 15
+08:00am , 0, 2359 time slot is inside the range row index 16
+08:30am , 0, 2359 time slot is inside the range row index 17
+09:00am , 0, 2359 time slot is inside the range row index 18
+09:30am , 0, 2359 time slot is inside the range row index 19
+10:00am , 0, 2359 time slot is inside the range row index 20
+10:30am , 0, 2359 time slot is inside the range row index 21
+11:00am , 0, 2359 time slot is inside the range row index 22
+11:30am , 0, 2359 time slot is inside the range row index 23
+12:00pm , 0, 2359 time slot is inside the range row index 24
+12:30pm , 0, 2359 time slot is inside the range row index 25
+01:00pm , 0, 2359 time slot is inside the range row index 26
+01:30pm , 0, 2359 time slot is inside the range row index 27
+02:00pm , 0, 2359 time slot is inside the range row index 28
+02:30pm , 0, 2359 time slot is inside the range row index 29
+03:00pm , 0, 2359 time slot is inside the range row index 30
+03:30pm , 0, 2359 time slot is inside the range row index 31
+04:00pm , 0, 2359 time slot is inside the range row index 32
+04:30pm , 0, 2359 time slot is inside the range row index 33
+05:00pm , 0, 2359 time slot is inside the range row index 34
+05:30pm , 0, 2359 time slot is inside the range row index 35
+06:00pm , 0, 2359 time slot is inside the range row index 36
+06:30pm , 0, 2359 time slot is inside the range row index 37
+07:00pm , 0, 2359 time slot is inside the range row index 38
+07:30pm , 0, 2359 time slot is inside the range row index 39
+08:00pm , 0, 2359 time slot is inside the range row index 40
+09:00pm , 0, 2359 time slot is inside the range row index 41
+09:30pm , 0, 2359 time slot is inside the range row index 42
+10:00pm , 0, 2359 time slot is inside the range row index 43
+10:30pm , 0, 2359 time slot is inside the range row index 44
+11:00pm , 0, 2359 time slot is inside the range row index 45
+11:30pm , 0, 2359 time slot is inside the range row index 46
+midnight , 0, 2359 time slot is outside the index 47
+calendarArrayCount 47
+UTC 시간: 2024-08-25 15:00:00 +0000
+한국 시간: 2024-08-26 00:00:00 +0900
+휴가 Optional(1)  2024-08-26 00:00:00 +0900
+startHourMin :  0
+endHourMin :  2359
+12:00am , 0, 2359 time slot is inside the range row index 0
+12:30am , 0, 2359 time slot is inside the range row index 1
+01:00am , 0, 2359 time slot is inside the range row index 2
+01:30am , 0, 2359 time slot is inside the range row index 3
+02:00am , 0, 2359 time slot is inside the range row index 4
+02:30am , 0, 2359 time slot is inside the range row index 5
+03:00am , 0, 2359 time slot is inside the range row index 6
+03:30am , 0, 2359 time slot is inside the range row index 7
+04:00am , 0, 2359 time slot is inside the range row index 8
+04:30am , 0, 2359 time slot is inside the range row index 9
+05:00am , 0, 2359 time slot is inside the range row index 10
+05:30am , 0, 2359 time slot is inside the range row index 11
+06:00am , 0, 2359 time slot is inside the range row index 12
+06:30am , 0, 2359 time slot is inside the range row index 13
+07:00am , 0, 2359 time slot is inside the range row index 14
+07:30am , 0, 2359 time slot is inside the range row index 15
+08:00am , 0, 2359 time slot is inside the range row index 16
+08:30am , 0, 2359 time slot is inside the range row index 17
+09:00am , 0, 2359 time slot is inside the range row index 18
+09:30am , 0, 2359 time slot is inside the range row index 19
+10:00am , 0, 2359 time slot is inside the range row index 20
+10:30am , 0, 2359 time slot is inside the range row index 21
+11:00am , 0, 2359 time slot is inside the range row index 22
+11:30am , 0, 2359 time slot is inside the range row index 23
+12:00pm , 0, 2359 time slot is inside the range row index 24
+12:30pm , 0, 2359 time slot is inside the range row index 25
+01:00pm , 0, 2359 time slot is inside the range row index 26
+01:30pm , 0, 2359 time slot is inside the range row index 27
+02:00pm , 0, 2359 time slot is inside the range row index 28
+02:30pm , 0, 2359 time slot is inside the range row index 29
+03:00pm , 0, 2359 time slot is inside the range row index 30
+03:30pm , 0, 2359 time slot is inside the range row index 31
+04:00pm , 0, 2359 time slot is inside the range row index 32
+04:30pm , 0, 2359 time slot is inside the range row index 33
+05:00pm , 0, 2359 time slot is inside the range row index 34
+05:30pm , 0, 2359 time slot is inside the range row index 35
+06:00pm , 0, 2359 time slot is inside the range row index 36
+06:30pm , 0, 2359 time slot is inside the range row index 37
+07:00pm , 0, 2359 time slot is inside the range row index 38
+07:30pm , 0, 2359 time slot is inside the range row index 39
+08:00pm , 0, 2359 time slot is inside the range row index 40
+09:00pm , 0, 2359 time slot is inside the range row index 41
+09:30pm , 0, 2359 time slot is inside the range row index 42
+10:00pm , 0, 2359 time slot is inside the range row index 43
+10:30pm , 0, 2359 time slot is inside the range row index 44
+11:00pm , 0, 2359 time slot is inside the range row index 45
+11:30pm , 0, 2359 time slot is inside the range row index 46
+midnight , 0, 2359 time slot is outside the index 47
+calendarArrayCount 94
+UTC 시간: 2024-08-26 23:42:00 +0000
+한국 시간: 2024-08-27 08:42:00 +0900
+【楽天GORA】 ゴルフ場予約 Optional(2)  2024-08-27 08:42:00 +0900
+startHourMin :  842
+endHourMin :  1442
+12:00am , 842, 1442 time slot is inside the range row index 0
+12:30am , 842, 1442 time slot is inside the range row index 1
+01:00am , 842, 1442 time slot is outside the index 2
+01:30am , 842, 1442 time slot is outside the index 3
+02:00am , 842, 1442 time slot is outside the index 4
+02:30am , 842, 1442 time slot is outside the index 5
+03:00am , 842, 1442 time slot is outside the index 6
+03:30am , 842, 1442 time slot is outside the index 7
+04:00am , 842, 1442 time slot is outside the index 8
+04:30am , 842, 1442 time slot is outside the index 9
+05:00am , 842, 1442 time slot is outside the index 10
+05:30am , 842, 1442 time slot is outside the index 11
+06:00am , 842, 1442 time slot is outside the index 12
+06:30am , 842, 1442 time slot is outside the index 13
+07:00am , 842, 1442 time slot is outside the index 14
+07:30am , 842, 1442 time slot is outside the index 15
+08:00am , 842, 1442 time slot is outside the index 16
+08:30am , 842, 1442 time slot is outside the index 17
+09:00am , 842, 1442 time slot is inside the range row index 18
+09:30am , 842, 1442 time slot is inside the range row index 19
+10:00am , 842, 1442 time slot is inside the range row index 20
+10:30am , 842, 1442 time slot is inside the range row index 21
+11:00am , 842, 1442 time slot is inside the range row index 22
+11:30am , 842, 1442 time slot is inside the range row index 23
+12:00pm , 842, 1442 time slot is inside the range row index 24
+12:30pm , 842, 1442 time slot is inside the range row index 25
+01:00pm , 842, 1442 time slot is inside the range row index 26
+01:30pm , 842, 1442 time slot is inside the range row index 27
+02:00pm , 842, 1442 time slot is inside the range row index 28
+02:30pm , 842, 1442 time slot is inside the range row index 29
+03:00pm , 842, 1442 time slot is outside the index 30
+03:30pm , 842, 1442 time slot is outside the index 31
+04:00pm , 842, 1442 time slot is outside the index 32
+04:30pm , 842, 1442 time slot is outside the index 33
+05:00pm , 842, 1442 time slot is outside the index 34
+05:30pm , 842, 1442 time slot is outside the index 35
+06:00pm , 842, 1442 time slot is outside the index 36
+06:30pm , 842, 1442 time slot is outside the index 37
+07:00pm , 842, 1442 time slot is outside the index 38
+07:30pm , 842, 1442 time slot is outside the index 39
+08:00pm , 842, 1442 time slot is outside the index 40
+09:00pm , 842, 1442 time slot is outside the index 41
+09:30pm , 842, 1442 time slot is outside the index 42
+10:00pm , 842, 1442 time slot is outside the index 43
+10:30pm , 842, 1442 time slot is outside the index 44
+11:00pm , 842, 1442 time slot is outside the index 45
+11:30pm , 842, 1442 time slot is outside the index 46
+midnight , 842, 1442 time slot is outside the index 47
+calendarArrayCount 108
+UTC 시간: 2024-08-27 23:22:00 +0000
+한국 시간: 2024-08-28 08:22:00 +0900
+【楽天GORA】 ゴルフ場予約 Optional(3)  2024-08-28 08:22:00 +0900
+startHourMin :  822
+endHourMin :  1422
+12:00am , 822, 1422 time slot is inside the range row index 0
+12:30am , 822, 1422 time slot is inside the range row index 1
+01:00am , 822, 1422 time slot is outside the index 2
+01:30am , 822, 1422 time slot is outside the index 3
+02:00am , 822, 1422 time slot is outside the index 4
+02:30am , 822, 1422 time slot is outside the index 5
+03:00am , 822, 1422 time slot is outside the index 6
+03:30am , 822, 1422 time slot is outside the index 7
+04:00am , 822, 1422 time slot is outside the index 8
+04:30am , 822, 1422 time slot is outside the index 9
+05:00am , 822, 1422 time slot is outside the index 10
+05:30am , 822, 1422 time slot is outside the index 11
+06:00am , 822, 1422 time slot is outside the index 12
+06:30am , 822, 1422 time slot is outside the index 13
+07:00am , 822, 1422 time slot is outside the index 14
+07:30am , 822, 1422 time slot is outside the index 15
+08:00am , 822, 1422 time slot is outside the index 16
+08:30am , 822, 1422 time slot is inside the range row index 17
+09:00am , 822, 1422 time slot is inside the range row index 18
+09:30am , 822, 1422 time slot is inside the range row index 19
+10:00am , 822, 1422 time slot is inside the range row index 20
+10:30am , 822, 1422 time slot is inside the range row index 21
+11:00am , 822, 1422 time slot is inside the range row index 22
+11:30am , 822, 1422 time slot is inside the range row index 23
+12:00pm , 822, 1422 time slot is inside the range row index 24
+12:30pm , 822, 1422 time slot is inside the range row index 25
+01:00pm , 822, 1422 time slot is inside the range row index 26
+01:30pm , 822, 1422 time slot is inside the range row index 27
+02:00pm , 822, 1422 time slot is inside the range row index 28
+02:30pm , 822, 1422 time slot is outside the index 29
+03:00pm , 822, 1422 time slot is outside the index 30
+03:30pm , 822, 1422 time slot is outside the index 31
+04:00pm , 822, 1422 time slot is outside the index 32
+04:30pm , 822, 1422 time slot is outside the index 33
+05:00pm , 822, 1422 time slot is outside the index 34
+05:30pm , 822, 1422 time slot is outside the index 35
+06:00pm , 822, 1422 time slot is outside the index 36
+06:30pm , 822, 1422 time slot is outside the index 37
+07:00pm , 822, 1422 time slot is outside the index 38
+07:30pm , 822, 1422 time slot is outside the index 39
+08:00pm , 822, 1422 time slot is outside the index 40
+09:00pm , 822, 1422 time slot is outside the index 41
+09:30pm , 822, 1422 time slot is outside the index 42
+10:00pm , 822, 1422 time slot is outside the index 43
+10:30pm , 822, 1422 time slot is outside the index 44
+11:00pm , 822, 1422 time slot is outside the index 45
+11:30pm , 822, 1422 time slot is outside the index 46
+midnight , 822, 1422 time slot is outside the index 47
+calendarArrayCount 122
+UTC 시간: 2024-08-29 04:00:00 +0000
+한국 시간: 2024-08-29 13:00:00 +0900
+비행기: OZ 173, 출발: CTS 도착: ICN Optional(4)  2024-08-29 13:00:00 +0900
+startHourMin :  1300
+endHourMin :  1610
+12:00am , 1300, 1610 time slot is outside the index 0
+12:30am , 1300, 1610 time slot is outside the index 1
+01:00am , 1300, 1610 time slot is outside the index 2
+01:30am , 1300, 1610 time slot is outside the index 3
+02:00am , 1300, 1610 time slot is outside the index 4
+02:30am , 1300, 1610 time slot is outside the index 5
+03:00am , 1300, 1610 time slot is outside the index 6
+03:30am , 1300, 1610 time slot is outside the index 7
+04:00am , 1300, 1610 time slot is outside the index 8
+04:30am , 1300, 1610 time slot is outside the index 9
+05:00am , 1300, 1610 time slot is outside the index 10
+05:30am , 1300, 1610 time slot is outside the index 11
+06:00am , 1300, 1610 time slot is outside the index 12
+06:30am , 1300, 1610 time slot is outside the index 13
+07:00am , 1300, 1610 time slot is outside the index 14
+07:30am , 1300, 1610 time slot is outside the index 15
+08:00am , 1300, 1610 time slot is outside the index 16
+08:30am , 1300, 1610 time slot is outside the index 17
+09:00am , 1300, 1610 time slot is outside the index 18
+09:30am , 1300, 1610 time slot is outside the index 19
+10:00am , 1300, 1610 time slot is outside the index 20
+10:30am , 1300, 1610 time slot is outside the index 21
+11:00am , 1300, 1610 time slot is outside the index 22
+11:30am , 1300, 1610 time slot is outside the index 23
+12:00pm , 1300, 1610 time slot is outside the index 24
+12:30pm , 1300, 1610 time slot is outside the index 25
+01:00pm , 1300, 1610 time slot is inside the range row index 26
+01:30pm , 1300, 1610 time slot is inside the range row index 27
+02:00pm , 1300, 1610 time slot is inside the range row index 28
+02:30pm , 1300, 1610 time slot is inside the range row index 29
+03:00pm , 1300, 1610 time slot is inside the range row index 30
+03:30pm , 1300, 1610 time slot is inside the range row index 31
+04:00pm , 1300, 1610 time slot is inside the range row index 32
+04:30pm , 1300, 1610 time slot is outside the index 33
+05:00pm , 1300, 1610 time slot is outside the index 34
+05:30pm , 1300, 1610 time slot is outside the index 35
+06:00pm , 1300, 1610 time slot is outside the index 36
+06:30pm , 1300, 1610 time slot is outside the index 37
+07:00pm , 1300, 1610 time slot is outside the index 38
+07:30pm , 1300, 1610 time slot is outside the index 39
+08:00pm , 1300, 1610 time slot is outside the index 40
+09:00pm , 1300, 1610 time slot is outside the index 41
+09:30pm , 1300, 1610 time slot is outside the index 42
+10:00pm , 1300, 1610 time slot is outside the index 43
+10:30pm , 1300, 1610 time slot is outside the index 44
+11:00pm , 1300, 1610 time slot is outside the index 45
+11:30pm , 1300, 1610 time slot is outside the index 46
+midnight , 1300, 1610 time slot is outside the index 47
+calendarArrayCount 129

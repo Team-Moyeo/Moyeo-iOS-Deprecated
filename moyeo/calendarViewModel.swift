@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import EventKit
 
-struct calendarViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class calendarViewModel{
+    
+    
+    var  myScheduleList: [EKCalendarItem ]
+    func fetchMySchedule(from startDate: String, to endDate: String) {
+        
+        
     }
-}
-
-#Preview {
-    calendarViewModel()
 }

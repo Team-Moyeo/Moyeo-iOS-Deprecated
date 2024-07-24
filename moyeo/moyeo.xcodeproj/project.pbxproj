@@ -7,8 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0FD4542C4E3AB10028AB12 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD43D2C4E3AB10028AB12 /* AlertError.swift */; };
+		CE0FD4552C4E3AB10028AB12 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD43E2C4E3AB10028AB12 /* Array+Extension.swift */; };
+		CE0FD4572C4E3AB10028AB12 /* BookingButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4402C4E3AB10028AB12 /* BookingButtonStyle.swift */; };
+		CE0FD4582C4E3AB10028AB12 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4412C4E3AB10028AB12 /* Date+Extension.swift */; };
+		CE0FD4592C4E3AB10028AB12 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4422C4E3AB10028AB12 /* EditButton.swift */; };
+		CE0FD45B2C4E3AB10028AB12 /* EventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4442C4E3AB10028AB12 /* EventDataStore.swift */; };
+		CE0FD45C2C4E3AB10028AB12 /* EventDataStore+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4452C4E3AB10028AB12 /* EventDataStore+FullAccess.swift */; };
+		CE0FD45E2C4E3AB10028AB12 /* EventStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4472C4E3AB10028AB12 /* EventStoreError.swift */; };
+		CE0FD45F2C4E3AB10028AB12 /* EventStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4482C4E3AB10028AB12 /* EventStoreManager.swift */; };
+		CE0FD4602C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4492C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift */; };
+		CE0FD4692C4E3AB10028AB12 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4522C4E3AB10028AB12 /* TimeInterval+Extension.swift */; };
+		CE0FD46B2C4E3DBB0028AB12 /* calendarFetchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD46A2C4E3DBB0028AB12 /* calendarFetchView.swift */; };
+		CE300BB42C4F69BB0016A56F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE300BB32C4F69BB0016A56F /* EventViewModel.swift */; };
+		CE300BB62C509D0C0016A56F /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE300BB52C509D0C0016A56F /* test.txt */; };
+		CEAFB5F32C48AA4200F22DA2 /* TempGroupVoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB5F22C48AA4200F22DA2 /* TempGroupVoteView.swift */; };
+		CEDF73142C4AA1E30051E9AD /* GridExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF73132C4AA1E30051E9AD /* GridExampleView.swift */; };
+		CEDF73162C4AA3C00051E9AD /* SwiDynamicGridRowExampleViewftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF73152C4AA3C00051E9AD /* SwiDynamicGridRowExampleViewftUIView.swift */; };
+		CEDF73192C4AA7470051E9AD /* LazyVGridWithIndexExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF73182C4AA7470051E9AD /* LazyVGridWithIndexExample.swift */; };
+		CEDF731B2C4AAA420051E9AD /* LazyVGridWithButtonTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF731A2C4AAA420051E9AD /* LazyVGridWithButtonTrackingView.swift */; };
+		CEDF731D2C4AB6380051E9AD /* DynamicGridExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF731C2C4AB6380051E9AD /* DynamicGridExample.swift */; };
+		CEDF731F2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDF731E2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
-		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
+		F3D0DEF12C44AF1800D5EB97 /*  CombinedGridExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /*  CombinedGridExampleView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
 		F3D0DEF62C44AF1A00D5EB97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF52C44AF1A00D5EB97 /* Preview Assets.xcassets */; };
 		F3D0DF002C44AF1A00D5EB97 /* moyeoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEFF2C44AF1A00D5EB97 /* moyeoTests.swift */; };
@@ -34,9 +55,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0FD4112C4E31D70028AB12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE0FD43D2C4E3AB10028AB12 /* AlertError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
+		CE0FD43E2C4E3AB10028AB12 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		CE0FD4402C4E3AB10028AB12 /* BookingButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingButtonStyle.swift; sourceTree = "<group>"; };
+		CE0FD4412C4E3AB10028AB12 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		CE0FD4422C4E3AB10028AB12 /* EditButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
+		CE0FD4442C4E3AB10028AB12 /* EventDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStore.swift; sourceTree = "<group>"; };
+		CE0FD4452C4E3AB10028AB12 /* EventDataStore+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventDataStore+FullAccess.swift"; sourceTree = "<group>"; };
+		CE0FD4472C4E3AB10028AB12 /* EventStoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreError.swift; sourceTree = "<group>"; };
+		CE0FD4482C4E3AB10028AB12 /* EventStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreManager.swift; sourceTree = "<group>"; };
+		CE0FD4492C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventStoreManager+FullAccess.swift"; sourceTree = "<group>"; };
+		CE0FD4522C4E3AB10028AB12 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		CE0FD46A2C4E3DBB0028AB12 /* calendarFetchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calendarFetchView.swift; sourceTree = "<group>"; };
+		CE300BB32C4F69BB0016A56F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		CE300BB52C509D0C0016A56F /* test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		CEAFB5F22C48AA4200F22DA2 /* TempGroupVoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupVoteView.swift; sourceTree = "<group>"; };
+		CEDF73132C4AA1E30051E9AD /* GridExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridExampleView.swift; sourceTree = "<group>"; };
+		CEDF73152C4AA3C00051E9AD /* SwiDynamicGridRowExampleViewftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiDynamicGridRowExampleViewftUIView.swift; sourceTree = "<group>"; };
+		CEDF73182C4AA7470051E9AD /* LazyVGridWithIndexExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyVGridWithIndexExample.swift; sourceTree = "<group>"; };
+		CEDF731A2C4AAA420051E9AD /* LazyVGridWithButtonTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyVGridWithButtonTrackingView.swift; sourceTree = "<group>"; };
+		CEDF731C2C4AB6380051E9AD /* DynamicGridExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicGridExample.swift; sourceTree = "<group>"; };
+		CEDF731E2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicGridWithDragSelection.swift; sourceTree = "<group>"; };
+		CEFEEEB62C4ED06900CFAB6B /* Empty.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Empty.md; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
-		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F3D0DEF02C44AF1800D5EB97 /*  CombinedGridExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " CombinedGridExampleView.swift"; sourceTree = "<group>"; };
 		F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3D0DEF52C44AF1A00D5EB97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F3D0DEFB2C44AF1A00D5EB97 /* moyeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = moyeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,9 +115,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE0FD4532C4E3AB10028AB12 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CE0FD43D2C4E3AB10028AB12 /* AlertError.swift */,
+				CE0FD43E2C4E3AB10028AB12 /* Array+Extension.swift */,
+				CE0FD4402C4E3AB10028AB12 /* BookingButtonStyle.swift */,
+				CE0FD4412C4E3AB10028AB12 /* Date+Extension.swift */,
+				CE0FD4422C4E3AB10028AB12 /* EditButton.swift */,
+				CE0FD4442C4E3AB10028AB12 /* EventDataStore.swift */,
+				CE0FD4452C4E3AB10028AB12 /* EventDataStore+FullAccess.swift */,
+				CEFEEEB62C4ED06900CFAB6B /* Empty.md */,
+				CE0FD4472C4E3AB10028AB12 /* EventStoreError.swift */,
+				CE0FD4482C4E3AB10028AB12 /* EventStoreManager.swift */,
+				CE0FD4492C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift */,
+				CE0FD4522C4E3AB10028AB12 /* TimeInterval+Extension.swift */,
+			);
+			path = Shared;
+			sourceTree = SOURCE_ROOT;
+		};
+		CEDF73172C4AA5110051E9AD /* GridTest */ = {
+			isa = PBXGroup;
+			children = (
+				CEDF73132C4AA1E30051E9AD /* GridExampleView.swift */,
+				CEDF73152C4AA3C00051E9AD /* SwiDynamicGridRowExampleViewftUIView.swift */,
+				F3D0DEF02C44AF1800D5EB97 /*  CombinedGridExampleView.swift */,
+				CEDF73182C4AA7470051E9AD /* LazyVGridWithIndexExample.swift */,
+				CEDF731A2C4AAA420051E9AD /* LazyVGridWithButtonTrackingView.swift */,
+				CEDF731C2C4AB6380051E9AD /* DynamicGridExample.swift */,
+				CEDF731E2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift */,
+				CE0FD46A2C4E3DBB0028AB12 /* calendarFetchView.swift */,
+			);
+			path = GridTest;
+			sourceTree = "<group>";
+		};
 		F3D0DEE22C44AF1800D5EB97 = {
 			isa = PBXGroup;
 			children = (
+				CE300BB32C4F69BB0016A56F /* EventViewModel.swift */,
+				CE300BB52C509D0C0016A56F /* test.txt */,
+				CE0FD4532C4E3AB10028AB12 /* Shared */,
+				CEDF73172C4AA5110051E9AD /* GridTest */,
 				F3D0DEED2C44AF1800D5EB97 /* moyeo */,
 				F3D0DEFE2C44AF1A00D5EB97 /* moyeoTests */,
 				F3D0DF082C44AF1A00D5EB97 /* moyeoUITests */,
@@ -94,10 +176,11 @@
 		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
 			isa = PBXGroup;
 			children = (
+				CE0FD4112C4E31D70028AB12 /* Info.plist */,
 				F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */,
-				F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */,
 				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
 				F3D0DEF42C44AF1A00D5EB97 /* Preview Content */,
+				CEAFB5F22C48AA4200F22DA2 /* TempGroupVoteView.swift */,
 			);
 			path = moyeo;
 			sourceTree = "<group>";
@@ -232,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3D0DEF62C44AF1A00D5EB97 /* Preview Assets.xcassets in Resources */,
+				CE300BB62C509D0C0016A56F /* test.txt in Resources */,
 				F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +341,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				F3D0DEF12C44AF1800D5EB97 /*  CombinedGridExampleView.swift in Sources */,
+				CE0FD45E2C4E3AB10028AB12 /* EventStoreError.swift in Sources */,
+				CE0FD46B2C4E3DBB0028AB12 /* calendarFetchView.swift in Sources */,
+				CE300BB42C4F69BB0016A56F /* EventViewModel.swift in Sources */,
+				CEDF731B2C4AAA420051E9AD /* LazyVGridWithButtonTrackingView.swift in Sources */,
+				CEDF731F2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift in Sources */,
+				CE0FD4552C4E3AB10028AB12 /* Array+Extension.swift in Sources */,
+				CE0FD45F2C4E3AB10028AB12 /* EventStoreManager.swift in Sources */,
+				CEDF731D2C4AB6380051E9AD /* DynamicGridExample.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
+				CE0FD4542C4E3AB10028AB12 /* AlertError.swift in Sources */,
+				CEDF73192C4AA7470051E9AD /* LazyVGridWithIndexExample.swift in Sources */,
+				CE0FD4572C4E3AB10028AB12 /* BookingButtonStyle.swift in Sources */,
+				CE0FD4592C4E3AB10028AB12 /* EditButton.swift in Sources */,
+				CE0FD4692C4E3AB10028AB12 /* TimeInterval+Extension.swift in Sources */,
+				CEDF73142C4AA1E30051E9AD /* GridExampleView.swift in Sources */,
+				CE0FD45B2C4E3AB10028AB12 /* EventDataStore.swift in Sources */,
+				CE0FD4602C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift in Sources */,
+				CE0FD4582C4E3AB10028AB12 /* Date+Extension.swift in Sources */,
+				CEAFB5F32C48AA4200F22DA2 /* TempGroupVoteView.swift in Sources */,
+				CEDF73162C4AA3C00051E9AD /* SwiDynamicGridRowExampleViewftUIView.swift in Sources */,
+				CE0FD45C2C4E3AB10028AB12 /* EventDataStore+FullAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,14 +526,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = moyeo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We'll access your calendar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,14 +559,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = moyeo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We'll access your calendar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
