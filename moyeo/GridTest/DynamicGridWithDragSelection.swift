@@ -109,8 +109,9 @@ struct DynamicGridWithDragSelection: View {
     @State var startTime: String?
     @State var endTime: String?
     
-    
-    
+    @State var numOfProfile : Int?
+    @State private var showAlert = false
+
     var body: some View {
       
         VStack {
@@ -119,10 +120,47 @@ struct DynamicGridWithDragSelection: View {
             // 시간과 분이 들어가서 정확하지 않는 일이 발생한다..참고할것.(ㅜㅜ
             
             VStack(alignment: .leading){
-                DatePicker(
-                    "Start Date",
-                    selection: $startDate,
-                    displayedComponents:  [.hourAndMinute, .date])
+                HStack{
+                    DatePicker(
+                        "StartDate",
+                        selection: $startDate,
+                        displayedComponents:  [.date])
+                    .frame(height: 40)
+                  
+                    .frame(height: 40)
+                    
+                    CircleImageListView()
+                        .onTapGesture {
+                            showAlert = true
+                        }
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("Images are tapped"))
+                        }
+                }.onChange(of : startDate){
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.year, .month, .day], from: startDate)
+                    var newComponents = DateComponents()
+                    
+                    newComponents.year = components.year
+                    newComponents.month = components.month
+                    newComponents.day = components.day
+                    newComponents.hour = 0
+                    newComponents.minute = 0
+                    newComponents.second = 0
+                    if let startDate = calendar.date(from: newComponents) {
+                        self.startDate = startDate
+                        
+                        self.endDate =  calendar.date(byAdding: .day, value: Int(numberOfColumns), to: self.startDate) ?? self.startDate
+                        print("self.endDate \(self.endDate)")
+                    }
+                    if let startDateString = dateToDateString(date: startDate) {
+                        self.startDateString  = startDateString
+                    }
+                    if let endDateString = dateToDateString(date: endDate) {
+                        self.endDateString = endDateString
+                    }
+                        
+                }
                 
                 Text("EndDate: \(String(describing: endDateString ?? ""))")
                     .frame(alignment: .leading)
