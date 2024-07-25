@@ -1,43 +1,37 @@
 import SwiftUI
+import NMapsMap
 
 struct TempPlaceSearchView: View {
-    @State private var keyword = ""
-    @State private var places = [Place]()
-    private let naverMapService = NaverMapService()
-
+    @State private var searchQuery: String = ""
+    @State private var places: [Place] = [] // 장소 데이터를 저장할 배열
+    
     var body: some View {
-        NavigationView {
-            VStack {
-                TextField("검색어를 입력하세요", text: $keyword)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Button("검색") {
-                    naverMapService.searchPlace(keyword: keyword) { places in
-                        self.places = places
-                    }
-                }
-                .padding()
-
-                List(places) { place in
-                    VStack(alignment: .leading) {
-                        Text(place.name)
-                            .font(.headline)
-                        Text(place.address)
-                            .font(.subheadline)
-                    }
-                }
+        VStack {
+            TextField("Search for places", text: $searchQuery, onCommit: {
+                searchPlaces(query: searchQuery)
+            })
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding()
+            
+            // 검색 결과 리스트
+            List(places) { place in
+                Text(place.name)
             }
-            .navigationTitle("가게 검색")
+            
+            NMapViewControllerRepresentable(places: $places)
+                .edgesIgnoringSafeArea(.all)
         }
+    }
+    
+    private func searchPlaces(query: String) {
+        // 여기에 검색 API를 호출하여 places 배열을 업데이트하는 로직을 추가합니다.
+        // 예를 들어, 네이버 장소 검색 API를 호출할 수 있습니다.
     }
 }
 
-//@main
-//struct MyApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            TempPlaceSearchView()
-//        }
-//    }
-//}
+struct Place: Identifiable {
+    let id = UUID()
+    let name: String
+    let latitude: Double
+    let longitude: Double
+}
