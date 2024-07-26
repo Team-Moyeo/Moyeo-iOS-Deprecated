@@ -9,10 +9,14 @@ struct TempPlaceSearchView: View {
     
     var body: some View {
         VStack {
+            
+            // 상단 제목 텍스트
             Text("새로운 장소 추가")
                 .font(.system(size: 17))
                 .bold()
                 .padding()
+            
+            // 장소 검색 텍스트 필드 & 검색 및 취소 버튼
             HStack{
                 TextField("장소를 검색하세요", text: $searchQuery, onCommit: {
                     searchPlaces(query: searchQuery)
@@ -34,9 +38,11 @@ struct TempPlaceSearchView: View {
                         .foregroundColor(.blue)
                 }
             }
+            // 검색 버튼을 눌렀을 경우 리스트 뷰를 띄운다.
             if showSearchResults{
-                placeSearchSheetView()
+                placeSearchListView()
             } else {
+                // 취소 버튼을 눌렀을 경우 다시 맵뷰를 띄운다
                 NMapViewControllerRepresentable(places: $places)
                     .edgesIgnoringSafeArea(.all)
             }
@@ -44,9 +50,10 @@ struct TempPlaceSearchView: View {
     }
 }
 
+// 검색 결과 리스트뷰
 extension TempPlaceSearchView {
     @ViewBuilder
-    func placeSearchSheetView() -> some View {
+    func placeSearchListView() -> some View {
         List(places) { place in
             VStack(alignment: .leading) {
                 Text(place.name)
@@ -59,8 +66,8 @@ extension TempPlaceSearchView {
     }
 }
 
+// API 요청 및 JASON 파일 가공 함수
 extension TempPlaceSearchView {
-    // API 요청 및 JASON 파일 가공 함수
     private func searchPlaces(query: String) {
         guard let url = URL(string: "https://openapi.naver.com/v1/search/local.json?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&display=10") else { return }
         

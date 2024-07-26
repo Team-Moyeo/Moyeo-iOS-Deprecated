@@ -12,11 +12,6 @@ class NMapViewController: UIViewController {
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(mapView)
         
-        // 맵 관련 속성 설정
-//        mapView.showScaleBar = true
-//        mapView.showZoomControls = true
-//        mapView.showLocationButton = false
-        
         // 마커 추가
         addMarkersToMap(mapView: mapView)
     }
