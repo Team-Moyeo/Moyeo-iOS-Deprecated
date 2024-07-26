@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct moyeoApp: App {
+    
+    @StateObject private var vm = AppViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack(path: $vm.appPath) {
+                ContentView()
+            }
         }
+        .environmentObject(vm)
+        
     }
 }
