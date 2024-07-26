@@ -1,10 +1,3 @@
-//
-//  moyeoApp.swift
-//  moyeo
-//
-//  Created by kyungsoolee on 7/15/24.
-//
-
 import SwiftUI
 
 @main
