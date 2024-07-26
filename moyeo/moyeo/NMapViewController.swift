@@ -12,7 +12,7 @@ class NMapViewController: UIViewController {
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(mapView)
         
-//        // 맵 관련 속성 설정
+        // 맵 관련 속성 설정
 //        mapView.showScaleBar = true
 //        mapView.showZoomControls = true
 //        mapView.showLocationButton = false
@@ -34,6 +34,7 @@ class NMapViewController: UIViewController {
     }
 }
 
+
 struct NMapViewControllerRepresentable: UIViewControllerRepresentable {
     @Binding var places: [Place]
     
@@ -45,6 +46,8 @@ struct NMapViewControllerRepresentable: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: NMapViewController, context: Context) {
         uiViewController.places = places
-        uiViewController.addMarkersToMap(mapView: uiViewController.view.subviews.first as! NMFMapView)
+        if let mapView = uiViewController.view.subviews.first(where: { $0 is NMFMapView }) as? NMFMapView {
+            uiViewController.addMarkersToMap(mapView: mapView)
+        }
     }
 }

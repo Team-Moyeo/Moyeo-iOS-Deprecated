@@ -15,23 +15,59 @@ struct TempPlaceSearchView: View {
             
             // 검색 결과 리스트
             List(places) { place in
-                Text(place.name)
+                VStack(alignment: .leading) {
+                    Text(place.name) // Title
+                        .font(.headline)
+                    Text(place.roadAddress) // Road Address
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
             }
             
             NMapViewControllerRepresentable(places: $places)
                 .edgesIgnoringSafeArea(.all)
         }
     }
-    
     private func searchPlaces(query: String) {
-        // 여기에 검색 API를 호출하여 places 배열을 업데이트하는 로직을 추가합니다.
-        // 예를 들어, 네이버 장소 검색 API를 호출할 수 있습니다.
-    }
-}
+        guard let url = URL(string: "https://openapi.naver.com/v1/search/local.json?query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&display=10") else { return }
 
-struct Place: Identifiable {
-    let id = UUID()
-    let name: String
-    let latitude: Double
-    let longitude: Double
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("7CXqtGiq5s7GYBdQji6l", forHTTPHeaderField: "X-Naver-Client-Id")
+        request.addValue("CDIp_3N75c", forHTTPHeaderField: "X-Naver-Client-Secret")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let items = json["items"] as? [[String: Any]] {
+                    let places = items.compactMap { item -> Place? in
+                        guard let name = item["title"] as? String,
+                              let latitude = item["mapy"] as? String,
+                              let longitude = item["mapx"] as? String,
+                              let roadAddress = item["roadAddress"] as? String else { return nil }
+                        return Place(name: name, roadAddress: roadAddress, latitude: Double(latitude) ?? 0.0, longitude: Double(longitude) ?? 0.0)
+                    }
+                    DispatchQueue.main.async {
+                        self.places = places
+                    }
+                }
+            } catch {
+                print("JSON parsing error: \(error)")
+            }
+        }.resume()
+    }
+
+    
+    
 }
