@@ -96,6 +96,7 @@
 		51FD50A52C534450008C5552 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
+				51FD50B12C538326008C5552 /* MemberPopupView.swift */,
 				51FD50A72C534585008C5552 /* GroupSetView.swift */,
 				51FD50A92C53828A008C5552 /* PlaceSearchView.swift */,
 				51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */,
@@ -111,10 +112,25 @@
 				5191A4592C522B8900550071 /* LoginView.swift */,
 				5191A45B2C522BBE00550071 /* MainView.swift */,
 				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
-				51FD50B12C538326008C5552 /* MemberPopupView.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		51FD50B82C54C11E008C5552 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		51FD50B92C54C13A008C5552 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5191A4572C5226D000550071 /* AppViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F3D0DEE22C44AF1800D5EB97 = {
@@ -141,11 +157,11 @@
 			isa = PBXGroup;
 			children = (
 				51FD50A62C53445D008C5552 /* View */,
+				51FD50B92C54C13A008C5552 /* ViewModel */,
 				51FD50A52C534450008C5552 /* Sheet */,
+				51FD50B82C54C11E008C5552 /* Resource */,
 				F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */,
 				F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */,
-				5191A4572C5226D000550071 /* AppViewModel.swift */,
-				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
 				F3D0DEF42C44AF1A00D5EB97 /* Preview Content */,
 			);
 			path = moyeo;
