@@ -57,6 +57,7 @@ struct MainView: View {
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
                     Text($0)
+                    // 확정/미확정, 그룹장/그룹원 여부 경우의 수로 목업 파일 추가하기
                 }
             }
             .pickerStyle(.segmented)
@@ -71,7 +72,6 @@ struct MainView: View {
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.black)
-                
                     .cornerRadius(8)
             }
             .frame(width: 360, height: 50)
