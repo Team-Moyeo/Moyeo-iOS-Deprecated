@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5191A4582C5226D000550071 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4572C5226D000550071 /* AppViewModel.swift */; };
+		5191A45A2C522B8900550071 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4592C522B8900550071 /* LoginView.swift */; };
+		5191A45C2C522BBE00550071 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A45B2C522BBE00550071 /* MainView.swift */; };
+		51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50A72C534585008C5552 /* GroupSetView.swift */; };
+		51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50A92C53828A008C5552 /* PlaceSearchView.swift */; };
+		51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */; };
+		51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */; };
+		51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AF2C5382F4008C5552 /* MapWideView.swift */; };
+		51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B12C538326008C5552 /* MemberPopupView.swift */; };
+		51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B32C53833E008C5552 /* GroupConfirmView.swift */; };
+		51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B52C53835F008C5552 /* GroupResultView.swift */; };
 		BF03308E2C48B69600D64E71 /* TempLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF03308D2C48B69600D64E71 /* TempLoginView.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
@@ -35,6 +46,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5191A4572C5226D000550071 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		5191A4592C522B8900550071 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5191A45B2C522BBE00550071 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		51FD50A72C534585008C5552 /* GroupSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSetView.swift; sourceTree = "<group>"; };
+		51FD50A92C53828A008C5552 /* PlaceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchView.swift; sourceTree = "<group>"; };
+		51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
+		51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupVoteView.swift; sourceTree = "<group>"; };
+		51FD50AF2C5382F4008C5552 /* MapWideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWideView.swift; sourceTree = "<group>"; };
+		51FD50B12C538326008C5552 /* MemberPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPopupView.swift; sourceTree = "<group>"; };
+		51FD50B32C53833E008C5552 /* GroupConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConfirmView.swift; sourceTree = "<group>"; };
+		51FD50B52C53835F008C5552 /* GroupResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResultView.swift; sourceTree = "<group>"; };
 		BF03308D2C48B69600D64E71 /* TempLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempLoginView.swift; sourceTree = "<group>"; };
 		BF0416132C48F4D500599C8D /* moyeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = moyeo.entitlements; sourceTree = "<group>"; };
 		BF0416142C4939BC00599C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +97,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51FD50A52C534450008C5552 /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				51FD50B12C538326008C5552 /* MemberPopupView.swift */,
+				51FD50A72C534585008C5552 /* GroupSetView.swift */,
+				51FD50A92C53828A008C5552 /* PlaceSearchView.swift */,
+				51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */,
+				51FD50AF2C5382F4008C5552 /* MapWideView.swift */,
+				51FD50B32C53833E008C5552 /* GroupConfirmView.swift */,
+			);
+			path = Sheet;
+			sourceTree = "<group>";
+		};
+		51FD50A62C53445D008C5552 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5191A4592C522B8900550071 /* LoginView.swift */,
+				5191A45B2C522BBE00550071 /* MainView.swift */,
+				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
+				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		51FD50B82C54C11E008C5552 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		51FD50B92C54C13A008C5552 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5191A4572C5226D000550071 /* AppViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F3D0DEE22C44AF1800D5EB97 = {
 			isa = PBXGroup;
 			children = (
@@ -98,11 +160,14 @@
 		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
 			isa = PBXGroup;
 			children = (
+				51FD50A62C53445D008C5552 /* View */,
+				51FD50B92C54C13A008C5552 /* ViewModel */,
+				51FD50A52C534450008C5552 /* Sheet */,
+				51FD50B82C54C11E008C5552 /* Resource */,
 				BF0416142C4939BC00599C8D /* Info.plist */,
 				BF0416132C48F4D500599C8D /* moyeo.entitlements */,
 				F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */,
 				F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */,
-				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
 				F3D0DEF42C44AF1A00D5EB97 /* Preview Content */,
 				BF03308D2C48B69600D64E71 /* TempLoginView.swift */,
 			);
@@ -264,8 +329,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
+				51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
+				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
+				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
+				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
+				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
+				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
+				5191A45C2C522BBE00550071 /* MainView.swift in Sources */,
+				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
+				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
 				BF03308E2C48B69600D64E71 /* TempLoginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,7 +508,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -465,7 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;

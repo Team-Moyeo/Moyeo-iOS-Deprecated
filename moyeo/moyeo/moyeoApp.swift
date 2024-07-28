@@ -12,11 +12,17 @@ import AuthenticationServices
 struct moyeoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    
+    @StateObject private var vm = AppViewModel()
+    
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            TempLoginView()
+            NavigationStack(path: $vm.appPath) {
+                ContentView()
+            }
         }
+        .environmentObject(vm)
+        
     }
 }
 
