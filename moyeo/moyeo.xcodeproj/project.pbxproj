@@ -20,6 +20,17 @@
 		51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B52C53835F008C5552 /* GroupResultView.swift */; };
 		BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */; };
 		BFB70E652C56B39800D3C616 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = BFB70E642C56B39800D3C616 /* Moya */; };
+		BFB70E672C5746D600D3C616 /* Colorsets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E662C5746D600D3C616 /* Colorsets.xcassets */; };
+		BFB70E722C57509800D3C616 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */; };
+		BFB70E732C57509800D3C616 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6A2C57509700D3C616 /* Pretendard-SemiBold.otf */; };
+		BFB70E742C57509800D3C616 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6B2C57509700D3C616 /* Pretendard-ExtraLight.otf */; };
+		BFB70E752C57509800D3C616 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6C2C57509700D3C616 /* Pretendard-Medium.otf */; };
+		BFB70E762C57509800D3C616 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6D2C57509700D3C616 /* Pretendard-ExtraBold.otf */; };
+		BFB70E772C57509800D3C616 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6E2C57509800D3C616 /* Pretendard-Black.otf */; };
+		BFB70E782C57509800D3C616 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E6F2C57509800D3C616 /* Pretendard-Light.otf */; };
+		BFB70E792C57509800D3C616 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */; };
+		BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */; };
+		BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -61,6 +72,17 @@
 		BF0416132C48F4D500599C8D /* moyeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = moyeo.entitlements; sourceTree = "<group>"; };
 		BF0416142C4939BC00599C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		BFB70E662C5746D600D3C616 /* Colorsets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colorsets.xcassets; sourceTree = "<group>"; };
+		BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		BFB70E6A2C57509700D3C616 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		BFB70E6B2C57509700D3C616 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		BFB70E6C2C57509700D3C616 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		BFB70E6D2C57509700D3C616 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		BFB70E6E2C57509800D3C616 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		BFB70E6F2C57509800D3C616 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+CustomFont.swift"; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,7 +148,9 @@
 		51FD50B82C54C11E008C5552 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				BFB70E682C574F1200D3C616 /* Font */,
 				F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */,
+				BFB70E662C5746D600D3C616 /* Colorsets.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -138,6 +162,30 @@
 				BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BFB70E682C574F1200D3C616 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				BFB70E6E2C57509800D3C616 /* Pretendard-Black.otf */,
+				BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */,
+				BFB70E6D2C57509700D3C616 /* Pretendard-ExtraBold.otf */,
+				BFB70E6B2C57509700D3C616 /* Pretendard-ExtraLight.otf */,
+				BFB70E6F2C57509800D3C616 /* Pretendard-Light.otf */,
+				BFB70E6C2C57509700D3C616 /* Pretendard-Medium.otf */,
+				BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */,
+				BFB70E6A2C57509700D3C616 /* Pretendard-SemiBold.otf */,
+				BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		BFB70E7B2C5751CD00D3C616 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		F3D0DEE22C44AF1800D5EB97 = {
@@ -163,6 +211,7 @@
 		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
 			isa = PBXGroup;
 			children = (
+				BFB70E7B2C5751CD00D3C616 /* Helper */,
 				51FD50A62C53445D008C5552 /* View */,
 				51FD50B92C54C13A008C5552 /* ViewModel */,
 				51FD50A52C534450008C5552 /* Sheet */,
@@ -311,7 +360,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB70E752C57509800D3C616 /* Pretendard-Medium.otf in Resources */,
+				BFB70E742C57509800D3C616 /* Pretendard-ExtraLight.otf in Resources */,
+				BFB70E762C57509800D3C616 /* Pretendard-ExtraBold.otf in Resources */,
+				BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */,
+				BFB70E782C57509800D3C616 /* Pretendard-Light.otf in Resources */,
 				F3D0DEF62C44AF1A00D5EB97 /* Preview Assets.xcassets in Resources */,
+				BFB70E772C57509800D3C616 /* Pretendard-Black.otf in Resources */,
+				BFB70E722C57509800D3C616 /* Pretendard-Bold.otf in Resources */,
+				BFB70E732C57509800D3C616 /* Pretendard-SemiBold.otf in Resources */,
+				BFB70E792C57509800D3C616 /* Pretendard-Regular.otf in Resources */,
+				BFB70E672C5746D600D3C616 /* Colorsets.xcassets in Resources */,
 				F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +403,7 @@
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
+				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
