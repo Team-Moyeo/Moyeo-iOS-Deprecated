@@ -10,8 +10,8 @@ import AuthenticationServices
 
 @main
 struct moyeoApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject private var vm = AppViewModel()
     

@@ -9,15 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    @StateObject var authViewModel: AuthViewModel = .init()
     
     var body: some View {
         Group {
-            if appViewModel.isAuthenticated {
+            if authViewModel.isAuthenticated {
                 MainView()
             } else {
                 LoginView()
             }
         }
+        .environmentObject(authViewModel)
     }
 }
 

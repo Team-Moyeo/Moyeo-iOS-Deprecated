@@ -1,42 +1,32 @@
 //
-//  TempLoginView.swift
+//  AuthViewModel.swift
 //  moyeo
 //
-//  Created by Chang Jonghyeon on 7/18/24.
+//  Created by Chang Jonghyeon on 7/29/24.
 //
 
-import SwiftUI
+import Foundation
 import AuthenticationServices
 
-struct TempLoginView: View {
-    var body: some View {
-        VStack {
-            AppleSigninButton()
-        }
-    }
+class AuthViewModel: ObservableObject {
+    @Published var isAuthenticated: Bool = false
+    
 }
 
-struct AppleSigninButton: View {
-    var body: some View {
-        
-        SignInWithAppleButton(
-            .signIn,
-            onRequest: { request in
-                request.requestedScopes = [.fullName, .email]
-            },
-            onCompletion: { result in
-                switch result {
-                case .success(let authorization):
-                    print("Apple Login Successful")
-                    handleAuthorization(authorization)
-                case .failure(let error):
-                    print("Authorization failed: \(error.localizedDescription)")
-                }
-            }
-        )
-        .signInWithAppleButtonStyle(.black)
-        .frame(width: 361, height: 50)
-        
+extension AuthViewModel {
+    
+    func appleLogin(request: ASAuthorizationAppleIDRequest) async {
+        request.requestedScopes = [.fullName, .email]
+    }
+    
+    func appleLoginCompletion(result: Result<ASAuthorization, Error>) async {
+        switch result {
+        case .success(let authorization):
+            print("Apple Login Successful")
+            handleAuthorization(authorization)
+        case .failure(let error):
+            print("Authorization failed: \(error.localizedDescription)")
+        }
     }
     
     private func handleAuthorization(_ authorization: ASAuthorization) {
@@ -63,13 +53,8 @@ struct AppleSigninButton: View {
             }
         }
         
+        DispatchQueue.main.async {
+            self.isAuthenticated = true
+        }
     }
-    
-}
-
-
-
-
-#Preview {
-    TempLoginView()
 }
