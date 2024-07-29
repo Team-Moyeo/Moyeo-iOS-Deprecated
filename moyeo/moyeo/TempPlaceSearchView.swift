@@ -19,7 +19,7 @@ struct TempPlaceSearchView: View {
             // 장소 검색 텍스트 필드 & 검색 및 취소 버튼
             HStack{
                 TextField("장소를 검색하세요", text: $searchQuery, onCommit: {
-                    searchPlaces(query: searchQuery)
+                    searchPlaces(query: searchQuery) // 아래 extension쪽에 있음
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.leading)
@@ -40,7 +40,7 @@ struct TempPlaceSearchView: View {
             }
             // 검색 버튼을 눌렀을 경우 리스트 뷰를 띄운다.
             if showSearchResults{
-                placeSearchListView()
+                placeSearchListView() // 아래 extension쪽에 있음
             } else {
                 // 취소 버튼을 눌렀을 경우 다시 맵뷰를 띄운다
                 NMapViewControllerRepresentable(places: $places, selectedPlace: $selectedPlace)
@@ -100,7 +100,7 @@ extension TempPlaceSearchView {
                               let latitude = item["mapy"] as? String,
                               let longitude = item["mapx"] as? String,
                               let roadAddress = item["roadAddress"] as? String else { return nil }
-                        return Place(name: name, roadAddress: roadAddress, latitude: Double(latitude) ?? 0.0, longitude: Double(longitude) ?? 0.0)
+                        return Place(name: name, roadAddress: roadAddress, latitude: Double(latitude)! / 1e7, longitude: Double(longitude)! / 1e7)
                     }
                     DispatchQueue.main.async {
                         self.places = places
@@ -112,3 +112,4 @@ extension TempPlaceSearchView {
         }.resume()
     }
 }
+
