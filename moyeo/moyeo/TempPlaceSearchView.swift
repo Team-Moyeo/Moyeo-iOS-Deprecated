@@ -6,10 +6,10 @@ struct TempPlaceSearchView: View {
     @State private var searchQuery: String = ""
     @State private var places: [Place] = [] // 장소 데이터를 저장할 배열
     @State private var showSearchResults: Bool = false
+    @State private var selectedPlace: Place? // 선택한 장소 저장
     
     var body: some View {
         VStack {
-            
             // 상단 제목 텍스트
             Text("새로운 장소 추가")
                 .font(.system(size: 17))
@@ -43,7 +43,7 @@ struct TempPlaceSearchView: View {
                 placeSearchListView()
             } else {
                 // 취소 버튼을 눌렀을 경우 다시 맵뷰를 띄운다
-                NMapViewControllerRepresentable(places: $places)
+                NMapViewControllerRepresentable(places: $places, selectedPlace: $selectedPlace)
                     .edgesIgnoringSafeArea(.all)
             }
         }
@@ -61,6 +61,10 @@ extension TempPlaceSearchView {
                 Text(place.roadAddress)
                     .font(.subheadline)
                     .foregroundColor(.gray)
+            }
+            .onTapGesture {
+                selectedPlace = place
+                showSearchResults = false
             }
         }
     }
