@@ -13,14 +13,8 @@ enum MainRoute : String , Hashable {
 }
 
 class AppViewModel: ObservableObject {
-    @Published var isAuthenticated: Bool = false
-    @Published var appPath = NavigationPath()
     
-    func handleSignInWithApple() {
-        // 애플 로그인 로직 구현 필요
-        
-        self.isAuthenticated = true
-    }
+    @Published var appPath = NavigationPath()
     
     func navigateTo(_ view: MainRoute) {
         appPath.append(view)
