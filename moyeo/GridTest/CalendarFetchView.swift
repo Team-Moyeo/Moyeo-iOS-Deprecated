@@ -8,7 +8,7 @@
 import SwiftUI
 import EventKit
 
-struct calendarFetchView: View {
+struct CalendarFetchView: View {
     @EnvironmentObject var storeManager: EventStoreManager
     
     @State var startDateString : String? = "2024-07-25"
@@ -78,6 +78,6 @@ struct calendarFetchView: View {
 }
 
 #Preview {
-    calendarFetchView()
+    CalendarFetchView()
         .environmentObject(EventStoreManager())
 }

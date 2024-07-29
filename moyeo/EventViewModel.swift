@@ -30,15 +30,14 @@ class EventViewModel : ObservableObject {
         self.calendarArray.removeAll()
         self.events.removeAll()
         
-        print("startDate endDate in the getEvents  \(self.startDate) endDate \(self.endDate)")
+        print("startDate endDate in the getEvents  \(String(describing: self.startDate)) endDate \(String(describing: self.endDate))")
         events = await storeManager.dataStore.fetchEventsFromTo(startDate: startDate, endDate: endDate) ?? []
         
     }
     
     // UTC라고 가정하고 한국 시간에 맞게 모두 수정, 만약에 timeZone이있는 경우 그 시간으로 변경한후에 다시 한국시간으로 변겨
-    func moveEventsToCalendarArray(){
-        print(events.count)
-        var basicDate : Date = Date()
+    func moveEventsToCalendarArray() async{
+
         var startHourMin : Int = 0
         var endHourMin : Int  = 0
         let dateFormatter = DateFormatter()
@@ -67,7 +66,7 @@ class EventViewModel : ObservableObject {
             
             let dayDiff = daysBetween(start: startDate!, end: event.startDate)
             
-            print("\(event.title ?? "") \(dayDiff)  \(koreanDateString)")
+            print("\(event.title ?? "") \(dayDiff ?? 0)  \(koreanDateString)")
             
             let colIndex = dayDiff ?? 0
             

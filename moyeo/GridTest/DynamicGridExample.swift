@@ -36,9 +36,7 @@ struct DynamicGridExample: View {
                 Slider(value: $numberOfColumns, in: 1...10, step: 1) {
                     Text("Number of Columns")
                 }
-                .onChange(of: numberOfColumns) { newValue in
-                    // 슬라이더가 변경될 때 추가적인 작업이 필요할 경우 이곳에 구현
-                }
+                
             }
             HStack {
                 Text("Fixed Column Width: \(fixedColumnWidth, specifier: "%.0f")")

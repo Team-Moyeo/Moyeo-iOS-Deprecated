@@ -39,8 +39,8 @@ enum Weekday: Int {
     }
 }
 struct DynamicGridWithDragSelection: View {
-    @State private var numberOfColumns: Double = 5
-    @State private var fixedColumnWidth: Double = 45
+    @State private var numberOfColumns: Double = 8
+    @State private var fixedColumnWidth: Double = 30
     var firstColumnWidth : Double { fixedColumnWidth + 22}
     @State private var fixedRowHeight : Double = 30
     @State private var checkedStates: [Bool] = Array(repeating: false, count: 48 * 7 )
@@ -58,6 +58,7 @@ struct DynamicGridWithDragSelection: View {
     
     @State var startDateString : String? = ""
     @State var endDateString : String?   = ""
+    @State var isLongPressed : Bool =  false
     
 //    init(eventViewModel: EventViewModel){
 //        
@@ -85,8 +86,9 @@ struct DynamicGridWithDragSelection: View {
     private let screenWidth = UIScreen.main.bounds.width
     private var sidePadding :CGFloat {  max((screenWidth - totalWidth) / 2, 0) }
     
+    @State private var pressedPosition: CGPoint = .zero
     @State private var  dragArray: Set<IntTuple> = []
-  
+    @State private var scrollOffset: CGSize = .zero
     
     private var timeSlot : [String] = ["12:00am", "12:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
     
@@ -111,7 +113,9 @@ struct DynamicGridWithDragSelection: View {
     
     @State var numOfProfile : Int?
     @State private var showAlert = false
-
+    private let minY: CGFloat = -380
+    private let maxY: CGFloat = 670
+    
     var body: some View {
       
         VStack {
@@ -119,14 +123,14 @@ struct DynamicGridWithDragSelection: View {
             // 현재 타임존의 시간을 기준
             // 시간과 분이 들어가서 정확하지 않는 일이 발생한다..참고할것.(ㅜㅜ
             
-            VStack(alignment: .leading){
+            VStack(alignment: .leading, spacing: 10){
                 HStack{
                     DatePicker(
                         "StartDate",
                         selection: $startDate,
                         displayedComponents:  [.date])
                     .frame(height: 40)
-                  
+                    
                     .frame(height: 40)
                     
                     CircleImageListView()
@@ -159,7 +163,7 @@ struct DynamicGridWithDragSelection: View {
                     if let endDateString = dateToDateString(date: endDate) {
                         self.endDateString = endDateString
                     }
-                        
+                    
                 }
                 
                 Text("EndDate: \(String(describing: endDateString ?? ""))")
@@ -174,214 +178,306 @@ struct DynamicGridWithDragSelection: View {
                             self.endDateString = endDateString
                         }
                     }
-            }
-            HStack {
-              
-                Text("No of Columns: \(Int(numberOfColumns))").font(.footnote)
-                Slider(value: $numberOfColumns, in: 1...8, step: 1) {_ in 
-                  //  Text("Number of Columns")
+                
+                HStack {
                     
-                    //fixedColumnWidth =  
-                    let calendar = Calendar.current
-                  
-                    if let endDate = calendar.date(byAdding: .day, value: Int(numberOfColumns), to: startDate) {
-                        self.endDate = endDate
+                    Text("No of Columns: \(Int(numberOfColumns))").font(.footnote)
+                    Slider(value: $numberOfColumns, in: 1...8, step: 1) {_ in
+                        //  Text("Number of Columns")
+                        
+                        //fixedColumnWidth =
+                        let calendar = Calendar.current
+                        
+                        if let endDate = calendar.date(byAdding: .day, value: Int(numberOfColumns), to: startDate) {
+                            self.endDate = endDate
+                        }
+                        startDateString = dateToDateString(date: startDate)
+                        endDateString = dateToDateString(date: endDate)
                     }
-                    startDateString = dateToDateString(date: startDate)
-                    endDateString = dateToDateString(date: endDate)
+                    
                 }
+                HStack {
+                    Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")").font(.footnote)
+                    Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
+                        //  Text("Fixed Column Width")
+                    }
+                }
+                HStack{
+                    Button(action: {
+                        Task {
+                            print("getEvents in the View \(startDate) , \(endDate)")
+                            await eventViewModel.getEvents(storeManager:storeManager, startDate:startDate, endDate:endDate)
+                            await eventViewModel.moveEventsToCalendarArray()
+                            
+                        }
+                        
+                    }) {
+                        Text("일정가져오기")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .frame(width: 160, height: 25)
+                    
+                    Button(action: {
+                        
+                        deleteCheckAll()
+                        
+                    }) {
+                        Text("일정지우기")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                        
+                    }.frame(width: 160, height: 25)
+                    
+                }.padding()
+            }
             
-            }
-            HStack {
-                Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")").font(.footnote)
-                Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
-                  //  Text("Fixed Column Width")
-                }
-            }
-            Button(action: {
-                Task {
-                    print("getEvents in the View \(startDate) , \(endDate)")
-                    await eventViewModel.getEvents(storeManager:storeManager, startDate:startDate, endDate:endDate)
-                    await eventViewModel.moveEventsToCalendarArray()
+            ScrollViewReader { scrollViewProxy in
+                ScrollView([.vertical], showsIndicators: true) {
                     
-                }
-                
-                       }) {
-                           Text("칼렌다 가져오기")
-                               .padding()
-                               .background(Color.blue)
-                               .foregroundColor(.white)
-                               .cornerRadius(8)
-                       }         
-            ScrollView {
-                
-                ZStack {
-                    // 드래그 영역을 표시하는 투명한 레이어
-                    Rectangle()
-                        .stroke(Color.blue, lineWidth: 0.5)
-                        .background(Color.clear)
-                        .padding(padding)
-                        .ignoresSafeArea(edges: .all)
-                    
-                    LazyVGrid(columns: columns, spacing: spacing) {
-                        // 헤더 행
-                        GridRow {
-                            Text("")
-                                .frame(width: firstColumnWidth, height: fixedRowHeight*2)
-                                .background(Color.gray.opacity(0.3))
-                                .foregroundColor(Color.mint)
-                                .border(Color.mint)
-                            ForEach(1..<Int(numberOfColumns), id: \.self) { index in
-                                let dateString = startDateString                           
-                                if let dayFromDateString = dayFromDateString(dateString: dateString, dateOffset: index - 1 ), let weekdayNumberFromDateString = weekdayFromDateString(dateString: dateString, dateOffset: index - 1 ) {
-                                    VStack(spacing:0){
-                                        Text(" \(dayFromDateString)")
-                                            .font(.footnote)
-                                            .frame(width: fixedColumnWidth, height: fixedRowHeight)
-                                            .foregroundColor(Color.mint)
-                                            .background(Color.gray.opacity(0.3))
-                                            .border(Color.mint)
-                                            .padding(0)
-                                        if  let weekDayString =  Weekday(rawValue: weekdayNumberFromDateString)?.name {
-                                            
-                                            Text(" (\(weekDayString))")
+                    ZStack {
+                        // 드래그 영역을 표시하는 투명한 레이어
+                        
+                        Rectangle()
+                            .stroke(Color.blue, lineWidth: 0.5)
+                            .background(Color.clear)
+                            .padding(padding)
+                            .ignoresSafeArea(edges: .all)
+                        
+                        LazyVGrid(columns: columns, spacing: spacing) {
+                            // 헤더 행
+                            GridRow {
+                                Text("")
+                                    .frame(width: firstColumnWidth, height: fixedRowHeight*2)
+                                    .background(Color.gray.opacity(0.3))
+                                    .foregroundColor(Color.mint)
+                                    .border(Color.mint)
+                                ForEach(1..<Int(numberOfColumns), id: \.self) { index in
+                                    let dateString = startDateString
+                                    if let dayFromDateString = dayFromDateString(dateString: dateString, dateOffset: index - 1 ), let weekdayNumberFromDateString = weekdayFromDateString(dateString: dateString, dateOffset: index - 1 ) {
+                                        VStack(spacing:0){
+                                            Text(" \(dayFromDateString)")
                                                 .font(.footnote)
                                                 .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                 .foregroundColor(Color.mint)
                                                 .background(Color.gray.opacity(0.3))
                                                 .border(Color.mint)
-                                            
+                                                .padding(0)
+                                            if  let weekDayString =  Weekday(rawValue: weekdayNumberFromDateString)?.name {
+                                                
+                                                Text(" (\(weekDayString))")
+                                                    .font(.footnote)
+                                                    .frame(width: fixedColumnWidth, height: fixedRowHeight)
+                                                    .foregroundColor(Color.mint)
+                                                    .background(Color.gray.opacity(0.3))
+                                                    .border(Color.mint)
+                                                
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                        
-                        // 데이터 행
-           //             let numberOfRows = (items.count + Int(numberOfColumns) - 1) / Int(numberOfColumns)
-                        let numberOfRows = 48
-                        ForEach(0..<numberOfRows, id: \.self) { rowIndex in
-                            GridRow {
-                                
-                                Text(timeSlot[rowIndex])
-                                    .frame(width: fixedColumnWidth + 23, height: fixedRowHeight)
-                                    .background(Color.gray.opacity(0.3))
-                                    .foregroundColor(Color.mint)
-                                    .border(Color.mint)
-                                    .font(.footnote)
-                             
-                                
-                                ForEach(0..<Int(numberOfColumns) - 1 , id: \.self) { columnIndex in
-                                    // -1 추가 column starts from 0 not 1
-                                    let itemIndex = rowIndex * Int(numberOfColumns) + columnIndex
-                                    if itemIndex < items.count {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor({
-                                                    if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                        return .red
-                                                    } else if eventViewModel.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                        return .blue
-                                                    } else {
-                                                        return .green
-                                                    }
-                                                }())
-
-                                                .frame(width: fixedColumnWidth, height: fixedRowHeight)
-                                                .background(GeometryReader { geometry in
-                                                    Color.clear
-                                                        .onAppear {
-                                                            cellSize = geometry.size
-//                                                            print("rectangle cell size \(cellSize)")
-                                                        }
-                                                    
-                                                })
+                            
+                            // 데이터 행
+                            //             let numberOfRows = (items.count + Int(numberOfColumns) - 1) / Int(numberOfColumns)
+                            let numberOfRows = 48
+                            ForEach(0..<numberOfRows, id: \.self) { rowIndex in
+                                GridRow {
+                                    
+                                    Text(timeSlot[rowIndex])
+                                        .frame(width: fixedColumnWidth + 22, height: fixedRowHeight)
+                                        .background(Color.gray.opacity(0.3))
+                                        .foregroundColor(Color.mint)
+                                        .border(Color.mint)
+                                        .font(.footnote)
+                                        .allowsHitTesting(false)
+                                    
+                                    
+                                    ForEach(0..<Int(numberOfColumns) - 1 , id: \.self) { columnIndex in
+                                        // -1 추가 column starts from 0 not 1
+                                        let itemIndex = rowIndex * Int(numberOfColumns - 1) + columnIndex
+                                        
+                                        if itemIndex < items.count {
                                             
-                                            CheckboxView(isChecked: $checkedStates[itemIndex], rowIndex: rowIndex, colIndex: columnIndex) {
-                                                row, column in
-                                                // 체크박스가 클릭될 때 실행되는 코드
-                                                print("Checkbox clicked at row: \(row), column: \(column)")
+                                            ZStack {
+                                                Rectangle()
+                                                    .foregroundColor({
+                                                        if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
+                                                            return .red
+                                                        } else if eventViewModel.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
+                                                            return .blue
+                                                        } else {
+                                                            return .green
+                                                        }
+                                                    }())
+                                                
+                                                    .frame(width: fixedColumnWidth, height: fixedRowHeight)
+                                                    .background(GeometryReader { geometry in
+                                                        Color.clear
+                                                            .onAppear {
+                                                                cellSize = geometry.size
+                                                                //                                                            print("rectangle cell size \(cellSize)")
+                                                            }
+                                                        
+                                                    })
+                                                //                                                .onTapGesture {
+                                                //
+                                                //                                                    let index = rowIndex * (numberOfColumns - 1 ) + columnIndex
+                                                //                                                    checkedStates[index] =
+                                                //                                                }
+                                                
+                                                CheckboxView(isChecked: $checkedStates[itemIndex], rowIndex: rowIndex, colIndex: columnIndex) {
+                                                    row, column in
+                                                    // 체크박스가 클릭될 때 실행되는 코드
+                                                    print("Checkbox clicked at row: \(row), column: \(column)")
+                                                } .allowsHitTesting(false)
+                                                
+                                                    .background(Color.mint)
+                                                    .frame(width: 20, height: 20)
+                                                
+                                                    .border(Color.gray)
+                                                    .contentShape(Circle())
+                                                
                                             }
                                             
-                                            .background(Color.mint)
-                                            .frame(width: 20, height: 20)
-
-                                            .border(Color.gray)
-                                            .contentShape(Circle())
-                                            
+                                        } else {
+                                            Spacer().frame(width:fixedColumnWidth, height: fixedRowHeight)
                                         }
-                                        
-                                    } else {
-                                        Spacer().frame(width:fixedColumnWidth, height: fixedRowHeight)
                                     }
-                                }
+                                } .id(rowIndex)
                             }
+                            
                         }
-
-                    }
-                    .padding(padding)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                        //$dragOffset 이 왜 필요하지???  value로 모두 값을 구할수있고  dragOffset도 구해지는데...
-                            .updating($dragOffset) { value, state, transaction in
-    //                                print("state \(state)")
-    //                                print("transaction \(transaction)")
-                                    state = value.translation
-                                //  totalDragOffset = dragOffset
-                                //  print("dragOffset in update \(dragOffset.width) \(dragOffset.height)")
-                                //  print("\(value) \(state) \(transaction)" )
-                            }
-                        
-                            .onChanged { value in
-                                
-                                if initialPosition == nil {
-                                    initialPosition = value.startLocation
-                                    dragStart = initialPosition
-                                    
-                                }
-                                totalDragOffset = value.translation // totalDragOffset = dragOffset
-                                dragEnd = value.location
-                                if let dragEnd = dragEnd {
-                                    if let coord =  indexForPosition(dragEnd ) {
-                                        
-                                        dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column ))
-                                        
-                                        
+                        .padding(padding)
+                        //  I used the pattern mathcing in switch, very concise!!!
+                        .gesture(
+                            LongPressGesture(minimumDuration: 0.25, maximumDistance: 3)
+                                .sequenced(before: DragGesture(minimumDistance: 3))
+                                .onChanged { value in
+                                    switch value {
+                                    case .first(true):
+                                        isLongPressed = true
+                                   //     print("isLongPressed")
+                                    case .second(true, let drag?):
+                                        if isLongPressed {
+                                            pressedPosition = drag.location
+                                            if let coord = indexForPosition(pressedPosition) {
+                                                dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
+                                            }
+                                        }
+                                    default:
+                                        break
                                     }
                                 }
-    //                            print("dragOffset \(Int(dragOffset.width)) \(Int(dragOffset.height))")
-    //                            print("totalDragOffset \(Int(totalDragOffset.width)) \(Int(totalDragOffset.height))")
-    //                            print("value.time   \(value.time.formatted(date: .omitted, time: .shortened))  value.translation  \(Int(value.translation.width)) \(Int(value.translation.height))")
-                            }
+                                .onEnded { value in
+                                    switch value {
+                                    case .second(true, let drag?):
+                                        if isLongPressed {
+                                            pressedPosition = drag.location
+                                            if let coord = indexForPosition(pressedPosition) {
+                                                dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
+                                            }
+                                            applyDragPath()
+                                            resetDragState()
+                                        }
+                                    default:
+                                        break
+                                    }
+                                }
+                                .exclusively(before: TapGesture()
+                                    .onEnded {
+                                        print("Tapped")
+                                    }
+                                    .simultaneously(with: DragGesture(minimumDistance: 0)
+                                        .onEnded { value in
+                                            pressedPosition = value.location
+                                         //   print("start, loc in tap \(value.startLocation) \(value.location)")
+                                            let dragDistance = sqrt(pow(value.translation.width, 2) +  pow(value.translation.height, 2))
+                                            if dragDistance > 3 {
+                                             // 작동 안하는데... 실제 첫번째 컬럼으로 스크롤할때 나머지 그리드셀 스크롤은 여기서 되는게 아님. 
+                                                    print("scrollTarget")
+                                                if value.translation.height > 0  {
+                                                    scrollViewProxy.scrollTo(0, anchor: .top)
+                                                }
+                                                if value.translation.height < 0 {
+                                                    
+                                                    scrollViewProxy.scrollTo(47, anchor: .bottom)
+                                                }
+                                                
+                                                
+                                               
+                                                
+                                            } else {
+                                                if let coord = indexForPosition(pressedPosition) {
+                                                    let index = coord.row * Int(numberOfColumns - 1 ) + coord.column
+                                                    if index < items.count && index >= 0 {
+                                                        checkedStates[index].toggle()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
+                                )
+                        )
                         
-                        
-                            .onEnded { value in
-    //                            print("dragOffset in onEnded \(Int(totalDragOffset.width)) \(Int(totalDragOffset.height))" )
-    //                            print("value.time  onEnded  \(value.time.formatted(date: .omitted, time: .shortened))  value.translation  \(Int(value.translation.width)) \(Int(value.translation.height))")
-                                
-                                //   print("onEnded \(value)")
-                                applyDragPath()
-                          //      applySelectionChange()
-                                dragActive = false
-                                initialPosition = nil
-                                totalDragOffset = .zero
-                                dragStart = nil
-                                dragEnd = nil
-                                dragArray.removeAll()
-                                
-                            }
-                    )
-//                    if let start = dragStart, let end = dragEnd {
-//                        Rectangle()
-//                            .fill(Color.yellow.opacity(0.3))
-//                            .border(Color.yellow, width: 0.5)
-//                            .frame(width: abs(end.x - start.x), height: abs(end.y - start.y))
-//                            .position(x: (start.x + end.x) / 2, y: (start.y + end.y) / 2)
-//                    }
-
+                        //                    .gesture(
+                        //                        LongPressGesture(minimumDuration: 0.3, maximumDistance: 0)
+                        //                                          .onEnded { value in
+                        //                                              isLongPressed = true
+                        //                                              print("islongPressed \(isLongPressed)")
+                        //
+                        //                                          }
+                        //                                          .sequenced(before: DragGesture(minimumDistance: 0)
+                        //                                              .onChanged { value in
+                        //                                                  if isLongPressed {
+                        //                                                      if initialPosition == nil {
+                        //                                                          //initialPosition -> dragStart -> dragEnd ->dragEnd-> dragEnd
+                        //                                                          initialPosition = value.startLocation
+                        //                                                      }
+                        //                                                      dragStart = value.startLocation
+                        //                                                      if let dragStart = dragStart, let coord = indexForPosition(dragStart) {
+                        //                                                          dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
+                        //                                                      }
+                        //
+                        //                                                      totalDragOffset = value.translation
+                        //                                                      dragEnd = value.location
+                        //                                                      // 일단은 dummy for testing
+                        //                                                      dragActive = true
+                        //                                                      if let dragEnd = dragEnd, let coord = indexForPosition(dragEnd) {
+                        //
+                        //                                                          dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
+                        //
+                        //                                                      }
+                        //                                                  }
+                        //                                              }
+                        //
+                        //                                              .onEnded { value in
+                        //                                                  if  isLongPressed {
+                        //                                                      applyDragPath()
+                        //                                                      dragActive = false
+                        //                                                      initialPosition = nil
+                        //                                                      totalDragOffset = .zero
+                        //                                                      dragStart = nil
+                        //                                                      dragEnd = nil
+                        //                                                      dragArray.removeAll()
+                        //                                                      isLongPressed = false
+                        //                                                  }
+                        //                                              }
+                        //                                          )
+                        //                                  )
+                        //
+                        //
+                    }
+                    
+                    
                 }
-                
-            }
+            } .background(Color.clear)
+           
+            
         }
     }
     
@@ -436,12 +532,24 @@ struct DynamicGridWithDragSelection: View {
         return nil
     }
     func applyDragPath() {
+      
         for tuple in dragArray {
-            let position = tuple.rowIndex * Int(numberOfColumns) + tuple.columnIndex
-            if position < items.count &&  position >= 0  {
-                checkedStates[position].toggle() // 값 변경 로직
+            let index = tuple.rowIndex * Int(numberOfColumns - 1 ) + tuple.columnIndex
+            if index < items.count &&  index >= 0  {
+                checkedStates[index].toggle() // 값 변경 로직
             }
             
+        }
+    }
+    func resetDragState() {
+           pressedPosition = .zero
+           isLongPressed = false
+           dragArray.removeAll()
+       }
+    
+    func deleteCheckAll() {
+        for i in 0..<checkedStates.count {
+            checkedStates[i] = false
         }
     }
     
@@ -510,7 +618,7 @@ struct DynamicGridWithDragSelection: View {
         let adjustedY = position.y - padding - fixedRowHeight - fixedRowHeight
         
         
-        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth + spacing) * numberOfColumns {
+        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth + spacing) * (numberOfColumns - 1) {
             return nil
         }
         
