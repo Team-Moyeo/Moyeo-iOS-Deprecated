@@ -1,7 +1,7 @@
 import Foundation
 import EventKit
-@MainActor
 
+@MainActor
 class EventViewModel : ObservableObject {
     
     

@@ -39,9 +39,10 @@ enum Weekday: Int {
     }
 }
 struct DynamicGridWithDragSelection: View {
-    @State private var numberOfColumns: Double = 7
+   
+    @ObservedObject var vm : TimeTableHeaderVM
+    
     @State private var fixedColumnWidth: Double = 50
-    var firstColumnWidth : Double { 0 }
     @State private var fixedRowHeight : Double = 30
     @State private var fixedHeaderHeight : Double = 35
     @State private var checkedStates: [Bool] = Array(repeating: false, count: 48 * 7 )
@@ -49,30 +50,26 @@ struct DynamicGridWithDragSelection: View {
     @State private var dragStart: CGPoint? = nil
     @State private var dragEnd: CGPoint? = nil
     @GestureState private var dragOffset: CGSize = .zero
+    
     @State private var initialPosition: CGPoint? = nil
     @State private var dragActive: Bool = false
     @State private var totalDragOffset: CGSize = .zero
-    @State private var cellSize : CGSize = .zero
+   
     
     @StateObject var eventViewModel =  EventViewModel()
     @StateObject var storeManager = EventStoreManager()
+  
+ 
     
-    @State var startDateString : String? = ""
-    @State var endDateString : String?   = ""
     @State var isLongPressed : Bool =  false
     @State var allowHitTestingFlag: Bool  = false
     @State var rectAllowHitTestingFlag : Bool = true
-    //    init(eventViewModel: EventViewModel){
-    //
-    //        self.eventViewModel = eventViewModel
-    //    }
-    
+ 
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
         var gridItems: [GridItem] = []
-        //        gridItems.append(GridItem(.fixed(CGFloat(firstColumnWidth)), spacing: spacing))
-        
-        for _ in 0..<Int(numberOfColumns) {
+    
+        for _ in 0..<Int(vm.numberOfColumns) {
             gridItems.append(GridItem(.fixed(CGFloat(fixedColumnWidth)), spacing: spacing))
         }
         return gridItems
@@ -84,7 +81,7 @@ struct DynamicGridWithDragSelection: View {
     
     private let padding: CGFloat = 10
     private let spacing: CGFloat = 0
-    private var totalWidth : CGFloat { fixedColumnWidth * (numberOfColumns ) + spacing * (numberOfColumns-1) + firstColumnWidth}
+    private var totalWidth : CGFloat { fixedColumnWidth * (vm.numberOfColumns ) + spacing * (vm.numberOfColumns-1) }
     private let screenWidth = UIScreen.main.bounds.width
     private var sidePadding :CGFloat {  max((screenWidth - totalWidth) / 2, 0) }
     
@@ -95,20 +92,9 @@ struct DynamicGridWithDragSelection: View {
     @State private var scrollOffset: CGFloat = 0
     
     private var timeSlot : [String] =  ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
-    /*
-     let dateFormatter = DateFormatter()
-     
-     // 날짜 형식 지정 (여기서는 "yyyy-MM-dd" 형식 사용)
-     dateFormatter.dateFormat = "yyyy-MM-dd"
-     if let date = dateFormatter.date(from: dateString) {
-     print(date)  // 2024-07-28 00:00:00 +0000
-     } else {
-     print("날짜 변환에 실패했습니다.")
-     }
-     */
+   
     // to change the number of columns
-    @State private var startDate = Date()
-    @State private var endDate  = Date()
+  
     
     // to change the number of rows for later use
     @State var startTime: String?
@@ -119,85 +105,34 @@ struct DynamicGridWithDragSelection: View {
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
-    @State var previousMonth : Int  = 0
-    @State var currentMonth : Int = 0
-    @State var previousYear : Int  = 0
-    @State var currentYear : Int  = 0
-    
+
     @State private var contentOffset: CGFloat = 0.0
     
+    init(vm:TimeTableHeaderVM ) {
+        self.vm = vm
+        print("test for init")
+    }
+    
+    
     var body: some View {
-        
-        
-        
+         
         // 현재 타임존의 시간을 기준
         // 시간과 분이 들어가서 정확하지 않는 일이 발생한다..참고할것.(ㅜㅜ
         
-        VStack(alignment: .leading, spacing : 10 ){
+        VStack(alignment: .center, spacing : 10 ){
             HStack{
                 DatePicker(
                     "StartDate",
-                    selection: $startDate,
+                    selection:  $vm.startDate,
                     displayedComponents:  [.date])
-                .onChange(of: startDate) {
-                    let calendar = Calendar.current
-                    let components = calendar.dateComponents([.year, .month, .day], from: startDate)
-                    var newComponents = DateComponents()
-                    
-                    newComponents.year = components.year
-                    newComponents.month = components.month
-                    newComponents.day = components.day
-                    newComponents.hour = 0
-                    newComponents.minute = 0
-                    newComponents.second = 0
-                    
-                    if let startDate = calendar.date(from: newComponents) {
-                        self.startDate = startDate
-                        
-                        if let endDate  =  calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: self.startDate)  {
-                            self.endDate = endDate
-                        }
-                        print("self.endDate \(self.endDate)")
-                    }
-                    if let startDateString = dateToDateString(date: startDate) {
-                        self.startDateString  = startDateString
-                    }
-                    if let endDateString = dateToDateString(date: endDate) {
-                        self.endDateString = endDateString
-                    }
-                    
-                }
+                   .onChange(of: vm.startDate) {
+                    updateDates()
+             }
                 .onAppear() {
-                    let calendar = Calendar.current
-                    let components = calendar.dateComponents([.year, .month, .day], from: startDate)
-                    var newComponents = DateComponents()
-                    
-                    newComponents.year = components.year
-                    newComponents.month = components.month
-                    newComponents.day = components.day
-                    newComponents.hour = 0
-                    newComponents.minute = 0
-                    newComponents.second = 0
-                    
-                    if let startDate = calendar.date(from: newComponents) {
-                        self.startDate = startDate
-                        
-                        self.endDate =  calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: self.startDate) ?? self.startDate
-                        print("self.endDate \(self.endDate)")
-                    }
-                    if let startDateString = dateToDateString(date: startDate) {
-                        self.startDateString  = startDateString
-                    }
-                    if let endDateString = dateToDateString(date: endDate) {
-                        self.endDateString = endDateString
-                    }
-                    
-                    
-                    
+                  updateDates()
                 }
+               
                 .frame(height: 20)
-                
-                
                 
                 CircleImageListView()
                     .onTapGesture {
@@ -207,66 +142,24 @@ struct DynamicGridWithDragSelection: View {
                         Alert(title: Text("Images are tapped"))
                     }
                 
-            }.onChange(of : startDate){
-                let calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day], from: startDate)
-                var newComponents = DateComponents()
-                
-                newComponents.year = components.year
-                newComponents.month = components.month
-                newComponents.day = components.day
-                newComponents.hour = 0
-                newComponents.minute = 0
-                newComponents.second = 0
-                if let startDate = calendar.date(from: newComponents) {
-                    self.startDate = startDate
-                    
-                    if let endDate  =  calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: self.startDate)  {
-                        self.endDate = endDate
-                    }
-                    print("self.endDate \(self.endDate)")
-                }
-                if let startDateString = dateToDateString(date: startDate) {
-                    self.startDateString  = startDateString
-                }
-                if let endDateString = dateToDateString(date: endDate) {
-                    self.endDateString = endDateString
-                }
-                
             }
             
-            Text("EndDate: \(String(describing: endDateString ?? ""))")
+            Text("EndDate: \(String(describing: vm.endDateString))")
                 .font(.system(size: 11))
                 .frame(alignment: .leading)
                 .onAppear() {
-                    let calendar = Calendar.current
-                    endDate = calendar.date(byAdding: .day, value: Int(numberOfColumns  ), to: startDate) ?? startDate
-                    if let startDateString = dateToDateString(date: startDate) {
-                        self.startDateString  = startDateString
-                    }
-                    if let endDateString = dateToDateString(date: endDate) {
-                        self.endDateString = endDateString
-                    }
+                    vm.endDateString = dateToDateString(date: vm.endDate) ?? ""
+                   updateDates()
                 }
             
             HStack {
                 
-                Text("No of Days: \(Int(numberOfColumns))")
+                Text("No of Days: \(Int(vm.numberOfColumns))")
                     .font(.system(size: 11))
-                Slider(value: $numberOfColumns  , in: 1...7, step: 1) {_ in
-                    //  Text("Number of Columns")
-                    
-                    //fixedColumnWidth =
-                    let calendar = Calendar.current
-                    
-                    if let endDate = calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: startDate) {
-                        self.endDate = endDate
-                    }
-                    startDateString = dateToDateString(date: startDate)
-                    endDateString = dateToDateString(date: endDate)
-                    
-                    print("startDateString \(startDateString!)")
-                    print("endDateString \(endDateString!)")
+                Slider(value: $vm.numberOfColumns , in: 1...7, step: 1) {_ in
+                    updateDates()
+                    print("startDateString \(vm.startDateString)")
+                    print("endDateString \(vm.endDateString)")
                 }
             }
             
@@ -281,8 +174,8 @@ struct DynamicGridWithDragSelection: View {
             HStack(spacing: 10){
                 Button(action: {
                     Task {
-                        print("getEvents in the View \(startDate) , \(endDate)")
-                        await eventViewModel.getEvents(storeManager:storeManager, startDate:startDate, endDate:endDate)
+                        print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
+                        await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
                         await eventViewModel.moveEventsToCalendarArray()
                         
                     }
@@ -330,21 +223,13 @@ struct DynamicGridWithDragSelection: View {
             }
             
             
-            
+      
             Grid(horizontalSpacing: 0,  verticalSpacing: 0) {
                 // 헤더 행
-                
-                let vm = TimeTableHeaderVM(startDate: startDate, numberOfColumns: Int(self.numberOfColumns))
+            
               
                 GridRow(){
-                    //                    Text("")
-                    //                        .frame(width: firstColumnWidth, height: fixedRowHeight - 15, alignment: .leading)
-                    //                        .background(Color.gray.opacity(0.3))
-                    //                        .foregroundColor(Color.mint)
-                    //                        .border(Color.mint)
-                    //                        .padding(0)
-                    
-                    
+   
                     ForEach(0..<vm.monthString.count , id: \.self) { index in
                         VStack(alignment: .leading, spacing: 0) {
                             
@@ -355,8 +240,6 @@ struct DynamicGridWithDragSelection: View {
                                     Text(vm.monthString[index].isEmpty ? "" : "\(vm.monthString[index])월")
                                         .font(.system(size: 11))
                                         .foregroundColor(.gray)
-                                    
-                                    
                                     Text(vm.yearString[index].isEmpty ? "" : "\(String(vm.yearString[index].suffix(2)))년")
                                         .font(.system(size: 8))
                                         .foregroundColor(.gray)
@@ -394,57 +277,10 @@ struct DynamicGridWithDragSelection: View {
                 
             }
             .onAppear(){
-                let calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day], from: startDate)
-                var newComponents = DateComponents()
-                
-                newComponents.year = components.year
-                newComponents.month = components.month
-                newComponents.day = components.day
-                newComponents.hour = 0
-                newComponents.minute = 0
-                newComponents.second = 0
-                if let startDate = calendar.date(from: newComponents) {
-                    self.startDate = startDate
-                    
-                    if let endDate  =  calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: self.startDate)  {
-                        self.endDate = endDate
-                    }
-                    print("self.endDate \(self.endDate)")
-                }
-                if let startDateString = dateToDateString(date: startDate) {
-                    self.startDateString  = startDateString
-                }
-                if let endDateString = dateToDateString(date: endDate) {
-                    self.endDateString = endDateString
-                }
+               updateDates()
             }
-            .onChange(of:startDate) {
-                let calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day], from: startDate)
-                var newComponents = DateComponents()
-                
-                newComponents.year = components.year
-                newComponents.month = components.month
-                newComponents.day = components.day
-                newComponents.hour = 0
-                newComponents.minute = 0
-                newComponents.second = 0
-                if let startDate = calendar.date(from: newComponents) {
-                    self.startDate = startDate
-                    
-                    if let endDate  =  calendar.date(byAdding: .day, value: Int(numberOfColumns ), to: self.startDate)  {
-                        self.endDate = endDate
-                    }
-                    print("self.endDate \(self.endDate)")
-                }
-                if let startDateString = dateToDateString(date: startDate) {
-                    self.startDateString  = startDateString
-                }
-                if let endDateString = dateToDateString(date: endDate) {
-                    self.endDateString = endDateString
-                }
-                
+            .onChange(of:vm.startDate) {
+              updateDates()
             }
             ScrollViewReader { scrollViewProxy in
                 ScrollView([.vertical], showsIndicators: true) {
@@ -461,16 +297,16 @@ struct DynamicGridWithDragSelection: View {
                         
                         LazyVGrid(columns: columns, spacing: spacing) {
                             // 데이터 행
-                            //             let numberOfRows = (items.count + Int(numberOfColumns) - 1) / Int(numberOfColumns)
+                            //             let numberOfRows = (items.count + Int(vm.numberOfColumns) - 1) / Int(vm.numberOfColumns)
                             let numberOfRows = 48
                             ForEach(0..<numberOfRows, id: \.self) { rowIndex in
                                 GridRow {
                                     
                                     
                                     
-                                    ForEach(0..<Int(numberOfColumns) , id: \.self) { columnIndex in
+                                    ForEach(0..<Int(vm.numberOfColumns) , id: \.self) { columnIndex in
                                         // -1 추가 column starts from 0 not 1
-                                        let itemIndex = rowIndex * Int(numberOfColumns) + columnIndex
+                                        let itemIndex = rowIndex * Int(vm.numberOfColumns) + columnIndex
                                         
                                         if itemIndex < items.count {
                                             
@@ -483,7 +319,7 @@ struct DynamicGridWithDragSelection: View {
                                                             color = .blue
                                                         }
                                                         
-                                                        let index = rowIndex * Int(numberOfColumns ) + columnIndex
+                                                        let index = rowIndex * Int(vm.numberOfColumns) + columnIndex
                                                         
                                                         if checkedStates[index] == true {
                                                             color = .cyan
@@ -498,14 +334,7 @@ struct DynamicGridWithDragSelection: View {
                                                 
                                                     .border(Color.white)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
-                                                    .background(GeometryReader { geometry in
-                                                        Color.clear
-                                                            .onAppear {
-                                                                cellSize = geometry.size
-                                                                //                                                            print("rectangle cell size \(cellSize)")
-                                                            }
-                                                        
-                                                    })
+                                                
                                                 
                                                 
                                                 
@@ -608,7 +437,7 @@ struct DynamicGridWithDragSelection: View {
                                                 
                                             } else {
                                                 if let coord = indexForPosition(pressedPosition) {
-                                                    let index = coord.row * Int(numberOfColumns  ) + coord.column
+                                                    let index = coord.row * Int(vm.numberOfColumns) + coord.column
                                                     if index < items.count && index >= 0 {
                                                         checkedStates[index].toggle()
                                                     }
@@ -676,7 +505,7 @@ struct DynamicGridWithDragSelection: View {
     func applyDragPath() {
         
         for tuple in dragArray {
-            let index = tuple.rowIndex * Int(numberOfColumns  ) + tuple.columnIndex
+            let index = tuple.rowIndex * Int(vm.numberOfColumns) + tuple.columnIndex
             if index < items.count &&  index >= 0  {
                 checkedStates[index].toggle() // 값 변경 로직
             }
@@ -705,7 +534,7 @@ struct DynamicGridWithDragSelection: View {
         
         for row in rowRange {
             for column in columnRange {
-                let itemIndex = row * Int(numberOfColumns) + column
+                let itemIndex = row * Int(vm.numberOfColumns) + column
                 if itemIndex < checkedStates.count && itemIndex >= 0  {
                     checkedStates[itemIndex].toggle()
                 }
@@ -719,7 +548,7 @@ struct DynamicGridWithDragSelection: View {
         let adjustedY = position.y - padding
         
         
-        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth  * numberOfColumns  + spacing * (numberOfColumns - 1 )) {
+        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth  * vm.numberOfColumns  + spacing * (vm.numberOfColumns - 1 )) {
             return nil
         }
         
@@ -728,9 +557,10 @@ struct DynamicGridWithDragSelection: View {
         let columnIndex  = Int(adjustedX / (fixedColumnWidth + spacing))
         print("(x, y) :   \(Int(adjustedX) ), \(Int(adjustedY)) ")
         print("(row, col) \(rowIndex),\(columnIndex)")
-        print("(rowh colw) \(fixedRowHeight) , \(fixedColumnWidth), \(firstColumnWidth) ")
+        print("(rowh colw) \(fixedRowHeight) , \(fixedColumnWidth) ")
         return (row: rowIndex, column: columnIndex)
     }
+    
     func convertCheckedStatesToTimeTable(){
         
         var availableTimeSet :Set<String> = []
@@ -738,12 +568,12 @@ struct DynamicGridWithDragSelection: View {
         let timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
         self.availableTimeSet.removeAll()
         for row in 0...47 {
-            for col in 0..<Int(numberOfColumns) {
-                let index = row * Int(numberOfColumns) + col
+            for col in 0..<Int(vm.numberOfColumns) {
+                let index = row * Int(vm.numberOfColumns) + col
                 if checkedStates[index] == true {
                     
                     
-                    if  let targetDay = calendar.date(byAdding: .day, value: col , to: startDate), let dateString  = dateToDateString(date: targetDay) {
+                    if  let targetDay = calendar.date(byAdding: .day, value: col , to: vm.startDate), let dateString  = dateToDateString(date: targetDay) {
                         
                         let timeString  = timeSlot[row]
                         
@@ -770,11 +600,8 @@ struct DynamicGridWithDragSelection: View {
         self.availableTimeTuple.removeAll()
         print("availableTimeSet.count \(availableTimeSet.count)")
         for item in availableTimeSet {
-            if let  days = daysBetween(start: startDate, end: dateStringToDate(dateString: String(item.prefix(10)))  ?? startDate ) {
-                
-                
+            if let  days = daysBetween(start: vm.startDate, end: dateStringToDate(dateString: String(item.prefix(10)))  ?? vm.startDate ) {
                 col = days
-              
             }
          
             if let timeslot =  timeSlot.firstIndex(of: String(item.suffix(7)) ) {
@@ -793,6 +620,41 @@ struct DynamicGridWithDragSelection: View {
         for item in availableTimeTuple {
             print(item)
         }
+    }
+    
+    func updateDates(){
+        
+        var components = DateComponents()
+        var newComponents = DateComponents()
+        let calendar = Calendar.current
+      
+        components = calendar.dateComponents([.year, .month, .day], from: vm.startDate)
+        
+        newComponents.year = components.year
+        newComponents.month = components.month
+        newComponents.day = components.day
+        newComponents.hour = 0
+        newComponents.minute = 0
+        newComponents.second = 0
+        
+        if let endDate =   calendar.date(byAdding: .day, value: Int(vm.numberOfColumns), to: vm.startDate){
+            vm.endDate = endDate
+        }
+        
+     
+    }
+    
+    private func bindingForDatePicker(startDate: Binding<Date?>) -> Binding<Date> {
+        return Binding(
+            get: { startDate.wrappedValue ?? Date() },
+            set: { newValue in startDate.wrappedValue = newValue }
+        )
+    }
+    private func bindingForSlider(numberOfColumns: Binding<Double?>) -> Binding<Double> {
+        return Binding(
+            get: { numberOfColumns.wrappedValue ?? 7},
+            set: { newValue in numberOfColumns.wrappedValue = newValue }
+        )
     }
     
 }
@@ -818,6 +680,6 @@ struct CheckboxView: View {
 
 struct DynamicGridWithDragSelection_Previews: PreviewProvider {
     static var previews: some View {
-        DynamicGridWithDragSelection()
+        DynamicGridWithDragSelection(vm: TimeTableHeaderVM())
     }
 }
