@@ -20,6 +20,7 @@
 		CE0FD4602C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4492C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift */; };
 		CE0FD4692C4E3AB10028AB12 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD4522C4E3AB10028AB12 /* TimeInterval+Extension.swift */; };
 		CE300BB42C4F69BB0016A56F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE300BB32C4F69BB0016A56F /* EventViewModel.swift */; };
+		CE6218892C57E1D900EFD4D4 /* TableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6218882C57E1D900EFD4D4 /* TableHeaderVM.swift */; };
 		CEA9A30A2C51DA0400DD5DF7 /* ProfileIconVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9A3092C51DA0400DD5DF7 /* ProfileIconVM.swift */; };
 		CEA9A30F2C51E0C200DD5DF7 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9A30B2C51E0C200DD5DF7 /* CircleImage.swift */; };
 		CEA9A3102C51E0C200DD5DF7 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9A30C2C51E0C200DD5DF7 /* FavoriteButton.swift */; };
@@ -66,6 +67,7 @@
 		CE0FD4492C4E3AB10028AB12 /* EventStoreManager+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventStoreManager+FullAccess.swift"; sourceTree = "<group>"; };
 		CE0FD4522C4E3AB10028AB12 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		CE300BB32C4F69BB0016A56F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		CE6218882C57E1D900EFD4D4 /* TableHeaderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderVM.swift; sourceTree = "<group>"; };
 		CEA9A3092C51DA0400DD5DF7 /* ProfileIconVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIconVM.swift; sourceTree = "<group>"; };
 		CEA9A30B2C51E0C200DD5DF7 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		CEA9A30C2C51E0C200DD5DF7 /* FavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				CEDF731E2C4AB81B0051E9AD /* DynamicGridWithDragSelection.swift */,
+				CE6218882C57E1D900EFD4D4 /* TableHeaderVM.swift */,
 			);
 			path = GridTest;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				CE0FD45F2C4E3AB10028AB12 /* EventStoreManager.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				CE0FD4542C4E3AB10028AB12 /* AlertError.swift in Sources */,
+				CE6218892C57E1D900EFD4D4 /* TableHeaderVM.swift in Sources */,
 				CE0A55F12C51FB0E0020B657 /* CircleImageListView.swift in Sources */,
 				CEA9A30A2C51DA0400DD5DF7 /* ProfileIconVM.swift in Sources */,
 				CE0FD4572C4E3AB10028AB12 /* BookingButtonStyle.swift in Sources */,
