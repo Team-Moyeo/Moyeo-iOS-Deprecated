@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     @State var selectedTab = "tab"
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
-    
     
     var body: some View {
         VStack {
@@ -96,5 +95,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
-        .environmentObject(AppViewModel())
+        .environment(AppViewModel())
 }

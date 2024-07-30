@@ -9,7 +9,7 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     
     var body: some View {
         VStack {
@@ -50,5 +50,5 @@ struct AppleSigninButton: View {
 
 #Preview {
     LoginView()
-        .environmentObject(AppViewModel())
+        .environment(AppViewModel())
 }
