@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroupConfirmView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     @Binding var isPresentingGroupConfirmView: Bool
     
     var body: some View {

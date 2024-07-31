@@ -122,15 +122,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		51FD50A52C534450008C5552 /* Sheet */ = {
+		515582D32C59E80300819895 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				51FD50A62C53445D008C5552 /* View */,
+				51FD50A52C534450008C5552 /* Sheet */,
+				515582D42C59E82100819895 /* Popup */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		515582D42C59E82100819895 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
 				51FD50B12C538326008C5552 /* MemberPopupView.swift */,
-				51FD50A72C534585008C5552 /* GroupSetView.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		51FD50A52C534450008C5552 /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
 				51FD50A92C53828A008C5552 /* PlaceSearchView.swift */,
 				51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */,
 				51FD50AF2C5382F4008C5552 /* MapWideView.swift */,
-				51FD50B32C53833E008C5552 /* GroupConfirmView.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -140,7 +155,9 @@
 			children = (
 				5191A4592C522B8900550071 /* LoginView.swift */,
 				5191A45B2C522BBE00550071 /* MainView.swift */,
+				51FD50A72C534585008C5552 /* GroupSetView.swift */,
 				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
+				51FD50B32C53833E008C5552 /* GroupConfirmView.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
 			);
 			path = View;
@@ -213,10 +230,9 @@
 		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
 			isa = PBXGroup;
 			children = (
+				515582D32C59E80300819895 /* Presentation */,
 				BFB70E7B2C5751CD00D3C616 /* Helper */,
-				51FD50A62C53445D008C5552 /* View */,
 				51FD50B92C54C13A008C5552 /* ViewModel */,
-				51FD50A52C534450008C5552 /* Sheet */,
 				51FD50B82C54C11E008C5552 /* Resource */,
 				BF0416142C4939BC00599C8D /* Info.plist */,
 				BF0416132C48F4D500599C8D /* moyeo.entitlements */,
@@ -579,7 +595,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -593,7 +609,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-Won";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -613,7 +629,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -627,7 +643,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-Won";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -644,7 +660,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -665,7 +681,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -684,7 +700,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;
@@ -702,7 +718,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;
