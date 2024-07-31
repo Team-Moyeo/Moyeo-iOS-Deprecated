@@ -194,6 +194,7 @@ struct TimeTableView: View {
 //                        }
 //                        .frame(width: 100, height: 12)
 //
+                        Spacer()
                         Button(action: {
                             
                             deleteCheckAll()
@@ -201,12 +202,14 @@ struct TimeTableView: View {
                         }) {
                             Text("지우기")
                                 .font(.system(size: 11))
-                                .padding()
+                                .padding(2)
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                                 .cornerRadius(4)
                             
-                        }.frame(width: 100, height: 12)
+                        }.frame(width: 80, height: 24)
+                        
+                        Spacer().frame(width: 8)
                         
                         Button(action: {
                             
@@ -218,29 +221,28 @@ struct TimeTableView: View {
                         }) {
                             Text("선택하기")
                                 .font(.system(size: 11))
-                                .padding()
+                                .padding(2)
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                                 .cornerRadius(4)
                             
-                        }.frame(width: 150, height: 12)
+                        }.frame(width: 80, height: 24) // Adjust the width and height as needed
+                       
+                        
+                        Spacer()
                     }
                     
                 
       
-            Grid(horizontalSpacing: 0,  verticalSpacing: 0) {
+            Grid(horizontalSpacing: 0,  verticalSpacing: 0 ) {
                 // 헤더 행
-            
-              
                 GridRow(){
-   
                     ForEach(0..<timeTHVm.monthString.count, id: \.self) { index in
                         VStack(alignment: .leading, spacing: 0) {
                             
                             HStack(alignment: .top, spacing: 0) {
                                 
                                 if index < timeTHVm.monthString.count  {
-                                    
                                     Text(timeTHVm.monthString[index].isEmpty ? "" : "\(timeTHVm.monthString[index])월")
                                         .font(.system(size: 11))
                                         .foregroundColor(.gray)
@@ -248,8 +250,6 @@ struct TimeTableView: View {
                                         .font(.system(size: 8))
                                         .foregroundColor(.gray)
                                 }
-                                
-                                
                             }
                             // Adjust the spacing between two sections
                             Spacer()
@@ -263,23 +263,23 @@ struct TimeTableView: View {
                                 Text("(\(timeTHVm.weekdayString[index]))")
                                     .font(.system(size: 8))
                                     .foregroundColor(.gray)
-                                
                             }
-                            
-                            
                             Spacer()
                             
-                        }.frame(width:fixedColumnWidth, height:fixedHeaderHeight)
-                            .onAppear(){
-                                print("\(index)")
-                            }
-                            .padding(0)
-                        //    .border(Color.blue)
+                        } 
+                        .border(Color.white, width: 2)
+                        .frame(width: fixedColumnWidth, height: fixedHeaderHeight)
+
+                    } 
+                   
                         
-                    }
                 }
+             
+               
+                    
                 
-            }
+            }  .padding(.horizontal, sidePadding)
+                    .padding(.vertical,0)
            
             ScrollViewReader { scrollViewProxy in
                 ScrollView([.vertical], showsIndicators: true) {
@@ -290,7 +290,7 @@ struct TimeTableView: View {
                         Rectangle()
                             .stroke(Color.blue, lineWidth: 0.5)
                             .background(Color.clear)
-                            .padding(padding)
+                            .padding(.vertical, padding)
                             .ignoresSafeArea(edges: .all)
                         
                         
@@ -300,9 +300,6 @@ struct TimeTableView: View {
                             let numberOfRows = 48
                             ForEach(0..<numberOfRows, id: \.self) { rowIndex in
                                 GridRow {
-                                    
-                                    
-                                    
                                     ForEach(0..<Int(sharedModel.numberOfDays) , id: \.self) { columnIndex in
                                         // -1 추가 column starts from 0 not 1
                                         let itemIndex = rowIndex * Int(sharedModel.numberOfDays) + columnIndex
@@ -313,24 +310,20 @@ struct TimeTableView: View {
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
-                                                      
+                                                        
                                                         if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
                                                             color = .blue
                                                         }
-                                                        
                                                         let index = rowIndex * Int(sharedModel.numberOfDays) + columnIndex
-                                                        
                                                         if checkedStates[index] == true {
                                                             color = .cyan
                                                         }
-                                                        
                                                         if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
                                                             color = .red
                                                         }
                                                         return color
                                                         
                                                     }())
-                                                
                                                     .border(Color.white, width: 2)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                 
@@ -349,29 +342,26 @@ struct TimeTableView: View {
                                                 //                                                .border(Color.gray)
                                                 //                                                .contentShape(Circle())
                                                 if columnIndex == 0 {
-                                                    VStack(alignment: .leading, spacing: 0){
                                                         Text(timeSlot[rowIndex])
                                                             .font(.system(size: 11))
                                                             .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                             .background(Color.white.opacity(0.3))
                                                             .foregroundColor(Color.gray)
                                                             .border(Color.white)
-                                                        
-                                                    }
                                                 }
                                             }
                                         }
-                                        //                                         else {
-                                        //                                            Spacer().frame(width:fixedColumnWidth, height: fixedRowHeight)
-                                        //                                        }
+                                        else {
+                                            Spacer().frame(width:fixedColumnWidth, height: fixedRowHeight)
+                                        }
                                     }
                                 } .id(rowIndex)
+                                   
                             }
-                            
+
                         }
-                        
                         .allowsHitTesting(allowHitTestingFlag)
-                        .padding(padding)
+                        .padding(.vertical, padding)
                         //  I used the pattern mathcing in switch, very concise!!!
                         .gesture(
                             LongPressGesture(minimumDuration: 0.25, maximumDistance: 3)
@@ -423,18 +413,13 @@ struct TimeTableView: View {
                                                     let hidden  = -Int(contentOffset / fixedRowHeight)
                                                     let target = min(max(hidden - 10,0), hidden)
                                                     scrollViewProxy.scrollTo(target , anchor: .top)
-                                                    
-                                                    
-                                                    
-                                                }
+                                               }
                                                 if value.translation.height < 0 {
                                                     let hidden  = -Int(contentOffset / fixedRowHeight)
                                                     let target = min(hidden + 10, Int(1010 / fixedRowHeight))
                                                     scrollViewProxy.scrollTo(target , anchor: .top)
                                                     
                                                 }
-                                                
-                                                
                                             } else {
                                                 if let coord = indexForPosition(pressedPosition) {
                                                     let index = coord.row * Int(sharedModel.numberOfDays) + coord.column
@@ -456,29 +441,24 @@ struct TimeTableView: View {
                             
                             if self.contentOffset != offset {
                                 self.contentOffset = offset
-                           
+                                
                             }
                             
                             self.adjustScroll(contentOffset: contentOffset)
-                            
-                            
-                            
                         }
                         return Color.clear
                     })
                     
-                    
                 }.scrollTargetLayout()
-                 .onAppear{
+                    .onAppear{
                         scrollViewProxy.scrollTo(timeSlot.firstIndex(of: "09:00am"), anchor: .top)
                     }
 
                 .coordinateSpace(name: "scroll")
                 .frame(height:450)
-                
+               
             } .background(Color.clear)
                                 
-            
         }
            
             .scrollTargetBehavior(.viewAligned)
@@ -667,7 +647,7 @@ struct CheckboxView: View {
 }
 
 
-struct DynamicGridWithDragSelection_Previews: PreviewProvider {
+struct  TimeTableView_Previews: PreviewProvider {
     static var previews: some View {
         TimeTableView()
     }

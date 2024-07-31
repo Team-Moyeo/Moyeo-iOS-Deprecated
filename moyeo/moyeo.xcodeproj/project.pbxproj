@@ -48,9 +48,6 @@
 		CE8574C22C59E04600E63AF8 /* EventStoreManager+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574AA2C59E04600E63AF8 /* EventStoreManager+FullAccess.swift */; };
 		CE8574CB2C59E04600E63AF8 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574B32C59E04600E63AF8 /* TimeInterval+Extension.swift */; };
 		CE8574D22C59E39E00E63AF8 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */; };
-		CE8575942C5A43D200E63AF8 /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */; };
-		CE8575952C5A43D200E63AF8 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575922C5A43D200E63AF8 /* EventViewModel.swift */; };
-		CE8575962C5A43D200E63AF8 /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */; };
 		CE85759B2C5A442000E63AF8 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575972C5A442000E63AF8 /* EventViewModel.swift */; };
 		CE85759C2C5A442000E63AF8 /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575982C5A442000E63AF8 /* SharedDateModel.swift */; };
 		CE85759D2C5A442000E63AF8 /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */; };
@@ -123,9 +120,6 @@
 		CE8574AA2C59E04600E63AF8 /* EventStoreManager+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventStoreManager+FullAccess.swift"; sourceTree = "<group>"; };
 		CE8574B32C59E04600E63AF8 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
-		CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableHeaderVM.swift; path = moyeo/Andy/ViewModel/TimeTableHeaderVM.swift; sourceTree = SOURCE_ROOT; };
-		CE8575922C5A43D200E63AF8 /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventViewModel.swift; path = moyeo/Andy/ViewModel/EventViewModel.swift; sourceTree = SOURCE_ROOT; };
-		CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedDateModel.swift; path = moyeo/Andy/ViewModel/SharedDateModel.swift; sourceTree = SOURCE_ROOT; };
 		CE8575972C5A442000E63AF8 /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		CE8575982C5A442000E63AF8 /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDateModel.swift; sourceTree = "<group>"; };
 		CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableHeaderVM.swift; sourceTree = "<group>"; };
@@ -185,9 +179,6 @@
 				5191A4592C522B8900550071 /* LoginView.swift */,
 				5191A45B2C522BBE00550071 /* MainView.swift */,
 				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
-				CE8575922C5A43D200E63AF8 /* EventViewModel.swift */,
-				CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */,
-				CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
 			);
 			path = View;
@@ -510,14 +501,12 @@
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
 				CE85759B2C5A442000E63AF8 /* EventViewModel.swift in Sources */,
 				CE8574992C59E00900E63AF8 /* CircleImage.swift in Sources */,
-				CE8575962C5A43D200E63AF8 /* SharedDateModel.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
 				CE8574B62C59E04600E63AF8 /* AlertError.swift in Sources */,
 				CE8574BD2C59E04600E63AF8 /* EventDataStore.swift in Sources */,
 				CE8574C12C59E04600E63AF8 /* EventStoreManager.swift in Sources */,
 				51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
-				CE8575942C5A43D200E63AF8 /* TimeTableHeaderVM.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				CE8574BA2C59E04600E63AF8 /* Date+Extension.swift in Sources */,
 				CE8574B72C59E04600E63AF8 /* Array+Extension.swift in Sources */,
@@ -538,7 +527,6 @@
 				CE8574BB2C59E04600E63AF8 /* EditButton.swift in Sources */,
 				5191A45C2C522BBE00550071 /* MainView.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
-				CE8575952C5A43D200E63AF8 /* EventViewModel.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
 				CE8574D22C59E39E00E63AF8 /* TimeTableView.swift in Sources */,
 			);
