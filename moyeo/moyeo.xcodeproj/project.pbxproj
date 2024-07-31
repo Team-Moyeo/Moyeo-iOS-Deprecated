@@ -32,6 +32,28 @@
 		BFB70E792C57509800D3C616 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */; };
 		BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */; };
 		BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */; };
+		CE8574992C59E00900E63AF8 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85748A2C59E00900E63AF8 /* CircleImage.swift */; };
+		CE85749A2C59E00900E63AF8 /* CircleImageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85748B2C59E00900E63AF8 /* CircleImageListView.swift */; };
+		CE85749B2C59E00900E63AF8 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85748C2C59E00900E63AF8 /* FavoriteButton.swift */; };
+		CE85749C2C59E00900E63AF8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85748D2C59E00900E63AF8 /* MapView.swift */; };
+		CE8574B52C59E04600E63AF8 /* 샘플데이타.md in Resources */ = {isa = PBXBuildFile; fileRef = CE85749D2C59E04600E63AF8 /* 샘플데이타.md */; };
+		CE8574B62C59E04600E63AF8 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85749E2C59E04600E63AF8 /* AlertError.swift */; };
+		CE8574B72C59E04600E63AF8 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85749F2C59E04600E63AF8 /* Array+Extension.swift */; };
+		CE8574BA2C59E04600E63AF8 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A22C59E04600E63AF8 /* Date+Extension.swift */; };
+		CE8574BB2C59E04600E63AF8 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A32C59E04600E63AF8 /* EditButton.swift */; };
+		CE8574BD2C59E04600E63AF8 /* EventDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A52C59E04600E63AF8 /* EventDataStore.swift */; };
+		CE8574BE2C59E04600E63AF8 /* EventDataStore+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A62C59E04600E63AF8 /* EventDataStore+FullAccess.swift */; };
+		CE8574C02C59E04600E63AF8 /* EventStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A82C59E04600E63AF8 /* EventStoreError.swift */; };
+		CE8574C12C59E04600E63AF8 /* EventStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574A92C59E04600E63AF8 /* EventStoreManager.swift */; };
+		CE8574C22C59E04600E63AF8 /* EventStoreManager+FullAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574AA2C59E04600E63AF8 /* EventStoreManager+FullAccess.swift */; };
+		CE8574CB2C59E04600E63AF8 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574B32C59E04600E63AF8 /* TimeInterval+Extension.swift */; };
+		CE8574D22C59E39E00E63AF8 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */; };
+		CE8575942C5A43D200E63AF8 /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */; };
+		CE8575952C5A43D200E63AF8 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575922C5A43D200E63AF8 /* EventViewModel.swift */; };
+		CE8575962C5A43D200E63AF8 /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */; };
+		CE85759B2C5A442000E63AF8 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575972C5A442000E63AF8 /* EventViewModel.swift */; };
+		CE85759C2C5A442000E63AF8 /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575982C5A442000E63AF8 /* SharedDateModel.swift */; };
+		CE85759D2C5A442000E63AF8 /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -85,6 +107,28 @@
 		BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+CustomFont.swift"; sourceTree = "<group>"; };
+		CE85748A2C59E00900E63AF8 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		CE85748B2C59E00900E63AF8 /* CircleImageListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageListView.swift; sourceTree = "<group>"; };
+		CE85748C2C59E00900E63AF8 /* FavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		CE85748D2C59E00900E63AF8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		CE85749D2C59E04600E63AF8 /* 샘플데이타.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "샘플데이타.md"; sourceTree = "<group>"; };
+		CE85749E2C59E04600E63AF8 /* AlertError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
+		CE85749F2C59E04600E63AF8 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		CE8574A22C59E04600E63AF8 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		CE8574A32C59E04600E63AF8 /* EditButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
+		CE8574A52C59E04600E63AF8 /* EventDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDataStore.swift; sourceTree = "<group>"; };
+		CE8574A62C59E04600E63AF8 /* EventDataStore+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventDataStore+FullAccess.swift"; sourceTree = "<group>"; };
+		CE8574A82C59E04600E63AF8 /* EventStoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreError.swift; sourceTree = "<group>"; };
+		CE8574A92C59E04600E63AF8 /* EventStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStoreManager.swift; sourceTree = "<group>"; };
+		CE8574AA2C59E04600E63AF8 /* EventStoreManager+FullAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventStoreManager+FullAccess.swift"; sourceTree = "<group>"; };
+		CE8574B32C59E04600E63AF8 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
+		CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableHeaderVM.swift; path = moyeo/Andy/ViewModel/TimeTableHeaderVM.swift; sourceTree = SOURCE_ROOT; };
+		CE8575922C5A43D200E63AF8 /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventViewModel.swift; path = moyeo/Andy/ViewModel/EventViewModel.swift; sourceTree = SOURCE_ROOT; };
+		CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedDateModel.swift; path = moyeo/Andy/ViewModel/SharedDateModel.swift; sourceTree = SOURCE_ROOT; };
+		CE8575972C5A442000E63AF8 /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		CE8575982C5A442000E63AF8 /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDateModel.swift; sourceTree = "<group>"; };
+		CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableHeaderVM.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,6 +185,9 @@
 				5191A4592C522B8900550071 /* LoginView.swift */,
 				5191A45B2C522BBE00550071 /* MainView.swift */,
 				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
+				CE8575922C5A43D200E63AF8 /* EventViewModel.swift */,
+				CE8575932C5A43D200E63AF8 /* SharedDateModel.swift */,
+				CE8575912C5A43D200E63AF8 /* TimeTableHeaderVM.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
 			);
 			path = View;
@@ -189,6 +236,64 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		CE85747E2C59DEA900E63AF8 /* Andy */ = {
+			isa = PBXGroup;
+			children = (
+				CE85759A2C5A442000E63AF8 /* ViewModel */,
+				CE8574B42C59E04600E63AF8 /* Shared */,
+				CE8574892C59E00900E63AF8 /* View */,
+				CE85748E2C59E00900E63AF8 /* Helpers */,
+			);
+			path = Andy;
+			sourceTree = "<group>";
+		};
+		CE8574892C59E00900E63AF8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE85748E2C59E00900E63AF8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CE85748A2C59E00900E63AF8 /* CircleImage.swift */,
+				CE85748B2C59E00900E63AF8 /* CircleImageListView.swift */,
+				CE85748C2C59E00900E63AF8 /* FavoriteButton.swift */,
+				CE85748D2C59E00900E63AF8 /* MapView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CE8574B42C59E04600E63AF8 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CE85749D2C59E04600E63AF8 /* 샘플데이타.md */,
+				CE85749E2C59E04600E63AF8 /* AlertError.swift */,
+				CE85749F2C59E04600E63AF8 /* Array+Extension.swift */,
+				CE8574A22C59E04600E63AF8 /* Date+Extension.swift */,
+				CE8574A32C59E04600E63AF8 /* EditButton.swift */,
+				CE8574A52C59E04600E63AF8 /* EventDataStore.swift */,
+				CE8574A62C59E04600E63AF8 /* EventDataStore+FullAccess.swift */,
+				CE8574A82C59E04600E63AF8 /* EventStoreError.swift */,
+				CE8574A92C59E04600E63AF8 /* EventStoreManager.swift */,
+				CE8574AA2C59E04600E63AF8 /* EventStoreManager+FullAccess.swift */,
+				CE8574B32C59E04600E63AF8 /* TimeInterval+Extension.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		CE85759A2C5A442000E63AF8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE8575972C5A442000E63AF8 /* EventViewModel.swift */,
+				CE8575982C5A442000E63AF8 /* SharedDateModel.swift */,
+				CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F3D0DEE22C44AF1800D5EB97 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +318,7 @@
 		F3D0DEED2C44AF1800D5EB97 /* moyeo */ = {
 			isa = PBXGroup;
 			children = (
+				CE85747E2C59DEA900E63AF8 /* Andy */,
 				BFB70E7B2C5751CD00D3C616 /* Helper */,
 				51FD50A62C53445D008C5552 /* View */,
 				51FD50B92C54C13A008C5552 /* ViewModel */,
@@ -363,6 +469,7 @@
 				BFB70E752C57509800D3C616 /* Pretendard-Medium.otf in Resources */,
 				BFB70E742C57509800D3C616 /* Pretendard-ExtraLight.otf in Resources */,
 				BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */,
+				CE8574B52C59E04600E63AF8 /* 샘플데이타.md in Resources */,
 				BFB70E762C57509800D3C616 /* Pretendard-ExtraBold.otf in Resources */,
 				BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */,
 				BFB70E782C57509800D3C616 /* Pretendard-Light.otf in Resources */,
@@ -398,21 +505,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8574C02C59E04600E63AF8 /* EventStoreError.swift in Sources */,
 				51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				CE85759B2C5A442000E63AF8 /* EventViewModel.swift in Sources */,
+				CE8574992C59E00900E63AF8 /* CircleImage.swift in Sources */,
+				CE8575962C5A43D200E63AF8 /* SharedDateModel.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
+				CE8574B62C59E04600E63AF8 /* AlertError.swift in Sources */,
+				CE8574BD2C59E04600E63AF8 /* EventDataStore.swift in Sources */,
+				CE8574C12C59E04600E63AF8 /* EventStoreManager.swift in Sources */,
 				51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
+				CE8575942C5A43D200E63AF8 /* TimeTableHeaderVM.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
+				CE8574BA2C59E04600E63AF8 /* Date+Extension.swift in Sources */,
+				CE8574B72C59E04600E63AF8 /* Array+Extension.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
+				CE8574BE2C59E04600E63AF8 /* EventDataStore+FullAccess.swift in Sources */,
+				CE85749B2C59E00900E63AF8 /* FavoriteButton.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
+				CE85759D2C5A442000E63AF8 /* TimeTableHeaderVM.swift in Sources */,
+				CE85749C2C59E00900E63AF8 /* MapView.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
+				CE85759C2C5A442000E63AF8 /* SharedDateModel.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
+				CE8574CB2C59E04600E63AF8 /* TimeInterval+Extension.swift in Sources */,
+				CE8574C22C59E04600E63AF8 /* EventStoreManager+FullAccess.swift in Sources */,
 				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
+				CE85749A2C59E00900E63AF8 /* CircleImageListView.swift in Sources */,
+				CE8574BB2C59E04600E63AF8 /* EditButton.swift in Sources */,
 				5191A45C2C522BBE00550071 /* MainView.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
+				CE8575952C5A43D200E63AF8 /* EventViewModel.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
+				CE8574D22C59E39E00E63AF8 /* TimeTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +707,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -593,7 +721,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-Andy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -613,7 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -627,7 +755,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-Andy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -644,7 +772,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -665,7 +793,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -684,7 +812,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;
@@ -702,7 +830,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = TB9MFLQJ6C;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeoUITests;

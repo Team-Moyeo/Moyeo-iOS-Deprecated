@@ -12,12 +12,22 @@ struct GroupVoteView: View {
     @State private var isPresentingMemberPopupView = false
     @State private var isPresentingMapWideView = false
     @State private var isPresentingGroupConfirmView = false
+    @State private var isShowingTimeTable = false
+  
     
     var body: some View {
         VStack {
-            Text("GroupVoteView")
-                .padding()
            
+            Button(action: {
+                            self.isShowingTimeTable = true
+                           }) {
+                               
+                               Text("시간표보기")
+                           }
+                           .sheet(isPresented: $isShowingTimeTable) {
+                               TimeTableView()
+                           }.padding()
+            
             Button(action: {
                 // 사용자의 역할(role)에 따라 '설정 아이콘' 또는 '초대하기 버튼'
             }) {

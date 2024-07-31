@@ -87,6 +87,7 @@ struct GroupSetView: View {
                     // NavigationStack에 쌓기
                     appViewModel.navigateTo(.groupVoteView)
                     isPresentingGroupSetView = false
+                  
                     
                 }) {
                     Text("모임 시작하기")
