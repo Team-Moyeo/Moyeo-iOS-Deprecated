@@ -87,9 +87,11 @@ struct DynamicGridWithDragSelection: View {
     
     @State private var pressedPosition: CGPoint = .zero
     @State private var  dragArray: Set<IntTuple> = []
+    @State private var contentOffset: CGFloat = 0.0
+    
     @State private var  availableTimeSet: Set<String> =  []
     @State private var availableTimeTuple : Set<IntTuple> = []
-    @State private var scrollOffset: CGFloat = 0
+ 
     
     private var timeSlot : [String] =  ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
    
@@ -106,7 +108,7 @@ struct DynamicGridWithDragSelection: View {
     //    private let maxY: CGFloat = 670
     //
 
-    @State private var contentOffset: CGFloat = 0.0
+   
     
     init(vm:TimeTableHeaderVM ) {
         self.vm = vm
@@ -118,111 +120,112 @@ struct DynamicGridWithDragSelection: View {
          
         // 현재 타임존의 시간을 기준
         // 시간과 분이 들어가서 정확하지 않는 일이 발생한다..참고할것.(ㅜㅜ
-        
-        VStack(alignment: .center, spacing : 10 ){
-            HStack{
-                DatePicker(
-                    "StartDate",
-                    selection:  $vm.startDate,
-                    displayedComponents:  [.date])
-                   .onChange(of: vm.startDate) {
-                    updateDates()
-             }
-                .onAppear() {
-                  updateDates()
-                }
-               
-                .frame(height: 20)
-                
-                CircleImageListView()
-                    .onTapGesture {
-                        showAlert = true
-                    }
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text("Images are tapped"))
-                    }
-                
-            }
-            
-            Text("EndDate: \(String(describing: vm.endDateString))")
-                .font(.system(size: 11))
-                .frame(alignment: .leading)
-                .onAppear() {
-                    vm.endDateString = dateToDateString(date: vm.endDate) ?? ""
-                   updateDates()
-                }
-            
-            HStack {
-                
-                Text("No of Days: \(Int(vm.numberOfColumns))")
-                    .font(.system(size: 11))
-                Slider(value: $vm.numberOfColumns , in: 1...7, step: 1) {_ in
-                    updateDates()
-                    print("startDateString \(vm.startDateString)")
-                    print("endDateString \(vm.endDateString)")
-                }
-            }
-            
-            
-            HStack {
-                Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")")
-                    .font(.system(size: 11))
-                Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
-                    //  Text("Fixed Column Width")
-                }
-            }
-            HStack(spacing: 10){
-                Button(action: {
-                    Task {
-                        print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
-                        await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
-                        await eventViewModel.moveEventsToCalendarArray()
+       
+            VStack(alignment: .leading, spacing : 10 ){
+                Section("모여"){
+                    HStack{
+                        DatePicker(
+                            "StartDate",
+                            selection:  $vm.startDate,
+                            displayedComponents:  [.date])
+                       .onChange(of: vm.startDate) {
+                            updateDates()
+                        }
+                        .onAppear() {
+                            updateDates()
+                        }
+                        
+                        .frame(height: 15)
+                       
+                        CircleImageListView()
+                            .onTapGesture {
+                                showAlert = true
+                            }
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("Images are tapped"))
+                            }
                         
                     }
                     
-                }) {
-                    Text("칼렌다")
+                    Text("EndDate: \(String(describing: vm.endDateString))")
                         .font(.system(size: 11))
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                }
-                .frame(width: 100, height: 12)
-                
-                Button(action: {
+                        .frame(alignment: .leading)
+                        .onAppear() {
+                            vm.endDateString = dateToDateString(date: vm.endDate) ?? ""
+                            updateDates()
+                        }
                     
-                    deleteCheckAll()
-                    
-                }) {
-                    Text("지우기")
-                        .font(.system(size: 11))
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    
-                }.frame(width: 100, height: 12)
-                
-                Button(action: {
-                    
-                    allowHitTestingFlag.toggle()
-                    if allowHitTestingFlag == false {
-                        convertCheckedStatesToTimeTable()
-                        convertAvailableTimeFromSetToTuPle()
+                    HStack {
+                        
+                        Text("No of Days: \(Int(vm.numberOfColumns))")
+                            .font(.system(size: 11))
+                        Slider(value: $vm.numberOfColumns , in: 1...7, step: 1) {_ in
+                            updateDates()
+                            print("startDateString \(vm.startDateString)")
+                            print("endDateString \(vm.endDateString)")
+                        }
                     }
-                }) {
-                    Text("선택하기")
-                        .font(.system(size: 11))
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
                     
-                }.frame(width: 150, height: 12)
-            }
-            
-            
+                    
+                    HStack {
+                        Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")")
+                            .font(.system(size: 11))
+                        Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
+                            //  Text("Fixed Column Width")
+                        }
+                    }
+                    HStack(spacing: 10){
+                        Button(action: {
+                            Task {
+                                print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
+                                await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
+                                await eventViewModel.moveEventsToCalendarArray()
+                                
+                            }
+                            
+                        }) {
+                            Text("칼렌다")
+                                .font(.system(size: 11))
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(4)
+                        }
+                        .frame(width: 100, height: 12)
+                        
+                        Button(action: {
+                            
+                            deleteCheckAll()
+                            
+                        }) {
+                            Text("지우기")
+                                .font(.system(size: 11))
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(4)
+                            
+                        }.frame(width: 100, height: 12)
+                        
+                        Button(action: {
+                            
+                            allowHitTestingFlag.toggle()
+                            if allowHitTestingFlag == false {
+                                convertCheckedStatesToTimeTable()
+                                convertAvailableTimeFromSetToTuPle()
+                            }
+                        }) {
+                            Text("선택하기")
+                                .font(.system(size: 11))
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(4)
+                            
+                        }.frame(width: 150, height: 12)
+                    }
+                    
+                }
       
             Grid(horizontalSpacing: 0,  verticalSpacing: 0) {
                 // 헤더 행
@@ -332,7 +335,7 @@ struct DynamicGridWithDragSelection: View {
                                                         
                                                     }())
                                                 
-                                                    .border(Color.white)
+                                                    .border(Color.white, width: 2)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                 
                                                 
@@ -370,6 +373,7 @@ struct DynamicGridWithDragSelection: View {
                             }
                             
                         }
+                        
                         .allowsHitTesting(allowHitTestingFlag)
                         .padding(padding)
                         //  I used the pattern mathcing in switch, very concise!!!
@@ -468,16 +472,20 @@ struct DynamicGridWithDragSelection: View {
                     })
                     
                     
-                }
-                
+                }.scrollTargetLayout()
+                 .onAppear{
+                        scrollViewProxy.scrollTo(timeSlot.firstIndex(of: "09:00am"), anchor: .top)
+                    }
+
                 .coordinateSpace(name: "scroll")
                 .frame(height:450)
                 
             } .background(Color.clear)
-            
+                                
             
         }
-        
+           
+            .scrollTargetBehavior(.viewAligned)
     }
     
     private func lastTwoDigits(year : Int) ->String {
@@ -486,20 +494,25 @@ struct DynamicGridWithDragSelection: View {
         return  String(yearString.suffix(2))
     }
     private func adjustScroll(contentOffset: CGFloat) {
+        var adjustedOffset : Double = 0
         let offset = contentOffset.truncatingRemainder(dividingBy: fixedRowHeight)
+        print("offset :\(offset)")
         if offset != 0 {
             let targetOffset = contentOffset - offset
-            //     if abs(offset) > fixedRowHeight / 2 {
-            let adjustedOffset = contentOffset + (fixedRowHeight - abs(offset)) * (offset > 0 ? 1 : -1)
-            withAnimation {
-                scrollOffset = adjustedOffset
+            if abs(offset) > fixedRowHeight / 2 {
+                
+                 adjustedOffset = targetOffset + (fixedRowHeight) * (offset > 0 ? 1 : -1)
+                
             }
-            //        } else {
-            withAnimation {
-                scrollOffset = targetOffset
+            else {
+                adjustedOffset = targetOffset
             }
-            //        }
+            withAnimation {
+                self.contentOffset = adjustedOffset
+            }
         }
+        
+        
     }
     
     func applyDragPath() {

@@ -108,11 +108,11 @@ func daysBetween(start: Date, end: Date, timeZone: TimeZone = TimeZone(identifie
     endComponents.minute = 0
     endComponents.second = 0
     
-    // 새 날짜 생성
-    guard let startOfDay = calendar.date(from: startComponents),
-          let endOfDay = calendar.date(from: endComponents) else {
-        return nil
-    }
+// 새 날짜 생성
+//    guard let startOfDay = calendar.date(from: startComponents),
+//          let endOfDay = calendar.date(from: endComponents) else {
+//        return nil
+//    }
     
     let components = calendar.dateComponents([.day], from: start, to: end)
     return components.day
