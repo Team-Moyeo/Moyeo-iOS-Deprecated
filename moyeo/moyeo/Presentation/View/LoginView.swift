@@ -12,10 +12,15 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Text("모여 로고")
-                .font(.title)
-            
+            Spacer()
+            Image(.loginViewLogo)
+                .padding(.bottom, 21)
+            Text("The Best Time for Everyone")
+                .pretendard(.extraLight, 19)
+                .foregroundStyle(.myGray)
+            Spacer()
             AppleSigninButton()
+                .padding(.bottom, 12)
         }
     }
 }
@@ -49,5 +54,6 @@ struct AppleSigninButton: View {
 
 #Preview {
     LoginView()
+        .environment(AuthViewModel())
         .environment(AppViewModel())
 }
