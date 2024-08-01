@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroupVoteView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     @State private var isPresentingMemberPopupView = false
     @State private var isPresentingMapWideView = false
     @State private var isPresentingGroupConfirmView = false
@@ -57,7 +57,6 @@ struct GroupVoteView: View {
             }
             .sheet(isPresented: $isPresentingGroupConfirmView) {
                 GroupConfirmView(isPresentingGroupConfirmView: $isPresentingGroupConfirmView)
-                    .environmentObject(appViewModel)
             }
             .padding()
             

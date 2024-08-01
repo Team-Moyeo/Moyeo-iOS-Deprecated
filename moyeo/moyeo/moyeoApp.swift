@@ -13,7 +13,7 @@ struct moyeoApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @StateObject private var vm = AppViewModel()
+    @State private var vm = AppViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -21,7 +21,7 @@ struct moyeoApp: App {
                 ContentView()
             }
         }
-        .environmentObject(vm)
+        .environment(vm)
         
     }
 }

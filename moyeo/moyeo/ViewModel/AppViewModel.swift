@@ -12,9 +12,9 @@ enum MainRoute : String , Hashable {
     case groupResultView
 }
 
-class AppViewModel: ObservableObject {
+@Observable class AppViewModel {
     
-    @Published var appPath = NavigationPath()
+    var appPath = NavigationPath()
     
     func navigateTo(_ view: MainRoute) {
         appPath.append(view)

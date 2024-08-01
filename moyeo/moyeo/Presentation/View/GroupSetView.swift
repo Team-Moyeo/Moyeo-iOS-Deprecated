@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroupSetView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     @State private var meetingName: String = ""
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
