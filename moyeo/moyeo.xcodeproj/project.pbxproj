@@ -18,7 +18,8 @@
 		51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B12C538326008C5552 /* MemberPopupView.swift */; };
 		51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B32C53833E008C5552 /* GroupConfirmView.swift */; };
 		51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B52C53835F008C5552 /* GroupResultView.swift */; };
-		BF4DAE3F2C5B0B5E002371DC /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE3E2C5B0B5E002371DC /* SignInInfo.swift */; };
+		BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */; };
+		BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */; };
 		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
 		BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
 		BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */; };
@@ -33,7 +34,6 @@
 		BFB70E792C57509800D3C616 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */; };
 		BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */; };
 		BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */; };
-		BFD683F12C591E17001B31DE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F02C591E17001B31DE /* NetworkManager.swift */; };
 		BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F22C59203A001B31DE /* APIEndpoints.swift */; };
 		BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberResponse.swift */; };
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
@@ -77,7 +77,8 @@
 		51FD50B52C53835F008C5552 /* GroupResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResultView.swift; sourceTree = "<group>"; };
 		BF0416132C48F4D500599C8D /* moyeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = moyeo.entitlements; sourceTree = "<group>"; };
 		BF0416142C4939BC00599C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BF4DAE3E2C5B0B5E002371DC /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
+		BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
+		BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+Encryption.swift"; sourceTree = "<group>"; };
 		BF59C8392C58688C00767A19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BFB70E662C5746D600D3C616 /* Colorsets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colorsets.xcassets; sourceTree = "<group>"; };
@@ -91,7 +92,6 @@
 		BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+CustomFont.swift"; sourceTree = "<group>"; };
-		BFD683F02C591E17001B31DE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BFD683F22C59203A001B31DE /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		BFD683F52C59CEC4001B31DE /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
@@ -219,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */,
+				BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -226,9 +227,8 @@
 		BFD683EF2C591DEB001B31DE /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BFD683F02C591E17001B31DE /* NetworkManager.swift */,
 				BFD683F22C59203A001B31DE /* APIEndpoints.swift */,
-				BF4DAE3E2C5B0B5E002371DC /* SignInInfo.swift */,
+				BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -449,18 +449,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
 				51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
 				51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */,
-				BFD683F12C591E17001B31DE /* NetworkManager.swift in Sources */,
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
 				BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
-				BF4DAE3F2C5B0B5E002371DC /* SignInInfo.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,

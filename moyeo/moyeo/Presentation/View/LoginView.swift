@@ -9,7 +9,6 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    @Environment(AppViewModel.self) var appViewModel
     
     var body: some View {
         VStack {
@@ -22,7 +21,7 @@ struct LoginView: View {
 }
 
 struct AppleSigninButton: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
     
     var body: some View {
         

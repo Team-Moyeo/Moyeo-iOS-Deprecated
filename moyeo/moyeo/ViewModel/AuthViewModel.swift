@@ -8,13 +8,14 @@
 import Foundation
 import AuthenticationServices
 
-class AuthViewModel: ObservableObject {
-    @Published var isAuthenticated: Bool = false
+@Observable
+class AuthViewModel {
+    var isAuthenticated: Bool = false
     
-    @Published var memberId: String?
-    @Published var accessToken: String?
-    @Published var refreshToken: String?
-    @Published var isServiceMember: Bool = false
+    var memberId: String?
+    var accessToken: String?
+    var refreshToken: String?
+    var isServiceMember: Bool = false
     
 }
 
@@ -46,10 +47,8 @@ extension AuthViewModel {
             // let email = appleIDCredential.email ?? ""
             
             // guard let identityToken = appleIDCredential.identityToken else { return }
-            // guard let authorizationCode = appleIDCredential.authorizationCode else { return }
-            
             // let tokenString = String(data: identityToken, encoding: .utf8) ?? "" // 이메일 가리기 시 여기서 이메일 추출
-            // let authCodeString = String(data: authorizationCode, encoding: .utf8)
+
             
             print("userIdentifier:\(userIdentifier)")
              
@@ -58,10 +57,12 @@ extension AuthViewModel {
                 return
             }
             
+            let encryptedUserIdentifier = HashHelper.hash(userIdentifier)
+            
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue(userIdentifier, forHTTPHeaderField: "userIdentifier")
+            request.setValue(encryptedUserIdentifier, forHTTPHeaderField: "encryptedUserIdentifier")
             // request.setValue(fullName, forHTTPHeaderField: "fullName")
             // request.setValue(email, forHTTPHeaderField: "email")
             
@@ -89,8 +90,24 @@ extension AuthViewModel {
                 print("\(self.isServiceMember)")
                 
                 
-                
-                
+                if let signInResponse = response.result {
+                    
+                    try SignInInfo.shared.addToken(.access, token: signInResponse.accessToken)
+                    try SignInInfo.shared.addToken(.refresh, token: signInResponse.refreshToken)
+                    
+                    if signInResponse.isServiceMember {
+                        print("로그인 성공")
+                        self.isAuthenticated = true
+                    } else {
+                        // 이때 정보 기입 뷰 뜨면서 프로필 사진, 이름, 이메일 기입?
+                        print("첫 로그인")
+                        self.isAuthenticated = true
+                    }
+                    
+                    print("accessToken: \(try SignInInfo.shared.readToken(.access))")
+                    print("refreshToken: \(try SignInInfo.shared.readToken(.refresh))")
+                    
+                }
                 
             } catch {
                 
@@ -99,11 +116,6 @@ extension AuthViewModel {
             
         default:
             break
-        }
-        
-        
-        DispatchQueue.main.async {
-            self.isAuthenticated = true
         }
     }
 }
