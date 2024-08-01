@@ -38,6 +38,10 @@ enum Weekday: Int {
         }
     }
 }
+
+var timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
+
+
 struct TimeTableView: View {
    
     
@@ -91,9 +95,7 @@ struct TimeTableView: View {
     @State private var  availableTimeSet: Set<String> =  []
     @State private var availableTimeTuple : Set<IntTuple> = []
  
-    
-    private var timeSlot : [String] =  ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
-   
+ 
     // to change the number of columns
   
     @State private var startDate: Date = Date()
@@ -216,7 +218,7 @@ struct TimeTableView: View {
                             allowHitTestingFlag.toggle()
                             if allowHitTestingFlag == false {
                                 convertCheckedStatesToTimeTable()
-                                convertAvailableTimeFromSetToTuPle()
+                                convertAvailableTimeFromSetToTuple()
                             }
                         }) {
                             Text("선택하기")
@@ -472,7 +474,7 @@ struct TimeTableView: View {
     private func adjustScroll(contentOffset: CGFloat) {
         var adjustedOffset : CGFloat = 0
         let offset = contentOffset.truncatingRemainder(dividingBy: fixedRowHeight)
-        print("offset :\(offset)")
+        
         if offset != 0 {
             let targetOffset = contentOffset - offset
             if abs(offset) > fixedRowHeight / 2 {
@@ -554,7 +556,7 @@ struct TimeTableView: View {
         
         var availableTimeSet :Set<String> = []
         let calendar = Calendar.current
-        let timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
+       
         self.availableTimeSet.removeAll()
         for row in 0...47 {
             for col in 0..<Int(sharedModel.numberOfDays) {
@@ -581,9 +583,9 @@ struct TimeTableView: View {
             print(" timeslot: \(item)" )
         }
     }
-    func convertAvailableTimeFromSetToTuPle() {
+    func convertAvailableTimeFromSetToTuple() {
         
-        let timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
+  
         var row :Int = 0
         var col : Int = 0
         self.availableTimeTuple.removeAll()

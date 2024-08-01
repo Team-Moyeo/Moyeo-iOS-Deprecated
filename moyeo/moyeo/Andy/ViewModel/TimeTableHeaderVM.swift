@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-
+// 화면 출력과 관계가 있어서 @MainActor.run {}을 사용해야 할곳이 있는지 추후 체크
 class TimeTableHeaderVM :ObservableObject{
     
     @Published var startDate : Date = Date()
@@ -25,7 +25,7 @@ class TimeTableHeaderVM :ObservableObject{
     @Published var startDateString : String
     @Published var endDateString : String
     private var cancellables = Set<AnyCancellable>()
-    
+    private var isShowing = false
     init(sharedModel : SharedDateModel) {
       
         
@@ -43,13 +43,18 @@ class TimeTableHeaderVM :ObservableObject{
 private func setupBindings(sharedModel: SharedDateModel) {
         
         Publishers.CombineLatest3(sharedModel.$startDate,sharedModel.$endDate , sharedModel.$numberOfDays)
-                    .sink { [weak self]  start, end, numberOfDays in
-                        self?.startDate = start
-                        self?.endDate = end
-                        self?.numberOfDays = numberOfDays
-                        self?.makeHeaderTimeTable()
-                    }
-                    .store(in: &cancellables)
+        .sink { [weak self]  start, end, numberOfDays in
+            
+            if self?.startDate != start || self?.endDate != end || self?.numberOfDays != numberOfDays  && !(self?.isShowing ?? true) {
+                self?.isShowing = true
+                self?.startDate = start
+                self?.endDate = end
+                self?.numberOfDays = numberOfDays
+                self?.makeHeaderTimeTable()
+                self?.isShowing = false
+            }
+        }
+        .store(in: &cancellables)
     }
     
     //변수의 값이 바뀔때 publishing-sink로 연결된 함수를 실행시킨다..내가 조건체크할 필요가 없음
@@ -58,7 +63,7 @@ private func setupBindings(sharedModel: SharedDateModel) {
 //        guard let endDate = self.endDate else {return }
 //        guard let numberOfDays = self.numberOfDays else { return}
 //
-        print("makeHeaderTimeTable from combine wonderful to use the combine..")
+        print("makeHeaderTimeTable from combine!! be careful not to run many times...")
         let dateString = dateToDateString(date: startDate)
         _ = TimeZone(identifier: "Asia/Seoul")!
         
