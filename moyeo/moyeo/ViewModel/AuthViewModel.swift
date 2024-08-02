@@ -50,11 +50,6 @@ extension AuthViewModel {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
             let userIdentifier = appleIDCredential.user // 사용자 식별자
-            // let fullName = (appleIDCredential.fullName?.familyName ?? "") + (appleIDCredential.fullName?.givenName ?? "")
-            // let email = appleIDCredential.email ?? ""
-            
-            // guard let identityToken = appleIDCredential.identityToken else { return }
-            // let tokenString = String(data: identityToken, encoding: .utf8) ?? "" // 이메일 가리기 시 여기서 이메일 추출
             
             print("userIdentifier:\(userIdentifier)")
             
@@ -80,18 +75,19 @@ extension AuthViewModel {
 
                 if let httpResponse = httpResponse as? HTTPURLResponse,
                    !(200..<300).contains(httpResponse.statusCode) {
-                    print("Error: badRequest")
+                    print("Error: \(httpResponse.statusCode) badRequest")
                 }
                 
                 do {
                     let response = try JSONDecoder().decode(BaseResponse<MemberResponse.SignIn>.self, from: data)
-                    // print("MemberResponse:SignIn: \(String(describing: response.result))")
 
                     if response.code == "COMMON200" {
                         self.memberId = response.result?.memberId
                         self.accessToken = response.result?.accessToken
                         self.refreshToken = response.result?.refreshToken
                         self.isServiced = response.result?.isServiced ?? false
+                    } else if response.code == "AUTH001" {
+                        print("Response from Bad Request: \(String(describing: response.result))")
                     }
                     
                     print("memberId: \(self.memberId ?? 0)")
