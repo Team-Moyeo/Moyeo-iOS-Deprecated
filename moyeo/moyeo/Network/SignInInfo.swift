@@ -87,14 +87,14 @@ final class SignInInfo {
         
         // 4. 키체인 추가가 잘 되었는지 확인
         if status == errSecSuccess {
-            print("키체인 생성 성공")
+            print("키체인 생성 성공: \(type.rawValue)")
         } else if status == errSecDuplicateItem {
             // 4-1. 만약 이미 존재한다면, 기존 키체인 item 업데이트
-            print("키체인 업데이트 시작")
+            print("키체인 업데이트 시작: \(type.rawValue)")
             try updateToken(type, value: tokenData)
             
         } else {
-            print("키체인 생성 실패")
+            print("키체인 생성 실패: \(type.rawValue)")
             throw KeyChainError.unHandledError(status: status)
         }
     }
@@ -146,8 +146,5 @@ final class SignInInfo {
             throw KeyChainError.unHandledError(status: status)
         }
         
-        
     }
-    
-    
 }

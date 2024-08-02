@@ -12,10 +12,17 @@ import AuthenticationServices
 class AuthViewModel {
     var isAuthenticated: Bool = false
     
-    var memberId: String?
+    var memberId: Int?
     var accessToken: String?
     var refreshToken: String?
-    var isServiceMember: Bool = false
+    var isServiced: Bool = false
+    
+    enum SocialType: String {
+        case apple = "APPLE"
+        case google = "GOOGLE"
+        case kakao = "KAKAO"
+        case naver = "NAVER"
+    }
     
 }
 
@@ -48,10 +55,9 @@ extension AuthViewModel {
             
             // guard let identityToken = appleIDCredential.identityToken else { return }
             // let tokenString = String(data: identityToken, encoding: .utf8) ?? "" // 이메일 가리기 시 여기서 이메일 추출
-
             
             print("userIdentifier:\(userIdentifier)")
-             
+            
             guard let url = URL(string: APIEndpoints.basicURLString(path: .signIn)) else {
                 print("Invalid URL")
                 return
@@ -62,55 +68,76 @@ extension AuthViewModel {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue(encryptedUserIdentifier, forHTTPHeaderField: "encryptedUserIdentifier")
-            // request.setValue(fullName, forHTTPHeaderField: "fullName")
-            // request.setValue(email, forHTTPHeaderField: "email")
+            
+            let body: [String: Any] = [
+                "encryptedUserIdentifier": encryptedUserIdentifier,
+                "socialType": SocialType.apple.rawValue
+            ]
             
             do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
                 let (data, httpResponse) = try await URLSession.shared.data(for: request)
-                
+
                 if let httpResponse = httpResponse as? HTTPURLResponse,
                    !(200..<300).contains(httpResponse.statusCode) {
                     print("Error: badRequest")
                 }
                 
-                let response = try JSONDecoder().decode(BaseResponse<MemberResponse.SignIn>.self, from: data)
-                print("MemberResponse:SignIn: \(String(describing: response.result))")
-                
-                if response.code == "COMMON200" {
-                    self.memberId = response.result?.memberId
-                    self.accessToken = response.result?.accessToken
-                    self.refreshToken = response.result?.refreshToken
-                    self.isServiceMember = response.result?.isServiceMember ?? false
-                }
-                
-                print("\(String(describing: self.memberId))")
-                print("\(String(describing: self.accessToken))")
-                print("\(String(describing: self.refreshToken))")
-                print("\(self.isServiceMember)")
-                
-                
-                if let signInResponse = response.result {
-                    
-                    try SignInInfo.shared.addToken(.access, token: signInResponse.accessToken)
-                    try SignInInfo.shared.addToken(.refresh, token: signInResponse.refreshToken)
-                    
-                    if signInResponse.isServiceMember {
-                        print("로그인 성공")
-                        self.isAuthenticated = true
-                    } else {
-                        // 이때 정보 기입 뷰 뜨면서 프로필 사진, 이름, 이메일 기입?
-                        print("첫 로그인")
-                        self.isAuthenticated = true
+                do {
+                    let response = try JSONDecoder().decode(BaseResponse<MemberResponse.SignIn>.self, from: data)
+                    // print("MemberResponse:SignIn: \(String(describing: response.result))")
+
+                    if response.code == "COMMON200" {
+                        self.memberId = response.result?.memberId
+                        self.accessToken = response.result?.accessToken
+                        self.refreshToken = response.result?.refreshToken
+                        self.isServiced = response.result?.isServiced ?? false
                     }
                     
-                    print("accessToken: \(try SignInInfo.shared.readToken(.access))")
-                    print("refreshToken: \(try SignInInfo.shared.readToken(.refresh))")
+                    print("memberId: \(self.memberId ?? 0)")
+                    print("accessToken: \(self.accessToken ?? "No AccessToken")")
+                    print("refreshToken: \(self.refreshToken ?? "NO RefreshToken")")
+                    print("isServiced: \(self.isServiced)")
                     
+                    if let signInResponse = response.result {
+                        
+                        try SignInInfo.shared.addToken(.access, token: signInResponse.accessToken)
+                        try SignInInfo.shared.addToken(.refresh, token: signInResponse.refreshToken)
+                        
+                        if signInResponse.isServiced {
+                            print("로그인 성공")
+                            self.isAuthenticated = true
+                        } else {
+                            // 이때 정보 기입 뷰 뜨면서 프로필 사진, 이름, 이메일 기입?
+                            print("첫 로그인")
+                            self.isAuthenticated = true
+                        }
+                        
+                        // print("accessToken in Keychain: \(try SignInInfo.shared.readToken(.access))")
+                        // print("refreshToken in Kychain: \(try SignInInfo.shared.readToken(.refresh))")
+                        
+                    }
+                    
+                } catch {
+                    print("디코딩 오류: \(error.localizedDescription)")
+                    if let jsonError = error as? DecodingError {
+                        switch jsonError {
+                        case .typeMismatch(let key, let context):
+                            print("Type mismatch error: \(key), \(context)")
+                        case .valueNotFound(let key, let context):
+                            print("Value not found error: \(key), \(context)")
+                        case .keyNotFound(let key, let context):
+                            print("Key not found error: \(key), \(context)")
+                        case .dataCorrupted(let context):
+                            print("Data corrupted error: \(context)")
+                        default:
+                            print("Decoding error: \(jsonError.localizedDescription)")
+                        }
+                    }
                 }
                 
             } catch {
-                
+                print("오류 발생: \(error.localizedDescription)")
             }
             
             

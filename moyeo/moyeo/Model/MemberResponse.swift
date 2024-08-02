@@ -10,10 +10,10 @@ import Foundation
 struct MemberResponse {
     
     struct SignIn: Codable {
-        let memberId: String
+        let memberId: Int
         let accessToken: String
         let refreshToken: String
-        let isServiceMember: Bool
+        let isServiced: Bool
     }
     
 }
