@@ -1,0 +1,187 @@
+//
+//  sample.txt
+//  moyeo
+//
+//  Created by Giwoo Kim on 8/2/24.
+//
+
+import Foundation
+        
+        let combinedPublisher = currentValueSubjectStart
+            .flatMap { value1 in
+                self.currentValueSubjectEnd.map { value2 in
+                    CombinedDate(start: value1, end: value2)
+                }
+            }
+            .eraseToAnyPublisher()
+
+        
+        
+        combinedPublisher
+                   .sink(receiveCompletion: { completion in
+                       switch completion {
+                       case .finished:
+                           print("CurrentValueSubject finished")
+                       case .failure(let error):
+                           print("CurrentValueSubject failed with error: \(error)")
+                       }
+                   }, receiveValue: {[weak self] combinedDate in
+                       guard let self = self else { return }
+                       print("currentValueSubject.sink receive Value: \(combinedDate)")
+                       if  self.startDate != combinedDate.start || self.startDate != combinedDate.end && !self.isUpdating {
+                           self.isUpdating = true  // Set flag before update
+                           self.startDate = combinedDate.start
+                           self.endDate = combinedDate.end
+                        
+                           self.isUpdating = false
+                       }
+                   })
+                   .store(in: &cancellables)
+        
+        
+
+
+
+        sharedModel.$combinedDate
+            .sink { [weak self]  combinedDate in
+                guard let self = self,  let start = combinedDate?.start,let end = combinedDate?.end else  {return}
+             
+                
+                if self.startDate != start  ||  self.endDate != end  && !(self.isFetching) {
+                    self.isFetching = true
+                    self.startDate = start
+                    self.endDate = end
+                    
+                    Task {
+                        await self.getEvents()
+                        await self.moveEventsToCalendarArray()
+                        self.isFetching = false
+                    }
+                }
+            }
+                    .store(in: &cancellables)
+            
+        // 순서가 중요
+        // passthroughSubject.sink  -> $startDate.sink -> passthroughSubject.send
+        // 만약 currentValueSubject로 한다면 currentValueSubject는 초기값을 갖을수있으므로..
+        // $startDate.sink -> currentValueSubject.send -> currentValueSubject.sink
+        
+        //        passthroughSubject
+        //                   .sink(receiveCompletion: { completion in
+        //                       switch completion {
+        //                       case .finished:
+        //                           print("PassthroughSubject finished")
+        //                       case .failure(let error):
+        //                           print("PassthroughSubject failed with error: \(error)")
+        //                       }
+        //                   }, receiveValue: {[weak self] value in
+        //                       guard let self = self else { return }
+        //                       print("passthroughSubject : \(value)")
+//                       if  self.startDate != value {
+//                           self.isUpdating = true  // Set flag before update
+//                           self.startDate = value
+//                           self.isUpdating = false
+//                       }
+//                   })
+//                   .store(in: &cancellables)
+//
+//
+//        Why $ is Not Used with Subject
+//        Design: $ is specifically designed for accessing the Publisher of an @Published property. It’s a convenience provided by SwiftUI and Combine to make it easy to subscribe to state changes.
+//        Direct Subject Usage: When working directly with Subject, you’re handling both publishing and subscribing explicitly. Subject itself is a Publisher, so you don’t need $ to access its publishing capabilities.
+
+//
+//        $startDate
+//            .dropFirst()
+//            .map{
+//                self.startTimeFix(date:$0)
+//            }
+//            .sink(receiveCompletion: { completion in
+//                       switch completion {
+//                       case .finished:
+//                           print("Subscription finished")
+//                       case .failure(let error):
+//                           print("Subscription failed with error: \(error)")
+//                       }
+//                   }, receiveValue: { [weak self] value in
+//                       guard let self = self else { return }
+//                       if let value = value {
+//                           print("startDate.sink receive value :  \(String(describing: value))")
+//                       }
+//                       else {
+//                           print("startDate changed to nil")
+//                       }
+//                       // Check flag before processing
+//
+//                      if !(self.isUpdating), let newValue = value {
+//
+////                           print("send to passthroughSubject \(newValue)")
+////                           self.passthroughSubject.send(newValue)
+////
+////                         비교해보자
+//
+//                          // startDate endDate 의 값이 바뀌기 전에 Start와 End를  Publish
+//                          // Start와 End를  combinedPublisher가  subscribe 한후 다시 CombinedDate구조로 결합해서 Publish
+//                          // 결합된 CombinedDated은 start와 end는 self.publishEnd(date: newValue)을 통해서 (numberofdays)의 차이만큼 업데이트된 값이어야함.
+//                          if !isUpdating {
+//                              print("send to currentValueSubjecStart Publisher \(newValue)")
+//                              self.passthroughSubjectStart.send(newValue)
+//
+//                              print("send to currentValueSubjectEnd Publisher \(newValue)")
+//                              self.publishEnd(date: newValue)
+//
+//
+//                          }
+//                       }
+//                   })
+//        .store(in: &cancellables)
+//
+//        let startDateStream = AsyncStream<Date> { continuation in
+//            self.$startDate
+//                .map{
+//                    self.startTimeFix(date:$0) ?? $0  }
+//                .sink { newDate in
+//                    print("continuation.yield \(newDate)")
+//                    Task{
+//                        continuation.yield(newDate)
+//                    }
+//                }
+//                .store(in: &cancellables)
+//        }
+//
+//        Task {
+//            for await date in startDateStream {
+//                print("Received date via async stream: \(date)")
+//                if !(self.isUpdating) && startDate != date {
+//                    isUpdating = true
+//                    startDate = date
+//                    updateEndDate()
+//                    isUpdating = false
+//                }
+//            }
+//        }
+        
+     
+
+        
+        
+//        currentValueSubjectStart
+//                   .sink(receiveCompletion: { completion in
+//                       switch completion {
+//                       case .finished:
+//                           print("CurrentValueSubject finished")
+//                       case .failure(let error):
+//                           print("CurrentValueSubject failed with error: \(error)")
+//                       }
+//                   }, receiveValue: {[weak self] value in
+//                       guard let self = self else { return }
+//                       print("currentValueSubject.sink receive Value: \(value)")
+//                       if  self.startDate != value {
+//                           self.isUpdating = true  // Set flag before update
+//                           self.startDate = value
+//
+//                           self.isUpdating = false
+//                       }
+//                   })
+//                   .store(in: &cancellables)
+//        

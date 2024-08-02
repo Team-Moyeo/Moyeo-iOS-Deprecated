@@ -95,7 +95,7 @@ extension EventDataStore {
         }
         
         if let start = startDate, let end = endDate {
-            print("start \(start) end \(end)" )
+            print("start: \(start) end : \(end)" )
             let predicate = eventStore.predicateForEvents(withStart: start, end: end, calendars: nil)
             let events = eventStore.events(matching: predicate).sortedEventByAscendingDate()
             let filteredEvents = events.filter { event in

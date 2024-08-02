@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-
+@MainActor
 // 화면 출력과 관계가 있어서 @MainActor.run {}을 사용해야 할곳이 있는지 추후 체크
 class TimeTableHeaderVM :ObservableObject{
     
@@ -26,6 +26,7 @@ class TimeTableHeaderVM :ObservableObject{
     @Published var endDateString : String
     private var cancellables = Set<AnyCancellable>()
     private var isShowing = false
+    
     init(sharedModel : SharedDateModel) {
       
         
@@ -37,12 +38,14 @@ class TimeTableHeaderVM :ObservableObject{
         weekdayString = []
         startDateString  = ""
         endDateString = ""
-        
-        setupBindings(sharedModel: sharedModel)
+        Task {
+           await  setupBindings(sharedModel: sharedModel)
+        }
     }
-private func setupBindings(sharedModel: SharedDateModel) {
+  
+    private func setupBindings(sharedModel: SharedDateModel)  async {
         
-        Publishers.CombineLatest3(sharedModel.$startDate,sharedModel.$endDate , sharedModel.$numberOfDays)
+     Publishers.CombineLatest3(sharedModel.$startDate,sharedModel.$endDate , sharedModel.$numberOfDays)
         .sink { [weak self]  start, end, numberOfDays in
             
             if self?.startDate != start || self?.endDate != end || self?.numberOfDays != numberOfDays  && !(self?.isShowing ?? true) {

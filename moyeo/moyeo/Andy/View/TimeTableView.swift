@@ -159,15 +159,12 @@ struct TimeTableView: View {
                             get: { CGFloat(sharedModel.numberOfDays) },
                             set: { newValue in
                                 sharedModel.numberOfDays = Int(newValue)
-                               
                             }
-                        ) , in: 1...7, step: 1) {_ in
-                  
+                        ), in: 1...7, step: 1) {_ in
                             print("startDateString \(sharedModel.startDateString)")
                             print("endDateString \(sharedModel.endDateString)")
                         }
                     }
-                    
                     
                     HStack {
                         Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")")
@@ -221,10 +218,10 @@ struct TimeTableView: View {
                                 convertAvailableTimeFromSetToTuple()
                             }
                         }) {
-                            Text("선택하기")
+                            Text(allowHitTestingFlag ?  "선택완료": "선택하기")
                                 .font(.system(size: 11))
                                 .padding(2)
-                                .background(Color.blue)
+                                .background( allowHitTestingFlag ? Color.blue : Color.cyan)
                                 .foregroundColor(.white)
                                 .cornerRadius(4)
                             
@@ -243,15 +240,17 @@ struct TimeTableView: View {
                         VStack(alignment: .leading, spacing: 0) {
                             
                             HStack(alignment: .top, spacing: 0) {
-                                
+                               
                                 if index < timeTHVm.monthString.count  {
                                     Text(timeTHVm.monthString[index].isEmpty ? "" : "\(timeTHVm.monthString[index])월")
-                                        .font(.system(size: 11))
+                                        .font(.system(size: 10))
                                         .foregroundColor(.gray)
+                                   
                                     Text(timeTHVm.yearString[index].isEmpty ? "" : "\(String(timeTHVm.yearString[index].suffix(2)))년")
                                         .font(.system(size: 8))
                                         .foregroundColor(.gray)
                                 }
+                               
                             }
                             // Adjust the spacing between two sections
                             Spacer()
