@@ -13,54 +13,41 @@ struct MainView: View {
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
     
+    // 임시
+    @State private var inviteCode = ""
+    @State private var presentAlert = false
+    
     var body: some View {
         VStack {
-            Text("Main View")
-                .font(.largeTitle)
-                .padding()
-            
-            // 상단 HeaderView
-            Group {
-                HStack {
-                    Button(action: {
-                        
-                    }) {
-                        Text("초대코드 입력")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(8)
-                    }
-                    Button(action: {
-                        
-                    }) {
-                        Text("선택")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(8)
-                    }
-                    Button(action: {
-                        
-                    }) {
-                        Text("프로필")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(8)
-                    }
-                }
-            }
             
             // 확정/미확정 미팅 리스트
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
                     Text($0)
-                    // 확정/미확정, 그룹장/그룹원 여부 경우의 수로 목업 파일 추가하기
+                        .fontWeight(.semibold)
                 }
             }
             .pickerStyle(.segmented)
             .padding()
+            
+            // 서버에서 모임을 불러온다.
+            List {
+                VStack (alignment: .leading) {
+                    Text("와인 동아리")
+                        .pretendard(.bold, 17)
+                    Text("24. 05. 12 마감 예정")
+                        .pretendard(.regular, 14)
+                }
+                VStack (alignment: .leading) {
+                    Text("와인 동아리")
+                        .pretendard(.bold, 17)
+                    Text("24. 05. 12 마감 예정")
+                        .pretendard(.regular, 14)
+                }
+            }
+            .listStyle(.inset)
+            
+            Spacer()
             
             // 모임 생성하기 버튼
             Button(action: {
@@ -81,13 +68,44 @@ struct MainView: View {
             }
             
         }
-        .navigationTitle("Moyeo")
+        //.navigationTitle("Moyeo")
         .navigationDestination(for: MainRoute.self) { destination in
             switch destination {
             case .groupVoteView:
                 GroupVoteView()
             case .groupResultView:
                 GroupResultView()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("MOYEO")
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    Button("초대코드 입력") {
+                        presentAlert = true
+                    }
+                    .alert("초대코드 입력", isPresented: $presentAlert, actions: {
+                        TextField("영문/숫자 30자리", text: $inviteCode)
+                        Button("확인", action: {})
+                        Button("취소", role: .cancel, action: {})
+                    }, message: {
+                        Text("공유받은 초대코드를 입력해주세요.")
+                    })
+                    .buttonStyle(.bordered)
+                    Button("선택") {
+                        
+                    }
+                    .buttonStyle(.bordered)
+                    
+                    Button {
+                        // ProfileView로 이동
+                    } label: {
+                        Image("IconToProfile")
+                    }
+                }
+                
             }
         }
     }
