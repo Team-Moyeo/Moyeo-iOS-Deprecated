@@ -18,7 +18,8 @@ struct moyeoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $vm.appPath) {
-                ContentView()
+//                ContentView()
+                ProfileView()
             }
         }
         .environment(vm)
