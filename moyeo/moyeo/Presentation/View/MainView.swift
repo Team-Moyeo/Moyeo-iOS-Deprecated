@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(AppViewModel.self) var appViewModel
-    @State var selectedTab = "tab"
+    @State var selectedTab = "미확정"
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
     
@@ -79,10 +79,14 @@ struct MainView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Text("MOYEO")
+                Image("MainViewLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 28)
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                HStack {
+                
+                HStack() {
                     Button("초대코드 입력") {
                         presentAlert = true
                     }
@@ -94,24 +98,45 @@ struct MainView: View {
                         Text("공유받은 초대코드를 입력해주세요.")
                     })
                     .buttonStyle(.bordered)
+                    .background(.myE1ACAC.opacity(0.3))
+                    .frame(height: 28)
+                    .font(.system(size: 15))
+                    .foregroundStyle(.myDD8686)
+                    .cornerRadius(10)
+                    
                     Button("선택") {
-                        
+                        // 내 모임들의 상태를 선택가능 하게 바꿉니다.
                     }
                     .buttonStyle(.bordered)
+                    .frame(height: 28)
+                    .font(.system(size: 15))
+                    .foregroundStyle(.myDD8686)
+                    .cornerRadius(10)
                     
                     Button {
                         // ProfileView로 이동
                     } label: {
                         Image("IconToProfile")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 28)
                     }
+//                    .padding(.leading, -8)
+                    
                 }
                 
+                
             }
+            
+            
+            
         }
     }
 }
 
 #Preview {
-    MainView()
-        .environment(AppViewModel())
+    NavigationStack {
+        MainView()
+            .environment(AppViewModel())
+    }
 }
