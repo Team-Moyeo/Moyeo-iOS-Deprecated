@@ -24,7 +24,7 @@ struct MainView: View {
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
                     Text($0)
-                        .fontWeight(.semibold)
+                        .pretendard(.semiBold, 13)
                 }
             }
             .pickerStyle(.segmented)
