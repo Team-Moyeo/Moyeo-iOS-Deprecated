@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(AppViewModel.self) var appViewModel
+    @Environment(MeetingListViewModel.self) var meetingListViewModel
+    
     @State var selectedTab = "미확정"
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
@@ -30,22 +32,14 @@ struct MainView: View {
             .pickerStyle(.segmented)
             .padding()
             
-            // 서버에서 모임을 불러온다.
-            List {
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
-                        .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
-                        .pretendard(.regular, 14)
+            List(meetingListViewModel.meetings, id: \.self) { meeting in
+                VStack(alignment: .leading) {
+                    Text(meeting.name)
+                        .font(.headline)
+                    Text("마감일: \(meeting.deadline)")
+                        .font(.subheadline)
                 }
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
-                        .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
-                        .pretendard(.regular, 14)
-                }
-            }
-            .listStyle(.inset)
+            }.listStyle(.inset)
             
             Spacer()
             
@@ -130,6 +124,11 @@ struct MainView: View {
             
             
             
+        }
+        .onAppear {
+            Task {
+                await meetingListViewModel.fetchMeetings(userIdentifier: "exampleUserIdentifier")
+            }
         }
     }
 }
