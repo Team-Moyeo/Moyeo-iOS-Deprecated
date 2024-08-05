@@ -7,7 +7,7 @@
 
 import SwiftUI
 import AuthenticationServices
-
+import NMapsMap
 @main
 struct moyeoApp: App {
     
@@ -29,6 +29,7 @@ struct moyeoApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        NMFAuthManager.shared().clientId = "vtjhtr895t"
         // 앱이 런칭될 때 호출되는 함수
         return true
     }

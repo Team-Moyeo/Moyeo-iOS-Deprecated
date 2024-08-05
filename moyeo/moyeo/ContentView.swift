@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import NMapsMap
 struct ContentView: View {
     @EnvironmentObject var appViewModel: AppViewModel
     @StateObject var authViewModel: AuthViewModel = .init()

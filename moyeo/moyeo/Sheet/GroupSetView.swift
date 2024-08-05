@@ -1,10 +1,3 @@
-//
-//  GroupSetView.swift
-//  moyeo
-//
-//  Created by Woowon Kang on 7/26/24.
-//
-
 import SwiftUI
 
 struct GroupSetView: View {
@@ -54,7 +47,9 @@ struct GroupSetView: View {
                             .foregroundColor(.gray)
                     }
                     .sheet(isPresented: $isPresentingPlaceSearchView) {
-                        PlaceSearchView()
+                        NavigationStack{
+                            PlaceSearchView()
+                        }
                     }
 
                 }
