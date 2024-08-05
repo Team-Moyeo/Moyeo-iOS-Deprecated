@@ -7,15 +7,25 @@
 
 import SwiftUI
 
+
 struct ProfileView: View {
+    
+    @State var profileViewModel: ProfileViewModel = .init()
+    
     var body: some View {
         VStack(spacing: 0) {
             
-            ProfileImageView()
-                .padding(.bottom, 28)
+            ProfileImageView(
+                profileImage: profileViewModel.profileInfo.profileImage
+            )
+            .padding(.bottom, 28)
             
             List {
-                ProfileDetailsView()
+                ProfileDetailsView(
+                    name: profileViewModel.profileInfo.name,
+                    phoneNumber: profileViewModel.profileInfo.phoneNumber,
+                    email: profileViewModel.profileInfo.email
+                )
                 AccountActionsView()
             }
             .listSectionSpacing(54)
@@ -26,18 +36,34 @@ struct ProfileView: View {
 }
 
 private struct ProfileImageView: View {
+    
+    var profileImage: Data?
+    
     var body: some View {
         ZStack {
             
-            Image(.dummyProfile)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                .overlay(
-                    Circle()
-                        .stroke(.myGray2, lineWidth: 1)
-                )
+            if let imageData = profileImage,
+               let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 70, height: 70)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(.myGray2, lineWidth: 1)
+                    )
+            } else {
+                Image(.dummyProfile)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 70, height: 70)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(.myGray2, lineWidth: 1)
+                    )
+            }
             
             Button {
                 
@@ -58,12 +84,17 @@ private struct ProfileImageView: View {
 }
 
 private struct ProfileDetailsView: View {
+    
+    var name: String?
+    var phoneNumber: String?
+    var email: String?
+    
     var body: some View {
         Section {
             
             ProfileDetailsViewCell(
                 title: "이름",
-                content: "장종현"
+                content: name
             )
             
             ProfileDetailsViewCell(
