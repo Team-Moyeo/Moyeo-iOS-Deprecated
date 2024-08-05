@@ -10,6 +10,7 @@ struct PlaceSearchView: View {
     
     @State private var meetingId: String = "12345"
     @State private var memberId: String = "54321"
+    @Binding var isPresentingPlaceSearchView: Bool
     
     var body: some View {
         NavigationStack {
@@ -81,7 +82,7 @@ extension PlaceSearchView {
                         memberId: memberId,
                         meetingId: meetingId),
                     places: $places,
-                    selectedPlace: $selectedPlace
+                    selectedPlace: $selectedPlace, isPresentingPlaceSearchView: $isPresentingPlaceSearchView
                 ),
                 label: {
                     VStack(alignment: .leading) {

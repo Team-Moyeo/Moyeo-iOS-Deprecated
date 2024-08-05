@@ -48,7 +48,7 @@ struct GroupSetView: View {
                     }
                     .sheet(isPresented: $isPresentingPlaceSearchView) {
                         NavigationStack{
-                            PlaceSearchView()
+                            PlaceSearchView(isPresentingPlaceSearchView: $isPresentingPlaceSearchView)
                         }
                     }
 

@@ -7,6 +7,7 @@ struct PlaceAddView: View {
     @Binding var selectedPlace: Place?
     
     @State private var mapViewController: NMapViewController? = nil
+    @Binding var isPresentingPlaceSearchView: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -47,6 +48,7 @@ extension PlaceAddView {
                 .foregroundColor(.gray)
             
             Button(action: {
+                isPresentingPlaceSearchView.toggle()
                 if let selectedPlace = selectedPlace {
                     postPlace(place: selectedPlace) { success in
                         if success {
