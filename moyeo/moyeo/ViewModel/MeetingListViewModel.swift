@@ -33,47 +33,48 @@ extension MeetingListViewModel {
     
     @MainActor
     func fetchMeetings(userIdentifier: String) async {
-            isLoading = true
-
-            guard let url = URL(string: "https://api.example.com/meetings?userIdentifier=\(userIdentifier)") else {
-                isLoading = false
-                print("Invalid URL")
+        isLoading = true
+        
+        do {
+            let accessToken = try SignInInfo.shared.readToken(.access)
+            let urlString = APIEndpoints.basicURLString(path: .meetingStatus)
+            guard let url = URL(string: urlString) else {
+                print("Failed to create URL")
                 return
             }
-
+            
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-            do {
-                let (data, response) = try await URLSession.shared.data(for: request)
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200..<300).contains(httpResponse.statusCode) else {
-                    isLoading = false
-                    print("Failed to fetch meetings")
-                    return
-                }
-
-                do {
-                    let baseResponse = try JSONDecoder().decode(BaseResponse<[MeetingListResponse.MeetingStatus]>.self, from: data)
-                    if let meetings = baseResponse.result {
-                        self.meetings = meetings
-                    } else {
-                        print("No meetings found")
-                    }
-                } catch {
-                    print("Failed to decode response: \(error.localizedDescription)")
-                    return
-                }
-                
-            } catch {
-                print("Failed to fetch meetings: \(error.localizedDescription)")
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                isLoading = false
+                print("Failed to fetch meetings")
                 return
             }
-
-            isLoading = false
+            
+            do {
+                let baseResponse = try JSONDecoder().decode(BaseResponse<[MeetingListResponse.MeetingStatus]>.self, from: data)
+                if let meetings = baseResponse.result {
+                    self.meetings = meetings
+                } else {
+                    print("No meetings found")
+                }
+            } catch {
+                print("Failed to decode response: \(error.localizedDescription)")
+                return
+            }
+            
+        } catch {
+            print("Failed to fetch meetings: \(error.localizedDescription)")
+            return
         }
+        
+        isLoading = false
+    }
     
     
 }

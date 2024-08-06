@@ -35,9 +35,10 @@ struct MainView: View {
             List(meetingListViewModel.meetings, id: \.self) { meeting in
                 VStack(alignment: .leading) {
                     Text(meeting.name)
-                        .font(.headline)
-                    Text("마감일: \(meeting.deadline)")
-                        .font(.subheadline)
+                        .pretendard(.bold, 17)
+                    Text("\(meeting.deadline) 마감 예정")
+                        .pretendard(.regular, 14)
+                        .foregroundStyle(.myGray)
                 }
             }.listStyle(.inset)
             
@@ -118,11 +119,7 @@ struct MainView: View {
 //                    .padding(.leading, -8)
                     
                 }
-                
-                
             }
-            
-            
             
         }
         .onAppear {
