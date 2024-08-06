@@ -97,7 +97,7 @@ struct TimeTableView: View {
     @State private var  availableTimeSet: Set<String> =  []
     @State private var availableTimeTuple : Set<IntTuple> = []
  
- 
+    @State private var closingDate : String = ""
     // to change the number of columns
   
   
@@ -146,7 +146,25 @@ struct TimeTableView: View {
                     }
                 
             }
-            HStack(spacing: 10){
+            Divider()
+            
+            HStack{
+                Text("투표마감일")
+                Spacer()
+                Text("\(closingDate)")
+            }   .font(.caption)
+                .background(Color.gray)
+                .onAppear(){
+                    let calendar = Calendar.current
+                    let dayComponent =  calendar.component(.day, from: sharedDm.selectedDate)
+                    let weekdayComponent = calendar.component(.weekday, from: sharedDm.selectedDate)
+                    let yearComponent = calendar.component(.year, from: sharedDm.selectedDate)
+                    let monthComonent = calendar.component(.month, from: sharedDm.selectedDate)
+                    let closingDateString =  "\(yearComponent)년 \(monthComonent)월 \(dayComponent)일(\(Weekday(rawValue: weekdayComponent)?.name ?? ""))"
+                    closingDate = closingDateString
+                }
+        
+        HStack(spacing: 10){
                 //
                 //                        Button(action: {
                 //                            Task {

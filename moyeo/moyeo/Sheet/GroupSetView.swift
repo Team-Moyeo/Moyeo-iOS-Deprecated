@@ -126,13 +126,13 @@ struct GroupSetView: View {
                     Text("투표 마감")
                     Spacer()
                     
-                    DatePicker("날짜", selection: $selectedDate, displayedComponents: .date)
+                    DatePicker("날짜", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(CompactDatePickerStyle())
                         .labelsHidden()
                     
-                    DatePicker("시간", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
+//                    DatePicker("시간", selection: $selectedTime, displayedComponents: .hourAndMinute)
+//                        .datePickerStyle(CompactDatePickerStyle())
+//                        .labelsHidden()
                 }
             }
             
