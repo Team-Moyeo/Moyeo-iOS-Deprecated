@@ -50,6 +50,7 @@
 		CE85759B2C5A442000E63AF8 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575972C5A442000E63AF8 /* EventViewModel.swift */; };
 		CE85759C2C5A442000E63AF8 /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575982C5A442000E63AF8 /* SharedDateModel.swift */; };
 		CE85759D2C5A442000E63AF8 /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */; };
+		CEF680142C612C130016073F /* MemberPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF680132C612C120016073F /* MemberPopUpView.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 		CE8575982C5A442000E63AF8 /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDateModel.swift; sourceTree = "<group>"; };
 		CE8575992C5A442000E63AF8 /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableHeaderVM.swift; sourceTree = "<group>"; };
 		CE97B0332C5C684400AF81AD /* result.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = result.md; sourceTree = "<group>"; };
+		CEF680132C612C120016073F /* MemberPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPopUpView.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8574D12C59E39E00E63AF8 /* TimeTableView.swift */,
+				CEF680132C612C120016073F /* MemberPopUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				CE8574BA2C59E04600E63AF8 /* Date+Extension.swift in Sources */,
 				CE8574B72C59E04600E63AF8 /* Array+Extension.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
+				CEF680142C612C130016073F /* MemberPopUpView.swift in Sources */,
 				CE8574BE2C59E04600E63AF8 /* EventDataStore+FullAccess.swift in Sources */,
 				CE85749B2C59E00900E63AF8 /* FavoriteButton.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,

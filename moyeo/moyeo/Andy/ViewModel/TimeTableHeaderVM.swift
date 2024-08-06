@@ -47,14 +47,16 @@ class TimeTableHeaderVM :ObservableObject{
         
      Publishers.CombineLatest3(sharedModel.$startDate,sharedModel.$endDate , sharedModel.$numberOfDays)
         .sink { [weak self]  start, end, numberOfDays in
-            
-            if self?.startDate != start || self?.endDate != end || self?.numberOfDays != numberOfDays  && !(self?.isShowing ?? true) {
-                self?.isShowing = true
-                self?.startDate = start
-                self?.endDate = end
-                self?.numberOfDays = numberOfDays
-                self?.makeHeaderTimeTable()
-                self?.isShowing = false
+            guard let self = self else { return }
+            if !(self.isShowing) {
+                self.isShowing = true
+                self.startDate = start
+                self.endDate = end
+                self.numberOfDays = numberOfDays
+                self.makeHeaderTimeTable()
+                self.isShowing = false
+                
+                print("TTHVM COMBINELATEST3 : s:\(start) e:\(end) n:\(numberOfDays)")
             }
         }
         .store(in: &cancellables)
@@ -81,6 +83,7 @@ class TimeTableHeaderVM :ObservableObject{
         startDateString = dateToDateString(date: startDate) ?? ""
         endDateString = dateToDateString(date: endDate) ?? ""
         
+        print("TimeTableHeader \(numberOfDaysInt)")
         for index in 0..<numberOfDaysInt {
             if let dayFromDateString = dayFromDateString(dateString: dateString, dateOffset: index  ),
                let weekdayNumberFromDateString = weekdayFromDateString(dateString: dateString, dateOffset:index ),

@@ -5,8 +5,9 @@ import Combine
 @MainActor
 class EventViewModel : ObservableObject {
     
-    var startDate: Date = Date()
-    var endDate: Date = Date()
+    @Published var startDate : Date = Date()
+    @Published var endDate : Date = Date()
+    @Published var numberOfDays: Int = 7
     @Published var calendarArray : Set<IntTuple> = []
     @Published var events : [EKEvent]  = []
     
@@ -17,35 +18,48 @@ class EventViewModel : ObservableObject {
     private var receiveCount = 0
     
     //mid night 필요가 없음.. 00:00 이면 00:00- 00:30am을 의미하는데.. midnight하고 같은것임. from midntight ~ midnight + 30min
-    var timeSlot : [String] =  ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
+    var timeSlot : [String] =  ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00am", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "12:00pm" ]
     
     init(sharedModel: SharedDateModel)   {
+        self.startDate = sharedModel.startDate
+        self.endDate = sharedModel.endDate
         setupBindings(sharedModel: sharedModel)
     }
     
     private func setupBindings(sharedModel: SharedDateModel) {
         
-        sharedModel.$combinedDate
-            .sink { [weak self]  combinedDate in
-                guard let self = self , let combinedDate = combinedDate else  {return}
+        Publishers.CombineLatest3(sharedModel.$startDate,sharedModel.$endDate , sharedModel.$numberOfDays)
+           .sink { [weak self]  start, end, numberOfDays in
+               
+                guard let self = self  else  {return}
                 
-                print("EVVM: start:  \(startDate)  end : \(endDate)")
-                receiveCount += 1
-                print("EVVMREC# \(receiveCount) id: \(combinedDate.id) start: \(combinedDate.start) end: \(combinedDate.end)")
+//                print("EVM: start:  \(startDate)  end : \(endDate)")
+//                receiveCount += 1
+//                print("EVM REC# \(receiveCount)  start: \(start) end: \(end)")
                 
                 if  !(self.isFetching) {
+//                    self.isFetching = true
+//                    print("EVVM combinedDate in the sharedModel \(combinedDate.id)")
+//                    self.startDate = combinedDate.start
+//                    print("EVVM startDate in sharedModel.$combinedDate \(self.startDate)")
+//                    self.endDate = combinedDate.end
+//                    print("EVM endDate in sharedModel.$combinedDate \(self.endDate)")
+//                
                     self.isFetching = true
-                    print("combinedDate in the sharedModel \(combinedDate.id)")
-                    self.startDate = combinedDate.start
-                    print("startDate in sharedModel.$combinedDate \(self.startDate)")
-                    self.endDate = combinedDate.end
-                    print("endDate in sharedModel.$combinedDate \(self.endDate)")
+                    
+                    if let start =  TimeFixToZero(date: start) , let end =  TimeFixToMidNight(date: end) {
+                        self.startDate = start
+                        
+                        self.endDate =  end
+                        print("EVM s: \(start) e: \(end)")
+                    }
+                    
                     Task {
                         print("getting the events...")
                         await self.getEvents()
                         await self.moveEventsToCalendarArray()
                         self.isFetching = false
-                        print("finish getting the events....")
+                        print("Finish getting the events....")
                     }
                 }
             }
@@ -77,7 +91,7 @@ class EventViewModel : ObservableObject {
         events = await storeManager.dataStore.fetchEventsFromTo(startDate: startDate, endDate: endDate) ?? []
         print("Number Of Events \(events.count)")
         
-        for (index, event ) in events.enumerated() {
+        for (index, event) in events.enumerated() {
             let title = event.title ?? "No Title"
             let startDate = event.startDate.map { "\($0)" } ?? "No Start Date"
             let endDate = event.endDate.map { "\($0)" } ?? "No End Date"
@@ -85,7 +99,7 @@ class EventViewModel : ObservableObject {
             print("Event #\(index + 1): \(title) \(startDate) - \(endDate) \(String(describing: event.timeZone))")
         }
     }
-    // UTC라고 가정하고 한국 시간에 맞게 모두 수정, 만약에 timeZone이있는 경우 그 시간으로 변경한후에 다시 한국시간으로 변겨
+    // UTC라고 가정하고 한국 시간에 맞day in the daysBetween :게 모두 수정, 만약에 timeZone이있는 경우 그 시간으로 변경한후에 다시 한국시간으로 변겨
     func moveEventsToCalendarArray() async {
         
         var startHourMin : Int = 0
@@ -113,13 +127,21 @@ class EventViewModel : ObservableObject {
             dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
             let koreanDateString = dateFormatter.string(from: event.startDate)
             
-            print("UTC 시간: \(utcDateString)   한국 시간: \(koreanDateString)")
+            print("EVM UTC 시간: \(utcDateString)   한국 시간: \(koreanDateString)")
             
-            let dayDiff = daysBetween(start: startDate, end: event.startDate) ?? 0
+            let dayDiff = daysBetween(start: startDate, end: event.startDate) ?? 1
+            print("EVM diff \(dayDiff)")
             
-            startCol = daysBetween(start: startDate, end: event.startDate) ?? 0
-            endCol =   daysBetween(start: startDate, end: event.endDate) ?? 0
-            
+            // day는 하루 미만도 1부터 시작하지만  startCol은 메모리상 컬럼이라 0부터 시작한다 착각 주의...
+            if let start = daysBetween(start: startDate, end: event.startDate) {
+                startCol = start - 1
+                print("EVM startCol \(startCol)")
+            }
+            if let end = daysBetween(start: startDate, end: event.endDate) {
+                endCol = end - 1
+                print("EVM endCol \(endCol)")
+            }
+        
             // 자정을 23:59: 59초 이므로 분은 59에서 종료
             
             if let startDate = event.startDate {
@@ -130,24 +152,25 @@ class EventViewModel : ObservableObject {
                 endHourMin = hourminToFourDigit(timeToConvert: endDate) ?? 0
                 
             }
-            print("약속시작 : \(startHourMin)  약속종료: \(endHourMin)")
+            print("EVM 약속시작 : \(startHourMin)  약속종료: \(endHourMin)")
             
             for rowIndex in 0..<(timeSlot.count - 1) {
                 let start = hourminStringToFourDigit(timeToConvert: timeSlot[rowIndex])
                 let end = hourminStringToFourDigit(timeToConvert: timeSlot[rowIndex + 1 ])
                 
-                if   start <= startHourMin  && startHourMin <= end  {
+                if   start <= startHourMin  && startHourMin < end  {
                     startRow = rowIndex
+                    print("EVM : startrow: \(rowIndex) start \(start)  end \(end)")
                 }
                 
-                if   start <= endHourMin  && endHourMin <= end  {
+                if   start < endHourMin  && endHourMin <= end  {
                     endRow = rowIndex
-                    print("start \(start)  end \(end)")
+                    print("EVM : endrow: \(rowIndex) start \(start)  end \(end)")
                 }
                 
             }
             
-            print("startRow: \(startRow)   endRow :\(endRow)")
+            print("EVM startRow: \(startRow)   endRow :\(endRow)")
             for col in startCol...endCol {
                 if col == startCol && col < endCol {
                     
@@ -173,7 +196,7 @@ class EventViewModel : ObservableObject {
                 
             }
             let title = event.title.prefix(20)
-            print("일자컬럼 : \(String(describing: dayDiff)) 약속제목 \(title) 약속시작: \(startHourMin) 약속종료 \(endHourMin) ")
+            print("EVM 일자컬럼 : \(String(describing: dayDiff)) 약속제목 \(title) 약속시작: \(startHourMin) 약속종료 \(endHourMin) ")
             /*
              for rowIndex in 0..<timeSlot.count {
              let scheduleTime = hourminStringToFourDigit(timeToConvert: timeSlot[rowIndex])

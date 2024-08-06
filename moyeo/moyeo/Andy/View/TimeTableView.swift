@@ -39,13 +39,14 @@ enum Weekday: Int {
     }
 }
 
-var timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00pm", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "midnight" ]
+var timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00am", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "12:00pm" ]
 
 
 struct TimeTableView: View {
    
+    @ObservedObject var sharedDm : SharedDateModel
     
-    @State private var fixedColumnWidth: CGFloat = 50
+    @State private var fixedColumnWidth: CGFloat = 55
     @State private var fixedRowHeight : CGFloat = 30
     @State private var fixedHeaderHeight : CGFloat = 35
    
@@ -59,7 +60,7 @@ struct TimeTableView: View {
     @State private var totalDragOffset: CGSize = .zero
    
     
-    @StateObject private var sharedModel = SharedDateModel()
+
     @StateObject private var eventVm : EventViewModel
     @StateObject private var timeTHVm : TimeTableHeaderVM
     
@@ -70,8 +71,9 @@ struct TimeTableView: View {
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
         var gridItems: [GridItem] = []
-    
-        for _ in 0..<Int(sharedModel.numberOfDays) {
+        print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
+        
+        for _ in 0..<Int(sharedDm.numberOfDays) {
             gridItems.append(GridItem(.fixed(CGFloat(fixedColumnWidth)), spacing: spacing))
         }
         return gridItems
@@ -84,7 +86,7 @@ struct TimeTableView: View {
     
     private let padding: CGFloat = 10
     private let spacing: CGFloat = 0
-    private var totalWidth : CGFloat { fixedColumnWidth * CGFloat(sharedModel.numberOfDays ) + spacing * CGFloat(sharedModel.numberOfDays-1) }
+    private var totalWidth : CGFloat { fixedColumnWidth * CGFloat(sharedDm.numberOfDays ) + spacing * CGFloat(sharedDm.numberOfDays-1) }
     private let screenWidth = UIScreen.main.bounds.width
     private var sidePadding :CGFloat {  max((screenWidth - totalWidth) / 2, 0) }
     
@@ -98,141 +100,112 @@ struct TimeTableView: View {
  
     // to change the number of columns
   
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
-    
+  
     // to change the number of rows for later use
-    @State var startTime: String?
-    @State var endTime: String?
-    
+  
     @State var numOfProfile : Int?
-    @State private var showAlert = false
+
+    @State private var showAlertImage = false
+    @State private var showAlertVote = false
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
 
    
     
-    init() {
-            let sharedModel = SharedDateModel()
-            _sharedModel = StateObject(wrappedValue: sharedModel)
-            _timeTHVm = StateObject(wrappedValue: TimeTableHeaderVM(sharedModel: sharedModel))
-            _eventVm = StateObject(wrappedValue: EventViewModel(sharedModel: sharedModel))
-        }
-
+    init(sharedDm: SharedDateModel) {
+        self.sharedDm = sharedDm
+        _timeTHVm = StateObject(wrappedValue: TimeTableHeaderVM(sharedModel:sharedDm))
+        _eventVm = StateObject(wrappedValue: EventViewModel(sharedModel: sharedDm))
+    }
+    
     
     
     var body: some View {
-         
+        
         // 현재 타임존의 시간을 기준
         // 시간과 분이 들어가서 정확하지 않는 일이 발생한다..참고할것.(ㅜㅜ
-       
-            VStack(alignment: .leading, spacing : 10 ){
-            
-                    HStack{
-                        DatePicker(
-                            "StartDate",
-                            selection:  $sharedModel.startDate,
-                            displayedComponents:  [.date])
-                        .frame(height: 15)
-                       
-                        CircleImageListView()
-                            .onTapGesture {
-                                showAlert = true
-                            }
-                            .alert(isPresented: $showAlert) {
-                                Alert(title: Text("Images are tapped"))
-                            }
-                        
-                    }
-                    
-                    Text("EndDate: \(String(describing: sharedModel.endDateString))")
-                        .font(.system(size: 11))
-                        .frame(alignment: .leading)
-                        
-                    
-                    HStack {
-                        
-                        Text("No of Days: \(Int(sharedModel.numberOfDays))")
-                            .font(.system(size: 11))
-                        Slider(value: Binding(
-                            get: { CGFloat(sharedModel.numberOfDays) },
-                            set: { newValue in
-                                sharedModel.numberOfDays = Int(newValue)
-                            }
-                        ), in: 1...7, step: 1) {_ in
-                            print("startDateString \(sharedModel.startDateString)")
-                            print("endDateString \(sharedModel.endDateString)")
-                        }
-                    }
-                    
-                    HStack {
-                        Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")")
-                            .font(.system(size: 11))
-                        Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
-                            //  Text("Fixed Column Width")
-                        }
-                    }
-                    HStack(spacing: 10){
-//
-//                        Button(action: {
-//                            Task {
-//                                print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
-//                                await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
-//                                await eventViewModel.moveEventsToCalendarArray()
-//                                
-//                            }
-//                            
-//                        }) {
-//                            Text("칼렌다")
-//                                .font(.system(size: 11))
-//                                .padding()
-//                                .background(Color.blue)
-//                                .foregroundColor(.white)
-//                                .cornerRadius(4)
-//                        }
-//                        .frame(width: 100, height: 12)
-//
-                        Spacer()
-                        Button(action: {
-                            
-                            deleteCheckAll()
-                            
-                        }) {
-                            Text("지우기")
-                                .font(.system(size: 11))
-                                .padding(2)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(4)
-                            
-                        }.frame(width: 80, height: 24)
-                        
-                        Spacer().frame(width: 8)
-                        
-                        Button(action: {
-                            
-                            allowHitTestingFlag.toggle()
-                            if allowHitTestingFlag == false {
-                                convertCheckedStatesToTimeTable()
-                                convertAvailableTimeFromSetToTuple()
-                            }
-                        }) {
-                            Text(allowHitTestingFlag ?  "선택완료": "선택하기")
-                                .font(.system(size: 11))
-                                .padding(2)
-                                .background( allowHitTestingFlag ? Color.blue : Color.cyan)
-                                .foregroundColor(.white)
-                                .cornerRadius(4)
-                            
-                        }.frame(width: 80, height: 24) // Adjust the width and height as needed
-                       
-                        
-                        Spacer()
-                    }
-                    
+        //   createTestView()
+        
+        
+        VStack(alignment: .leading, spacing : 10 ){
+            HStack{
                 
-      
+                Text("\(sharedDm.meetingName)")
+                    .font(.title)
+                
+                Spacer()
+                
+                CircleImageListView()
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        showAlertImage = true
+                    }
+                    .sheet(isPresented: $showAlertImage) {
+                        MemberPopUpView()
+                    }
+                
+            }
+            HStack(spacing: 10){
+                //
+                //                        Button(action: {
+                //                            Task {
+                //                                print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
+                //                                await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
+                //                                await eventViewModel.moveEventsToCalendarArray()
+                //
+                //                            }
+                //
+                //                        }) {
+                //                            Text("칼렌다")
+                //                                .font(.system(size: 11))
+                //                                .padding()
+                //                                .background(Color.blue)
+                //                                .foregroundColor(.white)
+                //                                .cornerRadius(4)
+                //                        }
+                //                        .frame(width: 100, height: 12)
+                //
+                Spacer()
+                Button(action: {
+                    
+                    deleteCheckAll()
+                    
+                }) {
+                    Text("지우기")
+                        .font(.system(size: 15))
+                        .padding(2)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(4)
+                    
+                }.frame(width: 80, height: 24)
+                
+                Spacer().frame(width: 8)
+                
+                Button(action: {
+                    
+                    allowHitTestingFlag.toggle()
+                    if allowHitTestingFlag == false {
+                        convertCheckedStatesToTimeTable()
+                        convertAvailableTimeFromSetToTuple()
+                    }
+                }) {
+                    Text(allowHitTestingFlag ?  "보내기": "선택하기")
+                        .font(.system(size: 15))
+                        .padding(2)
+                        .background( allowHitTestingFlag ? Color.blue : Color.cyan)
+                        .foregroundColor(.white)
+                        .cornerRadius(4)
+                    
+                }.frame(width: 80, height: 24) // Adjust the width and height as needed
+                
+                
+                Spacer()
+            }
+            
+            
+            
             Grid(horizontalSpacing: 0,  verticalSpacing: 0 ) {
                 // 헤더 행
                 GridRow(){
@@ -240,17 +213,17 @@ struct TimeTableView: View {
                         VStack(alignment: .leading, spacing: 0) {
                             
                             HStack(alignment: .top, spacing: 0) {
-                               
+                                
                                 if index < timeTHVm.monthString.count  {
                                     Text(timeTHVm.monthString[index].isEmpty ? "" : "\(timeTHVm.monthString[index])월")
                                         .font(.system(size: 10))
                                         .foregroundColor(.gray)
-                                   
+                                    
                                     Text(timeTHVm.yearString[index].isEmpty ? "" : "\(String(timeTHVm.yearString[index].suffix(2)))년")
                                         .font(.system(size: 8))
                                         .foregroundColor(.gray)
                                 }
-                               
+                                
                             }
                             // Adjust the spacing between two sections
                             Spacer()
@@ -267,21 +240,17 @@ struct TimeTableView: View {
                             }
                             Spacer()
                             
-                        } 
+                        }
                         .border(Color.white, width: 2)
                         .frame(width: fixedColumnWidth, height: fixedHeaderHeight)
-
-                    } 
-                   
                         
-                }
-             
-               
+                    }
                     
-                
+                    
+                }
             }  .padding(.horizontal, sidePadding)
-                    .padding(.vertical,0)
-           
+                .padding(.vertical,0)
+            
             ScrollViewReader { scrollViewProxy in
                 ScrollView([.vertical], showsIndicators: true) {
                     
@@ -297,13 +266,13 @@ struct TimeTableView: View {
                         
                         LazyVGrid(columns: columns, spacing: spacing) {
                             // 데이터 행
-                            //             let numberOfRows = (items.count + Int(sharedModel.numberOfDays) - 1) / Int(sharedModel.numberOfDays)
+                            //             let numberOfRows = (items.count + Int(sharedDm.numberOfDays) - 1) / Int(sharedDm.numberOfDays)
                             let numberOfRows = 48
                             ForEach(0..<numberOfRows, id: \.self) { rowIndex in
                                 GridRow {
-                                    ForEach(0..<Int(sharedModel.numberOfDays) , id: \.self) { columnIndex in
+                                    ForEach(0..<Int(sharedDm.numberOfDays) , id: \.self) { columnIndex in
                                         // -1 추가 column starts from 0 not 1
-                                        let itemIndex = rowIndex * Int(sharedModel.numberOfDays) + columnIndex
+                                        let itemIndex = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                         
                                         if itemIndex < items.count {
                                             
@@ -315,7 +284,7 @@ struct TimeTableView: View {
                                                         if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
                                                             color = .blue
                                                         }
-                                                        let index = rowIndex * Int(sharedModel.numberOfDays) + columnIndex
+                                                        let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
                                                             color = .cyan
                                                         }
@@ -343,12 +312,13 @@ struct TimeTableView: View {
                                                 //                                                .border(Color.gray)
                                                 //                                                .contentShape(Circle())
                                                 if columnIndex == 0 {
-                                                        Text(timeSlot[rowIndex])
-                                                            .font(.system(size: 11))
-                                                            .frame(width: fixedColumnWidth, height: fixedRowHeight)
-                                                            .background(Color.white.opacity(0.3))
-                                                            .foregroundColor(Color.gray)
-                                                            .border(Color.white)
+                                                    Text(timeSlot[rowIndex])
+                                                        .font(.system(size: 10))
+                                                        .frame(width: fixedColumnWidth, height: fixedRowHeight)
+                                                        .background(Color.white.opacity(0.3))
+                                                        .foregroundColor(Color.black)
+                                                        .border(Color.white)
+                                                        .fontWeight(.bold)
                                                 }
                                             }
                                         }
@@ -357,9 +327,9 @@ struct TimeTableView: View {
                                         }
                                     }
                                 } .id(rowIndex)
-                                   
+                                
                             }
-
+                            
                         }
                         .allowsHitTesting(allowHitTestingFlag)
                         .padding(.vertical, padding)
@@ -414,7 +384,7 @@ struct TimeTableView: View {
                                                     let hidden  = -Int(contentOffset / fixedRowHeight)
                                                     let target = min(max(hidden - 10,0), hidden)
                                                     scrollViewProxy.scrollTo(target , anchor: .top)
-                                               }
+                                                }
                                                 if value.translation.height < 0 {
                                                     let hidden  = -Int(contentOffset / fixedRowHeight)
                                                     let target = min(hidden + 10, Int(1010 / fixedRowHeight))
@@ -423,7 +393,7 @@ struct TimeTableView: View {
                                                 }
                                             } else {
                                                 if let coord = indexForPosition(pressedPosition) {
-                                                    let index = coord.row * Int(sharedModel.numberOfDays) + coord.column
+                                                    let index = coord.row * Int(sharedDm.numberOfDays) + coord.column
                                                     if index < items.count && index >= 0 {
                                                         checkedStates[index].toggle()
                                                     }
@@ -454,17 +424,33 @@ struct TimeTableView: View {
                     .onAppear{
                         scrollViewProxy.scrollTo(timeSlot.firstIndex(of: "09:00am"), anchor: .top)
                     }
-
-                .coordinateSpace(name: "scroll")
-                .frame(height:450)
-               
+                
+                    .coordinateSpace(name: "scroll")
+                    .frame(height:450)
+                
             } .background(Color.clear)
-                                
+            
+                .scrollTargetBehavior(.viewAligned)
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+               
+                Image(systemName: "star.fill")
+                    .contextMenu(ContextMenu(menuItems: {
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("초대하기")
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("수정하기")
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("그룹삭제하기")
+                        })
+                    }))
+              
+                
+            }
         }
-           
-            .scrollTargetBehavior(.viewAligned)
     }
-    
     private func lastTwoDigits(year : Int) ->String {
         
         let yearString = String(year)
@@ -495,7 +481,7 @@ struct TimeTableView: View {
     func applyDragPath() {
         
         for tuple in dragArray {
-            let index = tuple.rowIndex * Int(sharedModel.numberOfDays) + tuple.columnIndex
+            let index = tuple.rowIndex * Int(sharedDm.numberOfDays) + tuple.columnIndex
             if index < items.count &&  index >= 0  {
                 checkedStates[index].toggle() // 값 변경 로직
             }
@@ -524,7 +510,7 @@ struct TimeTableView: View {
         
         for row in rowRange {
             for column in columnRange {
-                let itemIndex = row * Int(sharedModel.numberOfDays) + column
+                let itemIndex = row * Int(sharedDm.numberOfDays) + column
                 if itemIndex < checkedStates.count && itemIndex >= 0  {
                     checkedStates[itemIndex].toggle()
                 }
@@ -538,16 +524,16 @@ struct TimeTableView: View {
         let adjustedY = position.y - padding
         
         
-        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth  * CGFloat(sharedModel.numberOfDays)  + spacing * CGFloat(sharedModel.numberOfDays - 1 )) {
+        if adjustedX <= 0 || adjustedY <= 0 || adjustedX > (fixedColumnWidth  * CGFloat(sharedDm.numberOfDays)  + spacing * CGFloat(sharedDm.numberOfDays - 1 )) {
             return nil
         }
         
         
         let rowIndex = Int((adjustedY ) / (fixedRowHeight + spacing))  // 각 체크박스의 높이가 50
         let columnIndex  = Int(adjustedX / (fixedColumnWidth + spacing))
-        print("(x, y) :   \(Int(adjustedX) ), \(Int(adjustedY)) ")
-        print("(row, col) \(rowIndex),\(columnIndex)")
-        print("(rowh colw) \(fixedRowHeight) , \(fixedColumnWidth) ")
+//        print("(x, y) :   \(Int(adjustedX) ), \(Int(adjustedY)) ")
+//        print("(row, col) \(rowIndex),\(columnIndex)")
+//        print("(rowh colw) \(fixedRowHeight) , \(fixedColumnWidth) ")
         return (row: rowIndex, column: columnIndex)
     }
     
@@ -558,12 +544,12 @@ struct TimeTableView: View {
        
         self.availableTimeSet.removeAll()
         for row in 0...47 {
-            for col in 0..<Int(sharedModel.numberOfDays) {
-                let index = row * Int(sharedModel.numberOfDays) + col
+            for col in 0..<Int(sharedDm.numberOfDays) {
+                let index = row * Int(sharedDm.numberOfDays) + col
                 if checkedStates[index] == true {
                     
                     
-                    if  let targetDay = calendar.date(byAdding: .day, value: col , to: sharedModel.startDate), let dateString  = dateToDateString(date: targetDay) {
+                    if  let targetDay = calendar.date(byAdding: .day, value: col , to: sharedDm.startDate), let dateString  = dateToDateString(date: targetDay) {
                         
                         let timeString  = timeSlot[row]
                         
@@ -590,21 +576,24 @@ struct TimeTableView: View {
         self.availableTimeTuple.removeAll()
         print("availableTimeSet.count \(availableTimeSet.count)")
         for item in availableTimeSet {
-            if let  days = daysBetween(start: sharedModel.startDate, end: dateStringToDate(dateString: String(item.prefix(10)))  ?? sharedModel.startDate ) {
+            let end = dateStringToDate(dateString: String(item.prefix(10))) ?? sharedDm.startDate
+            if let  days = daysBetween(start: sharedDm.startDate, end: end ) {
                 col = days
+                print(" start : \(sharedDm.startDate) end:  \(end) daysDiff: \(col)")
             }
          
-            if let timeslot =  timeSlot.firstIndex(of: String(item.suffix(7)) ) {
+            if let timeslot = timeSlot.firstIndex(where: { $0.contains(String(item.suffix(7))) }) {
+                
                 row = timeslot
+                print("item -> (Row, Col)  time: \(item.suffix(7))   (\(row) , \(col))")
                
+                availableTimeTuple.insert(IntTuple(rowIndex: row, columnIndex: col))
             } else {
                 
                 print("time slot error")
             }
             
-            print("row \(row) col \(col) in availableTimeSlot")
-            
-            availableTimeTuple.insert(IntTuple(rowIndex: row, columnIndex: col))
+
         }
         print("availableTimeTuple.count \(availableTimeTuple.count)")
         for item in availableTimeTuple {
@@ -627,7 +616,68 @@ struct TimeTableView: View {
         )
     }
     
+    
+    func createTestView() -> some View {
+      
+        VStack {
+           HStack{
+                DatePicker(
+                    "StartDate",
+                    selection:  $sharedDm.startDate,
+                    displayedComponents:  [.date])
+                .frame(height: 15)
+               
+               CircleImageListView()
+                   .onTapGesture {
+                       showAlertImage = true
+                   }
+               if showAlertImage  {
+                   Color.black.opacity(0.4)
+                       .edgesIgnoringSafeArea(.all)
+                   
+                   VStack {
+                       Spacer()
+                       MemberPopUpView()
+                       Spacer()
+                   }
+                   .transition(.move(edge: .bottom))
+                   .animation(.default, value: showAlertImage)
+               }
+               
+               
+           }
+            
+            Text("EndDate: \(String(describing: sharedDm.endDateString))")
+                .font(.system(size: 11))
+                .frame(alignment: .leading)
+            
+            
+            HStack {
+                
+                Text("No of Days: \(Int(sharedDm.numberOfDays))")
+                    .font(.system(size: 11))
+                Slider(value: Binding(
+                    get: { CGFloat(sharedDm.numberOfDays) },
+                    set: { newValue in
+                        sharedDm.numberOfDays = Int(newValue)
+                    }
+                ), in: 1...7, step: 1) {_ in
+                    print("startDateString \(sharedDm.startDateString)")
+                    print("endDateString \(sharedDm.endDateString)")
+                }
+            }
+            
+            HStack {
+                Text("Column Width: \(fixedColumnWidth, specifier: "%.0f")")
+                    .font(.system(size: 11))
+                Slider(value: $fixedColumnWidth, in: 30...100, step: 1) {
+                    //  Text("Fixed Column Width")
+                }
+            }
+        }
+    }
 }
+
 struct CheckboxView: View {
     @Binding var isChecked: Bool
     
@@ -648,8 +698,8 @@ struct CheckboxView: View {
 }
 
 
-struct  TimeTableView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimeTableView()
-    }
+#Preview {
+    
+    TimeTableView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
+    
 }

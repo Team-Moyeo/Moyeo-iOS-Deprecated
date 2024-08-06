@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircleImage: View {
     var image: Image?
+    @State var frameSize : CGFloat = 50
     var body: some View {
         if let image = image {
             image
@@ -18,7 +19,7 @@ struct CircleImage: View {
                 .overlay {
                     Circle().stroke(.white, lineWidth: 2)
                 }
-                .frame(width: 40, height: 40)
+                .frame(width: frameSize, height: frameSize)
               
         } else {
             Circle()
@@ -26,7 +27,7 @@ struct CircleImage: View {
                 .overlay {
                     Circle().stroke(Color.white, lineWidth: 2)
                 }
-                .frame(width: 40, height: 40)
+                .frame(width: frameSize, height: frameSize)
              
         }
     }

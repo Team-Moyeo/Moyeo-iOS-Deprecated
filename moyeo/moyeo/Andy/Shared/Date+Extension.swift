@@ -48,19 +48,43 @@ extension Date {
 
 func dateStringToDate(dateString : String?) -> Date? {
     guard let dateString = dateString else { return nil}
-    // DateFormatter를 생성합니다.
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd" // 문자열의 날짜 형식을 설정합니다.
-    dateFormatter.locale = Locale(identifier: "ko_KR") // 로케일을 한국으로 설정합니다.
-    dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-    // 문자열을 Date 객체로 변환합니다.
-    if let date = dateFormatter.date(from: dateString) {
-        print("The date is \(date)")
-        return date
-    } else {
-        print("Invalid date format")
-        return nil
-    }
+   
+       
+       // 문자열에서 연, 월, 일을 추출합니다.
+       let components = dateString.split(separator: "-")
+       guard components.count == 3,
+             let year = Int(components[0]),
+             let month = Int(components[1]),
+             let day = Int(components[2]) else {
+           print("Invalid date format")
+           return nil
+       }
+       
+       // Calendar를 사용하여 Date 객체를 생성합니다.
+       var dateComponents = DateComponents()
+       dateComponents.year = year
+       dateComponents.month = month
+       dateComponents.day = day
+       dateComponents.hour = 0
+       dateComponents.minute = 0
+       dateComponents.second = 0
+       
+       // 한국 시간대로 설정합니다.
+       let calendar = Calendar.current
+       if let timeZone = TimeZone(identifier: "Asia/Seoul") {
+           var calendarWithTimeZone = calendar
+           calendarWithTimeZone.timeZone = timeZone
+           if let date = calendarWithTimeZone.date(from: dateComponents) {
+               print("The date is \(date)")
+               return date
+           } else {
+               print("Invalid date components")
+               return nil
+           }
+       } else {
+           print("Invalid timezone")
+           return nil
+       }
 }
 
 func dateToDateString(date: Date?) ->String? {
@@ -94,29 +118,23 @@ func dateStringToDate2(dateString : String?) -> Date? {
 }
 
 
-func daysBetween(start: Date, end: Date, timeZone: TimeZone = TimeZone(identifier: "Asia/Seoul")!) -> Int? {
+func daysBetween(start: Date, end: Date, timeZone: TimeZone = TimeZone(identifier: "Asia/Seoul")!) -> Int?{
     var calendar = Calendar.current
     calendar.timeZone = timeZone
-    // 시간 구성 요소를 00:00:00으로 설정
-    var startComponents = calendar.dateComponents([.year, .month, .day], from: start)
-    var endComponents = calendar.dateComponents([.year, .month, .day], from: end)
+  
     
-    startComponents.hour = 0
-    startComponents.minute = 0
-    startComponents.second = 0
-    endComponents.hour = 0
-    endComponents.minute = 0
-    endComponents.second = 0
-    
-// 새 날짜 생성
-//    guard let startOfDay = calendar.date(from: startComponents),
-//          let endOfDay = calendar.date(from: endComponents) else {
-//        return nil
-//    }
-    
-    let components = calendar.dateComponents([.day], from: start, to: end)
-    return components.day
-    
+    if let startDay = TimeFixToZero(date: start), let endDay = TimeFixToMidNight(date: end) {
+        print("daysBet: fixStart: \(startDay)  fixEnd: \(endDay)")
+        let components = calendar.dateComponents([.day], from: startDay, to: endDay)
+        
+        if let day = components.day {
+            print("day in the daysBetween : \(day) fs: :\(startDay) fe: \(endDay) os: \(start) oe:\(end)")
+            return day + 1
+            
+        } else {
+            return nil
+        }
+    } else{ return nil}
 }
 
 func hourminToFourDigit(timeToConvert : Date, timeZone: TimeZone = TimeZone(identifier: "Asia/Seoul")!) -> Int? {
@@ -263,3 +281,26 @@ func weekdayFromDateString(dateString: String?, dateOffset: Int) -> Int? {
 }
 // 1은 일요일, 2는 월요일, ... , 7은 토요일
 
+func TimeFixToZero(date : Date) ->Date?{
+   
+    let calendar = Calendar.current
+    
+    let startDate =  calendar.startOfDay(for: date)
+        
+        return startDate
+    
+                                
+}
+func TimeFixToMidNight(date : Date) -> Date?{
+   
+    let calendar = Calendar.current
+    
+    if let endOfNextDay = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: date)) {
+        let endDate = calendar.date(byAdding: .second, value: -1 , to: endOfNextDay)
+            return  endDate
+    } else {
+        return nil
+    }
+                                   
+                                   
+}
