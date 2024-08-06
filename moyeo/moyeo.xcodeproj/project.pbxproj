@@ -21,8 +21,8 @@
 		6195D25C2C59CFBF0098A825 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6195D25B2C59CFBF0098A825 /* PlaceModel.swift */; };
 		6195D25E2C59CFEF0098A825 /* NMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6195D25D2C59CFEF0098A825 /* NMapViewController.swift */; };
 		921670F10C7A990510C6B734 /* Pods_moyeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CE6130C5FE50C8C54C9244 /* Pods_moyeo.framework */; };
-		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
-		BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
+		BF97958D2C61BFA3000A121A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF97958C2C61BFA3000A121A /* Secrets.xcconfig */; };
+		BF97958E2C61BFA3000A121A /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF97958C2C61BFA3000A121A /* Secrets.xcconfig */; };
 		BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */; };
 		BFB70E672C5746D600D3C616 /* Colorsets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E662C5746D600D3C616 /* Colorsets.xcassets */; };
 		BFB70E722C57509800D3C616 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */; };
@@ -80,7 +80,7 @@
 		90EB67E2935857656E321C64 /* Pods-moyeo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.debug.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.debug.xcconfig"; sourceTree = "<group>"; };
 		BF0416132C48F4D500599C8D /* moyeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = moyeo.entitlements; sourceTree = "<group>"; };
 		BF0416142C4939BC00599C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resource/Info.plist; sourceTree = "<group>"; };
-		BF59C8392C58688C00767A19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		BF97958C2C61BFA3000A121A /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BFB70E662C5746D600D3C616 /* Colorsets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colorsets.xcassets; sourceTree = "<group>"; };
 		BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		F3D0DEE22C44AF1800D5EB97 = {
 			isa = PBXGroup;
 			children = (
-				BF59C8392C58688C00767A19 /* Secrets.xcconfig */,
+				BF97958C2C61BFA3000A121A /* Secrets.xcconfig */,
 				F3D0DEED2C44AF1800D5EB97 /* moyeo */,
 				F3D0DEFE2C44AF1A00D5EB97 /* moyeoTests */,
 				F3D0DF082C44AF1A00D5EB97 /* moyeoUITests */,
@@ -392,7 +392,7 @@
 			files = (
 				BFB70E752C57509800D3C616 /* Pretendard-Medium.otf in Resources */,
 				BFB70E742C57509800D3C616 /* Pretendard-ExtraLight.otf in Resources */,
-				BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */,
+				BF97958D2C61BFA3000A121A /* Secrets.xcconfig in Resources */,
 				BFB70E762C57509800D3C616 /* Pretendard-ExtraBold.otf in Resources */,
 				BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */,
 				BFB70E782C57509800D3C616 /* Pretendard-Light.otf in Resources */,
@@ -410,7 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */,
+				BF97958E2C61BFA3000A121A /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +525,7 @@
 /* Begin XCBuildConfiguration section */
 		F3D0DF0D2C44AF1A00D5EB97 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF59C8392C58688C00767A19 /* Secrets.xcconfig */;
+			baseConfigurationReference = BF97958C2C61BFA3000A121A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -589,7 +589,7 @@
 		};
 		F3D0DF0E2C44AF1A00D5EB97 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF59C8392C58688C00767A19 /* Secrets.xcconfig */;
+			baseConfigurationReference = BF97958C2C61BFA3000A121A /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -655,7 +655,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = 2U3B7G3F2A;
+				DEVELOPMENT_TEAM = U5F437QJA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -669,7 +669,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo.Won;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -689,7 +689,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = 2U3B7G3F2A;
+				DEVELOPMENT_TEAM = U5F437QJA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -703,7 +703,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo.Won;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
