@@ -215,6 +215,7 @@
 		51219E982C61CE69005EDDCD /* GroupVote */ = {
 			isa = PBXGroup;
 			children = (
+				51219E912C61BAA8005EDDCD /* GroupVoteView.swift */,
 				51219E5C2C61BA72005EDDCD /* MemberPopUpView.swift */,
 				51219E602C61BA72005EDDCD /* TimeTableView.swift */,
 			);
@@ -266,7 +267,6 @@
 				5191A4592C522B8900550071 /* LoginView.swift */,
 				5191A45B2C522BBE00550071 /* MainView.swift */,
 				51219E932C61BB37005EDDCD /* GroupSetView.swift */,
-				51219E912C61BAA8005EDDCD /* GroupVoteView.swift */,
 				51FD50B32C53833E008C5552 /* GroupConfirmView.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
 			);
