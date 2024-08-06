@@ -83,6 +83,7 @@ struct TimeTableView: View {
     private let items = Array(1...48*7).map { "Item \($0)" }
     @State private var checkedStates: [Bool] = Array(repeating: false, count: 48 * 7 )
     
+    @State private var allSchedule: [CGFloat] = Array(repeating: 0.0, count: 48 * 7 )
     
     private let padding: CGFloat = 10
     private let spacing: CGFloat = 0
@@ -108,6 +109,8 @@ struct TimeTableView: View {
     @State private var showAlertImage = false
     @State private var showAlertVote = false
     @State private var showSchedule = false
+    @State private var showAllSchedule = false
+    
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
@@ -181,6 +184,27 @@ struct TimeTableView: View {
                 }
                 .frame(width: 80, height: 24)
                 
+                Button(action: {
+                
+                    for i in  0..<47 {
+                        for j in 0..<7 {
+                            let index = i * 7 + j
+                            allSchedule[ index ] = Double (generateRandomNumber())
+                            print(" \(allSchedule[ index ] )")
+                        }
+                    }
+                    showAllSchedule.toggle()
+                    print("showAllSchedule \(showAllSchedule)")
+                    
+                }) {
+                    Text(showAllSchedule == true ? "전체일정보기" : "전체일정숨기기")
+                        .font(.system(size: 15))
+                        .padding(2)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(4)
+                }
+                .frame(width: 80, height: 24)
                 Spacer()
                 Button(action: {
                     
@@ -295,15 +319,44 @@ struct TimeTableView: View {
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
+                                                        if showAllSchedule {
+                                                         
+                                                                color = .green
+                                                            
+                                                        }
+                                                        return color
+                                                        
+                                                    }())
+                                                    .opacity(allSchedule[itemIndex])
+                                                    .border(Color.white, width: 2)
+                                                    .frame(width: fixedColumnWidth, height: fixedRowHeight)
+                                                
+                                                Rectangle()
+                                                    .foregroundColor({
+                                                        var color : Color = .white
                                                         if showSchedule {
                                                             if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
                                                                 
-                                                                color = .blue
+                                                                color = .yellow
                                                             }
                                                         }
+                                                       
+                                                        
+                                                        return color
+                                                        
+                                                    }())
+                                                    .border(Color.white, width: 2)
+                                                    .opacity(0.3)
+                                                    .frame(width: fixedColumnWidth, height: fixedRowHeight)
+                                                
+                                                
+                                                Rectangle()
+                                                    .foregroundColor({
+                                                        var color : Color = .white
+                                                      
                                                         let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
-                                                            color = .cyan
+                                                            color = .red
                                                         }
                                                         if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
                                                             color = .red
@@ -312,10 +365,8 @@ struct TimeTableView: View {
                                                         
                                                     }())
                                                     .border(Color.white, width: 2)
+                                                    .opacity(0.7)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
-                                                
-                                                
-                                                
                                                 
                                                 
                                                 
@@ -728,6 +779,12 @@ struct CheckboxView: View {
     }
 }
 
+func generateRandomNumber() -> Double {
+    // 0.1 단위로 0.1에서 1.0까지의 숫자 배열 생성
+    let possibleValues = stride(from: 0.1, through: 1.0, by: 0.1).map { $0 }
+    // 배열에서 랜덤으로 하나의 값을 선택
+    return possibleValues.randomElement() ?? 0.1
+}
 
 #Preview {
     
