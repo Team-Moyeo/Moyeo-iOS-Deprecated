@@ -107,6 +107,7 @@ struct TimeTableView: View {
 
     @State private var showAlertImage = false
     @State private var showAlertVote = false
+    @State private var showSchedule = false
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
@@ -164,26 +165,22 @@ struct TimeTableView: View {
                     closingDate = closingDateString
                 }
         
-        HStack(spacing: 10){
-                //
-                //                        Button(action: {
-                //                            Task {
-                //                                print("getEvents in the View \(vm.startDate) , \(vm.endDate)")
-                //                                await eventViewModel.getEvents(storeManager:storeManager, startDate:vm.startDate, endDate:vm.endDate)
-                //                                await eventViewModel.moveEventsToCalendarArray()
-                //
-                //                            }
-                //
-                //                        }) {
-                //                            Text("칼렌다")
-                //                                .font(.system(size: 11))
-                //                                .padding()
-                //                                .background(Color.blue)
-                //                                .foregroundColor(.white)
-                //                                .cornerRadius(4)
-                //                        }
-                //                        .frame(width: 100, height: 12)
-                //
+            HStack(spacing: 10){
+                
+                Button(action: {
+                   
+                    showSchedule.toggle()
+                    
+                }) {
+                    Text(showSchedule == true ? "일정숨기기" : "일정보기")
+                        .font(.system(size: 15))
+                        .padding(2)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(4)
+                }
+                .frame(width: 80, height: 24)
+                
                 Spacer()
                 Button(action: {
                     
@@ -298,9 +295,11 @@ struct TimeTableView: View {
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
-                                                        
-                                                        if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                            color = .blue
+                                                        if showSchedule {
+                                                            if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
+                                                                
+                                                                color = .blue
+                                                            }
                                                         }
                                                         let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
