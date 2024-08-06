@@ -19,6 +19,9 @@ struct MainView: View {
     @State private var inviteCode = ""
     @State private var presentAlert = false
     
+    // Andy
+    @StateObject var sharedDm = SharedDateModel()
+    
     var body: some View {
         VStack {
             
@@ -59,7 +62,7 @@ struct MainView: View {
             .background(Color.black)
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
-                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView)
+                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
             }
             
         }
@@ -67,7 +70,7 @@ struct MainView: View {
         .navigationDestination(for: MainRoute.self) { destination in
             switch destination {
             case .groupVoteView:
-                GroupVoteView()
+                GroupVoteView(sharedDm: sharedDm)
             case .groupResultView:
                 GroupResultView()
             }
