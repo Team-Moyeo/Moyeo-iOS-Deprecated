@@ -446,8 +446,22 @@ struct TimeTableView: View {
                     .frame(height:450)
                 
             } .background(Color.clear)
-            
                 .scrollTargetBehavior(.viewAligned)
+            
+            Button(action: {
+               
+              
+                
+            }) {
+                Text("투표완료하기")
+                    .font(.system(size: 20))
+                    .padding(2)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+            }.frame(width: 300, height: 100 , alignment: .center)
+            
+            
         }.toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                
