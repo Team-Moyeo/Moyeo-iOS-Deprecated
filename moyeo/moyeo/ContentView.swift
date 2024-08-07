@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NMapsMap
 
 struct ContentView: View {
     @Environment(AppViewModel.self) var appViewModel

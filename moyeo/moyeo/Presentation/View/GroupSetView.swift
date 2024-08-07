@@ -15,8 +15,9 @@ struct GroupSetView: View {
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
     
-    @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
+    
+    @State var placeViewModel: PlaceViewModel = .init(meetingId: "12345", memberId: "54321")
     
     var body: some View {
         Form {
@@ -47,16 +48,19 @@ struct GroupSetView: View {
                     Spacer()
                     
                     Button(action: {
-                        // PlaceSearchView Sheet로 넘어가기
-                        isPresentingPlaceSearchView.toggle()
+                        placeViewModel.isPresentingPlaceSearchView.toggle()
                     }) {
                         Text("장소를 선택해주세요.")
                             .foregroundColor(.gray)
                     }
-                    .sheet(isPresented: $isPresentingPlaceSearchView) {
-                        PlaceSearchView()
+                    .sheet(isPresented: $placeViewModel.isPresentingPlaceSearchView) {
+                        NavigationStack {
+                            PlaceSearchView()
+                                .environment(placeViewModel)
+                        }
+                        
                     }
-
+                    
                 }
             }
             
@@ -81,10 +85,6 @@ struct GroupSetView: View {
                 Spacer()
                 
                 Button(action: {
-                    // GroupVoteView로 넘어가기
-                    // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
-                    // 해당 sheet가 내려가고, MainView의 List에 추가되고,
-                    // NavigationStack에 쌓기
                     appViewModel.navigateTo(.groupVoteView)
                     isPresentingGroupSetView = false
                     
@@ -103,7 +103,3 @@ struct GroupSetView: View {
         }
     }
 }
-
-//#Preview {
-//    GroupSetView()
-//}

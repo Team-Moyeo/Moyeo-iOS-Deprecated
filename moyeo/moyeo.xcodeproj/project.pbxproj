@@ -24,6 +24,9 @@
 		BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */; };
 		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
 		BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
+		BF9795962C625326000A121A /* NMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795952C625326000A121A /* NMapViewController.swift */; };
+		BF9795982C62541F000A121A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795972C62541F000A121A /* PlaceModel.swift */; };
+		BF97959A2C625D09000A121A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795992C625D09000A121A /* PlaceViewModel.swift */; };
 		BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */; };
 		BFB70E672C5746D600D3C616 /* Colorsets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E662C5746D600D3C616 /* Colorsets.xcassets */; };
 		BFB70E722C57509800D3C616 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */; };
@@ -87,6 +90,9 @@
 		BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
 		BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+Encryption.swift"; sourceTree = "<group>"; };
 		BF59C8392C58688C00767A19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		BF9795952C625326000A121A /* NMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapViewController.swift; sourceTree = "<group>"; };
+		BF9795972C62541F000A121A /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		BF9795992C625D09000A121A /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BFB70E662C5746D600D3C616 /* Colorsets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colorsets.xcassets; sourceTree = "<group>"; };
 		BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -203,6 +209,7 @@
 			children = (
 				5191A4572C5226D000550071 /* AppViewModel.swift */,
 				BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */,
+				BF9795992C625D09000A121A /* PlaceViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -251,6 +258,7 @@
 			children = (
 				BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */,
 				BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */,
+				BF9795952C625326000A121A /* NMapViewController.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 			children = (
 				BFD683F52C59CEC4001B31DE /* MemberResponse.swift */,
 				BFD683F72C59D84F001B31DE /* BaseResponse.swift */,
+				BF9795972C62541F000A121A /* PlaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -593,15 +602,18 @@
 				51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
 				BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */,
+				BF97959A2C625D09000A121A /* PlaceViewModel.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
 				51FD50A82C534585008C5552 /* GroupSetView.swift in Sources */,
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
+				BF9795982C62541F000A121A /* PlaceModel.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
 				BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
+				BF9795962C625326000A121A /* NMapViewController.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
 				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
