@@ -59,6 +59,7 @@
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
 		CECB7CCC2C62FAFC0013FAF9 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */; };
 		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
+		CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -139,6 +140,7 @@
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableView.swift; path = "../../../../../../../Downloads/Moyeo-iOS-feature-27-Groupvoteview/moyeo/moyeo/Andy/View/TimeTableView.swift"; sourceTree = "<group>"; };
 		CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableConfirmView.swift; sourceTree = "<group>"; };
+		CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				51219E4B2C61BA72005EDDCD /* EventStoreManager+FullAccess.swift */,
 				51219E532C61BA72005EDDCD /* MessageView.swift */,
 				51219E542C61BA72005EDDCD /* TimeInterval+Extension.swift */,
+				CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */,
 			);
 			path = GroupVote;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
 				51219E922C61BAA8005EDDCD /* GroupVoteView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
+				CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */,
 				51219E942C61BB37005EDDCD /* GroupSetView.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				51219E6F2C61BA72005EDDCD /* Array+Extension.swift in Sources */,
