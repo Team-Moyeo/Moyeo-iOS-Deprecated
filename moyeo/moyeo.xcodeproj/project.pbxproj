@@ -24,7 +24,6 @@
 		51219E7F2C61BA72005EDDCD /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E532C61BA72005EDDCD /* MessageView.swift */; };
 		51219E802C61BA72005EDDCD /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E542C61BA72005EDDCD /* TimeInterval+Extension.swift */; };
 		51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E5C2C61BA72005EDDCD /* MemberPopUpView.swift */; };
-		51219E8B2C61BA72005EDDCD /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E602C61BA72005EDDCD /* TimeTableView.swift */; };
 		51219E8C2C61BA72005EDDCD /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E622C61BA72005EDDCD /* EventViewModel.swift */; };
 		51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E642C61BA72005EDDCD /* SharedDateModel.swift */; };
 		51219E8F2C61BA72005EDDCD /* TimeTableHeaderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51219E652C61BA72005EDDCD /* TimeTableHeaderVM.swift */; };
@@ -58,6 +57,8 @@
 		BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F22C59203A001B31DE /* APIEndpoints.swift */; };
 		BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberResponse.swift */; };
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
+		CECB7CCC2C62FAFC0013FAF9 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */; };
+		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -102,7 +103,6 @@
 		51219E532C61BA72005EDDCD /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		51219E542C61BA72005EDDCD /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		51219E5C2C61BA72005EDDCD /* MemberPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPopUpView.swift; sourceTree = "<group>"; };
-		51219E602C61BA72005EDDCD /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableView.swift; sourceTree = "<group>"; };
 		51219E622C61BA72005EDDCD /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		51219E642C61BA72005EDDCD /* SharedDateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDateModel.swift; sourceTree = "<group>"; };
 		51219E652C61BA72005EDDCD /* TimeTableHeaderVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableHeaderVM.swift; sourceTree = "<group>"; };
@@ -137,6 +137,8 @@
 		BFD683F22C59203A001B31DE /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		BFD683F52C59CEC4001B31DE /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableView.swift; path = "../../../../../../../Downloads/Moyeo-iOS-feature-27-Groupvoteview/moyeo/moyeo/Andy/View/TimeTableView.swift"; sourceTree = "<group>"; };
+		CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableConfirmView.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -215,9 +217,10 @@
 		51219E982C61CE69005EDDCD /* GroupVote */ = {
 			isa = PBXGroup;
 			children = (
+				CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */,
 				51219E912C61BAA8005EDDCD /* GroupVoteView.swift */,
 				51219E5C2C61BA72005EDDCD /* MemberPopUpView.swift */,
-				51219E602C61BA72005EDDCD /* TimeTableView.swift */,
+				CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */,
 			);
 			path = GroupVote;
 			sourceTree = "<group>";
@@ -347,7 +350,6 @@
 		F3D0DEE22C44AF1800D5EB97 = {
 			isa = PBXGroup;
 			children = (
-				CE97B0332C5C684400AF81AD /* result.md */,
 				BF59C8392C58688C00767A19 /* Secrets.xcconfig */,
 				F3D0DEED2C44AF1800D5EB97 /* moyeo */,
 				F3D0DEFE2C44AF1A00D5EB97 /* moyeoTests */,
@@ -558,9 +560,9 @@
 				51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */,
 				51219E722C61BA72005EDDCD /* EventDataStore.swift in Sources */,
 				51219E7F2C61BA72005EDDCD /* MessageView.swift in Sources */,
-				51219E8B2C61BA72005EDDCD /* TimeTableView.swift in Sources */,
 				51219E6C2C61BA72005EDDCD /* MapView.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
+				CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */,
 				51219E732C61BA72005EDDCD /* EventDataStore+FullAccess.swift in Sources */,
 				51219E8F2C61BA72005EDDCD /* TimeTableHeaderVM.swift in Sources */,
 				BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */,
@@ -569,6 +571,7 @@
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
 				51219E752C61BA72005EDDCD /* EventStoreError.swift in Sources */,
 				51219E8C2C61BA72005EDDCD /* EventViewModel.swift in Sources */,
+				CECB7CCC2C62FAFC0013FAF9 /* TimeTableView.swift in Sources */,
 				51219E702C61BA72005EDDCD /* Date+Extension.swift in Sources */,
 				51219E772C61BA72005EDDCD /* EventStoreManager+FullAccess.swift in Sources */,
 				51219E712C61BA72005EDDCD /* EditButton.swift in Sources */,
@@ -583,16 +586,9 @@
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				51219E6A2C61BA72005EDDCD /* CircleImageListView.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
-				CE85759D2C5A442000E63AF8 /* TimeTableHeaderVM.swift in Sources */,
-				CE85749C2C59E00900E63AF8 /* MapView.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
-				CE85759C2C5A442000E63AF8 /* SharedDateModel.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
-				CE8574CB2C59E04600E63AF8 /* TimeInterval+Extension.swift in Sources */,
-				CE8574C22C59E04600E63AF8 /* EventStoreManager+FullAccess.swift in Sources */,
 				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
-				CE85749A2C59E00900E63AF8 /* CircleImageListView.swift in Sources */,
-				CE8574BB2C59E04600E63AF8 /* EditButton.swift in Sources */,
 				5191A45C2C522BBE00550071 /* MainView.swift in Sources */,
 				51219E692C61BA72005EDDCD /* CircleImage.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,

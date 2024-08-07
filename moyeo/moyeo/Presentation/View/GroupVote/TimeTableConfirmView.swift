@@ -1,72 +1,22 @@
 //
-//  SwiftUIView.swift
+//  GroupConfirmView.swift
 //  moyeo
 //
-//  Created by Giwoo Kim on 7/20/24.
-
+//  Created by Giwoo Kim on 8/7/24.
+//
 
 import SwiftUI
 
-struct CheckboxItem {
-    var isChecked: Bool
-    var row: Int
-    var column: Int
-}
-
-struct IntTuple: Hashable {
-    let rowIndex: Int
-    let columnIndex: Int
-}
-enum Weekday: Int {
-    case sunday = 1
-    case monday = 2
-    case tuesday = 3
-    case wednesday = 4
-    case thursday = 5
-    case friday = 6
-    case saturday = 7
-    
-    var name: String {
-        switch self {
-        case .sunday:    return "일"
-        case .monday:    return "월"
-        case .tuesday:   return "화"
-        case .wednesday: return "수"
-        case .thursday:  return "목"
-        case .friday:    return "금"
-        case .saturday:  return "토"
-        }
-    }
-}
-
-var timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00am", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "12:00pm" ]
-
-
-struct TimeTableView: View {
-   
+struct TimeTableConfirmView: View {
     @ObservedObject var sharedDm : SharedDateModel
     
     @State private var fixedColumnWidth: CGFloat = 55
     @State private var fixedRowHeight : CGFloat = 30
     @State private var fixedHeaderHeight : CGFloat = 35
-   
-    
-    @State private var dragStart: CGPoint? = nil
-    @State private var dragEnd: CGPoint? = nil
-    @GestureState private var dragOffset: CGSize = .zero
-    
-    @State private var initialPosition: CGPoint? = nil
-    @State private var dragActive: Bool = false
-    @State private var totalDragOffset: CGSize = .zero
-   
-    
-
-    @StateObject private var eventVm : EventViewModel
+ 
     @StateObject private var timeTHVm : TimeTableHeaderVM
     
-    @State var isLongPressed : Bool =  false
-    @State var allowHitTestingFlag: Bool  = false
-    @State var rectAllowHitTestingFlag : Bool = true
+   
  
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
@@ -83,16 +33,13 @@ struct TimeTableView: View {
     private let items = Array(1...48*7).map { "Item \($0)" }
     @State private var checkedStates: [Bool] = Array(repeating: false, count: 48 * 7 )
     
+    @State private var allSchedule: [CGFloat] = Array(repeating: 0.0, count: 48 * 7 )
     
     private let padding: CGFloat = 10
     private let spacing: CGFloat = 0
     private var totalWidth : CGFloat { fixedColumnWidth * CGFloat(sharedDm.numberOfDays ) + spacing * CGFloat(sharedDm.numberOfDays-1) }
     private let screenWidth = UIScreen.main.bounds.width
     private var sidePadding :CGFloat {  max((screenWidth - totalWidth) / 2, 0) }
-    
-    @State private var pressedPosition: CGPoint = .zero
-    @State private var  dragArray: Set<IntTuple> = []
-    @State private var contentOffset: CGFloat = 0.0
     
     @State private var  availableTimeSet: Set<String> =  []
     @State private var availableTimeTuple : Set<IntTuple> = []
@@ -106,18 +53,13 @@ struct TimeTableView: View {
     @State var numOfProfile : Int?
 
     @State private var showAlertImage = false
-    @State private var showAlertVote = false
-    @State private var showSchedule = false
-    //    private let minY: CGFloat = -380
-    //    private let maxY: CGFloat = 670
-    //
-
-   
+    @State private var showAllSchedule = true
+ 
     
     init(sharedDm: SharedDateModel) {
         self.sharedDm = sharedDm
         _timeTHVm = StateObject(wrappedValue: TimeTableHeaderVM(sharedModel:sharedDm))
-        _eventVm = StateObject(wrappedValue: EventViewModel(sharedModel: sharedDm))
+       
     }
     
     
@@ -164,60 +106,9 @@ struct TimeTableView: View {
                     let closingDateString =  "\(yearComponent)년 \(monthComonent)월 \(dayComponent)일(\(Weekday(rawValue: weekdayComponent)?.name ?? ""))"
                     closingDate = closingDateString
                 }
-        
-            HStack(spacing: 10){
-                
-                Button(action: {
-                   
-                    showSchedule.toggle()
-                    
-                }) {
-                    Text(showSchedule == true ? "일정숨기기" : "일정보기")
-                        .font(.system(size: 15))
-                        .padding(2)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                }
-                .frame(width: 80, height: 24)
-                
-                Spacer()
-                Button(action: {
-                    
-                    deleteCheckAll()
-                    
-                }) {
-                    Text("지우기")
-                        .font(.system(size: 15))
-                        .padding(2)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    
-                }.frame(width: 80, height: 24)
-                
-                Spacer().frame(width: 8)
-                
-                Button(action: {
-                    
-                    allowHitTestingFlag.toggle()
-                    if allowHitTestingFlag == false {
-                        convertCheckedStatesToTimeTable()
-                        convertAvailableTimeFromSetToTuple()
-                    }
-                }) {
-                    Text(allowHitTestingFlag ?  "보내기": "선택하기")
-                        .font(.system(size: 15))
-                        .padding(2)
-                        .background( allowHitTestingFlag ? Color.blue : Color.cyan)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    
-                }.frame(width: 80, height: 24) // Adjust the width and height as needed
-                
-                
-                Spacer()
-            }
+            
+            
+            
             
             
             
@@ -295,39 +186,20 @@ struct TimeTableView: View {
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
-                                                        if showSchedule {
-                                                            if eventVm.calendarArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                                
-                                                                color = .blue
-                                                            }
-                                                        }
-                                                        let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
-                                                        if checkedStates[index] == true {
-                                                            color = .cyan
-                                                        }
-                                                        if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                            color = .red
+                                                        if showAllSchedule {
+                                                            
+                                                            color = .green
+                                                            
                                                         }
                                                         return color
                                                         
                                                     }())
+                                                    .opacity(allSchedule[itemIndex])
                                                     .border(Color.white, width: 2)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                 
                                                 
                                                 
-                                                
-                                                
-                                                
-                                                //                                            CheckboxView(isChecked: $checkedStates[itemIndex], rowIndex: rowIndex, colIndex: columnIndex) {
-                                                //                                                row, column in
-                                                //                                                // 체크박스가 클릭될 때 실행되는 코드
-                                                //                                                print("Checkbox clicked at row: \(row), column: \(column)")
-                                                //                                            } .allowsHitTesting(false)
-                                                //                                                .background(Color.mint)
-                                                //                                                .frame(width: 20, height: 20)
-                                                //                                                .border(Color.gray)
-                                                //                                                .contentShape(Circle())
                                                 if columnIndex == 0 {
                                                     Text(timeSlot[rowIndex])
                                                         .font(.system(size: 10))
@@ -348,94 +220,11 @@ struct TimeTableView: View {
                             }
                             
                         }
-                        .allowsHitTesting(allowHitTestingFlag)
                         .padding(.vertical, padding)
-                        //  I used the pattern mathcing in switch, very concise!!!
-                        .gesture(
-                            LongPressGesture(minimumDuration: 0.25, maximumDistance: 3)
-                                .sequenced(before: DragGesture(minimumDistance: 3))
-                                .onChanged { value in
-                                    switch value {
-                                    case .first(true):
-                                        isLongPressed = true
-                                        //     print("isLongPressed")
-                                    case .second(true, let drag?):
-                                        if isLongPressed {
-                                            pressedPosition = drag.location
-                                            if let coord = indexForPosition(pressedPosition) {
-                                                dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
-                                            }
-                                        }
-                                    default:
-                                        break
-                                    }
-                                }
-                                .onEnded { value in
-                                    switch value {
-                                    case .second(true, let drag?):
-                                        if isLongPressed {
-                                            pressedPosition = drag.location
-                                            if let coord = indexForPosition(pressedPosition) {
-                                                dragArray.insert(IntTuple(rowIndex: coord.row, columnIndex: coord.column))
-                                            }
-                                            applyDragPath()
-                                            resetDragState()
-                                        }
-                                    default:
-                                        break
-                                    }
-                                }
-                                .exclusively(before: TapGesture()
-                                    .onEnded {
-                                        print("Tapped")
-                                    }
-                                    .simultaneously(with: DragGesture(minimumDistance: 0)
-                                        .onEnded { value in
-                                            pressedPosition = value.location
-                                            //   print("start, loc in tap \(value.startLocation) \(value.location)")
-                                            let dragDistance = sqrt(pow(value.translation.width, 2) +  pow(value.translation.height, 2))
-                                            if dragDistance > 3 {
-                                                // 작동 안하는데... 실제 첫번째 컬럼으로 스크롤할때 나머지 그리드셀 스크롤은 여기서 되는게 아님.
-                                                print("scrollTarget")
-                                                if value.translation.height > 0  {
-                                                    let hidden  = -Int(contentOffset / fixedRowHeight)
-                                                    let target = min(max(hidden - 10,0), hidden)
-                                                    scrollViewProxy.scrollTo(target , anchor: .top)
-                                                }
-                                                if value.translation.height < 0 {
-                                                    let hidden  = -Int(contentOffset / fixedRowHeight)
-                                                    let target = min(hidden + 10, Int(1010 / fixedRowHeight))
-                                                    scrollViewProxy.scrollTo(target , anchor: .top)
-                                                    
-                                                }
-                                            } else {
-                                                if let coord = indexForPosition(pressedPosition) {
-                                                    let index = coord.row * Int(sharedDm.numberOfDays) + coord.column
-                                                    if index < items.count && index >= 0 {
-                                                        checkedStates[index].toggle()
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    )
-                                )
-                        )
+                        //  I used the pattern mathcing in switch, very concise!!
                         
                         
-                    } .background(GeometryReader { geometry -> Color in
-                        DispatchQueue.main.async {
-                            // orgin.y == minY
-                            let offset = geometry.frame(in: .named("scroll")).minY
-                            
-                            if self.contentOffset != offset {
-                                self.contentOffset = offset
-                                
-                            }
-                            
-                            self.adjustScroll(contentOffset: contentOffset)
-                        }
-                        return Color.clear
-                    })
+                    }
                     
                 }.scrollTargetLayout()
                     .onAppear{
@@ -446,75 +235,28 @@ struct TimeTableView: View {
                     .frame(height:450)
                 
             } .background(Color.clear)
-            
                 .scrollTargetBehavior(.viewAligned)
-        }.toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-               
-                Image(systemName: "star.fill")
-                    .contextMenu(ContextMenu(menuItems: {
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("초대하기")
-                        })
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("수정하기")
-                        })
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                            Text("그룹삭제하기")
-                        })
-                    }))
-              
+            
+            Button(action: {
                 
-            }
+                
+                
+            }) {
+                Text("확정하기")
+                    .font(.system(size: 20))
+                    .padding(2)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(25)
+            }.frame(width: 300, height: 100 , alignment: .center)
+            
+            
         }
     }
     private func lastTwoDigits(year : Int) ->String {
         
         let yearString = String(year)
         return  String(yearString.suffix(2))
-    }
-    private func adjustScroll(contentOffset: CGFloat) {
-        var adjustedOffset : CGFloat = 0
-        let offset = contentOffset.truncatingRemainder(dividingBy: fixedRowHeight)
-        
-        if offset != 0 {
-            let targetOffset = contentOffset - offset
-            if abs(offset) > fixedRowHeight / 2 {
-                
-                 adjustedOffset = targetOffset + (fixedRowHeight) * (offset > 0 ? 1 : -1)
-                
-            }
-            else {
-                adjustedOffset = targetOffset
-            }
-            withAnimation {
-                self.contentOffset = adjustedOffset
-            }
-        }
-        
-        
-    }
-    
-    func applyDragPath() {
-        
-        for tuple in dragArray {
-            let index = tuple.rowIndex * Int(sharedDm.numberOfDays) + tuple.columnIndex
-            if index < items.count &&  index >= 0  {
-                checkedStates[index].toggle() // 값 변경 로직
-            }
-            
-        }
-    }
-    func resetDragState() {
-        pressedPosition = .zero
-        isLongPressed = false
-        dragArray.removeAll()
-    }
-    
-    func deleteCheckAll() {
-        for i in 0..<checkedStates.count {
-            checkedStates[i] = false
-        }
     }
     
     
@@ -695,28 +437,12 @@ struct TimeTableView: View {
     }
 }
 
-struct CheckboxView: View {
-    @Binding var isChecked: Bool
-    
-    var rowIndex : Int
-    var colIndex : Int
-    var onToggle: (Int, Int) -> Void
-    
-    var body: some View {
-        Image(systemName: isChecked ? "checkmark.square" : "square")
-            .resizable()
-            .frame(width: 15, height: 15)
-            .foregroundColor(isChecked ? .blue : .gray)
-            .onTapGesture {
-                isChecked.toggle()
-                onToggle(rowIndex, colIndex)
-            }
-    }
-}
 
 
 #Preview {
     
-    TimeTableView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
+    TimeTableConfirmView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
     
 }
+
+   

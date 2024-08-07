@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct GroupVoteView: View {
-    
-    @Environment(AppViewModel.self) var appViewModel
     @ObservedObject var sharedDm : SharedDateModel
+    @Environment(AppViewModel.self) var appViewModel
     @State private var isPresentingMemberPopupView = false
     @State private var isPresentingMapWideView = false
     @State private var isPresentingGroupConfirmView = false
@@ -80,16 +79,10 @@ struct GroupVoteView: View {
     }
 }
 
-//#Preview {
-//
-//        let sharedDm = SharedDateModel()
-//        sharedDm.meetingName = "Sample Meeting"
-//        sharedDm.voteTime = true
-//        sharedDm.startDate = Date()
-//        sharedDm.endDate = Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
-//        sharedDm.selectedDate = Date()
-//        sharedDm.selectedTime = Date()
-//        
-//         GroupVoteView()
-//    
-//}
+#Preview {
+
+      
+    GroupVoteView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7)) .environment(AppViewModel())
+    
+    
+}
