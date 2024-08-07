@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroupResultView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     
     var body: some View {
         VStack {

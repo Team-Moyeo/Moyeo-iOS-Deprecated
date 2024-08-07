@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
-    @StateObject var authViewModel: AuthViewModel = .init()
+    @Environment(AppViewModel.self) var appViewModel
+    @State var authViewModel: AuthViewModel = .init()
     
     var body: some View {
         Group {
@@ -19,11 +19,7 @@ struct ContentView: View {
                 LoginView()
             }
         }
-        .environmentObject(authViewModel)
+        .environment(authViewModel)
     }
 }
 
-#Preview {
-    ContentView()
-        .environmentObject(AppViewModel())
-}

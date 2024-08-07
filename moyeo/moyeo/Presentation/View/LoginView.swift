@@ -9,20 +9,24 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    @EnvironmentObject var appViewModel: AppViewModel
     
     var body: some View {
         VStack {
-            Text("모여 로고")
-                .font(.title)
-            
+            Spacer()
+            Image(.loginViewLogo)
+                .padding(.bottom, 21)
+            Text("The Best Time for Everyone")
+                .pretendard(.extraLight, 19)
+                .foregroundStyle(.myGray)
+            Spacer()
             AppleSigninButton()
+                .padding(.bottom, 12)
         }
     }
 }
 
 struct AppleSigninButton: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
     
     var body: some View {
         
@@ -50,5 +54,6 @@ struct AppleSigninButton: View {
 
 #Preview {
     LoginView()
-        .environmentObject(AppViewModel())
+        .environment(AuthViewModel())
+        .environment(AppViewModel())
 }
