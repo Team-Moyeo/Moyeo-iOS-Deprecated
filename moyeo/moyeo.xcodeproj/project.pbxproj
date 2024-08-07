@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31E550AC6270AB4359ED9D03 /* Pods_moyeoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D516887136BB1B99439F8ED0 /* Pods_moyeoTests.framework */; };
 		5191A4582C5226D000550071 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4572C5226D000550071 /* AppViewModel.swift */; };
 		5191A45A2C522B8900550071 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4592C522B8900550071 /* LoginView.swift */; };
 		5191A45C2C522BBE00550071 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A45B2C522BBE00550071 /* MainView.swift */; };
@@ -18,6 +19,9 @@
 		51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B12C538326008C5552 /* MemberPopupView.swift */; };
 		51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B32C53833E008C5552 /* GroupConfirmView.swift */; };
 		51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B52C53835F008C5552 /* GroupResultView.swift */; };
+		61EACD232C61B34C00D84DE2 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EACD222C61B34C00D84DE2 /* MeetingViewModel.swift */; };
+		B529F9BC03A77DC8F78D3078 /* Pods_moyeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA45E822124D773FA60F67E /* Pods_moyeo.framework */; };
+		B97428D4CFC975E775B34007 /* Pods_moyeo_moyeoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BA030B52C3D773E48A0F1A /* Pods_moyeo_moyeoUITests.framework */; };
 		BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */; };
 		BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */; };
 		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
@@ -64,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25BA030B52C3D773E48A0F1A /* Pods_moyeo_moyeoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyeo_moyeoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5191A4572C5226D000550071 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		5191A4592C522B8900550071 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5191A45B2C522BBE00550071 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -75,6 +80,12 @@
 		51FD50B12C538326008C5552 /* MemberPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPopupView.swift; sourceTree = "<group>"; };
 		51FD50B32C53833E008C5552 /* GroupConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConfirmView.swift; sourceTree = "<group>"; };
 		51FD50B52C53835F008C5552 /* GroupResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResultView.swift; sourceTree = "<group>"; };
+		61EACD222C61B34C00D84DE2 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
+		682BA4660D6E8817AADFE890 /* Pods-moyeo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.release.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.release.xcconfig"; sourceTree = "<group>"; };
+		8BDAA4D81EAC25B04BD66B99 /* Pods-moyeoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeoTests.release.xcconfig"; path = "Target Support Files/Pods-moyeoTests/Pods-moyeoTests.release.xcconfig"; sourceTree = "<group>"; };
+		936B85E633551FDF0D78E0B3 /* Pods-moyeo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.debug.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.debug.xcconfig"; sourceTree = "<group>"; };
+		A296D6A5A19AFF4651B8C414 /* Pods-moyeoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeoTests.debug.xcconfig"; path = "Target Support Files/Pods-moyeoTests/Pods-moyeoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4703641A35AC6703E4C989B /* Pods-moyeo-moyeoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo-moyeoUITests.debug.xcconfig"; path = "Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF0416132C48F4D500599C8D /* moyeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = moyeo.entitlements; sourceTree = "<group>"; };
 		BF0416142C4939BC00599C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
@@ -92,9 +103,12 @@
 		BFB70E702C57509800D3C616 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+CustomFont.swift"; sourceTree = "<group>"; };
+		BFC0B26167BD09D526C78739 /* Pods-moyeo-moyeoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo-moyeoUITests.release.xcconfig"; path = "Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BFD683F22C59203A001B31DE /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		BFD683F52C59CEC4001B31DE /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		CAA45E822124D773FA60F67E /* Pods_moyeo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyeo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D516887136BB1B99439F8ED0 /* Pods_moyeoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyeoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B529F9BC03A77DC8F78D3078 /* Pods_moyeo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31E550AC6270AB4359ED9D03 /* Pods_moyeoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97428D4CFC975E775B34007 /* Pods_moyeo_moyeoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +205,7 @@
 			children = (
 				5191A4572C5226D000550071 /* AppViewModel.swift */,
 				BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */,
+				61EACD222C61B34C00D84DE2 /* MeetingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -195,8 +213,24 @@
 		643641A8C1187D0D48E1C8C5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				936B85E633551FDF0D78E0B3 /* Pods-moyeo.debug.xcconfig */,
+				682BA4660D6E8817AADFE890 /* Pods-moyeo.release.xcconfig */,
+				A4703641A35AC6703E4C989B /* Pods-moyeo-moyeoUITests.debug.xcconfig */,
+				BFC0B26167BD09D526C78739 /* Pods-moyeo-moyeoUITests.release.xcconfig */,
+				A296D6A5A19AFF4651B8C414 /* Pods-moyeoTests.debug.xcconfig */,
+				8BDAA4D81EAC25B04BD66B99 /* Pods-moyeoTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BE8BDE105C80A4A5C1ADDCF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAA45E822124D773FA60F67E /* Pods_moyeo.framework */,
+				25BA030B52C3D773E48A0F1A /* Pods_moyeo_moyeoUITests.framework */,
+				D516887136BB1B99439F8ED0 /* Pods_moyeoTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BFB70E682C574F1200D3C616 /* Font */ = {
@@ -251,6 +285,7 @@
 				F3D0DF082C44AF1A00D5EB97 /* moyeoUITests */,
 				F3D0DEEC2C44AF1800D5EB97 /* Products */,
 				643641A8C1187D0D48E1C8C5 /* Pods */,
+				BE8BDE105C80A4A5C1ADDCF4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,9 +349,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3D0DF0F2C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeo" */;
 			buildPhases = (
+				66E3919E168AB2C8F6765355 /* [CP] Check Pods Manifest.lock */,
 				F3D0DEE72C44AF1800D5EB97 /* Sources */,
 				F3D0DEE82C44AF1800D5EB97 /* Frameworks */,
 				F3D0DEE92C44AF1800D5EB97 /* Resources */,
+				1D4E2348AC6FD85640F4E604 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -331,6 +368,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3D0DF122C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoTests" */;
 			buildPhases = (
+				8B4CA41D0CF3A16142BE7A96 /* [CP] Check Pods Manifest.lock */,
 				F3D0DEF72C44AF1A00D5EB97 /* Sources */,
 				F3D0DEF82C44AF1A00D5EB97 /* Frameworks */,
 				F3D0DEF92C44AF1A00D5EB97 /* Resources */,
@@ -349,9 +387,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3D0DF152C44AF1A00D5EB97 /* Build configuration list for PBXNativeTarget "moyeoUITests" */;
 			buildPhases = (
+				7CE15B6831BE8853C9422D18 /* [CP] Check Pods Manifest.lock */,
 				F3D0DF012C44AF1A00D5EB97 /* Sources */,
 				F3D0DF022C44AF1A00D5EB97 /* Frameworks */,
 				F3D0DF032C44AF1A00D5EB97 /* Resources */,
+				F62A7D8C17921DB4D420A916 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -444,6 +484,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1D4E2348AC6FD85640F4E604 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moyeo/Pods-moyeo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moyeo/Pods-moyeo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-moyeo/Pods-moyeo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66E3919E168AB2C8F6765355 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-moyeo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7CE15B6831BE8853C9422D18 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-moyeo-moyeoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B4CA41D0CF3A16142BE7A96 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-moyeoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F62A7D8C17921DB4D420A916 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F3D0DEE72C44AF1800D5EB97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -469,6 +612,7 @@
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
+				61EACD232C61B34C00D84DE2 /* MeetingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +772,7 @@
 		};
 		F3D0DF102C44AF1A00D5EB97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 936B85E633551FDF0D78E0B3 /* Pods-moyeo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -636,7 +781,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -650,7 +795,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo.Won;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -661,6 +806,7 @@
 		};
 		F3D0DF112C44AF1A00D5EB97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682BA4660D6E8817AADFE890 /* Pods-moyeo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -669,7 +815,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"moyeo/Preview Content\"";
-				DEVELOPMENT_TEAM = U5F437QJA7;
+				DEVELOPMENT_TEAM = 2U3B7G3F2A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moyeo/Info.plist;
@@ -683,7 +829,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.otechdong.moyeo-MC3";
+				PRODUCT_BUNDLE_IDENTIFIER = com.otechdong.moyeo.Won;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -694,6 +840,7 @@
 		};
 		F3D0DF132C44AF1A00D5EB97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A296D6A5A19AFF4651B8C414 /* Pods-moyeoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -714,6 +861,7 @@
 		};
 		F3D0DF142C44AF1A00D5EB97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BDAA4D81EAC25B04BD66B99 /* Pods-moyeoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -734,6 +882,7 @@
 		};
 		F3D0DF162C44AF1A00D5EB97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4703641A35AC6703E4C989B /* Pods-moyeo-moyeoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -752,6 +901,7 @@
 		};
 		F3D0DF172C44AF1A00D5EB97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFC0B26167BD09D526C78739 /* Pods-moyeo-moyeoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

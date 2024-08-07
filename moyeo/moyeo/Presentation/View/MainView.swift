@@ -48,6 +48,10 @@ struct MainView: View {
             .listStyle(.inset)
             
             Spacer()
+            //여기서부터는 GroupResultView로 이동하기 위한 임시 수단임.
+            NavigationLink(destination: GroupResultView(images: ["", ""])){
+                Text("GroupResultView로 이동")
+            }
             
             // 모임 생성하기 버튼
             Button(action: {
@@ -74,7 +78,7 @@ struct MainView: View {
             case .groupVoteView:
                 GroupVoteView()
             case .groupResultView:
-                GroupResultView()
+                GroupResultView(images: ["",""])
             }
         }
         .toolbar {
@@ -131,6 +135,7 @@ struct MainView: View {
             
             
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
