@@ -63,6 +63,7 @@ struct MainView: View {
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
                 GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
+                    
             }
             
         }

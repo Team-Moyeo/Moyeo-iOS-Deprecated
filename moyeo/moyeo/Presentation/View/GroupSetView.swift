@@ -15,11 +15,40 @@ struct GroupSetView: View {
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
     
+    @State private var selectedStartTime = Date()
+    @State private var selectedEndTime = Date()
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
     
+    @State private var dates: Set<DateComponents> = []
+    @State private var isPresentingDateRangePicker: Bool = false
+    
+    @Environment(\.calendar) var calendar
+    @Environment(\.timeZone) var timeZone
+    
+    var bounds: Range<Date> {
+        let start = calendar.date(
+            from: DateComponents(
+                timeZone: timeZone,
+                year: 2024,
+                month: 6,
+                day: 20)
+        )!
+        let end = calendar.date(
+            from: DateComponents(
+                timeZone: timeZone,
+                year: 2024,
+                month: 6,
+                day: 24)
+        )!
+        
+        return start..<end
+    }
+    
     @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
+    
+    @State private var isTextFieldActive: Bool = false
     
     @ObservedObject var sharedDm : SharedDateModel
     
@@ -30,7 +59,9 @@ struct GroupSetView: View {
                     HStack {
                         Text("모임명")
                             .padding(.trailing, 50)
-                        TextField("모임 이름을 입력해주세요.", text: $meetingName)
+                        TextField("모임 이름을 입력해주세요.", text: $meetingName, onEditingChanged: { isEditing in
+                            isTextFieldActive = isEditing
+                        })
                             .onAppear {
                                 UITextField.appearance().clearButtonMode = .whileEditing
                             }
@@ -45,6 +76,86 @@ struct GroupSetView: View {
                         Toggle(isOn: $voteTime) {
                             Text("시간 투표")
                         }
+                    }
+                    if voteTime {
+                        Section {
+                            HStack {
+                                Text("시작 투표일")
+                                Spacer()
+                                
+                                DatePicker("날짜", selection: $selectedStartDate, displayedComponents: .date)
+                                    .datePickerStyle(CompactDatePickerStyle())
+                                    .labelsHidden()
+                                    .onChange(of: selectedStartDate) { newStartDate,_ in
+                                        if selectedEndDate < selectedStartDate {
+                                            selectedEndDate = selectedStartDate
+                                        }
+                                        if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), selectedEndDate > maxEndDate {
+                                            selectedEndDate = maxEndDate
+                                        }
+                                        let calendar = Calendar.current
+                                        let components = calendar.dateComponents([.year, .month, .day], from: newStartDate)
+                                        if let year = components.year, let month = components.month, let day = components.day {
+                                            print("Year: \(year), Month: \(month), Day: \(day)")
+                                        }
+                                    }
+                            }
+                            
+                            HStack{
+                                Text("종료 투표일")
+                                Spacer()
+                                
+                                DatePicker("날짜", selection: $selectedEndDate, displayedComponents: .date)
+                                    .datePickerStyle(CompactDatePickerStyle())
+                                    .labelsHidden()
+                                    .onChange(of: selectedEndDate) { newEndDate in
+                                        // If the new end date exceeds 7 days from the start date, adjust it
+                                        if newEndDate < selectedStartDate {
+                                            selectedEndDate = selectedStartDate
+                                        } else if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: selectedStartDate), newEndDate > maxEndDate {
+                                            selectedEndDate = maxEndDate
+                                        }
+                                        let calendar = Calendar.current
+                                        let components = calendar.dateComponents([.year, .month, .day], from: selectedEndDate)
+                                        if let year = components.year, let month = components.month, let day = components.day {
+                                            print("Year: \(year), Month: \(month), Day: \(day)")
+                                        }
+                                    }
+                                
+                                //                                Text("날짜 범위")
+                                //                                Spacer()
+                                // 날짜를 선택해주세요(탭 하면 캘린더에서 선택)
+                                //                                Button(action: {
+                                //                                    print("눌리긴함?")
+                                //                                    isPresentingDateRangePicker = true
+                                //                                }, label: {
+                                //                                    Text("날짜를 선택해주세요.")
+                                //                                        .foregroundStyle(.gray)
+                                //                                })
+                                
+                                
+                            }
+                            .sheet(isPresented: $isPresentingDateRangePicker) {
+                                DateRangePickerView(dates: $dates)
+                            }
+                            
+                            Section {
+                                HStack {
+                                    Text("시간 범위")
+                                    Spacer()
+                                    DatePicker("", selection: $selectedStartTime, displayedComponents: .hourAndMinute)
+                                        .labelsHidden()
+                                        .frame(maxWidth: 100)
+                                    Text("~")
+                                    DatePicker("", selection: $selectedEndTime, displayedComponents: .hourAndMinute)
+                                        .labelsHidden()
+                                        .frame(maxWidth: 100)
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        DatePicker("날짜", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                     }
                 }
                 
@@ -75,68 +186,16 @@ struct GroupSetView: View {
                 
                 Section {
                     HStack {
-                        Text("시작투표일")
+                        Text("투표 마감기한")
                         Spacer()
                         
-                        DatePicker("날짜", selection: $selectedStartDate, displayedComponents: .date)
+                        DatePicker("", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                             .datePickerStyle(CompactDatePickerStyle())
-                            .labelsHidden()
-                            .onChange(of: selectedStartDate) { newStartDate,_ in
-                                if selectedEndDate < selectedStartDate {
-                                    selectedEndDate = selectedStartDate
-                                }
-                                if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), selectedEndDate > maxEndDate {
-                                    selectedEndDate = maxEndDate
-                                }
-                                let calendar = Calendar.current
-                                let components = calendar.dateComponents([.year, .month, .day], from: newStartDate)
-                                if let year = components.year, let month = components.month, let day = components.day {
-                                    print("Year: \(year), Month: \(month), Day: \(day)")
-                                }
-                            }
-                    }
-                    
-                    HStack{
-                        Text("종료투표일")
-                        Spacer()
-                        
-                        DatePicker("날짜", selection: $selectedEndDate, displayedComponents: .date)
-                            .datePickerStyle(CompactDatePickerStyle())
-                            .labelsHidden()
-                            .onChange(of: selectedEndDate) { newEndDate in
-                                // If the new end date exceeds 7 days from the start date, adjust it
-                                if newEndDate < selectedStartDate {
-                                    selectedEndDate = selectedStartDate
-                                } else if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: selectedStartDate), newEndDate > maxEndDate {
-                                    selectedEndDate = maxEndDate
-                                }
-                                let calendar = Calendar.current
-                                let components = calendar.dateComponents([.year, .month, .day], from: selectedEndDate)
-                                if let year = components.year, let month = components.month, let day = components.day {
-                                    print("Year: \(year), Month: \(month), Day: \(day)")
-                                }
-                            }
-                    }
-                    
-                    HStack {
-                        Text("투표 마감")
-                        Spacer()
-                        
-                        DatePicker("날짜", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
-                            .datePickerStyle(CompactDatePickerStyle())
-                            .labelsHidden()
-                        
-                        //                    DatePicker("시간", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                        //                        .datePickerStyle(CompactDatePickerStyle())
-                        //                        .labelsHidden()
                     }
                 }
                 
             }
-            .onTapGesture {
-                hideKeyboard()
-                print("키보드 내려가라")
-            }
+            
             VStack {
                 // Sheet 최상단에 있는 title
                 Text("모임 생성하기")
@@ -171,7 +230,6 @@ struct GroupSetView: View {
                     appViewModel.navigateTo(.groupVoteView)
                     isPresentingGroupSetView = false
                     
-                    
                 }) {
                     Text("모임 시작하기")
                         .foregroundColor(.white)
@@ -186,10 +244,32 @@ struct GroupSetView: View {
             }
             
         }
+        .scrollDismissesKeyboard(.immediately)
 
     }
 }
 
+struct DateRangePickerView: View {
+    @Binding var dates: Set<DateComponents>
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        NavigationView {
+            MultiDatePicker("날짜를 선택해주세요.", selection: $dates)
+                .datePickerStyle(.graphical)
+                .navigationTitle("날짜 선택")
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("완료") {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                }
+        }
+    }
+}
+
+// 키보드 외 영역 눌렀을때 키보드 숨기기
 extension View {
   func hideKeyboard() {
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
