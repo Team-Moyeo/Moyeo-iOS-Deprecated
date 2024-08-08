@@ -73,6 +73,58 @@ class APIService<T: Decodable> {
         return decoded
        
     }
+// URLRequest Version
+    
+    func get(for urlRequest: URLRequest) -> AnyPublisher<T, Error> {
+        URLSession.shared
+            .dataTaskPublisher(for: urlRequest)
+            .tryMap { element -> Data in
+                guard let httpResponse = element.response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 else {
+                        throw URLError(.badServerResponse)
+                    }
+                
+                return element.data
+            }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+   func fetchData(urlRequest: URLRequest) {
+            get(for: urlRequest)
+                .sink(
+                    receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            print("Finished successfully")
+                        case .failure(let error):
+                            print("Failed with error: \(error)")
+                        }
+                    },
+                    receiveValue: { [weak self] (response: T) in
+                        self?.responseData = response
+                        print("Received value: \(response)")
+                        // response에 대한 추가 작업 수행
+                    }
+                )
+                .store(in: &cancellables)
+        }
+        
+    
+        
+    
+    // combine --> async await 이 간단함
+    func asyncLoad(for urlRequest: URLRequest) async throws -> T {
+      
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
 
+        guard (response as? HTTPURLResponse)?.statusCode == 200
+        else { throw URLError(.badServerResponse) }
 
+        guard let decoded = try? JSONDecoder().decode(T.self, from: data)
+        else { throw URLError(.cannotDecodeContentData)}
+
+        return decoded
+       
+    }
 }

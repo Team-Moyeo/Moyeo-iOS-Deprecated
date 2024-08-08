@@ -17,7 +17,7 @@ struct CircleImageListView: View {
                     if index <= 1 {
                         CircleImage(image: Image(imageString[index]))
                             .offset(x: CGFloat(index) * -10)
-                            .frame(width: 80, height: 80)
+                           
                     } else {
                         
                         CircleImage()
@@ -28,7 +28,7 @@ struct CircleImageListView: View {
                                     .bold()
                             }
                             .offset(x: CGFloat(index) * -10)
-                            .frame(width: 80, height: 80)
+                          
                         
                         
                     }

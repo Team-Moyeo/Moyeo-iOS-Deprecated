@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupSetView: View {
     @Environment(AppViewModel.self) var appViewModel
-    @State private var meetingName: String = ""
+    @State private var meetingName: String = "우리지금만나~"
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
     @State private var selectedDate = Date()
@@ -22,6 +22,7 @@ struct GroupSetView: View {
     @Binding var isPresentingGroupSetView: Bool
     
     @ObservedObject var sharedDm  : SharedDateModel
+   
     
     var body: some View {
         Form {
