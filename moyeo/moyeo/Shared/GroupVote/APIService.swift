@@ -117,13 +117,13 @@ class APIService<T: Decodable> {
     func asyncLoad(for urlRequest: URLRequest) async throws -> T {
       
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-
+        print("asynLoad response \(response)")
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
 
         guard let decoded = try? JSONDecoder().decode(T.self, from: data)
         else { throw URLError(.cannotDecodeContentData)}
-
+        print("decoded in the asyncLoad decoded: \(decoded)")
         return decoded
        
     }

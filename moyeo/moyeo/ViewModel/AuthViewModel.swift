@@ -70,7 +70,6 @@ extension AuthViewModel {
             ]
             
             do {
-                print("encryptedUserIdentifier \(encryptedUserIdentifier)")
                 request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
                 let (data, httpResponse) = try await URLSession.shared.data(for: request)
 

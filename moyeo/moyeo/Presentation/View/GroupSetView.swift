@@ -136,7 +136,9 @@ struct GroupSetView: View {
                     // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
                     // 해당 sheet가 내려가고, MainView의 List에 추가되고,
                     // NavigationStack에 쌓기
-                    
+                    Task {
+                        await post_meeting()
+                    }
                     sharedDm.isUpdating = true
                     sharedDm.meetingName = meetingName
                     sharedDm.voteTime = voteTime
@@ -174,6 +176,78 @@ struct GroupSetView: View {
             
         }
     }
+}
+func post_meeting()  async {
+    
+    var apiService = APIService<Meeting>()
+    guard let url = URL(string: APIEndpoints.basicURLString(path: .meeting)) else {
+        print("Invalid URL")
+        return
+    }
+    print("url :  \(url)")
+   let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
+    
+    
+    var request = URLRequest(url: url)
+  
+   
+    let headers = [
+        "Content-Type": "application/json",
+        "Authorization": "Bearer \(accessToken)",
+    ]
+    
+
+    let meeting = Meeting(
+        title: "Andy's Team Meeting",
+        startDate: "2024-08-25",
+        endDate: "2024-08-31",
+        startTime: "09:00:00",
+        endTime: "17:00:00",
+        fixedTimes: ["2024-08-10T10:00:00", "2024-08-10T10:30:00"],
+        fixedPlace: Place(
+            title: "포항공대 생활관",
+            address: "경북 포항시 남구 청암로 포항공과대학교",
+            latitude: 35.3528,
+            longitude: 129.3135
+        ),
+        candidatePlaces: [
+            Place(
+                title: "Conference Room B",
+                address: "456 Secondary Street, Cityville",
+                latitude:35.3528,
+                longitude:129.3135
+            )
+        ],
+        deadline: "2024-08-09T23:59:59"
+    )
+
+    // JSON 인코더 생성
+    let encoder = JSONEncoder()
+
+    do {
+        // JSON 데이터로 인코딩
+        let jsonData = try encoder.encode(meeting)
+        request.httpBody = jsonData
+        print("jsonData \(jsonData)")
+        // JSON 데이터 문자열로 변환 (디버깅 용)
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("JSON String: \(jsonString)")
+        }
+    }
+    catch {
+        print(error)
+    }
+  
+    request.allHTTPHeaderFields = headers
+    request.httpMethod = "POST"
+    
+    do {
+        let  decoded = try  await apiService.asyncLoad(for: request)
+        print("decoded in the post_meeting \(decoded)")
+    } catch{
+        print("decoding error \(error)")
+    }
+  
 }
 
 //#Preview {
