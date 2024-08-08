@@ -32,6 +32,11 @@ struct ProfileView: View {
             .listStyle(.plain)
             
         }
+        .onAppear {
+            Task {
+                await profileViewModel.requestProfileInfo()
+            }
+        }
     }
 }
 
@@ -94,17 +99,17 @@ private struct ProfileDetailsView: View {
             
             ProfileDetailsViewCell(
                 title: "이름",
-                content: name
+                content: name ?? "미등록"
             )
             
             ProfileDetailsViewCell(
                 title: "전화번호",
-                content: "+82 10-1234-5678"
+                content: phoneNumber ?? "미등록"
             )
             
             ProfileDetailsViewCell(
                 title: "이메일",
-                content: "appleLearner@postech.ac.kr"
+                content: email ?? "미등록"
             )
             
         }

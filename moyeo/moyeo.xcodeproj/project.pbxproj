@@ -24,6 +24,7 @@
 		BF4DAE492C604DD6002371DC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE482C604DD6002371DC /* ProfileViewModel.swift */; };
 		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
 		BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
+		BF9795A92C64BD45000A121A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795A82C64BD45000A121A /* NetworkError.swift */; };
 		BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */; };
 		BFB70E672C5746D600D3C616 /* Colorsets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E662C5746D600D3C616 /* Colorsets.xcassets */; };
 		BFB70E722C57509800D3C616 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */; };
@@ -84,6 +85,7 @@
 		BF4DAE442C5F9B70002371DC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BF4DAE482C604DD6002371DC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		BF59C8392C58688C00767A19 /* Secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		BF9795A82C64BD45000A121A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BFB70E662C5746D600D3C616 /* Colorsets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colorsets.xcassets; sourceTree = "<group>"; };
 		BFB70E692C57509700D3C616 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				BFD683F22C59203A001B31DE /* APIEndpoints.swift */,
 				BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */,
+				BF9795A82C64BD45000A121A /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 			files = (
 				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
 				51FD50AE2C5382BA008C5552 /* GroupVoteView.swift in Sources */,
+				BF9795A92C64BD45000A121A /* NetworkError.swift in Sources */,
 				F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */,
 				BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
