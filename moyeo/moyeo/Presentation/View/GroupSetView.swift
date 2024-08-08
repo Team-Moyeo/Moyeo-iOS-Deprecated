@@ -12,38 +12,13 @@ struct GroupSetView: View {
     @State private var meetingName: String = ""
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
+    
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
-    
-    @State private var selectedStartTime = Date()
-    @State private var selectedEndTime = Date()
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
-    
-    @State private var dates: Set<DateComponents> = []
-    @State private var isPresentingDateRangePicker: Bool = false
-    
-    @Environment(\.calendar) var calendar
-    @Environment(\.timeZone) var timeZone
-    
-    var bounds: Range<Date> {
-        let start = calendar.date(
-            from: DateComponents(
-                timeZone: timeZone,
-                year: 2024,
-                month: 6,
-                day: 20)
-        )!
-        let end = calendar.date(
-            from: DateComponents(
-                timeZone: timeZone,
-                year: 2024,
-                month: 6,
-                day: 24)
-        )!
-        
-        return start..<end
-    }
+    @State private var selectedStartTime = Date()
+    @State private var selectedEndTime = Date()
     
     @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
@@ -121,22 +96,6 @@ struct GroupSetView: View {
                                             print("Year: \(year), Month: \(month), Day: \(day)")
                                         }
                                     }
-                                
-                                //                                Text("날짜 범위")
-                                //                                Spacer()
-                                // 날짜를 선택해주세요(탭 하면 캘린더에서 선택)
-                                //                                Button(action: {
-                                //                                    print("눌리긴함?")
-                                //                                    isPresentingDateRangePicker = true
-                                //                                }, label: {
-                                //                                    Text("날짜를 선택해주세요.")
-                                //                                        .foregroundStyle(.gray)
-                                //                                })
-                                
-                                
-                            }
-                            .sheet(isPresented: $isPresentingDateRangePicker) {
-                                DateRangePickerView(dates: $dates)
                             }
                             
                             Section {
