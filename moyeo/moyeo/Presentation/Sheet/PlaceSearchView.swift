@@ -61,7 +61,7 @@ struct PlaceSearchView: View {
                         ZStack {
                             NMapViewControllerRepresentable(
                                 places: placeViewModel.places,
-                                selectedPlace: placeViewModel.selectedPlace
+                                currentPlace: placeViewModel.currentPlace
                             )
                             .edgesIgnoringSafeArea(.all)
                         }
@@ -83,7 +83,7 @@ extension PlaceSearchView {
     func placeSearchListView() -> some View {
         List(placeViewModel.places) { place in
             NavigationLink(
-                destination: PlaceAddView(),
+                destination: PlaceAddView(place: place).environment(placeViewModel),
                 label: {
                     VStack(alignment: .leading) {
                         Text(place.name)
@@ -93,9 +93,7 @@ extension PlaceSearchView {
                             .foregroundColor(.gray)
                     }
                 })
-            .onTapGesture {
-                placeViewModel.selectedPlace = place
-            }
+
         }
     }
 }

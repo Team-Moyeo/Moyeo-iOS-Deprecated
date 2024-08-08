@@ -12,7 +12,7 @@ import NMapsMap
 class NMapViewController: UIViewController {
     
     var places: [Place] = []
-    var selectedPlace: Place?
+    var currentPlace: Place?
     var onPlaceSelected: ((Place) -> Void)?
     
     private var mapView: NMFMapView!
@@ -39,7 +39,7 @@ class NMapViewController: UIViewController {
             marker.mapView = mapView
             marker.touchHandler = { [weak self] _ in
                 guard let self = self else { return false }
-                self.selectedPlace = place
+                self.currentPlace = place
                 self.onPlaceSelected?(place)
                 self.moveToPlace(place: place)
                 return true
@@ -47,8 +47,8 @@ class NMapViewController: UIViewController {
         }
         
         // 초기 지도 중심 이동
-        if let selectedPlace = selectedPlace {
-            moveToPlace(place: selectedPlace)
+        if let currentPlace = currentPlace {
+            moveToPlace(place: currentPlace)
         }
     }
     
@@ -61,14 +61,14 @@ class NMapViewController: UIViewController {
 
 struct NMapViewControllerRepresentable: UIViewControllerRepresentable {
     var places: [Place]
-    var selectedPlace: Place?
+    var currentPlace: Place?
     
     func makeUIViewController(context: Context) -> NMapViewController {
         let viewController = NMapViewController()
         viewController.places = places
-        viewController.selectedPlace = selectedPlace
+        viewController.currentPlace = currentPlace
         viewController.onPlaceSelected = { place in
-            context.coordinator.parent.selectedPlace = place
+            context.coordinator.parent.currentPlace = place
         }
         context.coordinator.viewController = viewController
         return viewController
@@ -76,11 +76,11 @@ struct NMapViewControllerRepresentable: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: NMapViewController, context: Context) {
         uiViewController.places = places
-        uiViewController.selectedPlace = selectedPlace
+        uiViewController.currentPlace = currentPlace
         uiViewController.addMarkersToMap()
         
-        if let selectedPlace = selectedPlace {
-            uiViewController.moveToPlace(place: selectedPlace)
+        if let currentPlace = currentPlace {
+            uiViewController.moveToPlace(place: currentPlace)
         }
     }
     

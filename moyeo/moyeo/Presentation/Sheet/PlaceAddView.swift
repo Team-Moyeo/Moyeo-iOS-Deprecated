@@ -12,16 +12,21 @@ struct PlaceAddView: View {
     
     @Environment(PlaceViewModel.self) var placeViewModel
     
+    var place: Place
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 // NMapViewControllerRepresentable를 통해 지도를 표시
-                NMapViewControllerRepresentable(places: placeViewModel.places, selectedPlace: placeViewModel.selectedPlace)
+                NMapViewControllerRepresentable(places: placeViewModel.places, currentPlace: placeViewModel.currentPlace)
                     .edgesIgnoringSafeArea([.leading, .bottom, .trailing])
+                    .onAppear {
+                        placeViewModel.currentPlace = place
+                    }
                 
                 VStack{
                     Spacer()
-                    if placeViewModel.selectedPlace != nil {
+                    if placeViewModel.currentPlace != nil {
                         infoWindow(geometry: geometry)
                     }
                 }
@@ -38,12 +43,12 @@ extension PlaceAddView {
     @ViewBuilder
     func infoWindow(geometry: GeometryProxy) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(placeViewModel.selectedPlace?.name ?? "")
+            Text(placeViewModel.currentPlace?.name ?? "")
                 .font(.headline)
                 .foregroundColor(.black)
                 .fontWeight(.heavy)
                 .padding(.top, 10)
-            Text(placeViewModel.selectedPlace?.roadAddress ?? "")
+            Text(placeViewModel.currentPlace?.roadAddress ?? "")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             

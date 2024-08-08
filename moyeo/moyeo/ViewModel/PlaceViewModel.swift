@@ -12,7 +12,7 @@ class PlaceViewModel {
     var searchQuery: String = ""
     var places: [Place] = []
     var showSearchResults: Bool = false
-    var selectedPlace: Place?
+    var currentPlace: Place?
     var isPresentingPlaceSearchView: Bool = false
     
     private var meetingId: String
@@ -41,6 +41,7 @@ extension PlaceViewModel {
             let places = searchResponse.items.compactMap { item -> Place? in
                 guard let latitude = Double(item.mapy),
                       let longitude = Double(item.mapx) else { return nil }
+
                 return Place(
                     name: item.title,
                     roadAddress: item.roadAddress,
@@ -50,6 +51,7 @@ extension PlaceViewModel {
                     meetingId: self.meetingId
                 )
             }
+            
             DispatchQueue.main.async {
                 self.places = places
             }
@@ -60,8 +62,8 @@ extension PlaceViewModel {
     }
     
     func postPlace() async -> Bool {
-        guard let place = selectedPlace else { return false }
-        let urlString = "https://5techcdong.store/meetings/\(place.meetingId)/place"
+        guard let selectedPlace = currentPlace else { return false }
+        let urlString = "https://5techcdong.store/meetings/\(selectedPlace.meetingId)/place"
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return false
@@ -72,7 +74,7 @@ extension PlaceViewModel {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let jsonData = try JSONEncoder().encode(place)
+            let jsonData = try JSONEncoder().encode(selectedPlace)
             request.httpBody = jsonData
             
             let (_, response) = try await URLSession.shared.data(for: request)
@@ -83,7 +85,7 @@ extension PlaceViewModel {
             }
             
             DispatchQueue.main.async {
-                self.places.append(place)
+                self.places.append(selectedPlace)
             }
             return true
             

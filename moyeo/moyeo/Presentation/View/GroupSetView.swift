@@ -17,7 +17,7 @@ struct GroupSetView: View {
     
     @Binding var isPresentingGroupSetView: Bool
     
-    @State var placeViewModel: PlaceViewModel = .init(meetingId: "12345", memberId: "54321")
+    @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
     
     var body: some View {
         Form {
