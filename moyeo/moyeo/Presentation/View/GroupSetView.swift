@@ -15,12 +15,13 @@ struct GroupSetView: View {
     
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
+    @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
+
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
     @State private var selectedStartTime = Date()
     @State private var selectedEndTime = Date()
     
-    @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
     
     @State private var isTextFieldActive: Bool = false
@@ -46,35 +47,7 @@ struct GroupSetView: View {
                     Text("\n")
                 }
                 
-                Section {
-                    HStack {
-                        Toggle(isOn: $voteTime) {
-                            Text("시간 투표")
-                        }
-                    }
-                    if voteTime {
-                        Section {
-                            HStack {
-                                Text("시작 투표일")
-                                Spacer()
-                                
-                                DatePicker("날짜", selection: $selectedStartDate, displayedComponents: .date)
-                                    .datePickerStyle(CompactDatePickerStyle())
-                                    .labelsHidden()
-                                    .onChange(of: selectedStartDate) { newStartDate,_ in
-                                        if selectedEndDate < selectedStartDate {
-                                            selectedEndDate = selectedStartDate
-                                        }
-                                        if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), selectedEndDate > maxEndDate {
-                                            selectedEndDate = maxEndDate
-                                        }
-                                        let calendar = Calendar.current
-                                        let components = calendar.dateComponents([.year, .month, .day], from: newStartDate)
-                                        if let year = components.year, let month = components.month, let day = components.day {
-                                            print("Year: \(year), Month: \(month), Day: \(day)")
-                                        }
-                                    }
-                            }
+            }
                             
                             HStack{
                                 Text("종료 투표일")
