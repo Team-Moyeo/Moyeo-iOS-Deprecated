@@ -19,6 +19,10 @@
 	<string>$(HOST_URL)</string>
 	<key>NMFClientId</key>
 	<string>$(NMFClientId)</string>
+	<key>XNaverClientId</key>
+	<string>$(XNaverClientId)</string>
+	<key>XNaverClientSecret</key>
+	<string>$(XNaverClientSecret)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

@@ -29,10 +29,15 @@ extension PlaceViewModel {
     func searchPlaces() async {
         guard let url = URL(string: "https://openapi.naver.com/v1/search/local.json?query=\(searchQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&display=10") else { return }
         
+        guard let naverClientId = Bundle.main.object(forInfoDictionaryKey: "XNaverClientId") as? String else { return }
+        guard let naverClientSecret = Bundle.main.object(forInfoDictionaryKey: "XNaverClientSecret") as? String else { return }
+        
+        
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.addValue("7CXqtGiq5s7GYBdQji6l", forHTTPHeaderField: "X-Naver-Client-Id")
-        request.addValue("CDIp_3N75c", forHTTPHeaderField: "X-Naver-Client-Secret")
+        request.addValue(naverClientId, forHTTPHeaderField: "X-Naver-Client-Id")
+        request.addValue(naverClientSecret, forHTTPHeaderField: "X-Naver-Client-Secret")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {

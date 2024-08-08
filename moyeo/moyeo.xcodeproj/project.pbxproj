@@ -22,8 +22,6 @@
 		701B524A7DC595A4018AFCD3 /* Pods_moyeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33588E3C572E0DB068ACACB9 /* Pods_moyeo.framework */; };
 		BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */; };
 		BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4DAE422C5BA6F7002371DC /* Helper+Encryption.swift */; };
-		BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
-		BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BF59C8392C58688C00767A19 /* Secrets.xcconfig */; };
 		BF9795962C625326000A121A /* NMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795952C625326000A121A /* NMapViewController.swift */; };
 		BF9795982C62541F000A121A /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795972C62541F000A121A /* PlaceModel.swift */; };
 		BF97959A2C625D09000A121A /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9795992C625D09000A121A /* PlaceViewModel.swift */; };
@@ -417,7 +415,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					F3D0DEEA2C44AF1800D5EB97 = {
 						CreatedOnToolsVersion = 15.2;
@@ -459,7 +457,6 @@
 			files = (
 				BFB70E752C57509800D3C616 /* Pretendard-Medium.otf in Resources */,
 				BFB70E742C57509800D3C616 /* Pretendard-ExtraLight.otf in Resources */,
-				BF59C83A2C58688C00767A19 /* Secrets.xcconfig in Resources */,
 				BFB70E762C57509800D3C616 /* Pretendard-ExtraBold.otf in Resources */,
 				BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */,
 				BFB70E782C57509800D3C616 /* Pretendard-Light.otf in Resources */,
@@ -477,7 +474,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF59C83B2C58688C00767A19 /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
