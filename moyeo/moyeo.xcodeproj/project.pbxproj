@@ -34,6 +34,8 @@
 		5191A4582C5226D000550071 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4572C5226D000550071 /* AppViewModel.swift */; };
 		5191A45A2C522B8900550071 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A4592C522B8900550071 /* LoginView.swift */; };
 		5191A45C2C522BBE00550071 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A45B2C522BBE00550071 /* MainView.swift */; };
+		51988EF82C6101E4006134BC /* MeetingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51988EF72C6101E4006134BC /* MeetingListViewModel.swift */; };
+		51988EFA2C61054B006134BC /* MeetingListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51988EF92C61054B006134BC /* MeetingListResponse.swift */; };
 		51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50A92C53828A008C5552 /* PlaceSearchView.swift */; };
 		51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */; };
 		51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AF2C5382F4008C5552 /* MapWideView.swift */; };
@@ -118,6 +120,8 @@
 		5191A4572C5226D000550071 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		5191A4592C522B8900550071 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5191A45B2C522BBE00550071 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		51988EF72C6101E4006134BC /* MeetingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewModel.swift; sourceTree = "<group>"; };
+		51988EF92C61054B006134BC /* MeetingListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListResponse.swift; sourceTree = "<group>"; };
 		51FD50A92C53828A008C5552 /* PlaceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchView.swift; sourceTree = "<group>"; };
 		51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
 		51FD50AF2C5382F4008C5552 /* MapWideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWideView.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 				51219E992C61CEAA005EDDCD /* GroupVote */,
 				5191A4572C5226D000550071 /* AppViewModel.swift */,
 				BFB70E612C56B34E00D3C616 /* AuthViewModel.swift */,
+				51988EF72C6101E4006134BC /* MeetingListViewModel.swift */,
 				BF9795992C625D09000A121A /* PlaceViewModel.swift */,
 			);
 			path = ViewModel;
@@ -377,6 +382,7 @@
 			children = (
 				BFD683F52C59CEC4001B31DE /* MemberResponse.swift */,
 				BFD683F72C59D84F001B31DE /* BaseResponse.swift */,
+				51988EF92C61054B006134BC /* MeetingListResponse.swift */,
 				BF9795972C62541F000A121A /* PlaceModel.swift */,
 			);
 			path = Model;
@@ -709,6 +715,9 @@
 				51219E732C61BA72005EDDCD /* EventDataStore+FullAccess.swift in Sources */,
 				51219E8F2C61BA72005EDDCD /* TimeTableHeaderVM.swift in Sources */,
 				BF4DAE412C5B1F6D002371DC /* SignInInfo.swift in Sources */,
+				51988EFA2C61054B006134BC /* MeetingListResponse.swift in Sources */,
+				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
+				51988EF82C6101E4006134BC /* MeetingListViewModel.swift in Sources */,
 				BF97959A2C625D09000A121A /* PlaceViewModel.swift in Sources */,
 				51219E6E2C61BA72005EDDCD /* AlertError.swift in Sources */,
 				51219E762C61BA72005EDDCD /* EventStoreManager.swift in Sources */,
