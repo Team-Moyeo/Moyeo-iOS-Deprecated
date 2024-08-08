@@ -15,10 +15,11 @@ struct GroupSetView: View {
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
     
+    @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
+
     @State private var selectedStartDate = Date()
     @State private var selectedEndDate = Date()
     
-    @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
     
     @ObservedObject var sharedDm  : SharedDateModel
@@ -52,16 +53,19 @@ struct GroupSetView: View {
                     Spacer()
                     
                     Button(action: {
-                        // PlaceSearchView Sheet로 넘어가기
-                        isPresentingPlaceSearchView.toggle()
+                        placeViewModel.isPresentingPlaceSearchView.toggle()
                     }) {
                         Text("장소를 선택해주세요.")
                             .foregroundColor(.gray)
                     }
-                    .sheet(isPresented: $isPresentingPlaceSearchView) {
-                        PlaceSearchView()
+                    .sheet(isPresented: $placeViewModel.isPresentingPlaceSearchView) {
+                        NavigationStack {
+                            PlaceSearchView()
+                                .environment(placeViewModel)
+                        }
+                        
                     }
-
+                    
                 }
             }
             
