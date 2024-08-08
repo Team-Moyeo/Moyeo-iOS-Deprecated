@@ -13,18 +13,18 @@ class MeetingListViewModel {
     var isLoading: Bool = false
     
     var meetingId: Int64
-    var name: String
+    var title: String
     var deadlne: String
     
     init(meetingId: Int64, name: String, deadlne: String) {
         self.meetings = [
-            MeetingListResponse.MeetingStatus(meetingId: 1, name: "와인 동아리", deadline: "24. 08. 01"),
-            MeetingListResponse.MeetingStatus(meetingId: 2, name: "오텍동 회식", deadline: "24. 08. 04"),
-            MeetingListResponse.MeetingStatus(meetingId: 3, name: "테니스 동아리", deadline: "24. 08. 15")
+            MeetingListResponse.MeetingStatus(meetingId: 1, title: "와인 동아리", deadline: "24. 08. 01"),
+            MeetingListResponse.MeetingStatus(meetingId: 2, title: "오텍동 회식", deadline: "24. 08. 04"),
+            MeetingListResponse.MeetingStatus(meetingId: 3, title: "테니스 동아리", deadline: "24. 08. 15")
         ]
         
         self.meetingId = meetingId
-        self.name = name
+        self.title = name
         self.deadlne = deadlne
     }
 }

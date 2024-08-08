@@ -36,7 +36,7 @@ struct MainView: View {
             
             List(meetingListViewModel.meetings, id: \.self) { meeting in
                 VStack(alignment: .leading) {
-                    Text(meeting.name)
+                    Text(meeting.title)
                         .pretendard(.bold, 17)
                     Text("\(meeting.deadline) 마감 예정")
                         .pretendard(.regular, 14)

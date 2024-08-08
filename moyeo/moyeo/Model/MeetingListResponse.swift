@@ -11,7 +11,7 @@ struct MeetingListResponse {
     
     struct MeetingStatus: Codable, Hashable {
         let meetingId: Int64
-        let name: String
+        let title: String
         let deadline: String
     }
 }
