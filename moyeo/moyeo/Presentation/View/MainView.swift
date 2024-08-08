@@ -24,7 +24,6 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            
             // 확정/미확정 미팅 리스트
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
@@ -120,11 +119,8 @@ struct MainView: View {
                             .scaledToFit()
                             .frame(height: 28)
                     }
-//                    .padding(.leading, -8)
-                    
                 }
             }
-            
         }
         .onAppear {
             Task {

@@ -62,9 +62,9 @@ struct GroupSetView: View {
                         TextField("모임 이름을 입력해주세요.", text: $meetingName, onEditingChanged: { isEditing in
                             isTextFieldActive = isEditing
                         })
-                            .onAppear {
-                                UITextField.appearance().clearButtonMode = .whileEditing
-                            }
+                        .onAppear {
+                            UITextField.appearance().clearButtonMode = .whileEditing
+                        }
                     }
                 }
                 header: {
@@ -153,7 +153,6 @@ struct GroupSetView: View {
                                 }
                             }
                         }
-                        
                     } else {
                         DatePicker("날짜", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                     }
@@ -166,21 +165,38 @@ struct GroupSetView: View {
                         }
                     }
                     
-                    HStack {
-                        Text("장소")
-                        Spacer()
+                    if votePlace {
+                        // 새로운 장소가 추가되면 해당 섹션에 리스트 형태로 장소가 들어간다
                         
                         Button(action: {
                             // PlaceSearchView Sheet로 넘어가기
                             isPresentingPlaceSearchView.toggle()
-                        }) {
-                            Text("장소를 선택해주세요.")
-                                .foregroundColor(.gray)
+                        }, label: {
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("새로운 장소")
+                                Spacer()
+                            }
+                            .foregroundStyle(.myDD8686)
+                            
+                        })
+                    } else {
+                        HStack {
+                            Text("장소")
+                            Spacer()
+                            
+                            Button(action: {
+                                // PlaceSearchView Sheet로 넘어가기
+                                isPresentingPlaceSearchView.toggle()
+                            }) {
+                                Text("장소를 선택해주세요.")
+                                    .foregroundColor(.gray)
+                            }
+                            .sheet(isPresented: $isPresentingPlaceSearchView) {
+                                PlaceSearchView()
+                            }
+                            
                         }
-                        .sheet(isPresented: $isPresentingPlaceSearchView) {
-                            PlaceSearchView()
-                        }
-                        
                     }
                 }
                 
@@ -193,7 +209,6 @@ struct GroupSetView: View {
                             .datePickerStyle(CompactDatePickerStyle())
                     }
                 }
-                
             }
             
             VStack {
@@ -242,7 +257,6 @@ struct GroupSetView: View {
                 .cornerRadius(10)
                 .padding(.bottom, 25)
             }
-            
         }
         .scrollDismissesKeyboard(.immediately)
 
