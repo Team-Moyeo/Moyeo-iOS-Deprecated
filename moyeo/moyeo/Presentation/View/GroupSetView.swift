@@ -15,9 +15,14 @@ struct GroupSetView: View {
     @State private var selectedDate = Date()
     @State private var selectedTime = Date()
     
+    @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
+
+    @State private var selectedStartDate = Date()
+    @State private var selectedEndDate = Date()
+    
     @Binding var isPresentingGroupSetView: Bool
     
-    @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
+    @ObservedObject var sharedDm  : SharedDateModel
     
     var body: some View {
         Form {
@@ -66,16 +71,61 @@ struct GroupSetView: View {
             
             Section {
                 HStack {
+                    Text("시작투표일")
+                    Spacer()
+                    
+                    DatePicker("날짜", selection: $selectedStartDate, displayedComponents: .date)
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .labelsHidden()
+                        .onChange(of: selectedStartDate) { newStartDate,_ in
+                            if selectedEndDate < selectedStartDate {
+                                selectedEndDate = selectedStartDate
+                            }
+                            if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), selectedEndDate > maxEndDate {
+                                selectedEndDate = maxEndDate
+                            }
+                            let calendar = Calendar.current
+                            let components = calendar.dateComponents([.year, .month, .day], from: newStartDate)
+                            if let year = components.year, let month = components.month, let day = components.day {
+                                print("Year: \(year), Month: \(month), Day: \(day)")
+                            }
+                        }
+                }
+                
+                HStack{
+                    Text("종료투표일")
+                    Spacer()
+                    
+                    DatePicker("날짜", selection: $selectedEndDate, displayedComponents: .date)
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .labelsHidden()
+                        .onChange(of: selectedEndDate) { newEndDate in
+                            // If the new end date exceeds 7 days from the start date, adjust it
+                           if newEndDate < selectedStartDate {
+                                selectedEndDate = selectedStartDate
+                            } else if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: selectedStartDate), newEndDate > maxEndDate {
+                                selectedEndDate = maxEndDate
+                            }
+                            let calendar = Calendar.current
+                                   let components = calendar.dateComponents([.year, .month, .day], from: selectedEndDate)
+                                   if let year = components.year, let month = components.month, let day = components.day {
+                                       print("Year: \(year), Month: \(month), Day: \(day)")
+                                   }
+                        }
+                    
+                }
+                
+                HStack {
                     Text("투표 마감")
                     Spacer()
                     
-                    DatePicker("날짜", selection: $selectedDate, displayedComponents: .date)
+                    DatePicker("날짜", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(CompactDatePickerStyle())
                         .labelsHidden()
                     
-                    DatePicker("시간", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
+//                    DatePicker("시간", selection: $selectedTime, displayedComponents: .hourAndMinute)
+//                        .datePickerStyle(CompactDatePickerStyle())
+//                        .labelsHidden()
                 }
             }
             
@@ -85,8 +135,33 @@ struct GroupSetView: View {
                 Spacer()
                 
                 Button(action: {
+                    // GroupVoteView로 넘어가기
+                    // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
+                    // 해당 sheet가 내려가고, MainView의 List에 추가되고,
+                    // NavigationStack에 쌓기
+                    
+                    sharedDm.isUpdating = true
+                    sharedDm.meetingName = meetingName
+                    sharedDm.voteTime = voteTime
+                    sharedDm.endDate = selectedEndDate
+                    sharedDm.selectedDate = selectedDate
+                    sharedDm.selectedTime = selectedTime
+                    if let numberOfDays =  daysBetween(start: TimeFixToZero(date: selectedStartDate)! , end: TimeFixToMidNight(date: selectedEndDate)! ) {
+                        sharedDm.numberOfDays = numberOfDays
+                    } else {
+                        
+                        sharedDm.numberOfDays = 7
+                    }
+                    // 순서가 중요해~~ startDate이 다른 이벤트를 트리거 할수있어서..,
+                    sharedDm.startDate = selectedStartDate
+                    
+                    sharedDm.isUpdating = false
+                    
+                    print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
+              
                     appViewModel.navigateTo(.groupVoteView)
                     isPresentingGroupSetView = false
+                  
                     
                 }) {
                     Text("모임 시작하기")
@@ -103,3 +178,13 @@ struct GroupSetView: View {
         }
     }
 }
+
+//#Preview {
+//    // 임시 상태 및 뷰 모델 설정
+//    @StateObject var appViewModel = AppViewModel()
+//    @StateObject var sharedDm = SharedDateModel()
+//    @State var isPresentingGroupSetView = true
+//    
+//    return GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
+//        .environmentObject(appViewModel)
+//}
