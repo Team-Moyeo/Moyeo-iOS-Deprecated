@@ -20,6 +20,8 @@ enum APIEndpoints {
         case resign = "/members/resign"
         case tokenRefresh = "/members/token/access-token"
         
+        case meetingStatus = "/meetings?meetingStatus="
+        
     }
 }
 

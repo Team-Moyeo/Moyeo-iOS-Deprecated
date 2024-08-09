@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AuthenticationServices
+import NMapsMap
 
 @main
 struct moyeoApp: App {
@@ -30,6 +31,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // 앱이 런칭될 때 호출되는 함수
+        
         return true
     }
     

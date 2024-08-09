@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(AppViewModel.self) var appViewModel
+    @Environment(MeetingListViewModel.self) var meetingListViewModel
+    
     @State var selectedTab = "미확정"
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
@@ -17,9 +19,11 @@ struct MainView: View {
     @State private var inviteCode = ""
     @State private var presentAlert = false
     
+    // Andy
+    @StateObject var sharedDm = SharedDateModel()
+    
     var body: some View {
         VStack {
-            
             // 확정/미확정 미팅 리스트
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
@@ -30,22 +34,15 @@ struct MainView: View {
             .pickerStyle(.segmented)
             .padding()
             
-            // 서버에서 모임을 불러온다.
-            List {
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
+            List(meetingListViewModel.meetings, id: \.self) { meeting in
+                VStack(alignment: .leading) {
+                    Text(meeting.name)
                         .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
+                    Text("\(meeting.deadline) 마감 예정")
                         .pretendard(.regular, 14)
+                        .foregroundStyle(.myGray)
                 }
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
-                        .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
-                        .pretendard(.regular, 14)
-                }
-            }
-            .listStyle(.inset)
+            }.listStyle(.inset)
             
             Spacer()
             
@@ -64,7 +61,8 @@ struct MainView: View {
             .background(Color.black)
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
-                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView)
+                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
+                    
             }
             
         }
@@ -72,7 +70,7 @@ struct MainView: View {
         .navigationDestination(for: MainRoute.self) { destination in
             switch destination {
             case .groupVoteView:
-                GroupVoteView()
+                GroupVoteView(sharedDm: sharedDm)
             case .groupResultView:
                 GroupResultView()
             }
@@ -121,15 +119,13 @@ struct MainView: View {
                             .scaledToFit()
                             .frame(height: 28)
                     }
-//                    .padding(.leading, -8)
-                    
                 }
-                
-                
             }
-            
-            
-            
+        }
+        .onAppear {
+            Task {
+                await meetingListViewModel.fetchMeetings(userIdentifier: "exampleUserIdentifier")
+            }
         }
     }
 }
