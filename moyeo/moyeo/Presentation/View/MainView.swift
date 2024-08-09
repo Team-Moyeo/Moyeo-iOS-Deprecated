@@ -49,7 +49,9 @@ struct MainView: View {
             
             Spacer()
             //여기서부터는 GroupResultView로 이동하기 위한 임시 수단임.
-            NavigationLink(destination: GroupResultView(images: ["", ""])){
+            Button {
+                appViewModel.navigateTo(.groupResultView)
+            } label: {
                 Text("GroupResultView로 이동")
             }
             
@@ -78,7 +80,7 @@ struct MainView: View {
             case .groupVoteView:
                 GroupVoteView()
             case .groupResultView:
-                GroupResultView(images: ["",""])
+                GroupResultView(appViewModel: _appViewModel)
             }
         }
         .toolbar {

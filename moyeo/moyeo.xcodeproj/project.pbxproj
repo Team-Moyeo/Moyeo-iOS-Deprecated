@@ -19,6 +19,7 @@
 		51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B12C538326008C5552 /* MemberPopupView.swift */; };
 		51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B32C53833E008C5552 /* GroupConfirmView.swift */; };
 		51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50B52C53835F008C5552 /* GroupResultView.swift */; };
+		61D86F442C645BC300129B49 /* CapturedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D86F432C645BC300129B49 /* CapturedContent.swift */; };
 		61EACD232C61B34C00D84DE2 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EACD222C61B34C00D84DE2 /* MeetingViewModel.swift */; };
 		B529F9BC03A77DC8F78D3078 /* Pods_moyeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA45E822124D773FA60F67E /* Pods_moyeo.framework */; };
 		B97428D4CFC975E775B34007 /* Pods_moyeo_moyeoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BA030B52C3D773E48A0F1A /* Pods_moyeo_moyeoUITests.framework */; };
@@ -80,6 +81,7 @@
 		51FD50B12C538326008C5552 /* MemberPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberPopupView.swift; sourceTree = "<group>"; };
 		51FD50B32C53833E008C5552 /* GroupConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConfirmView.swift; sourceTree = "<group>"; };
 		51FD50B52C53835F008C5552 /* GroupResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResultView.swift; sourceTree = "<group>"; };
+		61D86F432C645BC300129B49 /* CapturedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedContent.swift; sourceTree = "<group>"; };
 		61EACD222C61B34C00D84DE2 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
 		682BA4660D6E8817AADFE890 /* Pods-moyeo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.release.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.release.xcconfig"; sourceTree = "<group>"; };
 		8BDAA4D81EAC25B04BD66B99 /* Pods-moyeoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeoTests.release.xcconfig"; path = "Target Support Files/Pods-moyeoTests/Pods-moyeoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				51FD50AD2C5382BA008C5552 /* GroupVoteView.swift */,
 				51FD50B32C53833E008C5552 /* GroupConfirmView.swift */,
 				51FD50B52C53835F008C5552 /* GroupResultView.swift */,
+				61D86F432C645BC300129B49 /* CapturedContent.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				5191A45A2C522B8900550071 /* LoginView.swift in Sources */,
+				61D86F442C645BC300129B49 /* CapturedContent.swift in Sources */,
 				51FD50B62C53835F008C5552 /* GroupResultView.swift in Sources */,
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
 				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
