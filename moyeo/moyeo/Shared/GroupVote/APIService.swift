@@ -137,15 +137,14 @@ class APIService<T: Decodable> {
        
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        print("asyncPost method:\(urlRequest.httpMethod?.description ?? "") data: \(data) response :\(urlRequest.url?.description ?? "")")
+        print("asyncPost method:\(urlRequest.httpMethod?.description ?? "") data: \(data.description) response :\(response)")
         
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
-        //   print("decoding in url \(urlRequest.url?.description) \(data.base64EncodedString())  type: \(T.self) ")
         
-        guard let decoded = try? JSONDecoder().decode(MeetingResponse.self, from: data)
-
-                
+        print("asyncPost in url \(urlRequest.url?.description) \(data.base64EncodedString())  type: \(T.self) ")
+        
+        guard let decoded = try? JSONDecoder().decode( APIResponse.self, from: data)
         else { print("Decoding Fail in url \(urlRequest.url) \(data) \(T.self)")
                throw URLError(.cannotDecodeContentData)
         }

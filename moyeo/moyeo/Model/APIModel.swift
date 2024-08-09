@@ -55,12 +55,12 @@ struct MeetingListResponse: Codable {
     }
 }
 
-struct APIResponse: Codable {
-    let timestamp: String
-    let code: String
-    let message: String
-    let result: [String: String] // 빈 객체를 표현하기 위해 딕셔너리 사용
-}
+//struct APIResponse: Codable {
+//    let timestamp: String
+//    let code: String
+//    let message: String
+//    let result: [String: String] // 빈 객체를 표현하기 위해 딕셔너리 사용
+//}
 
 struct MeetingResponse: Codable {
     let timeStamp: String
@@ -73,7 +73,17 @@ struct MeetingResponse: Codable {
         let meetingId: Int
     }
 }
+struct APIResponse: Codable {
+    let timeStamp: String
+    let code: String
+    let message: String
+    let result: Result
 
+    // Result 모델 정의
+    struct Result: Codable {
+        let meetingId: Int
+    }
+}
 // 전체 회의 정보를 나타내는 구조체 정의
 struct Meeting: Codable {
     let title: String
@@ -118,6 +128,13 @@ struct DetailMeetingResponse: Codable {
 
 
 // APIResponse 구조체 정의
+
+struct VoteInfo: Codable {
+    
+    let voteTimes: [String]
+    let votePlaces: [String] 
+}
+
 struct VoteResponse: Codable {
     let timestamp: String
     let code: String
