@@ -14,16 +14,18 @@ struct MemberInfo: Codable {
 }
 
 // Result 구조체 정의
-struct ProfileResult: Codable {
-    let memberInfo: MemberInfo
-}
+
 
 // APIResponse 구조체 정의
 struct ProfileResponse: Codable {
     let timestamp: String
     let code: String
     let message: String
-    let result: ProfileResult
+    let result: Result
+    
+    struct Result: Codable {
+        let memberInfo: MemberInfo
+    }
 }
 
 
@@ -35,6 +37,23 @@ struct CandidatePlace: Codable {
 }
 
 
+struct MeetingListResponse: Codable {
+    let timeStamp: String
+    let code: String
+    let message: String
+    let result: Result
+
+    struct Result: Codable {
+        let meetingList: [Meeting]
+    }
+
+    struct Meeting: Codable {
+        let meetingId: Int
+        let title: String
+        let deadline: String
+        let meetingStatus: String
+    }
+}
 
 struct APIResponse: Codable {
     let timestamp: String
@@ -43,6 +62,17 @@ struct APIResponse: Codable {
     let result: [String: String] // 빈 객체를 표현하기 위해 딕셔너리 사용
 }
 
+struct MeetingResponse: Codable {
+    let timeStamp: String
+    let code: String
+    let message: String
+    let result: Result
+
+    // Result 모델 정의
+    struct Result: Codable {
+        let meetingId: Int
+    }
+}
 
 // 전체 회의 정보를 나타내는 구조체 정의
 struct Meeting: Codable {
@@ -71,32 +101,37 @@ struct Participant: Codable {
 }
 
 // Result 구조체 정의
-struct DetailMeetingResult: Codable {
-    let votedTimes: [String]
-    let candidatedPlaces: [String]
-    let participants: [Participant]
-}
 
 // APIResponse 구조체 정의
-struct APIDetailMeetingResponse: Codable {
+struct DetailMeetingResponse: Codable {
     let timestamp: String
     let code: String
     let message: String
-    let result: DetailMeetingResult
+    let result: Result
+    
+    struct Result: Codable {
+        let votedTimes: [String]
+        let candidatedPlaces: [String]
+        let participants: [Participant]
+    }
 }
 
-struct VoteResult: Codable {
-    let candidateTimeIds: [Int]
-    let candidatePlaceIds: [Int]
-}
 
 // APIResponse 구조체 정의
-struct APIVoteResponse: Codable {
+struct VoteResponse: Codable {
     let timestamp: String
     let code: String
     let message: String
-    let result: VoteResult
+    let result: Result
+    
+    struct Result: Codable {
+        let candidateTimeIds: [Int]
+        let candidatePlaceIds: [Int]
+    }
+
 }
+
+
 //미팅 확정도 같음
 struct MeetingDetails: Codable {
     let fixedDateTime: [String]
