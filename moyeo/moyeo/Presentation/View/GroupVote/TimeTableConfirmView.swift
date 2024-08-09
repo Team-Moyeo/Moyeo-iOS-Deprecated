@@ -14,6 +14,7 @@ struct TimeTableConfirmView: View {
     @State private var fixedColumnWidth: CGFloat = 55
     @State private var fixedRowHeight : CGFloat = 30
     @State private var fixedHeaderHeight : CGFloat = 35
+    @State private var isManager : Bool = true
    
     
     @State private var dragStart: CGPoint? = nil
@@ -24,14 +25,11 @@ struct TimeTableConfirmView: View {
     @State private var dragActive: Bool = false
     @State private var totalDragOffset: CGSize = .zero
    
-    
 
-  
     @StateObject private var timeTHVm : TimeTableHeaderVM
     
     @State var isLongPressed : Bool =  false
     @State var allowHitTestingFlag: Bool  = false
-    @State var rectAllowHitTestingFlag : Bool = true
  
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
@@ -60,8 +58,8 @@ struct TimeTableConfirmView: View {
     @State private var  dragArray: Set<IntTuple> = []
     @State private var contentOffset: CGFloat = 0.0
     
-    @State private var  availableTimeSet: Set<String> =  []
-    @State private var availableTimeTuple : Set<IntTuple> = []
+    @State private var  finalTimeSet: Set<String> =  []
+    @State private var finalTimeTuple : Set<IntTuple> = []
  
     @State private var closingDate : String = ""
     // to change the number of columns
@@ -72,9 +70,10 @@ struct TimeTableConfirmView: View {
     @State var numOfProfile : Int?
 
     @State private var showAlertImage = false
-
+    @State private var showAlertVote = false
+    @State private var showSchedule = false
     @State private var showAllSchedule = false
-    
+    @State private var  showTimeTableConfirmView = false
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
@@ -84,7 +83,7 @@ struct TimeTableConfirmView: View {
     init(sharedDm: SharedDateModel) {
         self.sharedDm = sharedDm
         _timeTHVm = StateObject(wrappedValue: TimeTableHeaderVM(sharedModel:sharedDm))
-      
+     
     }
     
     
@@ -100,11 +99,12 @@ struct TimeTableConfirmView: View {
             HStack{
                 
                 Text("\(sharedDm.meetingName)")
-                    .font(.title)
+                    .font(.largeTitle)
                 
                 Spacer()
                 
                 CircleImageListView()
+                    .frame(width:32, height: 32)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         showAlertImage = true
@@ -120,8 +120,11 @@ struct TimeTableConfirmView: View {
                 Text("투표마감일")
                 Spacer()
                 Text("\(closingDate)")
-            }   .font(.caption)
-                .background(Color.gray)
+            }   .font(.system(size: 24))
+                .padding(4)
+                .background(.myF1F1F1)
+                .foregroundColor(.gray)
+              
                 .onAppear(){
                     let calendar = Calendar.current
                     let dayComponent =  calendar.component(.day, from: sharedDm.selectedDate)
@@ -131,13 +134,38 @@ struct TimeTableConfirmView: View {
                     let closingDateString =  "\(yearComponent)년 \(monthComonent)월 \(dayComponent)일(\(Weekday(rawValue: weekdayComponent)?.name ?? ""))"
                     closingDate = closingDateString
                 }
-            
+        
             HStack(spacing: 10){
                 
-                
+                Spacer()
                 
                 Button(action: {
                     
+                    allowHitTestingFlag.toggle()
+                    if allowHitTestingFlag == true {
+                        deleteCheckAll()
+                        
+                        convertCheckedStatesToTimeTable()
+                        convertfinalTimeFromSetToTuple()
+                    } else {
+                        deleteCheckAll()
+                    }
+                }) {
+
+                    Text(allowHitTestingFlag ? "다시선택하기" : "선택하기")
+                                    .font(.system(size: 15))
+                                    .padding(9)
+                                    .background(allowHitTestingFlag ? Color.myE1ACAC.opacity(0.3) : Color.myDD8686)
+                                    .foregroundColor(allowHitTestingFlag ? Color.myDD8686 : .white)
+                                    .cornerRadius(4)
+                                    .padding()
+                                
+                }.frame(minWidth: 200, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .trailing)      // Adjust the width and height as needed
+                
+              
+                
+                Button(action: {
+                
                     for i in  0..<47 {
                         for j in 0..<7 {
                             let index = i * 7 + j
@@ -149,48 +177,30 @@ struct TimeTableConfirmView: View {
                     print("showAllSchedule \(showAllSchedule)")
                     
                 }) {
-                    Text(showAllSchedule == true ? "전체일정보기" : "전체일정숨기기")
-                        .font(.system(size: 15))
+                    Image(systemName: "person.2" )
+                        .font(.system(size: 22))
                         .padding(2)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                        .background(showAllSchedule ? Color.blue : Color.white)
+                        .foregroundColor(showAllSchedule ? Color.white : Color.blue)
                         .cornerRadius(4)
                 }
-                .frame(width: 80, height: 24)
-                Spacer()
-                Button(action: {
-                    
-                    deleteCheckAll()
-                    
-                }) {
-                    Text("지우기")
-                        .font(.system(size: 15))
-                        .padding(2)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    
-                }.frame(width: 80, height: 24)
+                .frame(width: 30, height: 24)
+//                Spacer()
+//                Button(action: {
+//
+//                    deleteCheckAll()
+//
+//                }) {
+//                    Text("지우기")
+//                        .font(.system(size: 15))
+//                        .padding(2)
+//                        .background(Color.blue)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(4)
+//
+//                }.frame(width: 80, height: 24)
                 
-                Spacer().frame(width: 8)
-                
-                Button(action: {
-                    
-                    allowHitTestingFlag.toggle()
-                    if allowHitTestingFlag == false {
-                        convertCheckedStatesToTimeTable()
-                        convertAvailableTimeFromSetToTuple()
-                    }
-                }) {
-                    Text(allowHitTestingFlag ?  "보내기": "선택하기")
-                        .font(.system(size: 15))
-                        .padding(2)
-                        .background( allowHitTestingFlag ? Color.blue : Color.cyan)
-                        .foregroundColor(.white)
-                        .cornerRadius(4)
-                    
-                }.frame(width: 80, height: 24) // Adjust the width and height as needed
-                
+             
                 
                 Spacer()
             }
@@ -237,7 +247,6 @@ struct TimeTableConfirmView: View {
                         
                     }
                     
-                    
                 }
             }  .padding(.horizontal, sidePadding)
                 .padding(.vertical,0)
@@ -272,8 +281,8 @@ struct TimeTableConfirmView: View {
                                                     .foregroundColor({
                                                         var color : Color = .white
                                                         if showAllSchedule {
-                                                            
-                                                            color = .green
+                                                         
+                                                                color = .green
                                                             
                                                         }
                                                         return color
@@ -283,12 +292,13 @@ struct TimeTableConfirmView: View {
                                                     .border(Color.white, width: 2)
                                                     .frame(width: fixedColumnWidth, height: fixedRowHeight)
                                                 
+                                              
                                                 
                                                 
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
-                                                        
+                                                      
                                                         let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
                                                             color = .red
@@ -305,7 +315,15 @@ struct TimeTableConfirmView: View {
                                                 
                                                 
                                                 
-                                                
+                                                //                                            CheckboxView(isChecked: $checkedStates[itemIndex], rowIndex: rowIndex, colIndex: columnIndex) {
+                                                //                                                row, column in
+                                                //                                                // 체크박스가 클릭될 때 실행되는 코드
+                                                //                                                print("Checkbox clicked at row: \(row), column: \(column)")
+                                                //                                            } .allowsHitTesting(false)
+                                                //                                                .background(Color.mint)
+                                                //                                                .frame(width: 20, height: 20)
+                                                //                                                .border(Color.gray)
+                                                //                                                .contentShape(Circle())
                                                 if columnIndex == 0 {
                                                     Text(timeSlot[rowIndex])
                                                         .font(.system(size: 10))
@@ -314,6 +332,7 @@ struct TimeTableConfirmView: View {
                                                         .foregroundColor(Color.black)
                                                         .border(Color.white)
                                                         .fontWeight(.bold)
+                                                    
                                                 }
                                             }
                                         }
@@ -421,26 +440,49 @@ struct TimeTableConfirmView: View {
                     }
                 
                     .coordinateSpace(name: "scroll")
-                    .frame(height:450)
+                    .frame(height:440)
                 
             } .background(Color.clear)
                 .scrollTargetBehavior(.viewAligned)
+            
             HStack {
                 Spacer()
                 Button(action: {
                     
                     
+                    showTimeTableConfirmView.toggle()
+                    print("showshowTimeTableConfirmView. \(showTimeTableConfirmView)")
                     
                 }) {
                     Text("확정하기")
                         .font(.system(size: 20))
-                        .padding(2)
-                        .background(Color.blue)
+                        .padding(6)
+                        .background(.myDD8686)
                         .foregroundColor(.white)
-                        .cornerRadius(25)
-                }.frame(width: 150, height: 100)
+                        .cornerRadius(4)
+                }
+                .frame(minWidth: 150, maxWidth: .infinity, minHeight: 52)
+            }
+            Spacer()
+            
+            
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+               
+                Image(systemName: "gearshape")
+                    .contextMenu(ContextMenu(menuItems: {
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("초대하기")
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("수정하기")
+                        })
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                            Text("그룹삭제하기")
+                        })
+                    })).frame(width: 20, height: 20)
+              
                 
-                Spacer()
             }
         }
     }
@@ -530,12 +572,12 @@ struct TimeTableConfirmView: View {
         return (row: rowIndex, column: columnIndex)
     }
     
-    func convertCheckedStatesToTimeTable(){
+    func convertCheckedStatesToTimeTable()  {
         
-        var availableTimeSet :Set<String> = []
+        var finalTimeSet :Set<String> = []
         let calendar = Calendar.current
        
-        self.availableTimeSet.removeAll()
+        self.finalTimeSet.removeAll()
         for row in 0...47 {
             for col in 0..<Int(sharedDm.numberOfDays) {
                 let index = row * Int(sharedDm.numberOfDays) + col
@@ -548,27 +590,29 @@ struct TimeTableConfirmView: View {
                         
                         let result = dateString  + " " +  timeString
                         
-                        availableTimeSet.insert(result)
+                        finalTimeSet.insert(result)
                         
                     }
                 }
             }
         }
         
-        self.availableTimeSet = Set(availableTimeSet.sorted())
-        print("availableTimeSlot count \(self.availableTimeSet.count)")
-        for item in availableTimeSet.sorted() {
+        self.finalTimeSet = Set(finalTimeSet.sorted())
+        print("finalTimeSlot count \(self.finalTimeSet.count)")
+        for item in finalTimeSet.sorted() {
             print(" timeslot: \(item)" )
         }
+        
+       
     }
-    func convertAvailableTimeFromSetToTuple() {
+    func convertfinalTimeFromSetToTuple() {
         
   
         var row :Int = 0
         var col : Int = 0
-        self.availableTimeTuple.removeAll()
-        print("availableTimeSet.count \(availableTimeSet.count)")
-        for item in availableTimeSet {
+        self.finalTimeTuple.removeAll()
+        print("finalTimeSet.count \(finalTimeSet.count)")
+        for item in finalTimeSet {
             let end = dateStringToDate(dateString: String(item.prefix(10))) ?? sharedDm.startDate
             if let  days = daysBetween(start: sharedDm.startDate, end: end ) {
                 col = days
@@ -580,7 +624,7 @@ struct TimeTableConfirmView: View {
                 row = timeslot
                 print("item -> (Row, Col)  time: \(item.suffix(7))   (\(row) , \(col))")
                
-                availableTimeTuple.insert(IntTuple(rowIndex: row, columnIndex: col))
+                finalTimeTuple.insert(IntTuple(rowIndex: row, columnIndex: col))
             } else {
                 
                 print("time slot error")
@@ -588,8 +632,8 @@ struct TimeTableConfirmView: View {
             
 
         }
-        print("availableTimeTuple.count \(availableTimeTuple.count)")
-        for item in availableTimeTuple {
+        print("finalTimeTuple.count \(finalTimeTuple.count)")
+        for item in finalTimeTuple {
             print(item)
         }
     }

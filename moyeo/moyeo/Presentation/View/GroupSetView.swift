@@ -139,11 +139,15 @@ struct GroupSetView: View {
                     Task {
                       
                         await post_meeting()
-                        
                         await get_meeting()
                         
-                        await delete_meeting(meetingId: 1)
-                        
+                        await delete_meeting(meetingId: 3)
+                        await delete_meeting(meetingId: 5)
+                        await delete_meeting(meetingId: 6)
+                        await delete_meeting(meetingId: 7)
+                        await delete_meeting(meetingId: 8)
+                        await delete_meeting(meetingId: 9)
+                        await delete_meeting(meetingId: 10)
                         await get_meeting()
                     }
                     sharedDm.isUpdating = true

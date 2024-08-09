@@ -132,7 +132,8 @@ struct DetailMeetingResponse: Codable {
 struct VoteInfo: Codable {
     
     let voteTimes: [String]
-    let votePlaces: [String] 
+    
+    let votePlaces: [String]
 }
 
 struct VoteResponse: Codable {
