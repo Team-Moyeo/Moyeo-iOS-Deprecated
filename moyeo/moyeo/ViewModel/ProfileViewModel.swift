@@ -29,6 +29,12 @@ extension ProfileViewModel {
         
     }
     
+    @MainActor
+    func requestEditProfileInfo() async {
+        //
+    }
+    
+    
     private func requestProfile() async throws -> MemberResponse.MemberInfo {
         
         // URL 객체 생성
