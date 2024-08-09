@@ -57,6 +57,13 @@ extension ProfileViewModel {
             print("Error: No MemberInfo Response")
             throw NetworkError.decodeFailed
         }
+        
+        if let profileImage = memberInfoResponse.profileImage {
+            print("프로필이미지 From 서버: \(String(describing: String(data: profileImage, encoding: .utf8)))")
+        }
+        print("프로필이름 From 서버: \(String(describing: memberInfoResponse.name))")
+        print("프로필전화번호 From 서버: \(String(describing: memberInfoResponse.phoneNumber))")
+        print("프로필이메일 From 서버: \(String(describing: memberInfoResponse.email))")
      
         return memberInfoResponse
         
