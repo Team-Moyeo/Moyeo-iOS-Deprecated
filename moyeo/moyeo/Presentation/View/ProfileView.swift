@@ -10,31 +10,90 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @State var profileViewModel: ProfileViewModel = .init()
+    @Environment(AppViewModel.self) var appViewModel
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     
     var body: some View {
         VStack(spacing: 0) {
             
-            ProfileImageView(
-                profileImage: profileViewModel.profileInfo.profileImage
-            )
+            ProfileImageView()
             .padding(.bottom, 28)
             
             List {
-                ProfileDetailsView(
-                    name: profileViewModel.profileInfo.name,
-                    phoneNumber: profileViewModel.profileInfo.phoneNumber,
-                    email: profileViewModel.profileInfo.email
-                )
+                ProfileDetailsView()
                 AccountActionsView()
             }
             .listSectionSpacing(54)
             .listStyle(.plain)
             
         }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            toolbarContent
+        }
         .onAppear {
             Task {
-                await profileViewModel.requestProfileInfo()
+                await profileViewModel.loadProfileInfo()
+            }
+        }
+        
+    }
+    
+    
+    
+    private var toolbarContent: some ToolbarContent {
+        Group {
+            if profileViewModel.editProfileMode {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button {
+                        profileViewModel.toggleEditMode(cancelChanges: true)
+                    } label: {
+                        Text("취소")
+                            .pretendard(.regular, 17)
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .principal) {
+                    Text("내 정보 관리")
+                        .pretendard(.semiBold, 17)
+                        .foregroundStyle(.myGray6)
+                }
+                
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button {
+                        Task {
+                            await profileViewModel.saveProfileChanges()
+                        }
+                    } label: {
+                        Text("완료")
+                    }
+                }
+                
+            } else {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button {
+                        appViewModel.pop()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .foregroundStyle(.myDD8686)
+                            .frame(width: 18, height: 18)
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .principal) {
+                    Text("내 정보 관리")
+                        .pretendard(.semiBold, 17)
+                }
+                
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        profileViewModel.toggleEditMode(cancelChanges: false)
+                    } label: {
+                        Image(systemName: "pencil.circle")
+                            .foregroundStyle(.myDD8686)
+                            .frame(width: 18, height: 18)
+                    }
+                }
             }
         }
     }
@@ -42,12 +101,11 @@ struct ProfileView: View {
 
 private struct ProfileImageView: View {
     
-    var profileImage: Data?
-    
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+
     var body: some View {
         ZStack {
-            
-            if let imageData = profileImage,
+            if let imageData = profileViewModel.profileInfo.profileImage,
                let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -70,48 +128,43 @@ private struct ProfileImageView: View {
                     )
             }
             
-            Button {
-                // Profile수정 버튼
-            } label: {
-                Image(systemName: "pencil.circle.fill")
-                    .foregroundStyle(.black)
-                    .background(
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 16, height: 16)
-                    )
-                    .frame(width: 18, height: 18)
-                    .offset(x: 26, y: 25)
+            if profileViewModel.editProfileMode {
+                Button {
+                    // Profile Image 수정 로직 추가
+                } label: {
+                    Image(systemName: "photo.circle.fill")
+                        .foregroundStyle(.black)
+                        .background(
+                            Circle()
+                                .fill(.white)
+                                .frame(width: 16, height: 16)
+                        )
+                        .frame(width: 18, height: 18)
+                        .offset(x: 26, y: 25)
+                }
             }
-            
         }
     }
 }
 
+
 private struct ProfileDetailsView: View {
     
-    var name: String?
-    var phoneNumber: String?
-    var email: String?
+    enum ProfileDetail: String, CaseIterable {
+        case name = "이름"
+        case phoneNumber = "전화번호"
+        case email = "이메일"
+        
+        var label: String {
+            return self.rawValue
+        }
+    }
     
     var body: some View {
         Section {
-            
-            ProfileDetailsViewCell(
-                title: "이름",
-                content: name ?? "미등록"
-            )
-            
-            ProfileDetailsViewCell(
-                title: "전화번호",
-                content: phoneNumber ?? "미등록"
-            )
-            
-            ProfileDetailsViewCell(
-                title: "이메일",
-                content: email ?? "미등록"
-            )
-            
+            ForEach(ProfileDetail.allCases, id: \.self) { detail in
+                ProfileDetailsViewCell(profileDetail: detail)
+            }
         }
         .frame(height: 54)
         .listRowInsets(
@@ -120,18 +173,18 @@ private struct ProfileDetailsView: View {
     }
 }
 
+
 private struct AccountActionsView: View {
     var body: some View {
         Section {
-            
             Button {
-                
+                // 회원탈퇴 로직 추가
             } label: {
                 Text("회원탈퇴")
             }
             
             Button {
-                
+                // 로그아웃 로직 추가
             } label: {
                 Text("로그아웃")
                     .foregroundStyle(.myDD8686)
@@ -147,24 +200,42 @@ private struct AccountActionsView: View {
 
 private struct ProfileDetailsViewCell: View {
     
-    let title: String
-    let content: String
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    let profileDetail: ProfileDetailsView.ProfileDetail
     
     var body: some View {
-        HStack() {
-            
-            Text(title)
+        HStack {
+            Text(profileDetail.label)
                 .pretendard(.regular, 17)
                 .foregroundColor(.primary)
             
             Spacer()
             
-            Text(content)
-                .pretendard(.regular, 17)
-                .foregroundStyle(.secondary)
-            
+            if profileViewModel.editProfileMode {
+                TextField("기입해주세요", text: profileDetailContent)
+            } else {
+                Text(profileDetailContent.wrappedValue)
+                    .pretendard(.regular, 17)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
+}
+
+
+extension ProfileDetailsViewCell {
+    
+    private var profileDetailContent: Binding<String> {
+        switch profileDetail {
+        case .name:
+            return $profileViewModel.profileInfo.name
+        case .phoneNumber:
+            return $profileViewModel.profileInfo.phoneNumber
+        case .email:
+            return $profileViewModel.profileInfo.email
+        }
+    }
+    
 }
 
 
