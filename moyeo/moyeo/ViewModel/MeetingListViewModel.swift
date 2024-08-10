@@ -34,7 +34,7 @@ extension MeetingListViewModel {
             
             do {
                 let accessToken = try SignInInfo.shared.readToken(.access)
-                var urlComponents = URLComponents(string: APIEndpoints.basicURLString(path: .meetingStatus))
+                var urlComponents = URLComponents(string: APIEndpoints.basicURLString(path: .meetings))
                 urlComponents?.queryItems = [
                     URLQueryItem(name: "ß", value: meetingStatus)
                 ]
