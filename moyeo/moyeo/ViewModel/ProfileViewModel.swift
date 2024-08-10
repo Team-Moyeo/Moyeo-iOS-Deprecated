@@ -32,6 +32,7 @@ extension ProfileViewModel {
     @MainActor
     func saveProfileChanges() async {
         do {
+            print(profileInfo)
             try await updateProfileInfo(with: profileInfo)
             self.editProfileMode = false
         } catch {

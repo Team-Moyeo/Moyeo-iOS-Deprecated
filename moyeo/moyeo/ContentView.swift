@@ -12,14 +12,12 @@ struct ContentView: View {
     @Environment(AppViewModel.self) var appViewModel
     @State var authViewModel: AuthViewModel = .init()
     @State var meetingListViewModel: MeetingListViewModel = .init()
-    @StateObject var profileViewModel: ProfileViewModel = .init()
     
     var body: some View {
         Group {
             if authViewModel.isAuthenticated {
                 MainView()
                     .environment(meetingListViewModel)
-                    .environmentObject(profileViewModel)
             } else {
                 LoginView()
             }

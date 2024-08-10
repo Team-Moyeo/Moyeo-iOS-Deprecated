@@ -50,22 +50,24 @@ struct ProfileView: View {
                     } label: {
                         Text("취소")
                             .pretendard(.regular, 17)
+                            .foregroundStyle(.myDD8686)
                     }
                 }
                 
                 ToolbarItemGroup(placement: .principal) {
                     Text("내 정보 관리")
                         .pretendard(.semiBold, 17)
-                        .foregroundStyle(.myGray6)
+                        .foregroundStyle(.myGray4)
                 }
                 
-                ToolbarItemGroup(placement: .topBarLeading) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
                         Task {
                             await profileViewModel.saveProfileChanges()
                         }
                     } label: {
                         Text("완료")
+                            .foregroundStyle(.myDD8686)
                     }
                 }
                 
@@ -132,7 +134,7 @@ private struct ProfileImageView: View {
                 Button {
                     // Profile Image 수정 로직 추가
                 } label: {
-                    Image(systemName: "photo.circle.fill")
+                    Image(systemName: "pencil.circle.fill")
                         .foregroundStyle(.black)
                         .background(
                             Circle()
@@ -152,7 +154,7 @@ private struct ProfileDetailsView: View {
     
     enum ProfileDetail: String, CaseIterable {
         case name = "이름"
-        case phoneNumber = "전화번호"
+        case phoneNumber = "연락처"
         case email = "이메일"
         
         var label: String {
@@ -213,6 +215,8 @@ private struct ProfileDetailsViewCell: View {
             
             if profileViewModel.editProfileMode {
                 TextField("기입해주세요", text: profileDetailContent)
+                    .multilineTextAlignment(.trailing)
+                    .accentColor(.myDD8686)
             } else {
                 Text(profileDetailContent.wrappedValue)
                     .pretendard(.regular, 17)
