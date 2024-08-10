@@ -124,8 +124,14 @@ struct MainView: View {
         }
         .onAppear {
             Task {
-                await meetingListViewModel.fetchMeetings(userIdentifier: "exampleUserIdentifier")
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
             }
+        }
+        .refreshable {
+            Task {
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
+            }
+
         }
     }
 }
