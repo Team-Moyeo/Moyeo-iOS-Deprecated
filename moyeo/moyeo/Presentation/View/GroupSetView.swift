@@ -185,10 +185,6 @@ struct GroupSetView: View {
                   Spacer()
                   
                   Button(action: {
-                      // GroupVoteView로 넘어가기
-                      // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
-                      // 해당 sheet가 내려가고, MainView의 List에 추가되고,
-                      // NavigationStack에 쌓기
                       
 //                      sharedDm.isUpdating = true
 //                      sharedDm.meetingName = meetingName
@@ -208,13 +204,18 @@ struct GroupSetView: View {
 //                      
 //                      print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
                       
+                      // 선택한 모임 정보 viewModel로 보내주기
                       Task {
                           createMeetingViewModel.title = meetingName
                           createMeetingViewModel.startDate = startDate.toString()
                           createMeetingViewModel.endDate = endDate.toString()
                           createMeetingViewModel.startTime = startTime.toString()
                           createMeetingViewModel.endTime = endTime.toString()
+                          
+                          // 시간 정해졌을 경우, 몇시부터 몇시까지 약속인지 나타내줘야함
                           createMeetingViewModel.fixedTimes = voteTime ? [] : nil
+                          
+                          // 해당 모임의 Place를 가져와야하는데 이 부분 로직 어떻게 구현할지 생각해봐야합니다.
 //                          createMeetingViewModel.fixedPlace = placeViewModel.selectedFixedPlace
 //                          createMeetingViewModel.candidatePlaces = placeViewModel.selectedCandidatePlaces
                           createMeetingViewModel.deadline = deadLine.toString()
