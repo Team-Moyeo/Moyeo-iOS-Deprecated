@@ -15,6 +15,15 @@ class MeetingListViewModel {
     var meetingId: Int64?
     var title: String?
     var deadline: String?
+    
+    // 필터링된 회의 목록
+    var confirmedMeetings: [MeetingListResponse.MeetingStatus] {
+        meetings.filter { $0.meetingStatus == "CONFIRM" || $0.meetingStatus == "END" }
+    }
+    
+    var disconfirmedMeetings: [MeetingListResponse.MeetingStatus] {
+        meetings.filter { $0.meetingStatus == "PENDING" }
+    }
 }
 
 extension MeetingListViewModel {
