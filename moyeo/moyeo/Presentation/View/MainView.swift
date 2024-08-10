@@ -67,15 +67,6 @@ struct MainView: View {
             }
             
         }
-        //.navigationTitle("Moyeo")
-        .navigationDestination(for: MainRoute.self) { destination in
-            switch destination {
-            case .groupVoteView:
-                GroupVoteView(sharedDm: sharedDm)
-            case .groupResultView:
-                GroupResultView()
-            }
-        }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Image("MainViewLogo")
@@ -113,7 +104,7 @@ struct MainView: View {
                     .cornerRadius(10)
                     
                     Button {
-                        // ProfileView로 이동
+                        appViewModel.navigateTo(.profileView)
                     } label: {
                         Image("IconToProfile")
                             .resizable()
@@ -121,6 +112,16 @@ struct MainView: View {
                             .frame(height: 28)
                     }
                 }
+            }
+        }
+        .navigationDestination(for: MainRoute.self) { destination in
+            switch destination {
+            case .groupVoteView:
+                GroupVoteView(sharedDm: sharedDm)
+            case .groupResultView:
+                GroupResultView()
+            case .profileView:
+                ProfileView()
             }
         }
         .onAppear {
