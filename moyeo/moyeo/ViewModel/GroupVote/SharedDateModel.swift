@@ -19,6 +19,7 @@ struct CombinedDate{
 
 class SharedDateModel: ObservableObject {
    //  순환참조 조심 didSet은 값이 변경되면 한번만 불러오고 종료되게.
+    
     let id = UUID()
     @Published var combinedDate:  CombinedDate?
 

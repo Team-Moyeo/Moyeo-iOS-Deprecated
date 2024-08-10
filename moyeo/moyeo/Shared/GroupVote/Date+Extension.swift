@@ -312,17 +312,23 @@ func convertDateStringTo24Hour(dateString: [String]) -> [String] {
         let m = item.suffix(2)
         
         if m == "am" {
-            let newDateString = item.prefix(16)
+            let newDateString = item.prefix(16) + ":00"
             dateString24.append(String(newDateString))
         } else {
             let yymmdd = item.prefix(10)
             let hh = item.prefix(13).suffix(2)
-            let mm = item.suffix(4).prefix(2)
-           
-            let h24 = Int( Int(hh) ?? 0  + 12 ) % 24 
-            let newDateString = yymmdd + " " + String(h24) + ":" + mm
             
-            dateString24.append(newDateString)
+            let mm = item.suffix(4).prefix(2)
+            if Int(hh) ?? 0  < 12 {
+                let h24 = Int( ( Int(hh) ?? 0 ) + 12 ) % 24
+                let newDateString = yymmdd + " " + String(h24) + ":" + mm  + ":00"
+                dateString24.append(String(newDateString))
+
+            } else  {
+                let newDateString = item.prefix(16) + ":00"
+                dateString24.append(String(newDateString))
+            }
+         
         }
         
     }

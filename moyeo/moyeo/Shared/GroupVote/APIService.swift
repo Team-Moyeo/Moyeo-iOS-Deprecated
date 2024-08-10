@@ -153,7 +153,7 @@ class APIService<T: Decodable, S:Decodable> {
         
         print("asyncPost in url \(String(describing: urlRequest.url?.description)) \(data.base64EncodedString())  type: \(T.self) ")
         
-        guard let decoded = try? JSONDecoder().decode( S.self, from: data)
+        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
         else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(T.self)")
                throw URLError(.cannotDecodeContentData)
         }

@@ -20,7 +20,6 @@ struct GroupSetView: View {
     
     @State private var isPresentingPlaceSearchView = false
     @Binding var isPresentingGroupSetView: Bool
-    
     @ObservedObject var sharedDm  : SharedDateModel
    
     
@@ -137,12 +136,12 @@ struct GroupSetView: View {
                     // 해당 sheet가 내려가고, MainView의 List에 추가되고,
                     // NavigationStack에 쌓기
                     Task {
-                      
+                        
+                        await get_meeting()
                         await post_meeting()
                         await get_meeting()
                         
-                       
-                        await get_meeting()
+                     
                     }
                     sharedDm.isUpdating = true
                     sharedDm.meetingName = meetingName
@@ -156,9 +155,10 @@ struct GroupSetView: View {
                         
                         sharedDm.numberOfDays = 7
                     }
-                    // 순서가 중요해~~ startDate이 다른 이벤트를 트리거 할수있어서..,
-                    sharedDm.startDate = selectedStartDate
-                    
+                    sharedDm.startDate = Calendar.current.startOfDay(for: selectedStartDate)
+                    if let endDate = TimeFixToMidNight(date: selectedEndDate) {
+                        sharedDm.endDate = endDate
+                    }
                     sharedDm.isUpdating = false
                     
                     print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
@@ -181,164 +181,168 @@ struct GroupSetView: View {
             
         }
     }
-}
-func post_meeting()  async {
     
-    var apiService = APIService<Meeting ,APIResponse>()
-    guard let url = URL(string: APIEndpoints.basicURLString(path: .meeting)) else {
-        print("Invalid URL")
-        return
-    }
-    print("url :  \(url)")
-   let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
-    
-    
-    var request = URLRequest(url: url)
-  
-   
-    let headers = [
-        "Content-Type": "application/json",
-        "Authorization": "Bearer \(accessToken)",
-    ]
-    
-
-    let meeting = Meeting(
-        title: "Andy's Team Meeting",
-        startDate: "2024-08-25",
-        endDate: "2024-08-31",
-        startTime: "09:00:00",
-        endTime: "17:00:00",
-        fixedTimes: ["2024-08-10T10:00:00", "2024-08-10T10:30:00"],
-        fixedPlace: Place(
-            title: "포항공대 생활관",
-            address: "경북 포항시 남구 청암로 포항공과대학교",
-            latitude: 35.3528,
-            longitude: 129.3135
-        ),
-        candidatePlaces: [
-            Place(
-                title: "Conference Room B",
-                address: "456 Secondary Street, Cityville",
-                latitude:35.3528,
-                longitude:129.3135
-            )
-        ],
-        deadline: "2024-08-09T23:59:59"
-    )
-
-    // JSON 인코더 생성
-    let encoder = JSONEncoder()
-
-    do {
-        // JSON 데이터로 인코딩
-        let jsonData = try encoder.encode(meeting)
-        request.httpBody = jsonData
-        print("jsonData from meeting struc \(jsonData) ")
-        // JSON 데이터 문자열로 변환 (디버깅 용)
-        if let jsonString = String(data: jsonData, encoding: .utf8) {
-            print("JSON String from JsonData\(jsonString)")
-        }
-    }
-    catch {
-        print(error)
-    }
-  
-    request.allHTTPHeaderFields = headers
-    request.httpMethod = "POST"
-    
-    do {
-      
-        try  await apiService.asyncPost(for: request)
-        print("asyncPost Success")
-            
-    } catch{
-        print("asyncPost Fail  error: \(error) url:  \(request.url?.description)")
-    }
-  
-}
-
-func delete_meeting(meetingId: Int)  async {
-    
-    var apiService = APIService<Meeting, APIResponse>()
-    var urlString = APIEndpoints.basicURLString(path: .meeting)
-    
-    print("urlString \(urlString)")
-    urlString = urlString + "/\(meetingId)"
-    
-    guard let url = URL(string: urlString) else {
-        print("Invalid URL")
-        return
-    }
-    let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzE5NzEwMywiZXhwIjoxNzI0MDYxMTAzfQ.FkE0VSkpTFd5m8KEwCKKBXWytnyV_lfkront0dk7Q3PeRzjTaumBmCHYlnVS20M7mvcHg7S7x27AnWQyBYGAQw"
-    
-    var request = URLRequest(url: url)
-  
-   
-    let headers = [
-        "Content-Type": "application/json",
-        "Authorization": "Bearer \(accessToken)",
-    ]
-    
-
-  
-    // JSON 인코더 생성
-    let encoder = JSONEncoder()
-
-    
-    request.allHTTPHeaderFields = headers
-    request.httpMethod = "DELETE"
-    
-    do {
-      
-        try  await apiService.asyncPost(for: request)
-        print("asyncPost Delete Success")
-            
-    } catch{
-        print("asyncPost Delete Fail  error:\(error) url:\(request.url?.description)")
-    }
-  
-}
-func get_meeting()  async {
-    var meetingListResponse : MeetingListResponse
-    var apiService = APIService<MeetingListResponse , APIResponse>()
-    guard let url = URL(string: APIEndpoints.basicURLString(path: .meetingStatus)) else {
-        print("Invalid URL")
-        return
-    }
-   print("meeting status url :  \(url)")
-   let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
-    
-    
-    var request = URLRequest(url: url)
-  
-   
-    let headers = [
-        "Content-Type": "application/json",
-        "Authorization": "Bearer \(accessToken)",
-    ]
-    
-    request.allHTTPHeaderFields = headers
-    request.httpMethod = "GET"
-    
-    do {
-        let  decoded = try  await apiService.asyncLoad(for: request)
+    func post_meeting()  async {
         
-        let encoder = JSONEncoder()
-               encoder.outputFormatting = .prettyPrinted // 보기 좋게 출력
+        var apiService = APIService<Meeting ,APIResponse>()
+        guard let url = URL(string: APIEndpoints.basicURLString(path: .meeting)) else {
+            print("Invalid URL")
+            return
+        }
+        print("url :  \(url)")
+       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
+        
+        
+        var request = URLRequest(url: url)
+      
+       
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(accessToken)",
+        ]
+        
 
-               let jsonData = try encoder.encode(decoded)
-               
-               // JSON 데이터를 문자열로 변환
-               if let jsonString = String(data: jsonData, encoding: .utf8) {
-                   print("Decoded JSON:\n\(jsonString)")
-               } else {
-                   print("Failed to convert JSON data to string.")
-               }
-    } catch{
-        print("decoding error \(error)")
+        let meeting = Meeting(
+            title: "Andy's Team Meeting",
+            startDate: "2024-08-25",
+            endDate: "2024-08-31",
+            startTime: "09:00:00",
+            endTime: "17:00:00",
+            fixedTimes: ["2024-08-10T10:00:00", "2024-08-10T10:30:00"],
+            fixedPlace: Place(
+                title: "포항공대 생활관",
+                address: "경북 포항시 남구 청암로 포항공과대학교",
+                latitude: 35.3528,
+                longitude: 129.3135
+            ),
+            candidatePlaces: [
+                Place(
+                    title: "Conference Room B",
+                    address: "456 Secondary Street, Cityville",
+                    latitude:35.3528,
+                    longitude:129.3135
+                )
+            ],
+            deadline: "2024-08-09T23:59:59"
+        )
+
+        // JSON 인코더 생성
+        let encoder = JSONEncoder()
+
+        do {
+            // JSON 데이터로 인코딩
+            let jsonData = try encoder.encode(meeting)
+            request.httpBody = jsonData
+            print("jsonData from meeting struc \(jsonData) ")
+            // JSON 데이터 문자열로 변환 (디버깅 용)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON String from JsonData\(jsonString)")
+            }
+        }
+        catch {
+            print(error)
+        }
+      
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "POST"
+        
+        do {
+          
+            let decoded  = try  await apiService.asyncPost(for: request)
+            print("asyncPost Success meetingID\(decoded.result.meetingId)")
+            sharedDm.meetingId = decoded.result.meetingId
+                
+        } catch{
+            print("asyncPost Fail  error: \(error) url:  \(request.url?.description)")
+        }
+      
     }
-  
+
+    func delete_meeting(meetingId: Int)  async {
+        
+        var apiService = APIService<Meeting, APIResponse>()
+        var urlString = APIEndpoints.basicURLString(path: .meeting)
+        
+        print("urlString \(urlString)")
+        urlString = urlString + "/\(meetingId)"
+        
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzE5NzEwMywiZXhwIjoxNzI0MDYxMTAzfQ.FkE0VSkpTFd5m8KEwCKKBXWytnyV_lfkront0dk7Q3PeRzjTaumBmCHYlnVS20M7mvcHg7S7x27AnWQyBYGAQw"
+        
+        var request = URLRequest(url: url)
+      
+       
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(accessToken)",
+        ]
+        
+
+      
+        // JSON 인코더 생성
+        let encoder = JSONEncoder()
+
+        
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "DELETE"
+        
+        do {
+          
+            try  await apiService.asyncPost(for: request)
+            print("asyncPost Delete Success")
+                
+        } catch{
+            print("asyncPost Delete Fail  error:\(error) url:\(request.url?.description)")
+        }
+      
+    }
+    func get_meeting()  async {
+        var meetingListResponse : MeetingListResponse
+        var apiService = APIService<MeetingListResponse, APIResponse>()
+        guard let url = URL(string: APIEndpoints.basicURLString(path: .meetingStatus)) else {
+            print("Invalid URL")
+            return
+        }
+       print("meeting status url :  \(url)")
+       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
+        
+        
+        var request = URLRequest(url: url)
+      
+       
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(accessToken)",
+        ]
+        
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "GET"
+        
+        do {
+            let  decoded = try  await apiService.asyncLoad(for: request)
+            
+            let encoder = JSONEncoder()
+                   encoder.outputFormatting = .prettyPrinted // 보기 좋게 출력
+
+                   let jsonData = try encoder.encode(decoded)
+                   
+                   // JSON 데이터를 문자열로 변환
+                   if let jsonString = String(data: jsonData, encoding: .utf8) {
+                       print("Decoded JSON:\n\(jsonString)")
+                   } else {
+                       print("Failed to convert JSON data to string.")
+                   }
+        } catch{
+            print("decoding error \(error)")
+        }
+      
+    }
 }
+
+
 
 //#Preview {
 //    // 임시 상태 및 뷰 모델 설정

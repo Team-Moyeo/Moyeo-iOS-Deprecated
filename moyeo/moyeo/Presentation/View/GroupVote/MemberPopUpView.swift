@@ -14,8 +14,6 @@ struct MemberPopUpView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible()),
-        
-        
     ]
     
     
@@ -28,7 +26,7 @@ struct MemberPopUpView: View {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(0...100, id: \.self) { rowIndex in
                         CircleImage(image: Image(imageString[rowIndex % imageString.count]), frameSize: 80)
-                            .frame(width: 100, height: 100)
+                            .frame(width: 50, height: 50)
                     }
                 }
                 

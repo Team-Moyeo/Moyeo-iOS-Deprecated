@@ -58,7 +58,6 @@
 		BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberResponse.swift */; };
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
 		CE3885DE2C651EE1002F22BB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3885DD2C651EE1002F22BB /* APIModel.swift */; };
-		CE3885ED2C653658002F22BB /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3885EC2C653658002F22BB /* APITest.swift */; };
 		CECB7CCC2C62FAFC0013FAF9 /* TimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */; };
 		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
 		CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */; };
@@ -141,7 +140,6 @@
 		BFD683F52C59CEC4001B31DE /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		CE3885DD2C651EE1002F22BB /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
-		CE3885EC2C653658002F22BB /* APITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
 		CECB7CCB2C62FAFC0013FAF9 /* TimeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeTableView.swift; path = "../../../../../../../Downloads/Moyeo-iOS-feature-27-Groupvoteview/moyeo/moyeo/Andy/View/TimeTableView.swift"; sourceTree = "<group>"; };
 		CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableConfirmView.swift; sourceTree = "<group>"; };
 		CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -348,7 +346,6 @@
 		BFD683F42C59CEAC001B31DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE3885EC2C653658002F22BB /* APITest.swift */,
 				BFD683F52C59CEC4001B31DE /* MemberResponse.swift */,
 				BFD683F72C59D84F001B31DE /* BaseResponse.swift */,
 				CE3885DD2C651EE1002F22BB /* APIModel.swift */,
@@ -567,7 +564,6 @@
 			files = (
 				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
 				51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */,
-				CE3885ED2C653658002F22BB /* APITest.swift in Sources */,
 				51219E722C61BA72005EDDCD /* EventDataStore.swift in Sources */,
 				51219E7F2C61BA72005EDDCD /* MessageView.swift in Sources */,
 				51219E6C2C61BA72005EDDCD /* MapView.swift in Sources */,
