@@ -4,6 +4,14 @@
 //
 //  Created by Giwoo Kim on 8/8/24.
 //
+// JSON 데이터로 인코딩
+//voteInfo -> jsonData ---------------------------> jsonObject ------------------> jsonStringData -----> jsonString
+//         encode      JSONSerialization.jsonObject         JSONSerialization.data                 String
+//voteInfo ----> jsonData -------> jsonString
+//         encode         String
+// 차이 [String: String] vs [String: Any]  , JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+
+
 
 import Foundation
 import Combine
@@ -12,11 +20,12 @@ import Foundation
 // Combine으로 작성하고 다시  async/await으로 작성
 // SwiftTips 참조 https://www.youtube.com/watch?v=esmf26aGz4s
 
-class APIService<T: Decodable> {
+class APIService<T: Decodable, S:Decodable> {
     
     //혹시 모르니  public
     var cancellables = Set<AnyCancellable>()
     var responseData: T?
+    var response : S?
     
     func get(for url: URL) -> AnyPublisher<T, Error> {
         URLSession.shared
@@ -133,7 +142,7 @@ class APIService<T: Decodable> {
         return decoded
        
     }
-    func asyncPost(for urlRequest: URLRequest) async throws {
+    func asyncPost(for urlRequest: URLRequest) async throws -> S {
        
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
@@ -142,17 +151,17 @@ class APIService<T: Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
         
-        print("asyncPost in url \(urlRequest.url?.description) \(data.base64EncodedString())  type: \(T.self) ")
+        print("asyncPost in url \(String(describing: urlRequest.url?.description)) \(data.base64EncodedString())  type: \(T.self) ")
         
-        guard let decoded = try? JSONDecoder().decode( APIResponse.self, from: data)
-        else { print("Decoding Fail in url \(urlRequest.url) \(data) \(T.self)")
+        guard let decoded = try? JSONDecoder().decode( S.self, from: data)
+        else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(T.self)")
                throw URLError(.cannotDecodeContentData)
         }
         
           
         print("In the asyncSave SUCCESS decoded : \(decoded) ")
       
-       
+       return decoded
     }
     
    
