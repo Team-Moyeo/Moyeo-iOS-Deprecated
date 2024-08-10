@@ -15,7 +15,4 @@ struct MemberResponse {
         let refreshToken: String
         let isServiced: Bool
     }
-    
 }
-
-

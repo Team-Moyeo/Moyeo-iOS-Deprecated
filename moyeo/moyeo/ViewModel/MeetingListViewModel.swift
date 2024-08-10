@@ -12,20 +12,9 @@ class MeetingListViewModel {
     var meetings: [MeetingListResponse.MeetingStatus] = []
     var isLoading: Bool = false
     
-    var meetingId: Int64
-    var title: String
-    var deadlne: String
-    
-    init(meetingId: Int64, name: String, deadlne: String) {
-        self.meetings = [
-            MeetingListResponse.MeetingStatus(meetingId: 1, title: "와인 동아리", deadline: "24. 08. 01", meetingStatus: "PENDING"),
-            MeetingListResponse.MeetingStatus(meetingId: 2, title: "오텍동 회식", deadline: "24. 08. 04", meetingStatus: "PENDING")
-        ]
-        
-        self.meetingId = meetingId
-        self.title = name
-        self.deadlne = deadlne
-    }
+    var meetingId: Int64?
+    var title: String?
+    var deadline: String?
 }
 
 extension MeetingListViewModel {

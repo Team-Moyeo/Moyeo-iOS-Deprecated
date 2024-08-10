@@ -38,7 +38,8 @@ struct MainView: View {
                 VStack(alignment: .leading) {
                     Text(meeting.title)
                         .pretendard(.bold, 17)
-                    Text("\(meeting.deadline) 마감 예정")
+                        .padding(.bottom, 4)
+                    Text("\(meeting.formattedDeadline) 마감 예정")
                         .pretendard(.regular, 14)
                         .foregroundStyle(.myGray)
                 }
