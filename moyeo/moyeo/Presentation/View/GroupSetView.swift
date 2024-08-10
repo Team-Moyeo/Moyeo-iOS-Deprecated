@@ -230,7 +230,7 @@ struct GroupSetView: View {
 struct DateRangePickerView: View {
     @Binding var dates: Set<DateComponents>
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         NavigationView {
             MultiDatePicker("날짜를 선택해주세요.", selection: $dates)
@@ -249,9 +249,9 @@ struct DateRangePickerView: View {
 
 // 키보드 외 영역 눌렀을때 키보드 숨기기
 extension View {
-  func hideKeyboard() {
-    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-  }
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 //#Preview {
@@ -259,7 +259,7 @@ extension View {
 //    @StateObject var appViewModel = AppViewModel()
 //    @StateObject var sharedDm = SharedDateModel()
 //    @State var isPresentingGroupSetView = true
-//    
+//
 //    return GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
 //        .environmentObject(appViewModel)
 //}

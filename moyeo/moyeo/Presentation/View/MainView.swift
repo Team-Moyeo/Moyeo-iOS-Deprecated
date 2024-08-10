@@ -34,15 +34,35 @@ struct MainView: View {
             .pickerStyle(.segmented)
             .padding()
             
-            List(meetingListViewModel.meetings, id: \.self) { meeting in
-                VStack(alignment: .leading) {
-                    Text(meeting.name)
-                        .pretendard(.bold, 17)
-                    Text("\(meeting.deadline) 마감 예정")
-                        .pretendard(.regular, 14)
-                        .foregroundStyle(.myGray)
+            List {
+                if selectedTab == "미확정" {
+                    ForEach(meetingListViewModel.disconfirmedMeetings, id: \.self) { meeting in
+                        VStack(alignment: .leading) {
+                            Text(meeting.title)
+                                .font(.headline)
+                            Text("\(meeting.formattedDeadline) 마감 예정")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                } else {
+                    ForEach(meetingListViewModel.confirmedMeetings, id: \.self) { meeting in
+                        VStack(alignment: .leading) {
+                            Text(meeting.title)
+                                .font(.headline)
+                            Text("\(meeting.formattedDeadline) 마감 예정")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
                 }
-            }.listStyle(.inset)
+            }
+            .listStyle(.inset)
+            .onAppear {
+                Task {
+                    await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
+                }
+            }
             
             Spacer()
             
@@ -125,8 +145,14 @@ struct MainView: View {
         }
         .onAppear {
             Task {
-                await meetingListViewModel.fetchMeetings(userIdentifier: "exampleUserIdentifier")
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
             }
+        }
+        .refreshable {
+            Task {
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
+            }
+
         }
     }
 }
