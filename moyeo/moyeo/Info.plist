@@ -40,5 +40,11 @@
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Pretendard-Thin.otf</string>
 	</array>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>for research purpose only</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Please Allow to use calendar information</string>
+	<key>NSCalendarsFullAccessUsageDescription </key>
+	<string>Please Allow to use calendar information</string>
 </dict>
 </plist>
