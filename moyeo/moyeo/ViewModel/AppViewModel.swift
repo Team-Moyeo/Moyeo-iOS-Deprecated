@@ -10,6 +10,7 @@ import SwiftUI
 enum MainRoute : String , Hashable {
     case groupVoteView
     case groupResultView
+    case profileView
 }
 
 @Observable class AppViewModel {

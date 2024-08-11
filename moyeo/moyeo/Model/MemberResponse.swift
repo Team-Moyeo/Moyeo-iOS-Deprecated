@@ -16,6 +16,11 @@ struct MemberResponse {
         let isServiced: Bool
     }
     
+    struct MemberInfo: Codable {
+        let profileImage: Data?
+        let name: String?
+        let phoneNumber: String?
+        let email: String?
+    }
+    
 }
-
-

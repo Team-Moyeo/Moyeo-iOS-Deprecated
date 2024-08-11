@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(AppViewModel.self) var appViewModel
+    @Environment(MeetingListViewModel.self) var meetingListViewModel
+    
     @State var selectedTab = "미확정"
     var isConfirmed = ["미확정", "확정"]
     @State private var isPresentingGroupSetView = false
@@ -22,7 +24,6 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            
             // 확정/미확정 미팅 리스트
             Picker("", selection: $selectedTab) {
                 ForEach(isConfirmed, id: \.self) {
@@ -33,22 +34,35 @@ struct MainView: View {
             .pickerStyle(.segmented)
             .padding()
             
-            // 서버에서 모임을 불러온다.
             List {
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
-                        .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
-                        .pretendard(.regular, 14)
-                }
-                VStack (alignment: .leading) {
-                    Text("와인 동아리")
-                        .pretendard(.bold, 17)
-                    Text("24. 05. 12 마감 예정")
-                        .pretendard(.regular, 14)
+                if selectedTab == "미확정" {
+                    ForEach(meetingListViewModel.disconfirmedMeetings, id: \.self) { meeting in
+                        VStack(alignment: .leading) {
+                            Text(meeting.title)
+                                .font(.headline)
+                            Text("\(meeting.formattedDeadline) 마감 예정")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                } else {
+                    ForEach(meetingListViewModel.confirmedMeetings, id: \.self) { meeting in
+                        VStack(alignment: .leading) {
+                            Text(meeting.title)
+                                .font(.headline)
+                            Text("\(meeting.formattedDeadline) 마감 예정")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
                 }
             }
             .listStyle(.inset)
+            .onAppear {
+                Task {
+                    await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
+                }
+            }
             
             Spacer()
             
@@ -68,17 +82,9 @@ struct MainView: View {
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
                 GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
+                    
             }
             
-        }
-        //.navigationTitle("Moyeo")
-        .navigationDestination(for: MainRoute.self) { destination in
-            switch destination {
-            case .groupVoteView:
-                GroupVoteView(sharedDm: sharedDm)
-            case .groupResultView:
-                GroupResultView()
-            }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -117,22 +123,36 @@ struct MainView: View {
                     .cornerRadius(10)
                     
                     Button {
-                        // ProfileView로 이동
+                        appViewModel.navigateTo(.profileView)
                     } label: {
                         Image("IconToProfile")
                             .resizable()
                             .scaledToFit()
                             .frame(height: 28)
                     }
-//                    .padding(.leading, -8)
-                    
                 }
-                
-                
             }
-            
-            
-            
+        }
+        .navigationDestination(for: MainRoute.self) { destination in
+            switch destination {
+            case .groupVoteView:
+                GroupVoteView(sharedDm: sharedDm)
+            case .groupResultView:
+                GroupResultView()
+            case .profileView:
+                ProfileView()
+            }
+        }
+        .onAppear {
+            Task {
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
+            }
+        }
+        .refreshable {
+            Task {
+                await meetingListViewModel.fetchMeetings(meetingStatus: "")
+            }
+
         }
     }
 }
