@@ -20,7 +20,8 @@ enum APIEndpoints {
         case profileUpdate = "/members/profile/update"
         case tokenRefresh = "/members/token/access-token"
         
-        case meetingStatus = "/meetings"
+        // MARK: - 모임
+        case meetings = "/meetings"
         case places = "/places"
         
     }

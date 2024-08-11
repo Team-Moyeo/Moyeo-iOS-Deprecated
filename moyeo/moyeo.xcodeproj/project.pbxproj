@@ -36,6 +36,8 @@
 		5191A45C2C522BBE00550071 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191A45B2C522BBE00550071 /* MainView.swift */; };
 		51988EF82C6101E4006134BC /* MeetingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51988EF72C6101E4006134BC /* MeetingListViewModel.swift */; };
 		51988EFA2C61054B006134BC /* MeetingListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51988EF92C61054B006134BC /* MeetingListResponse.swift */; };
+		51F9DFEF2C678F7F009E4239 /* MeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F9DFEE2C678F7F009E4239 /* MeetingModel.swift */; };
+		51F9DFF12C679095009E4239 /* CreateMeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F9DFF02C679095009E4239 /* CreateMeetingViewModel.swift */; };
 		51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50A92C53828A008C5552 /* PlaceSearchView.swift */; };
 		51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */; };
 		51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51FD50AF2C5382F4008C5552 /* MapWideView.swift */; };
@@ -126,6 +128,8 @@
 		5191A45B2C522BBE00550071 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		51988EF72C6101E4006134BC /* MeetingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewModel.swift; sourceTree = "<group>"; };
 		51988EF92C61054B006134BC /* MeetingListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListResponse.swift; sourceTree = "<group>"; };
+		51F9DFEE2C678F7F009E4239 /* MeetingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingModel.swift; sourceTree = "<group>"; };
+		51F9DFF02C679095009E4239 /* CreateMeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeetingViewModel.swift; sourceTree = "<group>"; };
 		51FD50A92C53828A008C5552 /* PlaceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchView.swift; sourceTree = "<group>"; };
 		51FD50AB2C5382A1008C5552 /* PlaceAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddView.swift; sourceTree = "<group>"; };
 		51FD50AF2C5382F4008C5552 /* MapWideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWideView.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				51988EF72C6101E4006134BC /* MeetingListViewModel.swift */,
 				BF9795992C625D09000A121A /* PlaceViewModel.swift */,
 				BF4DAE482C604DD6002371DC /* ProfileViewModel.swift */,
+				51F9DFF02C679095009E4239 /* CreateMeetingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 				BFD683F72C59D84F001B31DE /* BaseResponse.swift */,
 				51988EF92C61054B006134BC /* MeetingListResponse.swift */,
 				BF9795972C62541F000A121A /* PlaceModel.swift */,
+				51F9DFEE2C678F7F009E4239 /* MeetingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -716,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
+				51F9DFF12C679095009E4239 /* CreateMeetingViewModel.swift in Sources */,
 				51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */,
 				51219E722C61BA72005EDDCD /* EventDataStore.swift in Sources */,
 				51219E7F2C61BA72005EDDCD /* MessageView.swift in Sources */,
@@ -755,6 +762,7 @@
 				51FD50B42C53833E008C5552 /* GroupConfirmView.swift in Sources */,
 				51FD50B02C5382F4008C5552 /* MapWideView.swift in Sources */,
 				5191A45C2C522BBE00550071 /* MainView.swift in Sources */,
+				51F9DFEF2C678F7F009E4239 /* MeetingModel.swift in Sources */,
 				51219E692C61BA72005EDDCD /* CircleImage.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */,

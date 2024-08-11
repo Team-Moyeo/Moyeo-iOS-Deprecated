@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GroupSetView: View {
     @Environment(AppViewModel.self) var appViewModel
+    @State var createMeetingViewModel: CreateMeetingViewModel = .init()
     @State private var meetingName: String = ""
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
@@ -17,10 +18,11 @@ struct GroupSetView: View {
     @State private var selectedTime = Date()
     @State var placeViewModel: PlaceViewModel = PlaceViewModel(meetingId: "12345", memberId: "54321")
     
-    @State private var selectedStartDate = Date()
-    @State private var selectedEndDate = Date()
-    @State private var selectedStartTime = Date()
-    @State private var selectedEndTime = Date()
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    @State private var startTime = Date()
+    @State private var endTime = Date()
+    @State private var deadLine = Date()
     
     @Binding var isPresentingGroupSetView: Bool
     
@@ -59,15 +61,15 @@ struct GroupSetView: View {
                                 Text("시작 투표일")
                                 Spacer()
                                 
-                                DatePicker("날짜", selection: $selectedStartDate, displayedComponents: .date)
+                                DatePicker("날짜", selection: $startDate, displayedComponents: .date)
                                     .datePickerStyle(CompactDatePickerStyle())
                                     .labelsHidden()
-                                    .onChange(of: selectedStartDate) { newStartDate,_ in
-                                        if selectedEndDate < selectedStartDate {
-                                            selectedEndDate = selectedStartDate
+                                    .onChange(of: startDate) { newStartDate,_ in
+                                        if endDate < startDate {
+                                            endDate = startDate
                                         }
-                                        if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), selectedEndDate > maxEndDate {
-                                            selectedEndDate = maxEndDate
+                                        if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: newStartDate), endDate > maxEndDate {
+                                            endDate = maxEndDate
                                         }
                                         let calendar = Calendar.current
                                         let components = calendar.dateComponents([.year, .month, .day], from: newStartDate)
@@ -81,18 +83,18 @@ struct GroupSetView: View {
                                 Text("종료 투표일")
                                 Spacer()
                                 
-                                DatePicker("날짜", selection: $selectedEndDate, displayedComponents: .date)
+                                DatePicker("날짜", selection: $endDate, displayedComponents: .date)
                                     .datePickerStyle(CompactDatePickerStyle())
                                     .labelsHidden()
-                                    .onChange(of: selectedEndDate) { newEndDate in
+                                    .onChange(of: endDate) { newEndDate in
                                         // If the new end date exceeds 7 days from the start date, adjust it
-                                        if newEndDate < selectedStartDate {
-                                            selectedEndDate = selectedStartDate
-                                        } else if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: selectedStartDate), newEndDate > maxEndDate {
-                                            selectedEndDate = maxEndDate
+                                        if endDate < startDate {
+                                            endDate = startDate
+                                        } else if let maxEndDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate), newEndDate > maxEndDate {
+                                            endDate = maxEndDate
                                         }
                                         let calendar = Calendar.current
-                                        let components = calendar.dateComponents([.year, .month, .day], from: selectedEndDate)
+                                        let components = calendar.dateComponents([.year, .month, .day], from: endDate)
                                         if let year = components.year, let month = components.month, let day = components.day {
                                             print("Year: \(year), Month: \(month), Day: \(day)")
                                         }
@@ -103,11 +105,11 @@ struct GroupSetView: View {
                                 HStack {
                                     Text("시간 범위")
                                     Spacer()
-                                    DatePicker("", selection: $selectedStartTime, displayedComponents: .hourAndMinute)
+                                    DatePicker("", selection: $startTime, displayedComponents: .hourAndMinute)
                                         .labelsHidden()
                                         .frame(maxWidth: 100)
                                     Text("~")
-                                    DatePicker("", selection: $selectedEndTime, displayedComponents: .hourAndMinute)
+                                    DatePicker("", selection: $endTime, displayedComponents: .hourAndMinute)
                                         .labelsHidden()
                                         .frame(maxWidth: 100)
                                 }
@@ -127,18 +129,24 @@ struct GroupSetView: View {
                     
                     if votePlace {
                         // 새로운 장소가 추가되면 해당 섹션에 리스트 형태로 장소가 들어간다
-                        
-                        Button(action: {
-                            placeViewModel.isPresentingPlaceSearchView.toggle()
-                        }, label: {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text("새로운 장소")
-                                Spacer()
+                        List {
+                            ForEach(sharedDm.places) { place in
+                                Text("\(place.name)")
                             }
-                            .foregroundStyle(.myDD8686)
-                            
-                        })
+                            Button(action: {
+                                placeViewModel.isPresentingPlaceSearchView.toggle()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "plus")
+                                    Text("새로운 장소")
+                                    Spacer()
+                                }
+                                .foregroundStyle(.myDD8686)
+                                
+                            })
+                        }
+                        
+                        
                     } else {
                         HStack {
                             Text("장소")
@@ -147,12 +155,13 @@ struct GroupSetView: View {
                             Button(action: {
                                 placeViewModel.isPresentingPlaceSearchView.toggle()
                             }) {
-                                // if !createMeetingViewModel.fixedPlace
-                                Text("장소를 선택해주세요.")
-                                    .foregroundColor(.gray)
-                                // else
-                                // Text("\(createMeetingViewModel.fixedPlace[0].name)")
-                                //     .foregroundColor(.gray)
+                                if sharedDm.places.isEmpty {
+                                    Text("장소를 선택해주세요.")
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Text("\(sharedDm.places[0].name)")
+                                        .foregroundColor(.gray)
+                                }
                                 
                             }
                         }
@@ -163,6 +172,7 @@ struct GroupSetView: View {
                     NavigationStack {
                         PlaceSearchView()
                             .environment(placeViewModel)
+                            .environmentObject(sharedDm)
                     }
                 }
                 
@@ -193,20 +203,20 @@ struct GroupSetView: View {
                     sharedDm.isUpdating = true
                     sharedDm.meetingName = meetingName
                     sharedDm.voteTime = voteTime
-                    sharedDm.endDate = selectedEndDate
+                    sharedDm.endDate = endDate
                     sharedDm.selectedDate = selectedDate
                     sharedDm.selectedTime = selectedTime
-                    if let numberOfDays =  daysBetween(start: TimeFixToZero(date: selectedStartDate)! , end: TimeFixToMidNight(date: selectedEndDate)! ) {
+                    if let numberOfDays =  daysBetween(start: TimeFixToZero(date: startDate)! , end: TimeFixToMidNight(date: endDate)! ) {
                         sharedDm.numberOfDays = numberOfDays
                     } else {
                         sharedDm.numberOfDays = 7
                     }
                     // 순서가 중요해~~ startDate이 다른 이벤트를 트리거 할수있어서..,
-                    sharedDm.startDate = selectedStartDate
+                    sharedDm.startDate = startDate
                     
                     sharedDm.isUpdating = false
                     
-                    print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
+//                    print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
                     
                     appViewModel.navigateTo(.groupVoteView)
                     isPresentingGroupSetView = false
@@ -226,6 +236,14 @@ struct GroupSetView: View {
         }
         .scrollDismissesKeyboard(.immediately)
         
+    }
+}
+
+extension Date {
+    func toString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return formatter.string(from: self)
     }
 }
 

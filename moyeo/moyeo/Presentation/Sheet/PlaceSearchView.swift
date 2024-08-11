@@ -12,6 +12,7 @@ import NMapsMap
 struct PlaceSearchView: View {
     
     @Environment(PlaceViewModel.self) var placeViewModel
+    @EnvironmentObject var sharedDm : SharedDateModel
     @State private var searchQuery: String = ""
     
     var body: some View {
@@ -83,7 +84,7 @@ extension PlaceSearchView {
     func placeSearchListView() -> some View {
         List(placeViewModel.places) { place in
             NavigationLink(
-                destination: PlaceAddView(place: place).environment(placeViewModel),
+                destination: PlaceAddView(place: place).environment(placeViewModel).environmentObject(sharedDm),
                 label: {
                     VStack(alignment: .leading) {
                         Text(place.name)

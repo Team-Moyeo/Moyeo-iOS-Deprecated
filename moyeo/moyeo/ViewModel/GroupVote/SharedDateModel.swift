@@ -19,6 +19,7 @@ struct CombinedDate{
 
 class SharedDateModel: ObservableObject {
    //  순환참조 조심 didSet은 값이 변경되면 한번만 불러오고 종료되게.
+    
     let id = UUID()
     @Published var combinedDate:  CombinedDate?
 
@@ -28,9 +29,10 @@ class SharedDateModel: ObservableObject {
     @Published var votePlace: Bool = false
     @Published var selectedDate = Date()
     @Published var selectedTime = Date()
-    
-    
+    @Published var meetingId : Int = 0
+    @Published var places : [Place] = []
     @Published var startDate: Date {
+        
         didSet {
 
             //willSet이면 아직 startDate가 변경되기 전이라   updateEndDate이 실행을 해도 값이 바뀌기 전이라 안바뀔것이고
@@ -106,7 +108,7 @@ class SharedDateModel: ObservableObject {
                 TimeFixToZero(date:$0)
             }
             .sink { [weak self] date in
-                guard let self = self else { 
+                guard let self = self else {
                     print("sink error")
                     return }
                 if !self.isUpdating {
