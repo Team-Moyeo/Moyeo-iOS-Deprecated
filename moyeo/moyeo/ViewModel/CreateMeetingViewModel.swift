@@ -18,6 +18,7 @@ class CreateMeetingViewModel: ObservableObject {
     @Published var places: [Place] = []
     @Published var fixedPlace: PlaceInfo?
     @Published var deadline: String = ""
+    @Published var meetingId: Int64 = 0
     
 }
 
@@ -50,6 +51,14 @@ extension CreateMeetingViewModel {
                 
                 if httpResponse.statusCode == 200 {
                     print("Meeting created successfully")
+                    guard let decoded = try? JSONDecoder().decode(BaseResponse<MeetingResult>.self, from: data) else {
+                        return
+                    }
+                    
+                    self.meetingId = decoded.result?.meetingId ?? -1
+                    print("IN CREATEMEETING☠️\(self.meetingId)")
+                    
+                    
                 } else {
                     // Print status code and response body for debugging
                     print("Failed to create meeting. Status code: \(httpResponse.statusCode)")

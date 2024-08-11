@@ -89,6 +89,11 @@ struct GroupVoteView: View {
                 print("😌endDate: \(endDate.toString())")
                 sharedDm.endDate = endDate
             }
+            
+            sharedDm.meetingId = createMeetingViewModel.meetingId
+            print("createMeetingViewModel.meetingId☠️\(createMeetingViewModel.meetingId)")
+            print("sharedDm.meetingId☠️\(sharedDm.meetingId)")
+            
             sharedDm.places = createMeetingViewModel.places
             sharedDm.deadLine = createMeetingViewModel.deadline
             if let numberOfDays =  daysBetween(start: TimeFixToZero(date: sharedDm.startDate)! , end: TimeFixToMidNight(date: sharedDm.endDate)! ) {
@@ -115,16 +120,4 @@ extension String {
 
 
 
-//#Preview {
-//
-//        let sharedDm = SharedDateModel()
-//        sharedDm.meetingName = "Sample Meeting"
-//        sharedDm.voteTime = true
-//        sharedDm.startDate = Date()
-//        sharedDm.endDate = Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
-//        sharedDm.selectedDate = Date()
-//        sharedDm.selectedTime = Date()
-//        
-//         GroupVoteView()
-//    
-//}
+

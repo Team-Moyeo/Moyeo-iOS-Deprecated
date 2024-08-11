@@ -32,7 +32,7 @@ struct CandidatePlace: Codable {
 struct MeetingListResult :Codable  {
     let meetingList: [Meeting]
     struct Meeting: Codable {
-        let meetingId: Int
+        let meetingId: Int64
         let title: String
         let deadline: String
         let meetingStatus: String
@@ -41,7 +41,7 @@ struct MeetingListResult :Codable  {
 
 
 struct MeetingResult :Codable {
-    let meetingId: Int
+    let meetingId: Int64
 
 }
 
@@ -53,12 +53,12 @@ struct Meeting: Codable {
     let startTime: String
     let endTime: String
     let fixedTimes: [String]// 선택적
-    let fixedPlace: Place   // 선택적
-    let candidatePlaces: [Place]? // 선택적
+    let fixedPlace: votePlace   // 선택적
+    let candidatePlaces: [votePlace]? // 선택적
     let deadline: String
 }
 
-struct Place: Codable {
+struct votePlace: Codable {
     let title: String
     let address: String
     let latitude: Double
@@ -127,7 +127,7 @@ struct VotedTimesResult: Codable {
 struct VotedPlacesResult: Codable {
   
         let myVotedPlaces: [String]
-        let totalCandidatePlaces: [Place]
+        let totalCandidatePlaces: [votePlace]
         let numberOfPeople : Int
         
         struct CandidatePlace: Codable {

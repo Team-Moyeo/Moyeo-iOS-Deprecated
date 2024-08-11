@@ -28,7 +28,7 @@ class SharedDateModel: ObservableObject {
     @Published var voteTime: Bool = false
     @Published var votePlace: Bool = false
     @Published var deadLine: String = ""
-    @Published var meetingId : Int = 0
+    @Published var meetingId : Int64 = 0
     @Published var places : [Place] = []
     @Published var startDate: Date {
         

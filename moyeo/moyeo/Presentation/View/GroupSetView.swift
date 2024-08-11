@@ -29,7 +29,7 @@ struct GroupSetView: View {
     
     @State private var isTextFieldActive: Bool = false
     
-//    @ObservedObject var sharedDm : SharedDateModel
+    //    @ObservedObject var sharedDm : SharedDateModel
     
     var body: some View {
         ZStack {
@@ -200,7 +200,7 @@ struct GroupSetView: View {
                     // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
                     // 해당 sheet가 내려가고, MainView의 List에 추가되고,
                     // NavigationStack에 쌓기
-
+                    
                     
                     Task {
                         createMeetingViewModel.title = meetingName
