@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(AppViewModel.self) var appViewModel
     @Environment(MeetingListViewModel.self) var meetingListViewModel
+    @StateObject var profileViewModel: ProfileViewModel = .init()
     
     @State var selectedTab = "미확정"
     var isConfirmed = ["미확정", "확정"]
@@ -141,6 +142,7 @@ struct MainView: View {
                 GroupResultView()
             case .profileView:
                 ProfileView()
+                    .environmentObject(profileViewModel)
             }
         }
         .onAppear {

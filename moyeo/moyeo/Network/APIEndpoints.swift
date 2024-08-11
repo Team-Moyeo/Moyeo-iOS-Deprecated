@@ -15,9 +15,9 @@ enum APIEndpoints {
         
         // MARK: - 멤버
         case signIn = "/members/sign-in"
-        case signUp = "/members/sign-up"
-        case profile = "/members/profile"
         case resign = "/members/resign"
+        case profile = "/members/profile"
+        case profileUpdate = "/members/profile/update"
         case tokenRefresh = "/members/token/access-token"
         
         case meetingStatus = "/meetings"
