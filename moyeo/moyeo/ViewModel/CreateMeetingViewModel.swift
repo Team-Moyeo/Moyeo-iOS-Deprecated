@@ -8,17 +8,16 @@
 import Foundation
 import AuthenticationServices
 
-@Observable
-class CreateMeetingViewModel {
-    var title: String = ""
-    var startDate: String = ""
-    var endDate: String = ""
-    var startTime: String = ""
-    var endTime: String = ""
-    var fixedTimes: [String]?
-    var fixedPlace: PlaceInfo?
-    var candidatePlaces: [PlaceInfo]?
-    var deadline: String = ""
+class CreateMeetingViewModel: ObservableObject {
+    @Published var title: String = ""
+    @Published var startDate: String = ""
+    @Published var endDate: String = ""
+    @Published var startTime: String = ""
+    @Published var endTime: String = ""
+    @Published var fixedTimes: [String]?
+    @Published var places: [Place] = []
+    @Published var fixedPlace: PlaceInfo?
+    @Published var deadline: String = ""
     
 }
 
@@ -100,11 +99,11 @@ extension CreateMeetingViewModel {
             ]
         }
         
-        if let candidatePlaces = candidatePlaces, !candidatePlaces.isEmpty {
-            payload["candidatePlaces"] = candidatePlaces.map { place in
+        if !places.isEmpty {
+            payload["candidatePlaces"] = places.map { place in
                 [
-                    "title": place.title,
-                    "address": place.address,
+                    "title": place.name,
+                    "address": place.roadAddress,
                     "latitude": place.latitude,
                     "longitude": place.longitude
                 ]

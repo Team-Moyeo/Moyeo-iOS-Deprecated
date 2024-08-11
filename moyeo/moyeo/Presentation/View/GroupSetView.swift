@@ -9,7 +9,8 @@ import SwiftUI
 
 struct GroupSetView: View {
     @Environment(AppViewModel.self) var appViewModel
-    @State var createMeetingViewModel: CreateMeetingViewModel = .init()
+    @EnvironmentObject var createMeetingViewModel : CreateMeetingViewModel
+    
     @State private var meetingName: String = ""
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
@@ -28,7 +29,7 @@ struct GroupSetView: View {
     
     @State private var isTextFieldActive: Bool = false
     
-    @ObservedObject var sharedDm : SharedDateModel
+//    @ObservedObject var sharedDm : SharedDateModel
     
     var body: some View {
         ZStack {
@@ -130,7 +131,7 @@ struct GroupSetView: View {
                     if votePlace {
                         // 새로운 장소가 추가되면 해당 섹션에 리스트 형태로 장소가 들어간다
                         List {
-                            ForEach(sharedDm.places) { place in
+                            ForEach(createMeetingViewModel.places) { place in
                                 Text("\(place.name)")
                             }
                             Button(action: {
@@ -155,11 +156,11 @@ struct GroupSetView: View {
                             Button(action: {
                                 placeViewModel.isPresentingPlaceSearchView.toggle()
                             }) {
-                                if sharedDm.places.isEmpty {
+                                if createMeetingViewModel.places.isEmpty {
                                     Text("장소를 선택해주세요.")
                                         .foregroundColor(.gray)
                                 } else {
-                                    Text("\(sharedDm.places[0].name)")
+                                    Text("\(createMeetingViewModel.places[0].name)")
                                         .foregroundColor(.gray)
                                 }
                                 
@@ -172,7 +173,7 @@ struct GroupSetView: View {
                     NavigationStack {
                         PlaceSearchView()
                             .environment(placeViewModel)
-                            .environmentObject(sharedDm)
+                            .environmentObject(createMeetingViewModel)
                     }
                 }
                 
@@ -199,27 +200,27 @@ struct GroupSetView: View {
                     // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
                     // 해당 sheet가 내려가고, MainView의 List에 추가되고,
                     // NavigationStack에 쌓기
+
                     
-                    sharedDm.isUpdating = true
-                    sharedDm.meetingName = meetingName
-                    sharedDm.voteTime = voteTime
-                    sharedDm.endDate = endDate
-                    sharedDm.selectedDate = selectedDate
-                    sharedDm.selectedTime = selectedTime
-                    if let numberOfDays =  daysBetween(start: TimeFixToZero(date: startDate)! , end: TimeFixToMidNight(date: endDate)! ) {
-                        sharedDm.numberOfDays = numberOfDays
-                    } else {
-                        sharedDm.numberOfDays = 7
+                    Task {
+                        createMeetingViewModel.title = meetingName
+                        createMeetingViewModel.startDate = startDate.toString()
+                        print("꺅~\(createMeetingViewModel.startDate)")
+                        createMeetingViewModel.endDate = endDate.toString()
+                        print("꺅~\(createMeetingViewModel.endDate)")
+                        createMeetingViewModel.startTime = startTime.toString()
+                        createMeetingViewModel.endTime = endTime.toString()
+                        
+                        // 시간 정해졌을 경우, 몇시부터 몇시까지 약속인지 나타내줘야함
+                        createMeetingViewModel.fixedTimes = voteTime ? [] : nil
+                        
+                        createMeetingViewModel.deadline = deadLine.toString()
+                        
+                        await createMeetingViewModel.createMeeting()
+                        
+                        appViewModel.navigateTo(.groupVoteView)
+                        isPresentingGroupSetView = false
                     }
-                    // 순서가 중요해~~ startDate이 다른 이벤트를 트리거 할수있어서..,
-                    sharedDm.startDate = startDate
-                    
-                    sharedDm.isUpdating = false
-                    
-//                    print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
-                    
-                    appViewModel.navigateTo(.groupVoteView)
-                    isPresentingGroupSetView = false
                     
                 }) {
                     Text("모임 시작하기")

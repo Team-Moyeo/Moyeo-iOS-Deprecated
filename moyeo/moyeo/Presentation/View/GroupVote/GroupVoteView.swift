@@ -10,6 +10,7 @@ import SwiftUI
 struct GroupVoteView: View {
     
     @Environment(AppViewModel.self) var appViewModel
+    @ObservedObject var createMeetingViewModel : CreateMeetingViewModel
     @ObservedObject var sharedDm : SharedDateModel
     @State private var isPresentingMemberPopupView = false
     @State private var isPresentingMapWideView = false
@@ -77,8 +78,42 @@ struct GroupVoteView: View {
                 .padding()
             }
         }
+        .onAppear {
+            sharedDm.meetingName = createMeetingViewModel.title
+            print("아아아 \(createMeetingViewModel.endDate)")
+            if let startDate = createMeetingViewModel.startDate.toDate() {
+                print("😌startDate: \(startDate.toString())")
+                sharedDm.startDate = startDate
+            }
+            if let endDate = createMeetingViewModel.endDate.toDate() {
+                print("😌endDate: \(endDate.toString())")
+                sharedDm.endDate = endDate
+            }
+            sharedDm.places = createMeetingViewModel.places
+            sharedDm.deadLine = createMeetingViewModel.deadline
+            if let numberOfDays =  daysBetween(start: TimeFixToZero(date: sharedDm.startDate)! , end: TimeFixToMidNight(date: sharedDm.endDate)! ) {
+                sharedDm.numberOfDays = numberOfDays
+            } else {
+                sharedDm.numberOfDays = 7
+            }
+        }
     }
 }
+
+extension String {
+    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+}
+
+
 
 //#Preview {
 //

@@ -22,6 +22,7 @@ struct MainView: View {
     
     // Andy
     @StateObject var sharedDm = SharedDateModel()
+    @StateObject var createMeetingViewModel: CreateMeetingViewModel = .init()
     
     var body: some View {
         VStack {
@@ -82,7 +83,8 @@ struct MainView: View {
             .background(Color.black)
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
-                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView, sharedDm: sharedDm)
+                GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView)
+                    .environmentObject(createMeetingViewModel)
                     
             }
             
@@ -137,7 +139,7 @@ struct MainView: View {
         .navigationDestination(for: MainRoute.self) { destination in
             switch destination {
             case .groupVoteView:
-                GroupVoteView(sharedDm: sharedDm)
+                GroupVoteView(createMeetingViewModel: createMeetingViewModel, sharedDm: sharedDm)
             case .groupResultView:
                 GroupResultView()
             case .profileView:
