@@ -55,9 +55,11 @@ extension PlaceAddView {
             Button(action: {
                 placeViewModel.isPresentingPlaceSearchView.toggle()
                 Task {
-                    let success = await placeViewModel.postPlace()
+                    let success = try await placeViewModel.postPlace()
                     if success {
                         print("Place added successfully")
+                        // fix된 장소 추가
+                        // createMeetingViewModel.fixedPlace = placeViewModel.places
                     } else {
                         print("Failed to add place")
                     }

@@ -21,6 +21,7 @@ enum APIEndpoints {
         case tokenRefresh = "/members/token/access-token"
         
         case meetingStatus = "/meetings"
+        case places = "/places"
         
     }
 }
