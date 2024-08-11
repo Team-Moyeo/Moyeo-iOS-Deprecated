@@ -11,7 +11,7 @@ import NMapsMap
 struct PlaceAddView: View {
     
     @Environment(PlaceViewModel.self) var placeViewModel
-    @EnvironmentObject var sharedDm : SharedDateModel
+    @EnvironmentObject var createMeetingViewModel : CreateMeetingViewModel
     
     var place: Place
     
@@ -60,7 +60,7 @@ extension PlaceAddView {
                     if success {
                         print("Place added successfully")
                         // fix된 장소 추가
-                         sharedDm.places = placeViewModel.places
+                        createMeetingViewModel.places = placeViewModel.places
                     } else {
                         print("Failed to add place")
                     }

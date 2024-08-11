@@ -156,13 +156,14 @@ struct TimeTableView: View {
             }   .font(.caption)
                 .background(Color.gray)
                 .onAppear(){
-                    let calendar = Calendar.current
-                    let dayComponent =  calendar.component(.day, from: sharedDm.selectedDate)
-                    let weekdayComponent = calendar.component(.weekday, from: sharedDm.selectedDate)
-                    let yearComponent = calendar.component(.year, from: sharedDm.selectedDate)
-                    let monthComonent = calendar.component(.month, from: sharedDm.selectedDate)
-                    let closingDateString =  "\(yearComponent)년 \(monthComonent)월 \(dayComponent)일(\(Weekday(rawValue: weekdayComponent)?.name ?? ""))"
-                    closingDate = closingDateString
+//                    let calendar = Calendar.current
+//                    let dayComponent =  calendar.component(.day, from: sharedDm.selectedDate)
+//                    let weekdayComponent = calendar.component(.weekday, from: sharedDm.selectedDate)
+//                    let yearComponent = calendar.component(.year, from: sharedDm.selectedDate)
+//                    let monthComonent = calendar.component(.month, from: sharedDm.selectedDate)
+//                    let closingDateString =  "\(yearComponent)년 \(monthComonent)월 \(dayComponent)일(\(Weekday(rawValue: weekdayComponent)?.name ?? ""))"
+//                    closingDate = closingDateString
+                    closingDate = sharedDm.deadLine
                 }
         
             HStack(spacing: 10){
