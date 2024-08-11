@@ -114,8 +114,9 @@ extension ProfileViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let body: [String: Any] = [
+        let body: [String: String] = [
             "name": editedInfo.name,
             "phoneNumber": editedInfo.phoneNumber,
             "email": editedInfo.email
