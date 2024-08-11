@@ -185,7 +185,7 @@ struct GroupSetView: View {
     
     func post_meeting()  async {
         
-        var apiService = APIService<Meeting ,APIResponse>()
+        var apiService = APIService<Meeting ,BaseResponse<MeetingResult>>()
         guard let url = URL(string: APIEndpoints.basicURLString(path: .meeting)) else {
             print("Invalid URL")
             return
@@ -250,8 +250,10 @@ struct GroupSetView: View {
         do {
           
             let decoded  = try  await apiService.asyncPost(for: request)
-            print("asyncPost Success meetingID\(decoded.result.meetingId)")
-            sharedDm.meetingId = decoded.result.meetingId
+            print("asyncPost Success meetingID \(decoded.result?.meetingId ?? -1 )")
+            if let meetingId =  decoded.result?.meetingId {
+                sharedDm.meetingId = meetingId
+            }
          //   sharedDm.meetingId = 1
                 
         } catch{
@@ -262,7 +264,7 @@ struct GroupSetView: View {
 
     func delete_meeting(meetingId: Int)  async {
         
-        var apiService = APIService<Meeting, APIResponse>()
+        var apiService = APIService<Meeting, BaseResponse<MeetingResult>>()
         var urlString = APIEndpoints.basicURLString(path: .meeting)
         
         print("urlString \(urlString)")
@@ -302,8 +304,8 @@ struct GroupSetView: View {
       
     }
     func get_meeting()  async {
-        var meetingListResponsemeetingListResponse : MeetingListResponse
-        var apiService = APIService<MeetingListResponse, APIResponse>()
+      
+        let apiService = APIService<BaseResponse<MeetingListResult>, BaseResponse<MeetingListResult>>()
         guard let url = URL(string: APIEndpoints.basicURLString(path: .meetingStatus)) else {
             print("Invalid URL")
             return

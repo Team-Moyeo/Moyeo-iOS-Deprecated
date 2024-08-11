@@ -131,7 +131,7 @@ class APIService<T: Decodable, S:Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
        
-         print("AsyncLoad response  : \(response )  type: \(T.self) ")
+        print("AsyncLoad response  : \(response ) \n type:  \(T.self) ")
         
         guard let decoded = try? JSONDecoder().decode(T.self, from: data)
                 
