@@ -164,6 +164,7 @@ struct GroupSetView: View {
                     print("GroupSetView \(sharedDm.meetingName) s:\(sharedDm.startDate) e:\(sharedDm.endDate) n: \(sharedDm.numberOfDays)")
               
                     appViewModel.navigateTo(.groupVoteView)
+                    
                     isPresentingGroupSetView = false
                   
                     
@@ -190,7 +191,7 @@ struct GroupSetView: View {
             return
         }
         print("url :  \(url)")
-       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
+       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
         
         
         var request = URLRequest(url: url)
@@ -251,6 +252,7 @@ struct GroupSetView: View {
             let decoded  = try  await apiService.asyncPost(for: request)
             print("asyncPost Success meetingID\(decoded.result.meetingId)")
             sharedDm.meetingId = decoded.result.meetingId
+         //   sharedDm.meetingId = 1
                 
         } catch{
             print("asyncPost Fail  error: \(error) url:  \(request.url?.description)")
@@ -270,7 +272,7 @@ struct GroupSetView: View {
             print("Invalid URL")
             return
         }
-        let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzE5NzEwMywiZXhwIjoxNzI0MDYxMTAzfQ.FkE0VSkpTFd5m8KEwCKKBXWytnyV_lfkront0dk7Q3PeRzjTaumBmCHYlnVS20M7mvcHg7S7x27AnWQyBYGAQw"
+        let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
         
         var request = URLRequest(url: url)
       
@@ -300,14 +302,14 @@ struct GroupSetView: View {
       
     }
     func get_meeting()  async {
-        var meetingListResponse : MeetingListResponse
+        var meetingListResponsemeetingListResponse : MeetingListResponse
         var apiService = APIService<MeetingListResponse, APIResponse>()
         guard let url = URL(string: APIEndpoints.basicURLString(path: .meetingStatus)) else {
             print("Invalid URL")
             return
         }
        print("meeting status url :  \(url)")
-       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MiwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzEyMjM4OCwiZXhwIjoxNzIzOTg2Mzg4fQ.RLAKFQHU0VYxCOvi20Q4jQryn_-KCE9-W_HWp_c6CgqMMuWbzPpaUoiDJXxJh0zxsdRaX0m13-l8pk8MRscifg"
+       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
         
         
         var request = URLRequest(url: url)

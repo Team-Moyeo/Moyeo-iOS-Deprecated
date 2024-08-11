@@ -127,14 +127,16 @@ class APIService<T: Decodable, S:Decodable> {
       
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        print("asyncLoad response \(data)")
+     //   print("asyncLoad response \(data)")
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
        
-        print("Decoding in URL method : \(urlRequest.httpMethod?.description ?? "" ) \(urlRequest.url?.description ?? "" )   type: \(T.self) ")
+         print("AsyncLoad response  : \(response )  type: \(T.self) ")
         
         guard let decoded = try? JSONDecoder().decode(T.self, from: data)
-        else { print("Decoding Fail in url \(urlRequest.url) \(data) \(T.self)")
+                
+        else {
+               print("Decoding Fail in url \(urlRequest.url ) \(data) \(T.self)")
                throw URLError(.cannotDecodeContentData)
         }
         print("asyncLoad Success: \(decoded) ")
@@ -151,7 +153,7 @@ class APIService<T: Decodable, S:Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
         
-        print("asyncPost in url \(String(describing: urlRequest.url?.description)) \(data.base64EncodedString())  type: \(T.self) ")
+        print("asyncPost in url \(String(describing: urlRequest.url?.description)) \(data.base64EncodedString())type: \(T.self) ")
         
         guard let decoded = try? JSONDecoder().decode(S.self, from: data)
         else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(T.self)")

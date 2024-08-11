@@ -161,3 +161,69 @@ struct MeetingConfirmed: Codable {
     let fixedDateTime: [String]
     let fixedPlace: String
 }
+
+struct VotedTimes: Codable {
+    let myVotedTimes: [String]
+    let totalVotedTimes: [totalCandidateTimes]
+    let numberOfPeople : Int
+    struct totalCandidateTimes: Codable {
+        let dateTime: String
+        let voteCount: Int?
+    }
+}
+
+struct VotedPlaces: Codable {
+    let myVotedPlaces: [String]
+    let totalCandidatePlaces: [TotalVotedPlace]
+    let numberOfPeople : Int
+}
+
+
+// MARK: - TotalVotedTime
+
+// MARK: - TotalVotedPlace
+struct TotalVotedPlace: Codable {
+    let title: String
+    let voteCount: Int
+}
+
+// MARK: - Response
+struct ResponseVotedTimes: Codable {
+    let timeStamp: String
+    let code: String
+    let message: String
+    let result: Result
+    struct Result: Codable {
+        let myVotedTimes: [String]
+        let totalCandidateTimes: [totalCandidateTime]
+        let numberOfPeople : Int
+        }
+    
+    struct totalCandidateTime: Codable {
+        let dateTime: String
+        let voteCount: Int
+    }
+}
+
+
+struct ResponseVotedPlaces: Codable {
+    let timestamp: String
+    let code: String
+    let message: String
+    let result: Result
+    
+    struct Result: Codable {
+        let myVotedPlaces: [String]
+        let totalCandidatePlaces: [totalCandidatePlace]
+        let numberOfPeople : Int
+        
+        struct totalCandidatePlace: Codable {
+            let title : String         //"title": "Conference Room C",
+            let address : String       //                "address": "789 Tertiary Street, Cityville",
+            let latitude : Double      // "latitude": 37.7751,
+            let longitude : Double     //            "longitude": -122.4196,
+            let voteCount : Int        //      "voteCount": 0
+        }
+    }
+
+}
