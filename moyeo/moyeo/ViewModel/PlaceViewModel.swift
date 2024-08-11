@@ -66,31 +66,46 @@ extension PlaceViewModel {
         }
     }
     
-    func postPlace() async -> Bool {
+    func postPlace() async throws -> Bool {
         guard let selectedPlace = currentPlace else { return false }
-        let urlString = "https://5techcdong.store/meetings/\(selectedPlace.meetingId)/place"
-        guard let url = URL(string: urlString) else {
+        
+        guard let url = URL(string: APIEndpoints.basicURLString(path: .places)) else {
             print("Invalid URL")
             return false
         }
         
+        let accessToken = try SignInInfo.shared.readToken(.access)
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        
+        let title = selectedPlace.name
+        let address = selectedPlace.roadAddress
+        let latitude = selectedPlace.latitude
+        let longitude = selectedPlace.longitude
+        
+        let body: [String: Any] = [
+            "title": title,
+            "address": address,
+            "latitude": latitude,
+            "longitude": longitude
+        ]
         
         do {
-            let jsonData = try JSONEncoder().encode(selectedPlace)
-            request.httpBody = jsonData
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
             
-            let (_, response) = try await URLSession.shared.data(for: request)
+            let (data, httpResponse) = try await URLSession.shared.data(for: request)
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                return false
+            if let httpResponse = httpResponse as? HTTPURLResponse,
+               !(200..<300).contains(httpResponse.statusCode) {
+                print("🐻‍❄️Error: \(httpResponse.statusCode) badRequest")
             }
             
             DispatchQueue.main.async {
                 self.places.append(selectedPlace)
+                print(self.places)
             }
             return true
             
