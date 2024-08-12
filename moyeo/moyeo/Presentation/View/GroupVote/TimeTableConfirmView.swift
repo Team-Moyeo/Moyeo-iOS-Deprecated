@@ -493,7 +493,7 @@ struct TimeTableConfirmView: View {
         let convertedFinalTimeSlot  = convertDateStringTo24Hour(dateString: finalTimeSlot)
         print("convertedFinalTimeSlot: \(convertedFinalTimeSlot)")
         // 임시
-        let tempPlace = PlaceInfo(title: "대한민국",address: "포항",latitude:35.3528, longitude: 129.3135)
+        let tempPlace = FixedPlaceInfo(title: "대한민국",address: "포항",latitude:35.3528, longitude: 129.3135)
         
         let fixedSchedule = FixedSchedule(fixedTimes: convertedFinalTimeSlot, fixedPlace: tempPlace)
         let encoder = JSONEncoder()

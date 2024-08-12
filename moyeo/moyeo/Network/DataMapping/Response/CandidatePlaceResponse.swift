@@ -27,4 +27,8 @@ class CandidatePlaceResponse {
     struct AddCandidatePlace: Codable {
         var candidatePlaceId: Int = 0
     }
+    
+    struct DeleteCandidatePlace: Codable {
+        var candidatePlaceId: Int = 0
+    }
 }
