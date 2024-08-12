@@ -81,7 +81,7 @@ extension AuthViewModel {
                 print("로그인 결과: \(String(data: data, encoding: .utf8) ?? "")")
                 
                 do {
-                    let response = try JSONDecoder().decode(BaseResponse<MemberResponse.SignIn>.self, from: data)
+                    let response = try JSONDecoder().decode(BaseResponse<MemberAuthResponse.SignIn>.self, from: data)
                     
                     if let signInResponse = response.result {
                         

@@ -12,6 +12,7 @@ struct NetworkManagerTestView: View {
     @ObservedObject var candidatePlaceNetworkManager = CandidatePlaceNetworkManager()
     @ObservedObject var placeNetworkManager = PlaceNetworkManager()
     @ObservedObject var meetingNetworkManager = MeetingNetworkManager()
+    @ObservedObject var memberNetworkManager = MemberNetworkManager()
     @State private var getMeetingDetailTimesMeetingId: String = ""
     @State private var getMeetingDetailPlacesMeetingId: String = ""
     @State private var createPlaceTitle: String = ""
@@ -28,6 +29,7 @@ struct NetworkManagerTestView: View {
     @State private var getMeetingDetailMeetingId: String = ""
     @State private var voteUpdateMeetingId: String = ""
     @State private var fixMeetingId: String = ""
+    @State private var getMembersByMeetingId: String = ""
     
     
     
@@ -188,6 +190,18 @@ struct NetworkManagerTestView: View {
             TextField("확정할 모임 아이디를 입력하세요.", text: $fixMeetingId)
             Divider()
             
+            // MARK: - 모임 참여자 조회
+            Button {
+                if let meetingId = Int(getMembersByMeetingId) {
+                    Task {
+                        print(await memberNetworkManager.fetchGetMembersByMeeting(meetingId: meetingId))
+                    }
+                }
+            } label: {
+                Text("GetMembersByMeeting")
+            }
+            TextField("조회할 모임 아이디를 입력하세요.", text: $getMembersByMeetingId)
+            Divider()
         }
     }
 }

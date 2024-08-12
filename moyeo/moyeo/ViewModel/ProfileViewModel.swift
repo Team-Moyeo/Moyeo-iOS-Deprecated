@@ -8,7 +8,7 @@
 import Foundation
 
 class ProfileViewModel: ObservableObject {
-    @Published var profileInfo: MemberResponse.MemberInfo
+    @Published var profileInfo: MemberAuthResponse.MemberInfo
     @Published var editProfileMode: Bool = false
     
     init() {
@@ -51,7 +51,7 @@ extension ProfileViewModel {
     }
     
     
-    private func fetchProfileInfo() async throws -> MemberResponse.MemberInfo {
+    private func fetchProfileInfo() async throws -> MemberAuthResponse.MemberInfo {
         
         // URL 객체 생성
         guard let url = URL(string: APIEndpoints.basicURLString(path: .profile)) else {
@@ -72,7 +72,7 @@ extension ProfileViewModel {
             throw NetworkError.badRequest
         }
         
-        let response = try JSONDecoder().decode(BaseResponse<MemberResponse.MemberInfo>.self, from: data)
+        let response = try JSONDecoder().decode(BaseResponse<MemberAuthResponse.MemberInfo>.self, from: data)
         
         guard let responseResult = response.result else {
             print("Error: No MemberInfo Response")
@@ -104,7 +104,7 @@ extension ProfileViewModel {
         
     }
     
-    private func updateProfileInfo(with editedInfo: MemberResponse.MemberInfo) async throws {
+    private func updateProfileInfo(with editedInfo: MemberAuthResponse.MemberInfo) async throws {
         guard let url = URL(string: APIEndpoints.basicURLString(path: .profileUpdate)) else {
             throw NetworkError.cannotCreateURL
         }

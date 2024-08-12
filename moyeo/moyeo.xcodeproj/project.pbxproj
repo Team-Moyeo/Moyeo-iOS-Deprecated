@@ -67,7 +67,7 @@
 		BFB70E7A2C57509800D3C616 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */; };
 		BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */; };
 		BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F22C59203A001B31DE /* APIEndpoints.swift */; };
-		BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberResponse.swift */; };
+		BFD683F62C59CEC4001B31DE /* MemberAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberAuthResponse.swift */; };
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
 		CE3885DE2C651EE1002F22BB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3885DD2C651EE1002F22BB /* APIModel.swift */; };
 		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
@@ -86,6 +86,8 @@
 		F3860CE52C6A87BE00F0EA61 /* MeetingNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */; };
 		F3860CE72C6A884900F0EA61 /* MeetingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */; };
 		F3860CE92C6A932100F0EA61 /* MeetingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE82C6A932100F0EA61 /* MeetingRequest.swift */; };
+		F3860CEB2C6A9E6E00F0EA61 /* MemberNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CEA2C6A9E6E00F0EA61 /* MemberNetworkManager.swift */; };
+		F3860CED2C6A9F1300F0EA61 /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CEC2C6A9F1300F0EA61 /* MemberResponse.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -178,7 +180,7 @@
 		BFB70E712C57509800D3C616 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		BFB70E7C2C5751DB00D3C616 /* Helper+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Helper+CustomFont.swift"; sourceTree = "<group>"; };
 		BFD683F22C59203A001B31DE /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
-		BFD683F52C59CEC4001B31DE /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
+		BFD683F52C59CEC4001B31DE /* MemberAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAuthResponse.swift; sourceTree = "<group>"; };
 		BFD683F72C59D84F001B31DE /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		C1ACEF1995A10F1A8DE2FE86 /* Pods-moyeo-moyeoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo-moyeoUITests.release.xcconfig"; path = "Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CC00E0548D5EB819A3FB0B19 /* Pods-moyeo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.debug.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +204,8 @@
 		F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingNetworkManager.swift; sourceTree = "<group>"; };
 		F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingResponse.swift; sourceTree = "<group>"; };
 		F3860CE82C6A932100F0EA61 /* MeetingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRequest.swift; sourceTree = "<group>"; };
+		F3860CEA2C6A9E6E00F0EA61 /* MemberNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberNetworkManager.swift; sourceTree = "<group>"; };
+		F3860CEC2C6A9F1300F0EA61 /* MemberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponse.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -434,7 +438,7 @@
 		BFD683F42C59CEAC001B31DE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BFD683F52C59CEC4001B31DE /* MemberResponse.swift */,
+				BFD683F52C59CEC4001B31DE /* MemberAuthResponse.swift */,
 				BFD683F72C59D84F001B31DE /* BaseResponse.swift */,
 				51988EF92C61054B006134BC /* MeetingListResponse.swift */,
 				BF9795972C62541F000A121A /* PlaceModel.swift */,
@@ -452,6 +456,7 @@
 				F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */,
 				F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */,
 				F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */,
+				F3860CEA2C6A9E6E00F0EA61 /* MemberNetworkManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */,
 				F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */,
 				F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */,
+				F3860CEC2C6A9F1300F0EA61 /* MemberResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -859,6 +865,7 @@
 				F3860CDB2C6A4FC200F0EA61 /* NetworkManagerTestView.swift in Sources */,
 				F3860CDD2C6A6C3800F0EA61 /* PlaceRequest.swift in Sources */,
 				51219E692C61BA72005EDDCD /* CircleImage.swift in Sources */,
+				F3860CEB2C6A9E6E00F0EA61 /* MemberNetworkManager.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				F3860CDF2C6A6C4000F0EA61 /* PlaceResponse.swift in Sources */,
 				51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */,
@@ -867,10 +874,11 @@
 				F3860CD72C6A3A5C00F0EA61 /* NetworkHelper.swift in Sources */,
 				BF4DAE492C604DD6002371DC /* ProfileViewModel.swift in Sources */,
 				F3860CCD2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift in Sources */,
-				BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */,
+				BFD683F62C59CEC4001B31DE /* MemberAuthResponse.swift in Sources */,
 				BF4DAE452C5F9B70002371DC /* ProfileView.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
 				51219E6B2C61BA72005EDDCD /* FavoriteButton.swift in Sources */,
+				F3860CED2C6A9F1300F0EA61 /* MemberResponse.swift in Sources */,
 				51219E802C61BA72005EDDCD /* TimeInterval+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
