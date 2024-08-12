@@ -78,22 +78,10 @@ extension AuthViewModel {
                     print("Error: \(httpResponse.statusCode) badRequest")
                 }
                 
+                print("로그인 결과: \(String(data: data, encoding: .utf8) ?? "")")
+                
                 do {
                     let response = try JSONDecoder().decode(BaseResponse<MemberResponse.SignIn>.self, from: data)
-
-                    if response.code == "COMMON200" {
-                        self.memberId = response.result?.memberId
-                        self.accessToken = response.result?.accessToken
-                        self.refreshToken = response.result?.refreshToken
-                        self.isServiced = response.result?.isServiced ?? false
-                    } else if response.code == "AUTH001" {
-                        print("Response from Bad Request: \(String(describing: response.result))")
-                    }
-                    
-                    print("memberId: \(self.memberId ?? 0)")
-                    print("accessToken: \(self.accessToken ?? "No AccessToken")")
-                    print("refreshToken: \(self.refreshToken ?? "NO RefreshToken")")
-                    print("isServiced: \(self.isServiced)")
                     
                     if let signInResponse = response.result {
                         
@@ -101,11 +89,10 @@ extension AuthViewModel {
                         try SignInInfo.shared.addToken(.refresh, token: signInResponse.refreshToken)
                         
                         if signInResponse.isServiced {
-                            print("로그인 성공")
+                            print("기존 멤버")
                             self.isAuthenticated = true
                         } else {
-                            // 이때 정보 기입 뷰 뜨면서 프로필 사진, 이름, 이메일 기입?
-                            print("첫 로그인")
+                            print("신규 멤버")
                             self.isAuthenticated = true
                         }
                         

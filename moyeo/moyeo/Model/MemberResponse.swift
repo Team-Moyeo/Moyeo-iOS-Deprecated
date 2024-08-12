@@ -13,9 +13,14 @@ struct MemberResponse {
         let memberId: Int
         let accessToken: String
         let refreshToken: String
-        let isServiced: Bool
+        var isServiced: Bool
+    }
+    
+    struct MemberInfo: Codable {
+        var profileImage: Data?
+        var name: String
+        var phoneNumber: String
+        var email: String
     }
     
 }
-
-
