@@ -70,6 +70,12 @@ struct MainView: View {
             }
             
             Spacer()
+            //여기서부터는 GroupResultView로 이동하기 위한 임시 수단임.
+            Button {
+                appViewModel.navigateTo(.groupResultView)
+            } label: {
+                Text("GroupResultView로 이동")
+            }
             
             // 모임 생성하기 버튼
             Button(action: {
