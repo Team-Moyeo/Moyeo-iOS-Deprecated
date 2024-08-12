@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MeetingResponse {
+struct MeetingResponseWon {
     
     struct Meeting: Codable {
         let meetingId: Int

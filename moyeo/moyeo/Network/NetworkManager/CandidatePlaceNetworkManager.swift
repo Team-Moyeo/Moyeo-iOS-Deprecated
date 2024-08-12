@@ -78,5 +78,39 @@ class CandidatePlaceNetworkManager: ObservableObject {
         
         return result
     }
+    // MARK: - 후보 장소 삭제
+    @MainActor
+    func fetchDeleteCandidatePlace(meetingId: Int, candidatePlaceId: Int) async -> CandidatePlaceResponse.DeleteCandidatePlace {
+        var response = CandidatePlaceResponse.DeleteCandidatePlace()
+        
+        do {
+            response = try await deleteCandidatePlace(meetingId: meetingId, candidatePlaceId: candidatePlaceId)
+            
+        } catch {
+            print("[fetchDeleteCandidatePlace] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func deleteCandidatePlace(meetingId: Int, candidatePlaceId: Int) async throws -> CandidatePlaceResponse.DeleteCandidatePlace {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.candidatePlaces.rawValue + "/\(meetingId)" + "/\(candidatePlaceId)", queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.DELETE, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<CandidatePlaceResponse.DeleteCandidatePlace>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
     
 }
