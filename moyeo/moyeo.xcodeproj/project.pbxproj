@@ -81,6 +81,8 @@
 		F3860CDB2C6A4FC200F0EA61 /* NetworkManagerTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CDA2C6A4FC200F0EA61 /* NetworkManagerTestView.swift */; };
 		F3860CDD2C6A6C3800F0EA61 /* PlaceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CDC2C6A6C3800F0EA61 /* PlaceRequest.swift */; };
 		F3860CDF2C6A6C4000F0EA61 /* PlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */; };
+		F3860CE12C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */; };
+		F3860CE32C6A791F00F0EA61 /* CandidatePlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -192,6 +194,8 @@
 		F3860CDA2C6A4FC200F0EA61 /* NetworkManagerTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTestView.swift; sourceTree = "<group>"; };
 		F3860CDC2C6A6C3800F0EA61 /* PlaceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRequest.swift; sourceTree = "<group>"; };
 		F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResponse.swift; sourceTree = "<group>"; };
+		F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatePlaceNetworkManager.swift; sourceTree = "<group>"; };
+		F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatePlaceResponse.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 				F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */,
 				F3860CCC2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift */,
 				F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */,
+				F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 			children = (
 				F3860CCF2C6A35DE00F0EA61 /* CandidateTimeResponse.swift */,
 				F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */,
+				F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -809,6 +815,7 @@
 				BF97959A2C625D09000A121A /* PlaceViewModel.swift in Sources */,
 				51219E6E2C61BA72005EDDCD /* AlertError.swift in Sources */,
 				51219E762C61BA72005EDDCD /* EventStoreManager.swift in Sources */,
+				F3860CE12C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift in Sources */,
 				51FD50AA2C53828A008C5552 /* PlaceSearchView.swift in Sources */,
 				51219E752C61BA72005EDDCD /* EventStoreError.swift in Sources */,
 				51219E8C2C61BA72005EDDCD /* EventViewModel.swift in Sources */,
@@ -817,6 +824,7 @@
 				51219E712C61BA72005EDDCD /* EditButton.swift in Sources */,
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
 				BF9795982C62541F000A121A /* PlaceModel.swift in Sources */,
+				F3860CE32C6A791F00F0EA61 /* CandidatePlaceResponse.swift in Sources */,
 				F3860CD02C6A35DE00F0EA61 /* CandidateTimeResponse.swift in Sources */,
 				51219E922C61BAA8005EDDCD /* GroupVoteView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,

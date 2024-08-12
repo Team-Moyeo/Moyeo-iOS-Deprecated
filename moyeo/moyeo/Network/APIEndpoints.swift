@@ -27,6 +27,9 @@ enum APIEndpoints {
         // MARK: - candidate-times
         case candidateTimes = "/candidate-times"
         
+        // MARK: - candidate-places
+        case candidatePlaces = "/candidate-places"
+        
         // MARK: - places
         case places = "/places"
         

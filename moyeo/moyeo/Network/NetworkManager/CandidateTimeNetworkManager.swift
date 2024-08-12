@@ -11,11 +11,11 @@ class CandidateTimeNetworkManager: ObservableObject {
     
     // MARK: - 모임 상세 조회(시간)
     @MainActor
-    func fetchGetMeetingDetailTimes(request: CandidateTimeRequest.GetMeetingDetailTimes) async -> CandidateTimeResponse.GetMeetingDetailTimes {
+    func fetchGetMeetingDetailTimes(meetingId: Int) async -> CandidateTimeResponse.GetMeetingDetailTimes {
         var response = CandidateTimeResponse.GetMeetingDetailTimes()
         
         do {
-            response = try await getMeetingDetailTimes(meetingId: request.meetingId)
+            response = try await getMeetingDetailTimes(meetingId: meetingId)
             
         } catch {
             print("[fetchGetMeetingDetailTimes] Error: \(error)")

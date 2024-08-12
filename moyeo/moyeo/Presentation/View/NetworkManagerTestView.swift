@@ -9,8 +9,10 @@ import SwiftUI
 
 struct NetworkManagerTestView: View {
     @ObservedObject var candidateTimeNetworkManager = CandidateTimeNetworkManager()
+    @ObservedObject var candidatePlaceNetworkManager = CandidatePlaceNetworkManager()
     @ObservedObject var placeNetworkManager = PlaceNetworkManager()
-    @State private var fetchGetMeetingDetailTimesMeetingId: String = ""
+    @State private var getMeetingDetailTimesMeetingId: String = ""
+    @State private var getMeetingDetailPlacesMeetingId: String = ""
     @State private var createPlaceTitle: String = ""
     @State private var createPlaceAddress: String = ""
     @State private var createPlaceLatitude: String = ""
@@ -26,15 +28,28 @@ struct NetworkManagerTestView: View {
             
             // MARK: - 모임 상세 조회(시간)
             Button {
-                if let intMeetingId = Int(fetchGetMeetingDetailTimesMeetingId) {
+                if let intMeetingId = Int(getMeetingDetailTimesMeetingId) {
                     Task {
-                        print(await candidateTimeNetworkManager.fetchGetMeetingDetailTimes(request: CandidateTimeRequest.GetMeetingDetailTimes(meetingId: intMeetingId)))
+                        print(await candidateTimeNetworkManager.fetchGetMeetingDetailTimes(meetingId: intMeetingId))
                     }
                 }
             } label: {
                 Text("getMeetingDetailTimes")
             }
-            TextField("조회할 모임 아이디를 입력하세요.", text: $fetchGetMeetingDetailTimesMeetingId)
+            TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingDetailTimesMeetingId)
+            Divider()
+            
+            // MARK: - 모임 상세 조회(장소)
+            Button {
+                if let intMeetingId = Int(getMeetingDetailPlacesMeetingId) {
+                    Task {
+                        print(await candidatePlaceNetworkManager.fetchGetMeetingDetailPlaces(meetingId: intMeetingId))
+                    }
+                }
+            } label: {
+                Text("getMeetingDetailPlaces")
+            }
+            TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingDetailPlacesMeetingId)
             Divider()
             
             // MARK: - 장소 등록
