@@ -29,7 +29,7 @@ struct GroupSetView: View {
     
     @State private var isTextFieldActive: Bool = false
     
-//    @ObservedObject var sharedDm : SharedDateModel
+    //    @ObservedObject var sharedDm : SharedDateModel
     
     var body: some View {
         ZStack {
@@ -200,23 +200,24 @@ struct GroupSetView: View {
                     // 시간, 장소 둘 중 하나라도 활성화 되어야 해당 버튼 활성화
                     // 해당 sheet가 내려가고, MainView의 List에 추가되고,
                     // NavigationStack에 쌓기
-
+                    
                     
                     Task {
                         createMeetingViewModel.title = meetingName
-                        createMeetingViewModel.startDate = startDate.toString()
-                        print("꺅~\(createMeetingViewModel.startDate)")
-                        createMeetingViewModel.endDate = endDate.toString()
-                        print("꺅~\(createMeetingViewModel.endDate)")
-                        createMeetingViewModel.startTime = startTime.toString()
-                        createMeetingViewModel.endTime = endTime.toString()
                         
+                        createMeetingViewModel.startDate = startDate
+                        createMeetingViewModel.endDate = endDate
+                        
+                        createMeetingViewModel.startTime = startTime
+                        createMeetingViewModel.endTime = endTime
+
                         // 시간 정해졌을 경우, 몇시부터 몇시까지 약속인지 나타내줘야함
                         createMeetingViewModel.fixedTimes = voteTime ? [] : nil
                         
                         createMeetingViewModel.deadline = deadLine.toString()
                         
                         await createMeetingViewModel.createMeeting()
+                        try await createMeetingViewModel.getMeetings()
                         
                         appViewModel.navigateTo(.groupVoteView)
                         isPresentingGroupSetView = false
@@ -246,6 +247,20 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter.string(from: self)
     }
+    
+    /// 18:03 형식의 문자열을 반환합니다.
+    func hourMinute() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
+    
+    func yearMonthDay() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
 }
 
 struct DateRangePickerView: View {
