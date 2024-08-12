@@ -228,6 +228,16 @@ struct NetworkManagerTestView: View {
                 Text("GetMeetingsByStatus")
             }
             Divider()
+            
+            // MARK: - 모임 생성
+            Button {
+                    Task {
+                        print(await meetingNetworkManager.fetchCreateMeeting(request: MeetingRequest.CreateMeeting(title: "MC3 끝", startDate: "2024-08-11", endDate: "2024-08-12", startTime: "09:00:00", endTime: "17:00:00", fixedTimes: [], fixedPlace: MeetingRequest.CreateMeeting.CreateMeetingPlace(), candidatePlaces: [], deadline: "2024-08-13T09:00:00"))) // T 꼭 붙일 것
+                    }
+            } label: {
+                Text("CreateMeeting")
+            }
+            Divider()
         
         }
     }

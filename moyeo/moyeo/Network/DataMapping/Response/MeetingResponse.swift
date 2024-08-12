@@ -69,4 +69,8 @@ class MeetingResponse: ObservableObject {
             case END
         }
     }
+    
+    struct CreateMeeting: Codable {
+        var meetingId: Int = 0
+    }
 }

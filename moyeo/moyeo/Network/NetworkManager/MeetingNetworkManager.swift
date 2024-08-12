@@ -297,4 +297,41 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 생성
+    @MainActor
+    func fetchCreateMeeting(request: MeetingRequest.CreateMeeting) async -> MeetingResponse.CreateMeeting {
+        var response = MeetingResponse.CreateMeeting()
+        
+        do {
+            let requestBody = try NetworkHelper.encodeRequestBody(requestBody: request)
+            response = try await createMeeting(requestBody: requestBody)
+            
+        } catch {
+            print("[fetchCreateMeeting] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func createMeeting(requestBody: Data) async throws -> MeetingResponse.CreateMeeting {
+        
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue, queryItems: [])
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.POST, needAuthorization: true, headers: [:], requestBody: requestBody)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.CreateMeeting>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }
