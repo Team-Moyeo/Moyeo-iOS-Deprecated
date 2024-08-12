@@ -7,7 +7,7 @@
 
 import Foundation
     
-struct MemberResponse {
+struct MemberAuthResponse {
     
     struct SignIn: Codable {
         let memberId: Int

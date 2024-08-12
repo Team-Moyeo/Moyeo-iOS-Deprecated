@@ -142,6 +142,6 @@ struct VotedPlacesResult: Codable {
 struct FixedSchedule: Codable {
     
     let fixedTimes: [String]?
-    let fixedPlace: PlaceInfo?
+    let fixedPlace: FixedPlaceInfo?
     
 }
