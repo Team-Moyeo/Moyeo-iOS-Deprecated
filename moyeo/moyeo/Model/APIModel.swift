@@ -46,17 +46,17 @@ struct MeetingResult :Codable {
 }
 
 // 전체 회의 정보를 나타내는 구조체 정의
-struct Meeting: Codable {
-    let title: String
-    let startDate: String
-    let endDate: String
-    let startTime: String
-    let endTime: String
-    let fixedTimes: [String]// 선택적
-    let fixedPlace: votePlace   // 선택적
-    let candidatePlaces: [votePlace]? // 선택적
-    let deadline: String
-}
+//struct Meeting: Codable {
+//    let title: String
+//    let startDate: String
+//    let endDate: String
+//    let startTime: String
+//    let endTime: String
+//    let fixedTimes: [String]// 선택적
+//    let fixedPlace: votePlace   // 선택적
+//    let candidatePlaces: [votePlace]? // 선택적
+//    let deadline: String
+//}
 
 struct votePlace: Codable {
     let title: String

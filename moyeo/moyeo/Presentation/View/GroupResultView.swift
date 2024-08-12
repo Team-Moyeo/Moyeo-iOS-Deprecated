@@ -1,16 +1,14 @@
 import SwiftUI
 
 struct GroupResultView: View {
-    @Environment var appViewModel: AppViewModel
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(AppViewModel.self) var appViewModel
     @State private var capturedImage: UIImage?
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 // 캡처될 부분: 시간, 날짜, 장소 및 그룹원
-                CapturedContent(appViewModel: _appViewModel, images: ["",""])
-                    .environment(appViewModel)
+                CapturedContent(images: ["",""])
                 
                 Spacer()
                 // main으로 가는 버튼
@@ -18,8 +16,7 @@ struct GroupResultView: View {
                     appViewModel.popToMain()
                 } label: {
                     Text("홈으로 돌아가기")
-                        .bold()
-                        .font(.system(size: 17))
+                        .pretendard(.bold, 17)
                 }
                 .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.06)
                 .foregroundColor(Color.black)
@@ -30,31 +27,54 @@ struct GroupResultView: View {
         }
         .navigationTitle("오택동 첫 회식")
         .toolbar{
-            ToolbarItem(placement: .topBarTrailing, content: {
+            toolbarContent
+        }
+    }
+    
+    private var toolbarContent: some ToolbarContent {
+        Group {
+            ToolbarItemGroup(placement: .topBarLeading) {
+                Button {
+                    appViewModel.pop()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .foregroundStyle(.myDD8686)
+                        .frame(width: 18, height: 18)
+                }
+            }
+            
+            ToolbarItemGroup(placement: .principal) {
+                Text("확정 모임 이름")
+                    .pretendard(.semiBold, 17)
+            }
+            
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                
                 HStack() {
-                    Spacer()
                     Button(action: {
                         capturedImage = takeCapture()
                     }, label: {
                         Image(systemName: "camera.viewfinder")
                             .resizable()
                             .frame(width: 24, height: 24)
-                            .foregroundStyle(Color.myDD8686)
+                            .foregroundStyle(.myDD8686)
                     })
                     if let image = capturedImage {
-//                        Image(uiImage: image)
-//                            .resizable()
-//                            .scaledToFit()
+    //                        Image(uiImage: image)
+    //                            .resizable()
+    //                            .scaledToFit()
                         ShareLink(item: TransferableImage(uiImage: image),
                                   preview: SharePreview(Text("Captured Image"), image: Image(uiImage: image))) {
                             Label("", systemImage: "square.and.arrow.up")
                                 .frame(width: 18, height: 24)
-                                .foregroundStyle(Color.myDD8686)
+                                .foregroundStyle(.myDD8686)
                         }
                     }
                     
                 }
-            })
+                
+            }
+            
         }
     }
     

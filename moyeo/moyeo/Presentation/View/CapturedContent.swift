@@ -1,6 +1,6 @@
 import SwiftUI
 struct CapturedContent: View {
-    @Environment var appViewModel: AppViewModel
+    @Environment(AppViewModel.self) var appViewModel
     @State private var Details = false
     let images: [String] // 서버에서 받아온 이미지 URL 배열
     
