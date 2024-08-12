@@ -123,7 +123,7 @@ class APIService<T: Decodable, S:Decodable> {
         
     
     // combine --> async await 이 간단함
-    func asyncLoad(for urlRequest: URLRequest) async throws -> T {
+    func asyncLoad(for urlRequest: URLRequest) async throws -> S {
       
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
@@ -131,37 +131,37 @@ class APIService<T: Decodable, S:Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
        
-        print("AsyncLoad response  : \(response ) \n type:  \(T.self) ")
+     //   print("AsyncLoad response: \(response)\ntype:  \(T.self) ")
         
-        guard let decoded = try? JSONDecoder().decode(T.self, from: data)
+        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
                 
         else {
-               print("Decoding Fail in url \(urlRequest.url ) \(data) \(T.self)")
+               print("Decoding Fail in url \(urlRequest.url ) \(data) \(S.self)")
                throw URLError(.cannotDecodeContentData)
         }
-        print("asyncLoad Success: \(decoded) ")
+        print("asyncLoad Success")
       
         return decoded
        
     }
+    
+    
     func asyncPost(for urlRequest: URLRequest) async throws -> S {
        
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        print("asyncPost method:\(urlRequest.httpMethod?.description ?? "") data: \(data.description) response :\(response)")
+        print("asyncPost Method: \(urlRequest.httpMethod?.description ?? "") data: \(data.description) response :\((response as? HTTPURLResponse)?.statusCode)")
         
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
         
-        print("asyncPost in url \(String(describing: urlRequest.url?.description)) \(data.base64EncodedString())type: \(T.self) ")
-        
-        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
+        print("asyncPost in url \(String(describing: urlRequest.url?.description ?? "")) \ntype: \(T.self) ")
+        print("data \(data)")
+        guard let decoded = try? JSONDecoder().decode( S.self, from: data)
         else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(T.self)")
                throw URLError(.cannotDecodeContentData)
         }
-        
-          
-        print("In the asyncSave SUCCESS decoded : \(decoded) ")
+       print("asyncPost SUCCESS decoded ")
       
        return decoded
     }

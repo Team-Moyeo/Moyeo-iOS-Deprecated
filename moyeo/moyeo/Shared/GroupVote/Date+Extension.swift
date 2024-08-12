@@ -109,7 +109,7 @@ func dateStringToDate2(dateString : String?) -> Date? {
     dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
     // 문자열을 Date 객체로 변환합니다.
     if let date = dateFormatter.date(from: dateString) {
-        print("The date is \(date)")
+    //    print("The date is \(date)")
         return date
     } else {
         print("Invalid date format")
@@ -124,11 +124,11 @@ func daysBetween(start: Date, end: Date, timeZone: TimeZone = TimeZone(identifie
   
     
     if let startDay = TimeFixToZero(date: start), let endDay = TimeFixToMidNight(date: end) {
-        print("daysBet: fixStart: \(startDay)  fixEnd: \(endDay)")
+ //       print("daysBetween: fixStart: \(startDay)  fixEnd: \(endDay)")
         let components = calendar.dateComponents([.day], from: startDay, to: endDay)
         
         if let day = components.day {
-            print("day in the daysBetween : \(day) fs: :\(startDay) fe: \(endDay) os: \(start) oe:\(end)")
+ //           print("day in the daysBetween : \(day) fs: :\(startDay) fe: \(endDay) os: \(start) oe:\(end)")
             return day + 1
             
         } else {
@@ -312,7 +312,7 @@ func convertDateStringTo24Hour(dateString: [String]) -> [String] {
         let m = item.suffix(2)
         
         if m == "am" {
-            let newDateString = item.prefix(16) + ":00"
+            let newDateString = item.prefix(16)
             dateString24.append(String(newDateString))
         } else {
             let yymmdd = item.prefix(10)
@@ -321,11 +321,11 @@ func convertDateStringTo24Hour(dateString: [String]) -> [String] {
             let mm = item.suffix(4).prefix(2)
             if Int(hh) ?? 0  < 12 {
                 let h24 = Int( ( Int(hh) ?? 0 ) + 12 ) % 24
-                let newDateString = yymmdd + " " + String(h24) + ":" + mm  + ":00"
+                let newDateString = yymmdd + " " + String(h24) + ":" + mm
                 dateString24.append(String(newDateString))
 
             } else  {
-                let newDateString = item.prefix(16) + ":00"
+                let newDateString = item.prefix(16) 
                 dateString24.append(String(newDateString))
             }
          

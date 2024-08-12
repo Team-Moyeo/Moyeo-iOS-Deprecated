@@ -30,6 +30,7 @@ class SharedDateModel: ObservableObject {
     @Published var selectedDate = Date()
     @Published var selectedTime = Date()
     @Published var meetingId : Int = 0
+    @Published var dearLine :String = ""
     
     @Published var startDate: Date {
         didSet {
@@ -52,6 +53,7 @@ class SharedDateModel: ObservableObject {
             
         }
     }
+    
     @Published var numberOfDays: Int {
         
         

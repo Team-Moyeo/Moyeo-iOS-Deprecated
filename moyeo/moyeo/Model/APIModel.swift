@@ -53,7 +53,7 @@ struct Meeting: Codable {
     let startTime: String
     let endTime: String
     let fixedTimes: [String]// 선택적
-    let fixedPlace: Place   // 선택적
+    let fixedPlace: Place?   // 선택적
     let candidatePlaces: [Place]? // 선택적
     let deadline: String
 }
@@ -138,3 +138,32 @@ struct VotedPlacesResult: Codable {
             let voteCount : Int        //      "voteCount": 0
         }
 }
+
+
+struct FixedPlace: Codable {
+    let title: String
+    let address: String
+    let latitude: Double
+    let longitude: Double
+}
+struct FixedSchedule: Codable {
+    
+    let fixedTimes: [String]?
+    let fixedPlace: FixedPlace?
+    
+}
+struct ResultSchedule: Codable {
+    
+    let fixedTimes: [String]?
+    let fixedPlace: String
+    
+}
+
+
+//"timestamp": "2024-01-16T14:20:15.793029167",
+//"code": "COMMON200",
+//"message": "요청에 성공하였습니다.",
+//"result": {
+//        "meetingId" : 4
+//}
+

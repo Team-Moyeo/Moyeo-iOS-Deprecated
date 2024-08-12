@@ -42,6 +42,7 @@ enum Weekday: Int {
 let timeSlot : [String] = ["00:00am", "00:30am","01:00am","01:30am","02:00am", "02:30am", "03:00am", "03:30am", "04:00am", "04:30am","05:00am", "05:30am", "06:00am","06:30am", "07:00am" ,"07:30am", "08:00am","08:30am", "09:00am", "09:30am", "10:00am", "10:30am", "11:00am", "11:30am", "12:00am", "12:30pm","01:00pm","01:30pm","02:00pm", "02:30pm", "03:00pm", "03:30pm", "04:00pm", "04:30pm","05:00pm", "05:30pm", "06:00pm","06:30pm", "07:00pm" ,"07:30pm", "08:00pm", "09:00pm", "09:30pm", "10:00pm", "10:30pm", "11:00pm", "11:30pm", "12:00pm" ]
 let timeSlot2 : [String] = ["00:00", "00:30","01:00","01:30","02:00", "02:30am", "03:00", "03:30","04:00", "04:30","05:00", "05:30", "06:00","06:30", "07:00" ,"07:30", "08:00","08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30","13:00","13:30","14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30","18:00","18:30", "19:00","19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30", "24:00" ]
 
+let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
 
 struct TimeTableView: View {
    
@@ -72,7 +73,7 @@ struct TimeTableView: View {
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
         var gridItems: [GridItem] = []
-        print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
+   //     print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
         
         for _ in 0..<Int(sharedDm.numberOfDays) {
             gridItems.append(GridItem(.fixed(CGFloat(fixedColumnWidth)), spacing: spacing))
@@ -216,16 +217,17 @@ struct TimeTableView: View {
                 .frame(width: 30, height: 24)
                 
                 Button(action: {
-                    Task {
-                      await  getTimeTableHit(meetingID: sharedDm.meetingId)
-                    }
-//                    for i in  0..<47 {
-//                        for j in 0..<7 {
-//                            let index = i * 7 + j
-//                            allSchedule[ index ] = Double (generateRandomNumber())
-//                            print(" \(allSchedule[ index ] )")
-//                        }
+//                    Task {
+//                        await  getTimeTableHit(meetingID: sharedDm.meetingId)
 //                    }
+                  
+                    for i in  0..<47 {
+                        for j in 0..<7 {
+                            let index = i * 7 + j
+                            allSchedule[ index ] = Double (generateRandomNumber())
+                            print(" \(allSchedule[ index ] )")
+                        }
+                    }
                     showAllSchedule.toggle()
                     print("showAllSchedule \(showAllSchedule)")
                     
@@ -238,22 +240,22 @@ struct TimeTableView: View {
                         .cornerRadius(4)
                 }
                 .frame(width: 30, height: 24)
-//                Spacer()
-//                Button(action: {
-//                    
-//                    deleteCheckAll()
-//                    
-//                }) {
-//                    Text("지우기")
-//                        .font(.system(size: 15))
-//                        .padding(2)
-//                        .background(Color.blue)
-//                        .foregroundColor(.white)
-//                        .cornerRadius(4)
-//                    
-//                }.frame(width: 80, height: 24)
+                //                Spacer()
+                //                Button(action: {
+                //
+                //                    deleteCheckAll()
+                //
+                //                }) {
+                //                    Text("지우기")
+                //                        .font(.system(size: 15))
+                //                        .padding(2)
+                //                        .background(Color.blue)
+                //                        .foregroundColor(.white)
+                //                        .cornerRadius(4)
+                //
+                //                }.frame(width: 80, height: 24)
                 
-             
+                
                 
                 Spacer()
             }
@@ -333,8 +335,8 @@ struct TimeTableView: View {
                                                     .foregroundColor({
                                                         var color : Color = .white
                                                         if showAllSchedule {
-                                                         
-                                                                color = .green
+                                                            
+                                                            color = .green
                                                             
                                                         }
                                                         return color
@@ -353,7 +355,7 @@ struct TimeTableView: View {
                                                                 color = .yellow
                                                             }
                                                         }
-                                                       
+                                                        
                                                         
                                                         return color
                                                         
@@ -366,7 +368,7 @@ struct TimeTableView: View {
                                                 Rectangle()
                                                     .foregroundColor({
                                                         var color : Color = .white
-                                                      
+                                                        
                                                         let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
                                                             color = .red
@@ -514,7 +516,7 @@ struct TimeTableView: View {
                 .scrollTargetBehavior(.viewAligned)
             
             HStack {
-            Spacer()
+                Spacer()
                 Button(action: {
                     
                     var voteInfo : VoteInfo
@@ -522,14 +524,14 @@ struct TimeTableView: View {
                     convertAvailableTimeFromSetToTuple()
                     
                     let apiService = APIService<VoteInfo ,BaseResponse<VoteInfoResult>>()
-                 // ParentView에서 전달 받는다.
-                 //   sharedDm.meetingId = 1
+                    // ParentView에서 전달 받는다.
+                    //   sharedDm.meetingId = 1
                     guard let url = URL(string: "https://5techdong.store/meetings/\(sharedDm.meetingId)/vote-values") else {
                         print("Invalid URL")
                         return
                     }
-                
-                   let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
+                    
+                    
                     
                     
                     var request = URLRequest(url: url)
@@ -572,13 +574,13 @@ struct TimeTableView: View {
                         
                         print("jsonData from voteInfo struc :\(jsonData.debugDescription) ")
                         // JSON 데이터 문자열로 변환 (디버깅 용)
-                        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
-                        print("JSONObject: \(jsonObject)")
-                        // JSON 객체를 JSON 문자열 형식의 Data로 변환
-                        let jsonStringData = try JSONSerialization.data(withJSONObject: jsonObject, options:.prettyPrinted)
-                        
-                           // Data를 문자열로
-                        if let jsonString = String(data: jsonStringData, encoding: .utf8) {
+//                        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
+//                        print("JSONObject: \(jsonObject)")
+//                        // JSON 객체를 JSON 문자열 형식의 Data로 변환
+//                        let jsonStringData = try JSONSerialization.data(withJSONObject: jsonObject, options:.prettyPrinted)
+//                        
+//                           // Data를 문자열로
+                        if let jsonString = String(data: jsonData, encoding: .utf8 ) {
                             print("JSONString: \(jsonString)")
                         }
                         
@@ -766,9 +768,9 @@ struct TimeTableView: View {
         
         self.availableTimeSet = Set(availableTimeSet.sorted())
         print("availableTimeSlot count \(self.availableTimeSet.count)")
-        for item in availableTimeSet.sorted() {
-            print(" timeslot: \(item)" )
-        }
+//        for item in availableTimeSet.sorted() {
+//            print(" timeslot: \(item)" )
+//        }
         
        
     }
@@ -783,13 +785,13 @@ struct TimeTableView: View {
             let end = dateStringToDate(dateString: String(item.prefix(10))) ?? sharedDm.startDate
             if let  days = daysBetween(start: sharedDm.startDate, end: end ) {
                 col = days - 1
-                print("start : \(sharedDm.startDate) end:  \(end) daysDiff: \(col)")
+        //        print("start : \(sharedDm.startDate) end:  \(end) daysDiff: \(col)")
             }
          
-            if let timeslot = timeSlot.firstIndex(where: { $0.contains(String(item.suffix(5))) }) {
+            if let timeslot = timeSlot.firstIndex(where: { $0.contains(String(item.suffix(7))) }) {
                 
                 row = timeslot
-                print("item -> (Row, Col)  time: \(item.suffix(7))   (\(row) , \(col))")
+           //     print("item -> (Row, Col)  time: \(item.suffix(7))   (\(row) , \(col))")
                 availableTimeTuple.insert(IntTuple(rowIndex: row, columnIndex: col))
             } else {
                 
@@ -799,9 +801,9 @@ struct TimeTableView: View {
 
         }
         print("availableTimeTuple.count \(availableTimeTuple.count)")
-        for item in availableTimeTuple {
-            print(item)
-        }
+//        for item in availableTimeTuple {
+//            print(item)
+//        }
     }
     
     
@@ -825,7 +827,7 @@ struct TimeTableView: View {
             }
             print("item.dateTime.suffix(7)\(item)  \(item.dateTime.suffix(7))")
             
-            if let timeSlot2 = timeSlot2.firstIndex(where: { $0.contains(String(item.dateTime.suffix(7))) }) {
+            if let timeSlot2 = timeSlot2.firstIndex(where: { $0.contains(String(item.dateTime.suffix(5))) }) {
                 
                 row = timeSlot2
                 print("item ->(Row, Col) time: \(item.dateTime.suffix(7))   (\(row) , \(col))")
@@ -858,8 +860,7 @@ struct TimeTableView: View {
         
        allSchedule.removeAll()
        print("getTimeTableHit  url :  \(url)")
-       let accessToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJtZW1iZXJJZCI6MSwiY2xpZW50SWQiOiI3NTcyMDdhMmU1MDgzZmY2NWU2ZTU4ZjhmYWY1OGE0YWU4ZWRiYmY4MDM0YzEzM2NhYTI1ZmJkZDFhZDA5ODFmIiwicGVybWlzc2lvblJvbGUiOiJBRE1JTiIsImlhdCI6MTcyMzM1NTYwNCwiZXhwIjoxNzI0MjE5NjA0fQ.5mXvDIxHYMm0L-mOFVmSpV248dn7_k_j2T7dFy4j2wB-aFyPDRM_AKePnQzLCW_3sOC5935ZjJ0aTtZrgVuQsg"
-        var request = URLRequest(url: url)
+       var request = URLRequest(url: url)
         
         let headers = [
             "Content-Type": "application/json",

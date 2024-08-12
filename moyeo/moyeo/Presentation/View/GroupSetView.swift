@@ -207,12 +207,12 @@ struct GroupSetView: View {
             title: "Andy's Team Meeting",
             startDate: "2024-08-25",
             endDate: "2024-08-31",
-            startTime: "09:00:00",
-            endTime: "17:00:00",
-            fixedTimes: ["2024-08-10T10:00:00", "2024-08-10T10:30:00"],
+            startTime: "00:00:00",
+            endTime: "23:30:00",
+            fixedTimes: [],
             fixedPlace: Place(
-                title: "포항공대 생활관",
-                address: "경북 포항시 남구 청암로 포항공과대학교",
+                title: "",
+                address: "",
                 latitude: 35.3528,
                 longitude: 129.3135
             ),
