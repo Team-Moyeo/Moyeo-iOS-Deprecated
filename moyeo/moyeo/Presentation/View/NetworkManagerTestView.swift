@@ -26,12 +26,13 @@ struct NetworkManagerTestView: View {
     @State private var joinMeetingInviteCode: String = ""
     @State private var getInviteCodeMeetingId: String = ""
     @State private var getMeetingDetailMeetingId: String = ""
+    @State private var voteUpdateMeetingId: String = ""
     
     
     
     
     var body: some View {
-        VStack {
+        ScrollView {
             AppleSigninButton()
             
             Divider()
@@ -135,34 +136,48 @@ struct NetworkManagerTestView: View {
             
             // MARK: - 모임 초대코드 조회
             Button {
-                    if let meetingId = Int(getInviteCodeMeetingId) {
-                        Task {
-                            print(await meetingNetworkManager.fetchGetInviteCode(meetingId: meetingId))
-                        }
+                if let meetingId = Int(getInviteCodeMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchGetInviteCode(meetingId: meetingId))
                     }
-                } label: {
-                    Text("getInviteCode")
                 }
-                TextField("초대코드를 조회할 모임의 아이디를 입력하세요.", text: $getInviteCodeMeetingId)
-                Divider()
-                
+            } label: {
+                Text("getInviteCode")
             }
-        // MARK: - 모임 상세 조회
-        Button {
-            if let meetingId = Int(getMeetingDetailMeetingId) {
-                Task {
-                    print(await meetingNetworkManager.fetchGetMeetingDetail(meetingId: meetingId))
+            TextField("초대코드를 조회할 모임의 아이디를 입력하세요.", text: $getInviteCodeMeetingId)
+            Divider()
+            
+            
+            // MARK: - 모임 상세 조회
+            Button {
+                if let meetingId = Int(getMeetingDetailMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchGetMeetingDetail(meetingId: meetingId))
+                    }
                 }
+            } label: {
+                Text("getMeetingDetail")
             }
-        } label: {
-            Text("getMeetingDetail")
-        }
-        TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingDetailMeetingId)
-        Divider()
+            TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingDetailMeetingId)
+            Divider()
+            
+            // MARK: - 투표 수정(재투표)
+            Button {
+                if let meetingId = Int(voteUpdateMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchVoteUpdate(meetingId: meetingId, request: MeetingRequest.VoteUpdate(candidateTimes: ["2024-08-29 09:30", "2024-08-30 09:30", "2024-08-31 09:30"], candidatePlaces: ["Conference Room B", "Conference Room C"])))
+                    }
+                }
+            } label: {
+                Text("VoteUpdate")
+            }
+            TextField("재투표 할 모임 아이디를 입력하세요.", text: $voteUpdateMeetingId)
+            Divider()
             
         }
     }
-    
-    #Preview {
-        NetworkManagerTestView()
-    }
+}
+
+#Preview {
+    NetworkManagerTestView()
+}

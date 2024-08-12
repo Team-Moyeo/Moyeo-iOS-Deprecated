@@ -35,7 +35,11 @@ class MeetingResponse: ObservableObject {
             case OWNER
             case PARTICIPANTS
         }
-        
-        
+    }
+    
+    struct VoteUpdate: Codable {
+        var meetingId: Int = 0
+        var votePlaceIds: [Int] = []
+        var voteTimeIds: [Int] = []
     }
 }

@@ -85,6 +85,7 @@
 		F3860CE32C6A791F00F0EA61 /* CandidatePlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */; };
 		F3860CE52C6A87BE00F0EA61 /* MeetingNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */; };
 		F3860CE72C6A884900F0EA61 /* MeetingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */; };
+		F3860CE92C6A932100F0EA61 /* MeetingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE82C6A932100F0EA61 /* MeetingRequest.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -200,6 +201,7 @@
 		F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatePlaceResponse.swift; sourceTree = "<group>"; };
 		F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingNetworkManager.swift; sourceTree = "<group>"; };
 		F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingResponse.swift; sourceTree = "<group>"; };
+		F3860CE82C6A932100F0EA61 /* MeetingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRequest.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			children = (
 				F3860CD22C6A381200F0EA61 /* CandidateTimeRequest.swift */,
 				F3860CDC2C6A6C3800F0EA61 /* PlaceRequest.swift */,
+				F3860CE82C6A932100F0EA61 /* MeetingRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				51219E712C61BA72005EDDCD /* EditButton.swift in Sources */,
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
 				BF9795982C62541F000A121A /* PlaceModel.swift in Sources */,
+				F3860CE92C6A932100F0EA61 /* MeetingRequest.swift in Sources */,
 				F3860CE32C6A791F00F0EA61 /* CandidatePlaceResponse.swift in Sources */,
 				F3860CD02C6A35DE00F0EA61 /* CandidateTimeResponse.swift in Sources */,
 				51219E922C61BAA8005EDDCD /* GroupVoteView.swift in Sources */,

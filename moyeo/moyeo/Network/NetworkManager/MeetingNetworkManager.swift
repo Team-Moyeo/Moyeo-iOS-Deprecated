@@ -148,4 +148,40 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 투표 수정(재투표)
+    @MainActor
+    func fetchVoteUpdate(meetingId: Int, request: MeetingRequest.VoteUpdate) async -> MeetingResponse.VoteUpdate {
+        var response = MeetingResponse.VoteUpdate()
+        
+        do {
+            let requestBody = try NetworkHelper.encodeRequestBody(requestBody: request)
+            response = try await voteUpdate(meetingId: meetingId, requestBody: requestBody)
+            
+        } catch {
+            print("[fetchVoteUpdate] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func voteUpdate(meetingId: Int, requestBody: Data) async throws -> MeetingResponse.VoteUpdate {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue + "/\(meetingId)" + APIEndpoints.Path.voteUpdateValues.rawValue, queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.POST, needAuthorization: true, headers: [:], requestBody: requestBody)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.VoteUpdate>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }
