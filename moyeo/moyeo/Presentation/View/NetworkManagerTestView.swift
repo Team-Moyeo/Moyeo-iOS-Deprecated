@@ -27,6 +27,7 @@ struct NetworkManagerTestView: View {
     @State private var getInviteCodeMeetingId: String = ""
     @State private var getMeetingDetailMeetingId: String = ""
     @State private var voteUpdateMeetingId: String = ""
+    @State private var fixMeetingId: String = ""
     
     
     
@@ -172,6 +173,19 @@ struct NetworkManagerTestView: View {
                 Text("VoteUpdate")
             }
             TextField("재투표 할 모임 아이디를 입력하세요.", text: $voteUpdateMeetingId)
+            Divider()
+            
+            // MARK: - 모임 확정
+            Button {
+                if let meetingId = Int(fixMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchFixMeeting(meetingId: meetingId, request: MeetingRequest.FixMeeting(fixedTimes: ["2024-08-29 09:30", "2024-08-30 09:30", "2024-08-31 09:30"], fixedPlace: MeetingRequest.FixPlaceInfo(title: "Conference Room B", address: "456 Secondary Street, Cityville", latitude: 37.775, longitude: -122.4195))))
+                    }
+                }
+            } label: {
+                Text("fixMeeting")
+            }
+            TextField("확정할 모임 아이디를 입력하세요.", text: $fixMeetingId)
             Divider()
             
         }

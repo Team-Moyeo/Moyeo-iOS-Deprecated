@@ -42,4 +42,8 @@ class MeetingResponse: ObservableObject {
         var votePlaceIds: [Int] = []
         var voteTimeIds: [Int] = []
     }
+    
+    struct FixMeeting: Codable {
+        var meetingId: Int = 0
+    }
 }

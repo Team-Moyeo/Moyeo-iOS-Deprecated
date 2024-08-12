@@ -184,4 +184,40 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 확정
+    @MainActor
+    func fetchFixMeeting(meetingId: Int, request: MeetingRequest.FixMeeting) async -> MeetingResponse.FixMeeting {
+        var response = MeetingResponse.FixMeeting()
+        
+        do {
+            let requestBody = try NetworkHelper.encodeRequestBody(requestBody: request)
+            response = try await fixMeeting(meetingId: meetingId, requestBody: requestBody)
+            
+        } catch {
+            print("[fetchVoteUpdate] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func fixMeeting(meetingId: Int, requestBody: Data) async throws -> MeetingResponse.FixMeeting {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue + "/\(meetingId)" + APIEndpoints.Path.fix.rawValue, queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.POST, needAuthorization: true, headers: [:], requestBody: requestBody)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.FixMeeting>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }

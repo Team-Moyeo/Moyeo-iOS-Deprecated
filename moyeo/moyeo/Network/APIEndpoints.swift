@@ -26,6 +26,7 @@ enum APIEndpoints {
         case meetingsJoin = "/meetings/join"
         case meetingsInviteCode = "/meetings/invite-code"
         case voteUpdateValues = "/vote/update-values"
+        case fix = "/fix"
         
         // MARK: - candidate-times
         case candidateTimes = "/candidate-times"
