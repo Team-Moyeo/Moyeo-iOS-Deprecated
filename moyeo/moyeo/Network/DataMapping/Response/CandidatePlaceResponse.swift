@@ -23,4 +23,8 @@ class CandidatePlaceResponse {
         var longitude: Double = 0.0
         var voteCount: Int = 0
     }
+    
+    struct AddCandidatePlace: Codable {
+        var candidatePlaceId: Int = 0
+    }
 }

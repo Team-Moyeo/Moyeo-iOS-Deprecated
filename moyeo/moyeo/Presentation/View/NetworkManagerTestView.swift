@@ -17,6 +17,8 @@ struct NetworkManagerTestView: View {
     @State private var createPlaceAddress: String = ""
     @State private var createPlaceLatitude: String = ""
     @State private var createPlaceLongitude: String = ""
+    @State private var addCandidatePlaceMeetingId: String = ""
+    @State private var addCandidatePlacePlaceId: String = ""
     
     
     
@@ -67,6 +69,21 @@ struct NetworkManagerTestView: View {
             TextField("등록할 장소 주소 입력하세요.", text: $createPlaceAddress)
             TextField("등록할 장소 위도 입력하세요.", text: $createPlaceLatitude)
             TextField("등록할 장소 경도 입력하세요.", text: $createPlaceLongitude)
+            Divider()
+            
+            // MARK: - 후보 장소 등록
+            Button {
+                if let meetingId = Int(addCandidatePlaceMeetingId)
+                , let placeId = Int(addCandidatePlacePlaceId) {
+                    Task {
+                        print(await candidatePlaceNetworkManager.fetchAddCandidatePlace(meetingId: meetingId, placeId: placeId))
+                    }
+                }
+            } label: {
+                Text("addCandidatePlace")
+            }
+            TextField("등록할 미팅 아이디를 입력하세요.", text: $addCandidatePlaceMeetingId)
+            TextField("등록할 장소 아이디를 입력하세요.", text: $addCandidatePlacePlaceId)
             Divider()
 
         }

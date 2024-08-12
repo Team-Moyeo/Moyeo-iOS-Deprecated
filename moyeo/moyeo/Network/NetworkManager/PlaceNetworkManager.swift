@@ -28,19 +28,13 @@ class PlaceNetworkManager: ObservableObject {
     func createPlace(requestBody: Data) async throws -> PlaceResponse.PlaceCreate {
         let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.places.rawValue, queryItems: nil)
         
-        print("[createPlace] url : ", url)
-        
         let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.POST, needAuthorization: true, headers: [:], requestBody: requestBody)
-        
-        print("[createPlace] request : ", request)
         
         let (data, optionalResponse) = try await URLSession.shared.data(for: request)
         
-        print("[createPlace] data : ", data)
-        
         let response = try NetworkHelper.getResponse(response: optionalResponse)
         
-        print("[createPlace] response : ", response)
+        print(response)
         
         let jsonDictionary = try JSONDecoder().decode(BaseResponse<PlaceResponse.PlaceCreate>.self, from: data)
         
