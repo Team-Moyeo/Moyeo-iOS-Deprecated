@@ -72,6 +72,8 @@
 		CE3885DE2C651EE1002F22BB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3885DD2C651EE1002F22BB /* APIModel.swift */; };
 		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
 		CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */; };
+		F3860CC92C6A2E8400F0EA61 /* BaseResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */; };
+		F3860CCB2C6A319C00F0EA61 /* PlaceNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -174,6 +176,8 @@
 		CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E97B83C44CE683794A53AF28 /* Pods-moyeoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeoTests.debug.xcconfig"; path = "Target Support Files/Pods-moyeoTests/Pods-moyeoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE1379590200C73F61B69AAC /* Pods_moyeoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyeoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseProtocol.swift; sourceTree = "<group>"; };
+		F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceNetworkManager.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -393,6 +397,8 @@
 		BFD683EF2C591DEB001B31DE /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F3860CC62C6A2E6000F0EA61 /* DataMapping */,
+				F3860CC52C6A205A00F0EA61 /* NetworkManager */,
 				BFD683F22C59203A001B31DE /* APIEndpoints.swift */,
 				BF4DAE402C5B1F6D002371DC /* SignInInfo.swift */,
 				BF9795A82C64BD45000A121A /* NetworkError.swift */,
@@ -411,6 +417,22 @@
 				CE3885DD2C651EE1002F22BB /* APIModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F3860CC52C6A205A00F0EA61 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		F3860CC62C6A2E6000F0EA61 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */,
+			);
+			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		F3D0DEE22C44AF1800D5EB97 = {
@@ -760,6 +782,7 @@
 				51219E922C61BAA8005EDDCD /* GroupVoteView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */,
+				F3860CCB2C6A319C00F0EA61 /* PlaceNetworkManager.swift in Sources */,
 				CE3885DE2C651EE1002F22BB /* APIModel.swift in Sources */,
 				51219E942C61BB37005EDDCD /* GroupSetView.swift in Sources */,
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
@@ -778,6 +801,7 @@
 				51219E692C61BA72005EDDCD /* CircleImage.swift in Sources */,
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */,
+				F3860CC92C6A2E8400F0EA61 /* BaseResponseProtocol.swift in Sources */,
 				BF4DAE492C604DD6002371DC /* ProfileViewModel.swift in Sources */,
 				BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */,
 				BF4DAE452C5F9B70002371DC /* ProfileView.swift in Sources */,
