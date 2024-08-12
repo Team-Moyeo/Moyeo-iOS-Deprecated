@@ -113,4 +113,39 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 상세 조회
+    @MainActor
+    func fetchGetMeetingDetail(meetingId: Int) async -> MeetingResponse.GetMeetingDetail {
+        var response = MeetingResponse.GetMeetingDetail()
+        
+        do {
+            response = try await getMeetingDetail(meetingId: meetingId)
+            
+        } catch {
+            print("[fetchGetMeetingDetail] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func getMeetingDetail(meetingId: Int) async throws -> MeetingResponse.GetMeetingDetail {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue + "/\(meetingId)", queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.GetMeetingDetail>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }

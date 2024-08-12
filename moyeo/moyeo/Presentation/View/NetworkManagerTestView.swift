@@ -25,6 +25,7 @@ struct NetworkManagerTestView: View {
     @State private var deleteMeetingId: String = ""
     @State private var joinMeetingInviteCode: String = ""
     @State private var getInviteCodeMeetingId: String = ""
+    @State private var getMeetingDetailMeetingId: String = ""
     
     
     
@@ -146,6 +147,18 @@ struct NetworkManagerTestView: View {
                 Divider()
                 
             }
+        // MARK: - 모임 상세 조회
+        Button {
+            if let meetingId = Int(getMeetingDetailMeetingId) {
+                Task {
+                    print(await meetingNetworkManager.fetchGetMeetingDetail(meetingId: meetingId))
+                }
+            }
+        } label: {
+            Text("getMeetingDetail")
+        }
+        TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingDetailMeetingId)
+        Divider()
             
         }
     }
