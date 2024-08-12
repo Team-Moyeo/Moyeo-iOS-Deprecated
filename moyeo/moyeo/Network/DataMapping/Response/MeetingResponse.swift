@@ -16,4 +16,8 @@ class MeetingResponse: ObservableObject {
     struct JoinWithInviteCode: Codable {
         var meetingId: Int = 0
     }
+    
+    struct GetInviteCode: Codable {
+        var inviteCode: String = ""
+    }
 }

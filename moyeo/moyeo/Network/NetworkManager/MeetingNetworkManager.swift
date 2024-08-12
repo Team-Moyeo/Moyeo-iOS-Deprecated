@@ -78,4 +78,39 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 초대코드 조회
+    @MainActor
+    func fetchGetInviteCode(meetingId: Int) async -> MeetingResponse.GetInviteCode {
+        var response = MeetingResponse.GetInviteCode()
+        
+        do {
+            response = try await getInviteCode(meetingId: meetingId)
+            
+        } catch {
+            print("[fetchGetInviteCode] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func getInviteCode(meetingId: Int) async throws -> MeetingResponse.GetInviteCode {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetingsInviteCode.rawValue + "/\(meetingId)", queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.GetInviteCode>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }
