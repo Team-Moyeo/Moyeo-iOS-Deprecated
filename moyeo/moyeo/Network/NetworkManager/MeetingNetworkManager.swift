@@ -220,4 +220,81 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 결과 조회
+    @MainActor
+    func fetchGetMeetingResult(meetingId: Int) async -> MeetingResponse.GetMeetingResult {
+        var response = MeetingResponse.GetMeetingResult()
+        
+        do {
+            response = try await getMeetingResult(meetingId: meetingId)
+            
+        } catch {
+            print("[fetchGetMeetingResult] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func getMeetingResult(meetingId: Int) async throws -> MeetingResponse.GetMeetingResult {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue + "/\(meetingId)" + APIEndpoints.Path.result.rawValue, queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.GetMeetingResult>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
+    
+    // MARK: - 모임 결과 조회
+    @MainActor
+    func fetchGetMeetingsByStatus(meetingStatus: MeetingResponse.GetMeetingsByStatus.MeetingStatus?) async -> MeetingResponse.GetMeetingsByStatus {
+        var response = MeetingResponse.GetMeetingsByStatus()
+        
+        do {
+            response = try await getMeetingsByStatus(meetingStatus: meetingStatus)
+            
+        } catch {
+            print("[fetchGetMeetingsByStatus] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func getMeetingsByStatus(meetingStatus: MeetingResponse.GetMeetingsByStatus.MeetingStatus?) async throws -> MeetingResponse.GetMeetingsByStatus {
+        var queryItems: [URLQueryItem] = []
+        
+        // meetingStatus가 nil이 아닐 경우, queryItems에 추가
+        if let meetingStatus = meetingStatus {
+            queryItems.append(URLQueryItem(name: "meetingStatus", value: meetingStatus.rawValue))
+        }
+        
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetings.rawValue, queryItems: queryItems)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.GetMeetingsByStatus>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }

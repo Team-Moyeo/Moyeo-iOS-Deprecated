@@ -30,6 +30,8 @@ struct NetworkManagerTestView: View {
     @State private var voteUpdateMeetingId: String = ""
     @State private var fixMeetingId: String = ""
     @State private var getMembersByMeetingId: String = ""
+    @State private var getMeetingResultMeetingId: String = ""
+    
     
     
     
@@ -202,6 +204,31 @@ struct NetworkManagerTestView: View {
             }
             TextField("조회할 모임 아이디를 입력하세요.", text: $getMembersByMeetingId)
             Divider()
+            
+            
+            // MARK: - 모임 결과 조회
+            Button {
+                if let meetingId = Int(getMeetingResultMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchGetMeetingResult(meetingId: meetingId))
+                    }
+                }
+            } label: {
+                Text("GetMeetingResult")
+            }
+            TextField("조회할 모임 아이디를 입력하세요.", text: $getMeetingResultMeetingId)
+            Divider()
+            
+            // MARK: - 모임 리스트 조회
+            Button {
+                    Task {
+                        print(await meetingNetworkManager.fetchGetMeetingsByStatus(meetingStatus: nil))
+                    }
+            } label: {
+                Text("GetMeetingsByStatus")
+            }
+            Divider()
+        
         }
     }
 }

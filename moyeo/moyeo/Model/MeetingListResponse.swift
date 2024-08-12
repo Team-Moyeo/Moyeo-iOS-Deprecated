@@ -10,7 +10,7 @@ import Foundation
 struct MeetingListResponse: Codable {
     
     struct MeetingStatus: Codable, Hashable {
-        let meetingId: Int64
+        let meetingId: Int
         let title: String
         let deadline: String
         let meetingStatus: String

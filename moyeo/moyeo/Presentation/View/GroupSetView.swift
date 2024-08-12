@@ -218,7 +218,7 @@ struct GroupSetView: View {
                         
                         await createMeetingViewModel.createMeeting()
                         
-                        appViewModel.navigateTo(.groupVoteView)
+//                        appViewModel.navigateTo(.groupVoteView(meetingId: <#T##Int#>))
                         isPresentingGroupSetView = false
                     }
                     

@@ -46,4 +46,27 @@ class MeetingResponse: ObservableObject {
     struct FixMeeting: Codable {
         var meetingId: Int = 0
     }
+    
+    struct GetMeetingResult: Codable {
+        var title: String = ""
+        var fixedTimes: [String] = []
+        var fixedPlace: String = ""
+    }
+    
+    struct GetMeetingsByStatus: Codable {
+        var meetingList: [MeetingInfoByStatus] = []
+        
+        struct MeetingInfoByStatus: Codable {
+            var meetingId: Int = 0
+            var title: String = ""
+            var deadline: String = ""
+            var meetingStatus: MeetingStatus = MeetingStatus.CONFIRM
+        }
+        
+        enum MeetingStatus: String, Codable {
+            case PENDING
+            case CONFIRM
+            case END
+        }
+    }
 }

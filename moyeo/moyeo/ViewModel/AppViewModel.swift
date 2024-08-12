@@ -9,7 +9,7 @@ import SwiftUI
 
 enum MainRoute : Hashable {
  
-    case groupVoteView
+    case groupVoteView(meetingId: Int)
     case groupResultView
     case profileView
 }

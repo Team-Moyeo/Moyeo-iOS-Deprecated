@@ -24,6 +24,10 @@ struct MainView: View {
     @StateObject var sharedDm = SharedDateModel()
     @StateObject var createMeetingViewModel: CreateMeetingViewModel = .init()
     
+    @ObservedObject var meetingNetworkManager = MeetingNetworkManager()
+    @State private var getMeetingsByStatusDTO = MeetingResponse.GetMeetingsByStatus()
+    
+    
     var body: some View {
         VStack {
             // 확정/미확정 미팅 리스트
@@ -39,18 +43,24 @@ struct MainView: View {
             List {
                 if selectedTab == "미확정" {
                     ForEach(meetingListViewModel.disconfirmedMeetings, id: \.self) { meeting in
-                        VStack(alignment: .leading) {
-                            Text(meeting.title)
-                                .font(.headline)
-                            Text("\(meeting.formattedDeadline) 마감 예정")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
+                            Button {
+                                appViewModel.navigateTo(.groupVoteView(meetingId: Int(meeting.meetingId)))
+                            } label: {
+                                VStack(alignment: .leading) {
+                                    Text(meeting.title == "" ? "제목 없음" : meeting.title)
+                                        .font(.headline)
+                                    Text("\(meeting.formattedDeadline) 마감 예정")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                        
+                        
                     }
                 } else {
                     ForEach(meetingListViewModel.confirmedMeetings, id: \.self) { meeting in
                         VStack(alignment: .leading) {
-                            Text(meeting.title)
+                            Text(meeting.title == "" ? "제목 없음" : meeting.title)
                                 .font(.headline)
                             Text("\(meeting.formattedDeadline) 마감 예정")
                                 .font(.subheadline)
@@ -64,6 +74,7 @@ struct MainView: View {
                 if selectedTab == "미확정" {
                     Task {
                         await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
+                        getMeetingsByStatusDTO = await meetingNetworkManager.fetchGetMeetingsByStatus(meetingStatus: MeetingResponse.GetMeetingsByStatus.MeetingStatus.CONFIRM)
                     }
                 }
                 
@@ -106,8 +117,15 @@ struct MainView: View {
                         presentAlert = true
                     }
                     .alert("초대코드 입력", isPresented: $presentAlert, actions: {
-                        TextField("영문/숫자 30자리", text: $inviteCode)
-                        Button("확인", action: {})
+                        TextField("영문/숫자 8자리", text: $inviteCode)
+                        Button {
+                            Task {
+                                await meetingNetworkManager.fetchJoinMeetingWithInviteCode(inviteCode: inviteCode)
+                                await meetingListViewModel.fetchMeetings(meetingStatus: "")
+                            }
+                        } label: {
+                            Text("확인")
+                        }
                         Button("취소", role: .cancel, action: {})
                     }, message: {
                         Text("공유받은 초대코드를 입력해주세요.")
@@ -164,9 +182,9 @@ struct MainView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        MainView()
-            .environment(AppViewModel())
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        MainView()
+//            .environment(AppViewModel())
+//    }
+//}
