@@ -16,7 +16,7 @@ class CreateMeetingViewModel: ObservableObject {
     @Published var endTime: Date = Date()
     @Published var fixedTimes: [String]?
     @Published var places: [Place] = []
-    @Published var fixedPlace: PlaceInfo?
+    @Published var fixedPlace: FixedPlaceInfo?
     @Published var deadline: String = ""
     @Published var meetingId: Int64 = 0
     

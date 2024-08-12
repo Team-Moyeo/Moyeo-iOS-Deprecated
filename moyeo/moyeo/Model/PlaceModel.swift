@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SearchResponse: Codable {
-    let items: [PlaceResponse]
+    let items: [PlaceInfo]
 }
 
-struct PlaceResponse: Codable {
+struct PlaceInfo: Codable {
     let title: String
     let roadAddress: String
     let mapx: String

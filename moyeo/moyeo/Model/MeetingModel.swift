@@ -26,7 +26,7 @@ struct MeetingInfo: Codable {
     let deadline: String
 }
 
-struct PlaceInfo: Codable {
+struct FixedPlaceInfo: Codable {
     let title: String
     let address: String
     let latitude: Double

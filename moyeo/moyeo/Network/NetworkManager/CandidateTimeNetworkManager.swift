@@ -27,18 +27,19 @@ class CandidateTimeNetworkManager: ObservableObject {
     func getMeetingDetailTimes(meetingId: Int) async throws -> CandidateTimeResponse.GetMeetingDetailTimes {
         let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.candidateTimes.rawValue + "/\(meetingId)", queryItems: nil)
         
-        print("[getMeetingDetailTimes]: url : ", url)
+        print("[getMeetingDetailTimes] url : ", url)
         
-        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:])
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:], requestBody: nil)
         
-        print("[getMeetingDetailTimes]: request : ", request)
+        print("[getMeetingDetailTimes] request : ", request)
         
         let (data, optionalResponse) = try await URLSession.shared.data(for: request)
         
+        print("[getMeetingDetailTimes] data : ", data)
+        
         let response = try NetworkHelper.getResponse(response: optionalResponse)
         
-        print("[getMeetingDetailTimes]: data : ", data)
-        print("[getMeetingDetailTimes]: response : ", response)
+        print("[getMeetingDetailTimes] response : ", response)
         
         let jsonDictionary = try JSONDecoder().decode(BaseResponse<CandidateTimeResponse.GetMeetingDetailTimes>.self, from: data)
         
