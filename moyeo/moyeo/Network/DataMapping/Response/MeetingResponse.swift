@@ -12,4 +12,8 @@ class MeetingResponse: ObservableObject {
     struct DeleteMeeting: Codable {
         var meetingId: Int = 0
     }
+    
+    struct JoinWithInviteCode: Codable {
+        var meetingId: Int = 0
+    }
 }

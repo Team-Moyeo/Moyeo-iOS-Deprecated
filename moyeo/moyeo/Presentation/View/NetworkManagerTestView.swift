@@ -23,6 +23,7 @@ struct NetworkManagerTestView: View {
     @State private var deleteCandidatePlaceMeetingId: String = ""
     @State private var deleteCandidatePlaceId: String = ""
     @State private var deleteMeetingId: String = ""
+    @State private var joinMeetingInviteCode: String = ""
     
     
     
@@ -62,7 +63,7 @@ struct NetworkManagerTestView: View {
             // MARK: - 장소 등록
             Button {
                 if let doubleLatitude = Double(createPlaceLatitude)
-                , let doubleLongitude = Double(createPlaceLongitude) {
+                    , let doubleLongitude = Double(createPlaceLongitude) {
                     Task {
                         print(await placeNetworkManager.fetchCreatePlace(request: PlaceRequest.PlaceCreate(title: createPlaceTitle, address: createPlaceAddress, latitude: doubleLatitude, longitude: doubleLongitude)))
                     }
@@ -79,7 +80,7 @@ struct NetworkManagerTestView: View {
             // MARK: - 후보 장소 삭제
             Button {
                 if let meetingId = Int(addCandidatePlaceMeetingId)
-                , let placeId = Int(addCandidatePlacePlaceId) {
+                    , let placeId = Int(addCandidatePlacePlaceId) {
                     Task {
                         print(await candidatePlaceNetworkManager.fetchAddCandidatePlace(meetingId: meetingId, placeId: placeId))
                     }
@@ -90,11 +91,11 @@ struct NetworkManagerTestView: View {
             TextField("등록할 모임 아이디를 입력하세요.", text: $addCandidatePlaceMeetingId)
             TextField("등록할 장소 아이디를 입력하세요.", text: $addCandidatePlacePlaceId)
             Divider()
-
+            
             // MARK: - 후보 장소 삭제
             Button {
                 if let meetingId = Int(deleteCandidatePlaceMeetingId)
-                , let candidatePlaceId = Int(deleteCandidatePlaceId) {
+                    , let candidatePlaceId = Int(deleteCandidatePlaceId) {
                     Task {
                         print(await candidatePlaceNetworkManager.fetchDeleteCandidatePlace(meetingId: meetingId, candidatePlaceId: candidatePlaceId))
                     }
@@ -106,7 +107,7 @@ struct NetworkManagerTestView: View {
             TextField("삭제할 후보 장소 아이디를 입력하세요.", text: $deleteCandidatePlaceId)
             Divider()
             
-            // MARK: - 미팅 삭제
+            // MARK: - 모임 삭제
             Button {
                 if let meetingId = Int(deleteMeetingId) {
                     Task {
@@ -118,9 +119,20 @@ struct NetworkManagerTestView: View {
             }
             TextField("삭제할 모임 아이디를 입력하세요.", text: $deleteMeetingId)
             Divider()
-
+            
+            // MARK: - 모임 가입
+            Button {
+                Task {
+                    print(await meetingNetworkManager.fetchJoinMeetingWithInviteCode(inviteCode: joinMeetingInviteCode))
+                }
+            } label: {
+                Text("JoinMeeting")
+            }
+            TextField("가입할 모임의 초대코드를 입력하세요.", text: $joinMeetingInviteCode)
+            Divider()
+            
         }
-
+        
     }
 }
 

@@ -23,6 +23,7 @@ enum APIEndpoints {
         
         // MARK: - 모임
         case meetings = "/meetings"
+        case meetingsJoin = "/meetings/join"
         
         // MARK: - candidate-times
         case candidateTimes = "/candidate-times"

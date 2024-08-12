@@ -43,4 +43,39 @@ class MeetingNetworkManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: - 모임 가입
+    @MainActor
+    func fetchJoinMeetingWithInviteCode(inviteCode: String) async -> MeetingResponse.JoinWithInviteCode {
+        var response = MeetingResponse.JoinWithInviteCode()
+        
+        do {
+            response = try await joinMeetingWithInviteCode(inviteCode: inviteCode)
+            
+        } catch {
+            print("[fetchDeleteMeeting] Error: \(error)")
+        }
+        
+        return response
+    }
+    
+    func joinMeetingWithInviteCode(inviteCode: String) async throws -> MeetingResponse.JoinWithInviteCode {
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.meetingsJoin.rawValue + "/\(inviteCode)", queryItems: nil)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.POST, needAuthorization: true, headers: [:], requestBody: nil)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print(response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<MeetingResponse.JoinWithInviteCode>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
+    }
 }
