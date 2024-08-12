@@ -16,7 +16,7 @@ struct GroupVoteView: View {
     @State private var isPresentingMapWideView = false
     @State private var isPresentingGroupConfirmView = false
     @State private var isShowingTimeTable = false
-  
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -80,27 +80,25 @@ struct GroupVoteView: View {
         }
         .onAppear {
             sharedDm.meetingName = createMeetingViewModel.title
-            print("아아아 \(createMeetingViewModel.endDate)")
-            if let startDate = createMeetingViewModel.startDate.toDate() {
-                print("😌startDate: \(startDate.toString())")
-                sharedDm.startDate = startDate
-            }
-            if let endDate = createMeetingViewModel.endDate.toDate() {
-                print("😌endDate: \(endDate.toString())")
+            sharedDm.meetingId = createMeetingViewModel.meetingId
+            
+            sharedDm.startDate = Calendar.current.startOfDay(for: createMeetingViewModel.startDate)
+            if let endDate = TimeFixToMidNight(date: createMeetingViewModel.endDate) {
                 sharedDm.endDate = endDate
             }
             
-            sharedDm.meetingId = createMeetingViewModel.meetingId
+            if let numberOfDays =  daysBetween(start: TimeFixToZero(date: createMeetingViewModel.startDate)! , end: TimeFixToMidNight(date: createMeetingViewModel.endDate)! ) {
+                sharedDm.numberOfDays = numberOfDays
+            } else {
+                sharedDm.numberOfDays = 7
+            }
+            
             print("createMeetingViewModel.meetingId☠️\(createMeetingViewModel.meetingId)")
             print("sharedDm.meetingId☠️\(sharedDm.meetingId)")
             
             sharedDm.places = createMeetingViewModel.places
             sharedDm.deadLine = createMeetingViewModel.deadline
-            if let numberOfDays =  daysBetween(start: TimeFixToZero(date: sharedDm.startDate)! , end: TimeFixToMidNight(date: sharedDm.endDate)! ) {
-                sharedDm.numberOfDays = numberOfDays
-            } else {
-                sharedDm.numberOfDays = 7
-            }
+            
         }
     }
 }
@@ -116,6 +114,7 @@ extension String {
             return nil
         }
     }
+
 }
 
 

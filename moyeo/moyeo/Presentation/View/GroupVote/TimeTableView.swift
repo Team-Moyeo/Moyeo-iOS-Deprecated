@@ -535,28 +535,19 @@ struct TimeTableView: View {
                     
                     
                     var request = URLRequest(url: url)
-                    let headers = [
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer \(accessToken)",
-                    ]
-                    
-                    let testTimes =  [
-                        "2024-08-25 09:00:00",
-                        "2024-08-25 09:30:00",
-                        "2024-08-26 09:00:00",
-                        "2024-08-26 09:30:00"
-                    ]
-                    let testPlaces = [
-                        "Conference Room B"
-                    ]
+
+                    request.httpMethod = "POST"
+                    request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     
                     let availableTimeSlot = Array(availableTimeSet)
                     
                     print("availableTimeSlot: \(availableTimeSlot)")
                     let convertedAvailableTimeSlot  = convertDateStringTo24Hour(dateString: availableTimeSlot)
-                    print("convertedAvailableTimeSlot: \(convertedAvailableTimeSlot )")
+                    print("convertedAvailableTimeSlot: \(convertedAvailableTimeSlot)")
                     /// 장소 추가해야함
                     voteInfo = VoteInfo(candidateTimes: convertedAvailableTimeSlot , candidatePlaces: [])
+                    print("😄\(voteInfo)")
                     // JSON 인코더 생성
                     let encoder = JSONEncoder()
                     
@@ -572,11 +563,10 @@ struct TimeTableView: View {
                     catch {
                         print(error)
                     }
-                    
-                    request.allHTTPHeaderFields = headers
-                    request.httpMethod = "POST"
+
                     Task{
                         do {
+                            try await getMeetings()
                             let response =  try await apiService.asyncPost(for: request)
                             print("asyncPost Success \(response)")
                             
@@ -638,6 +628,37 @@ struct TimeTableView: View {
             }
         }
     }
+    
+    /// 임시
+    @MainActor
+    func getMeetings() async throws {
+        
+        // URL 객체 생성
+        guard let url = URL(string: "https://5techdong.store/meetings/\(sharedDm.meetingId)") else {
+            throw NetworkError.cannotCreateURL
+        }
+        do {
+            let accessToken = try SignInInfo.shared.readToken(.access)
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            
+            
+            let (data, httpResponse) = try await URLSession.shared.data(for: request)
+            print("❤️@생성된 모임조회@TIMETABLE: \(String(data: data, encoding: .utf8) ?? "")")
+            
+            if let httpResponse = httpResponse as? HTTPURLResponse,
+               !(200..<300).contains(httpResponse.statusCode) {
+                print("Error: \(httpResponse.statusCode) badRequest")
+                throw NetworkError.badRequest
+            }
+        } catch {
+            print("Error getMeetings: \(error.localizedDescription)")
+        }
+    }
+    
+    
     private func lastTwoDigits(year : Int) ->String {
         
         let yearString = String(year)

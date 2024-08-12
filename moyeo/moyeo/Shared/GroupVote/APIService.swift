@@ -147,7 +147,7 @@ class APIService<T: Decodable, S:Decodable> {
     func asyncPost(for urlRequest: URLRequest) async throws -> S {
        
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
+        print("❤️@투표완료: \(String(data: data, encoding: .utf8) ?? "")")
         
         print("asyncPost method:\(urlRequest.httpMethod?.description ?? "") data: \(data.description) response :\(response)")
         

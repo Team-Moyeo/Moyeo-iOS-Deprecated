@@ -159,16 +159,27 @@ struct TimeTableConfirmView: View {
               
                 
                 Button(action: {
-                
-                    for i in  0..<47 {
-                        for j in 0..<7 {
-                            let index = i * 7 + j
-                            allSchedule[ index ] = Double (generateRandomNumber())
-                            print(" \(allSchedule[ index ] )")
-                        }
+                    Task {
+                        await  getTimeTableHit(meetingID: sharedDm.meetingId)
                     }
+                    //                    for i in  0..<47 {
+                    //                        for j in 0..<7 {
+                    //                            let index = i * 7 + j
+                    //                            allSchedule[ index ] = Double (generateRandomNumber())
+                    //                            print(" \(allSchedule[ index ] )")
+                    //                        }
+                    //                    }
                     showAllSchedule.toggle()
                     print("showAllSchedule \(showAllSchedule)")
+//                    for i in  0..<47 {
+//                        for j in 0..<7 {
+//                            let index = i * 7 + j
+//                            allSchedule[ index ] = Double (generateRandomNumber())
+//                            print(" \(allSchedule[ index ] )")
+//                        }
+//                    }
+//                    showAllSchedule.toggle()
+//                    print("showAllSchedule \(showAllSchedule)")
                     
                 }) {
                     Image(systemName: "person.2" )
@@ -480,6 +491,102 @@ struct TimeTableConfirmView: View {
             }
         }
     }
+    
+    func getTimeTableHit(meetingID: Int64) async{
+        let apiService  = APIService< BaseResponse<VotedTimesResult>, BaseResponse<VotedTimesResult>>()
+        var TimeCellToTuple : Set<IntTuple> = []
+        var allSchedule = Array(repeating: 0, count: 48 * 7)
+        //https://5techdong.store/candidate-times/{meetingId}
+        let urlString = "https://5techdong.store/candidate-times/\(meetingID)"
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        
+        allSchedule.removeAll()
+        print("getTimeTableHit  url :  \(url)")
+        let accessToken: String
+        do {
+            accessToken = try SignInInfo.shared.readToken(.access)
+        } catch {
+            print("Failed to retrieve access token: \(error)")
+            return
+        }
+        var request = URLRequest(url: url)
+        
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(accessToken)",
+        ]
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "GET"
+        
+        do {
+            print("request body: \(request.httpBody)")
+            let  decoded = try  await apiService.asyncLoad(for: request)
+            print("decoded : \(decoded)")
+            
+            convertTimeCellToTuple(voteTimes: decoded.result)
+            
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted // 보기 좋게 출력
+            
+            let jsonData = try encoder.encode(decoded)
+            
+            // JSON 데이터를 문자열로 변환
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("Decoded JSON:\n\(jsonString)")
+            } else {
+                print("Failed to convert JSON data to string.")
+            }
+        } catch{
+            print("decoding error \(error)")
+        }
+        
+    }
+    
+    func convertTimeCellToTuple( voteTimes : VotedTimesResult?) {
+        
+        
+        var row :Int = 0
+        var col : Int = 0
+        var voteTimeCellToTuple : Set<IntTuple> = []
+        
+        guard let voteTimes = voteTimes else {
+            print("voteTimesResult is nil")
+            return
+        }
+        print("voteTimes  count \(voteTimes.totalCandidateTimes.count   )")
+        for item in voteTimes.totalCandidateTimes {
+            let end = dateStringToDate(dateString: String(item.dateTime.prefix(10))) ?? sharedDm.startDate
+            if let  days = daysBetween(start: sharedDm.startDate, end: end ) {
+                col = days - 1
+                print("start : \(sharedDm.startDate) end:  \(end) daysDiff: \(col)")
+            }
+            print("item.dateTime.suffix(7)\(item)  \(item.dateTime.suffix(7))")
+            
+            if let timeSlot2 = timeSlot2.firstIndex(where: { $0.contains(String(item.dateTime.suffix(5))) }) {
+                
+                row = timeSlot2
+                print("item ->(Row, Col) time: \(item.dateTime.suffix(7))   (\(row) , \(col))")
+                
+                let index = row * sharedDm.numberOfDays  + col
+                
+                allSchedule[index] = Double(item.voteCount ?? 0 ) /   Double(voteTimes.numberOfPeople)
+                
+                
+            } else {
+                
+                print("timeSlot2 error")
+            }
+            
+            
+        }
+        
+    }
+    
+    
     private func lastTwoDigits(year : Int) ->String {
         
         let yearString = String(year)
