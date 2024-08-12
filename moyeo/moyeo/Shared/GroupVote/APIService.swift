@@ -24,10 +24,10 @@ class APIService<T: Decodable, S:Decodable> {
     
     //혹시 모르니  public
     var cancellables = Set<AnyCancellable>()
-    var responseData: T?
-    var response : S?
+    var postData: T?
+    var responseData : S?
     
-    func get(for url: URL) -> AnyPublisher<T, Error> {
+    func get(for url: URL) -> AnyPublisher<S, Error> {
         URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { element -> Data in
@@ -38,7 +38,7 @@ class APIService<T: Decodable, S:Decodable> {
                 
                 return element.data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: S.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -53,7 +53,7 @@ class APIService<T: Decodable, S:Decodable> {
                             print("Failed with error: \(error)")
                         }
                     },
-                    receiveValue: { [weak self] (response: T) in
+                    receiveValue: { [weak self] (response: S) in
                         self?.responseData = response
                         print("Received value: \(response)")
                         // response에 대한 추가 작업 수행
@@ -63,20 +63,20 @@ class APIService<T: Decodable, S:Decodable> {
         }
         
     
-        func getResponseData() -> T? {
+        func getResponseData() -> S? {
             return responseData
         }
 
     
     // combine --> async await 이 간단함
-    func asyncLoad(for url: URL) async throws -> T {
+    func asyncLoad(for url: URL) async throws -> S {
       
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
 
-        guard let decoded = try? JSONDecoder().decode(T.self, from: data)
+        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
         else { throw URLError(.cannotDecodeContentData)}
 
         return decoded
@@ -84,7 +84,7 @@ class APIService<T: Decodable, S:Decodable> {
     }
 // URLRequest Version
     
-    func get(for urlRequest: URLRequest) -> AnyPublisher<T, Error> {
+    func get(for urlRequest: URLRequest) -> AnyPublisher<S, Error> {
         URLSession.shared
             .dataTaskPublisher(for: urlRequest)
             .tryMap { element -> Data in
@@ -95,7 +95,7 @@ class APIService<T: Decodable, S:Decodable> {
                 
                 return element.data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: S.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -110,7 +110,7 @@ class APIService<T: Decodable, S:Decodable> {
                             print("Failed with error: \(error)")
                         }
                     },
-                    receiveValue: { [weak self] (response: T) in
+                    receiveValue: { [weak self] (response: S) in
                         self?.responseData = response
                         print("Received value: \(response)")
                         // response에 대한 추가 작업 수행
