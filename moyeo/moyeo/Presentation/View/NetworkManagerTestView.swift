@@ -11,6 +11,7 @@ struct NetworkManagerTestView: View {
     @ObservedObject var candidateTimeNetworkManager = CandidateTimeNetworkManager()
     @ObservedObject var candidatePlaceNetworkManager = CandidatePlaceNetworkManager()
     @ObservedObject var placeNetworkManager = PlaceNetworkManager()
+    @ObservedObject var meetingNetworkManager = MeetingNetworkManager()
     @State private var getMeetingDetailTimesMeetingId: String = ""
     @State private var getMeetingDetailPlacesMeetingId: String = ""
     @State private var createPlaceTitle: String = ""
@@ -21,6 +22,8 @@ struct NetworkManagerTestView: View {
     @State private var addCandidatePlacePlaceId: String = ""
     @State private var deleteCandidatePlaceMeetingId: String = ""
     @State private var deleteCandidatePlaceId: String = ""
+    @State private var deleteMeetingId: String = ""
+    
     
     
     
@@ -102,6 +105,20 @@ struct NetworkManagerTestView: View {
             TextField("삭제할 모임 아이디를 입력하세요.", text: $deleteCandidatePlaceMeetingId)
             TextField("삭제할 후보 장소 아이디를 입력하세요.", text: $deleteCandidatePlaceId)
             Divider()
+            
+            // MARK: - 미팅 삭제
+            Button {
+                if let meetingId = Int(deleteMeetingId) {
+                    Task {
+                        print(await meetingNetworkManager.fetchDeleteMeeting(meetingId: meetingId, candidatePlaceId: meetingId))
+                    }
+                }
+            } label: {
+                Text("DeleteMeeting")
+            }
+            TextField("삭제할 모임 아이디를 입력하세요.", text: $deleteMeetingId)
+            Divider()
+
         }
 
     }

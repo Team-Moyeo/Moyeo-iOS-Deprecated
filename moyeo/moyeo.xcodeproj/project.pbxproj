@@ -83,6 +83,8 @@
 		F3860CDF2C6A6C4000F0EA61 /* PlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */; };
 		F3860CE12C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */; };
 		F3860CE32C6A791F00F0EA61 /* CandidatePlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */; };
+		F3860CE52C6A87BE00F0EA61 /* MeetingNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */; };
+		F3860CE72C6A884900F0EA61 /* MeetingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -196,6 +198,8 @@
 		F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResponse.swift; sourceTree = "<group>"; };
 		F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatePlaceNetworkManager.swift; sourceTree = "<group>"; };
 		F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidatePlaceResponse.swift; sourceTree = "<group>"; };
+		F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingNetworkManager.swift; sourceTree = "<group>"; };
+		F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingResponse.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -445,6 +449,7 @@
 				F3860CCC2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift */,
 				F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */,
 				F3860CE02C6A787400F0EA61 /* CandidatePlaceNetworkManager.swift */,
+				F3860CE42C6A87BE00F0EA61 /* MeetingNetworkManager.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				F3860CCF2C6A35DE00F0EA61 /* CandidateTimeResponse.swift */,
 				F3860CDE2C6A6C4000F0EA61 /* PlaceResponse.swift */,
 				F3860CE22C6A791F00F0EA61 /* CandidatePlaceResponse.swift */,
+				F3860CE62C6A884900F0EA61 /* MeetingResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -835,6 +841,7 @@
 				BFB70E622C56B34E00D3C616 /* AuthViewModel.swift in Sources */,
 				51219E6F2C61BA72005EDDCD /* Array+Extension.swift in Sources */,
 				51FD50B22C538326008C5552 /* MemberPopupView.swift in Sources */,
+				F3860CE52C6A87BE00F0EA61 /* MeetingNetworkManager.swift in Sources */,
 				BFD683F32C59203A001B31DE /* APIEndpoints.swift in Sources */,
 				BFB70E7D2C5751DB00D3C616 /* Helper+CustomFont.swift in Sources */,
 				51219E6A2C61BA72005EDDCD /* CircleImageListView.swift in Sources */,
@@ -851,6 +858,7 @@
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				F3860CDF2C6A6C4000F0EA61 /* PlaceResponse.swift in Sources */,
 				51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */,
+				F3860CE72C6A884900F0EA61 /* MeetingResponse.swift in Sources */,
 				F3860CC92C6A2E8400F0EA61 /* BaseResponseProtocol.swift in Sources */,
 				F3860CD72C6A3A5C00F0EA61 /* NetworkHelper.swift in Sources */,
 				BF4DAE492C604DD6002371DC /* ProfileViewModel.swift in Sources */,
