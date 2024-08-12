@@ -61,9 +61,12 @@ struct MainView: View {
             }
             .listStyle(.inset)
             .onAppear {
-                Task {
-                    await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
+                if selectedTab == "미확정" {
+                    Task {
+                        await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
+                    }
                 }
+                
             }
             
             Spacer()
