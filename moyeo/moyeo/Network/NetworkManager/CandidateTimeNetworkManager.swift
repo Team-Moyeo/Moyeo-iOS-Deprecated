@@ -9,6 +9,7 @@ import Foundation
 
 class CandidateTimeNetworkManager: ObservableObject {
     
+    // MARK: - 모임 상세 조회(시간)
     @MainActor
     func fetchGetMeetingDetailTimes(request: CandidateTimeRequest.GetMeetingDetailTimes) async -> CandidateTimeResponse.GetMeetingDetailTimes {
         var response = CandidateTimeResponse.GetMeetingDetailTimes()
@@ -24,9 +25,28 @@ class CandidateTimeNetworkManager: ObservableObject {
     }
     
     func getMeetingDetailTimes(meetingId: Int) async throws -> CandidateTimeResponse.GetMeetingDetailTimes {
-        NetworkHelper.setUrlComponet(path: APIEndpoints.Path.candidateTimes, queryItems: <#T##[URLQueryItem]?#>)
+        let url = try NetworkHelper.setUrlComponet(path: APIEndpoints.Path.candidateTimes.rawValue + "/\(meetingId)", queryItems: nil)
         
-        return CandidateTimeResponse.GetMeetingDetailTimes()
+        print("[getMeetingDetailTimes]: url : ", url)
+        
+        let request = try NetworkHelper.setUrlRequest(url: url, httpMethod: NetworkHelper.HttpMethod.GET, needAuthorization: true, headers: [:])
+        
+        print("[getMeetingDetailTimes]: request : ", request)
+        
+        let (data, optionalResponse) = try await URLSession.shared.data(for: request)
+        
+        let response = try NetworkHelper.getResponse(response: optionalResponse)
+        
+        print("[getMeetingDetailTimes]: data : ", data)
+        print("[getMeetingDetailTimes]: response : ", response)
+        
+        let jsonDictionary = try JSONDecoder().decode(BaseResponse<CandidateTimeResponse.GetMeetingDetailTimes>.self, from: data)
+        
+        guard let result = jsonDictionary.result else {
+            throw NetworkError.decodeFailed
+        }
+        
+        return result
     }
     
 }

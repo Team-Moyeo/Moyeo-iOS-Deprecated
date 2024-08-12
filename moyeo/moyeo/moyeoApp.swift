@@ -19,7 +19,8 @@ struct moyeoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $vm.appPath) {
-                ContentView()
+                NetworkManagerTestView()
+                    .environment(AuthViewModel())
             }
         }
         .environment(vm)

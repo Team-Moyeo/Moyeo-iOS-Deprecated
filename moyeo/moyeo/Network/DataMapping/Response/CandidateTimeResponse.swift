@@ -11,7 +11,7 @@ class CandidateTimeResponse {
     
     // MARK: - 모임 상세 조회(시간)
     struct GetMeetingDetailTimes: Codable {
-        var myVotedtimes: [String] = []
+        var myVotedTimes: [String] = []
         var totalCandidateTimes: [CandidateTimeInfo] = []
         var numberOfPeople: Int = 0
     }
