@@ -131,8 +131,8 @@ struct GroupSetView: View {
                     if votePlace {
                         // 새로운 장소가 추가되면 해당 섹션에 리스트 형태로 장소가 들어간다
                         List {
-                            ForEach(createMeetingViewModel.places) { place in
-                                Text("\(place.name)")
+                            ForEach(createMeetingViewModel.places, id: \.self) { addedPlace in
+                                Text("\(addedPlace.name)")
                             }
                             Button(action: {
                                 placeViewModel.isPresentingPlaceSearchView.toggle()

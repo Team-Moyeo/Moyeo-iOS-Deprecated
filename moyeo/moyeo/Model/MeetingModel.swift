@@ -10,7 +10,7 @@ import Foundation
 struct MeetingResponse {
     
     struct Meeting: Codable {
-        let meetingId: Int64
+        let meetingId: Int
     }
 }
 

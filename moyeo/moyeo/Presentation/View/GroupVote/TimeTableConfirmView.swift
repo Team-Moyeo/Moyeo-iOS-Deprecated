@@ -12,6 +12,7 @@ struct TimeTableConfirmView: View {
     @Environment(AppViewModel.self) var appViewModel
     
     @ObservedObject var sharedDm : SharedDateModel
+    // @ObservedObject var candidateTimeNetworkManager: CandidateTimeNetworkManager
     
     @State private var fixedColumnWidth: CGFloat = 55
     @State private var fixedRowHeight : CGFloat = 30
@@ -158,8 +159,10 @@ struct TimeTableConfirmView: View {
                 
                 
                 Button(action: {
+                    
                     Task {
                         await  getTimeTableHit(meetingID: sharedDm.meetingId)
+//                        await candidateTimeNetworkManager.fetchGetMeetingDetailTimes(meetingId: sharedDm.meetingId)
                     }
                     
                     showAllSchedule.toggle()
@@ -493,7 +496,7 @@ struct TimeTableConfirmView: View {
         let convertedFinalTimeSlot  = convertDateStringTo24Hour(dateString: finalTimeSlot)
         print("convertedFinalTimeSlot: \(convertedFinalTimeSlot)")
         // 임시
-        let tempPlace = PlaceInfo(title: "대한민국",address: "포항",latitude:35.3528, longitude: 129.3135)
+        let tempPlace = FixedPlaceInfo(title: "대한민국",address: "포항",latitude:35.3528, longitude: 129.3135)
         
         let fixedSchedule = FixedSchedule(fixedTimes: convertedFinalTimeSlot, fixedPlace: tempPlace)
         let encoder = JSONEncoder()
@@ -534,7 +537,7 @@ struct TimeTableConfirmView: View {
     }
     
     
-    func getTimeTableHit(meetingID: Int64) async{
+    func getTimeTableHit(meetingID: Int) async{
         let apiService  = APIService< BaseResponse<VotedTimesResult>, BaseResponse<VotedTimesResult>>()
         var TimeCellToTuple : Set<IntTuple> = []
         var allSchedule = Array(repeating: 0, count: 48 * 7)
@@ -857,11 +860,3 @@ struct TimeTableConfirmView: View {
         }
     }
 }
-
-#Preview {
-    
-    TimeTableConfirmView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
-    
-}
-
-

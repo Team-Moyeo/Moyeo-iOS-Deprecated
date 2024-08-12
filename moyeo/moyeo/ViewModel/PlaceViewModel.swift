@@ -48,7 +48,7 @@ extension PlaceViewModel {
                       let longitude = Double(item.mapx) else { return nil }
 
                 return Place(
-                    name: item.title,
+                    name: stripHTMLTags(from: item.title),
                     roadAddress: item.roadAddress,
                     latitude: latitude / 1e7,
                     longitude: longitude / 1e7,
@@ -112,6 +112,21 @@ extension PlaceViewModel {
         } catch {
             print("Error posting data: \(error)")
             return false
+        }
+    }
+    
+    func stripHTMLTags(from string: String) -> String {
+        // 정규식 패턴으로 HTML 태그를 매칭합니다.
+        let regexPattern = "<[^>]+>"
+        
+        // 정규식을 사용해 HTML 태그를 빈 문자열로 대체합니다.
+        if let regex = try? NSRegularExpression(pattern: regexPattern, options: .caseInsensitive) {
+            let range = NSRange(location: 0, length: string.utf16.count)
+            let cleanedString = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
+            return cleanedString
+        } else {
+            // 정규식 생성에 실패한 경우, 원본 문자열을 반환합니다.
+            return string
         }
     }
 }

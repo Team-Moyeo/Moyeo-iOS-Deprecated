@@ -17,12 +17,14 @@ struct GroupVoteView: View {
     @State private var isPresentingGroupConfirmView = false
     @State private var isShowingTimeTable = false
     
+    // @StateObject var candidateTimeNetworkManager = CandidateTimeNetworkManager()
+    
     var body: some View {
         ScrollView {
             VStack {
                 Spacer()
                 
-                TimeTableView(sharedDm : sharedDm)
+                TimeTableView(sharedDm: sharedDm)
                 
                 Button(action: {
                     // 사용자의 역할(role)에 따라 '설정 아이콘' 또는 '초대하기 버튼'
@@ -96,7 +98,8 @@ struct GroupVoteView: View {
             print("createMeetingViewModel.meetingId☠️\(createMeetingViewModel.meetingId)")
             print("sharedDm.meetingId☠️\(sharedDm.meetingId)")
             
-            sharedDm.places = createMeetingViewModel.places
+//            sharedDm.places = createMeetingViewModel.places
+            // createPlace가지고 candidatePlace request
             sharedDm.deadLine = createMeetingViewModel.deadline
             
         }
@@ -114,7 +117,7 @@ extension String {
             return nil
         }
     }
-
+    
 }
 
 

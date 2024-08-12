@@ -15,10 +15,10 @@ class CreateMeetingViewModel: ObservableObject {
     @Published var startTime: Date = Date()
     @Published var endTime: Date = Date()
     @Published var fixedTimes: [String]?
-    @Published var places: [Place] = []
+    @Published var places: [AddedPlaceInfo] = []
     @Published var fixedPlace: FixedPlaceInfo?
     @Published var deadline: String = ""
-    @Published var meetingId: Int64 = 0
+    @Published var meetingId: Int = 0
     
 }
 
@@ -119,16 +119,16 @@ extension CreateMeetingViewModel {
             ]
         }
         
-        if !places.isEmpty {
-            payload["candidatePlaces"] = places.map { place in
-                [
-                    "title": place.name,
-                    "address": place.roadAddress,
-                    "latitude": place.latitude,
-                    "longitude": place.longitude
-                ]
-            }
-        }
+//        if !places.isEmpty {
+//            payload["candidatePlaces"] = places.map { place in
+//                [
+//                    "title": place.name,
+//                    "address": place.roadAddress,
+//                    "latitude": place.latitude,
+//                    "longitude": place.longitude
+//                ]
+//            }
+//        }
         print("meeting잘 들어갔나 봅시다. \(payload)")
         return payload
     }

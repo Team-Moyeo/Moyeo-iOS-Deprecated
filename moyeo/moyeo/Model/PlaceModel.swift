@@ -38,3 +38,8 @@ struct Place: Identifiable, Codable{
         self.meetingId = meetingId
     }
 }
+
+struct AddedPlaceInfo: Codable, Hashable {
+    let placeId: Int
+    let name: String
+}

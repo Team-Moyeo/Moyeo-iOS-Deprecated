@@ -32,7 +32,7 @@ struct CandidatePlace: Codable {
 struct MeetingListResult :Codable  {
     let meetingList: [Meeting]
     struct Meeting: Codable {
-        let meetingId: Int64
+        let meetingId: Int
         let title: String
         let deadline: String
         let meetingStatus: String
@@ -41,7 +41,7 @@ struct MeetingListResult :Codable  {
 
 
 struct MeetingResult :Codable {
-    let meetingId: Int64
+    let meetingId: Int
 
 }
 
@@ -142,6 +142,6 @@ struct VotedPlacesResult: Codable {
 struct FixedSchedule: Codable {
     
     let fixedTimes: [String]?
-    let fixedPlace: PlaceInfo?
+    let fixedPlace: FixedPlaceInfo?
     
 }

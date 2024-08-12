@@ -46,6 +46,7 @@ let timeSlot2 : [String] = ["00:00", "00:30","01:00","01:30","02:00", "02:30am",
 struct TimeTableView: View {
     
     @ObservedObject var sharedDm : SharedDateModel
+    // @ObservedObject var candidateTimeNetworkManager: CandidateTimeNetworkManager
     
     @State private var fixedColumnWidth: CGFloat = 55
     @State private var fixedRowHeight : CGFloat = 30
@@ -213,6 +214,7 @@ struct TimeTableView: View {
                 Button(action: {
                     Task {
                         await  getTimeTableHit(meetingID: sharedDm.meetingId)
+//                        await candidateTimeNetworkManager.fetchGetMeetingDetailTimes(meetingId: sharedDm.meetingId)
                     }
 
                     showAllSchedule.toggle()
@@ -522,12 +524,15 @@ struct TimeTableView: View {
                 Spacer()
                 
             }
-        }.toolbar {
+        }
+        .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 
                 Image(systemName: "gearshape")
                     .contextMenu(ContextMenu(menuItems: {
-                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Button(action: {
+                            // 초대하기
+                        }, label: {
                             Text("초대하기")
                         })
                         Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
@@ -800,7 +805,7 @@ struct TimeTableView: View {
         
     }
     
-    func getTimeTableHit(meetingID: Int64) async{
+    func getTimeTableHit(meetingID: Int) async{
         let apiService  = APIService< BaseResponse<VotedTimesResult>, BaseResponse<VotedTimesResult>>()
         var TimeCellToTuple : Set<IntTuple> = []
         var allSchedule = Array(repeating: 0, count: 48 * 7)
@@ -965,11 +970,4 @@ func generateRandomNumber() -> Double {
     let possibleValues = stride(from: 0.1, through: 1.0, by: 0.1).map { $0 }
     // 배열에서 랜덤으로 하나의 값을 선택
     return possibleValues.randomElement() ?? 0.1
-}
-
-
-#Preview {
-    
-    TimeTableView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
-    
 }

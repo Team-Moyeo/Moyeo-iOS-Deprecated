@@ -12,6 +12,7 @@ struct PlaceAddView: View {
     
     @Environment(PlaceViewModel.self) var placeViewModel
     @EnvironmentObject var createMeetingViewModel : CreateMeetingViewModel
+    @ObservedObject var placeNetworkManager = PlaceNetworkManager()
     
     var place: Place
     
@@ -55,16 +56,22 @@ extension PlaceAddView {
             
             Button(action: {
                 placeViewModel.isPresentingPlaceSearchView.toggle()
+                guard let currentPlace = placeViewModel.currentPlace else { return }
+                
+                let placeRequest = PlaceRequest.PlaceCreate(
+                    title: currentPlace.name,
+                    address: currentPlace.roadAddress,
+                    latitude: currentPlace.latitude,
+                    longitude: currentPlace.longitude
+                )
+                
                 Task {
-                    let success = try await placeViewModel.postPlace()
-                    if success {
-                        print("Place added successfully")
-                        // fix된 장소 추가
-                        createMeetingViewModel.places = placeViewModel.places
-                    } else {
-                        print("Failed to add place")
-                    }
+                    let addedPlace = await placeNetworkManager.fetchCreatePlace(request: placeRequest)
+                    let addedPlaceInfo = AddedPlaceInfo(placeId: addedPlace.placeId, name: currentPlace.name)
+                    createMeetingViewModel.places.append(addedPlaceInfo)
+                    print(addedPlaceInfo)
                 }
+                
             }) {
                 Text("추가하기")
                     .font(.body)
