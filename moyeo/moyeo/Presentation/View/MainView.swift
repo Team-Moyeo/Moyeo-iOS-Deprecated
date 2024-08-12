@@ -46,6 +46,8 @@ struct MainView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             sharedDm.meetingId = meeting.meetingId
                             print("메인뷰 미확정 shareDm의 meetingId: \(sharedDm.meetingId)")
@@ -57,11 +59,18 @@ struct MainView: View {
                         VStack(alignment: .leading) {
                             Text(meeting.title)
                                 .font(.headline)
-                            Text("\(meeting.formattedDeadline) 마감 예정")
+                            // deadline과 현재날짜로 계산해서 D-n or 종료 로 표기 해주기
+                            Text("D-1")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
-                        
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            sharedDm.meetingId = meeting.meetingId
+                            print("메인뷰 확정 shareDm의 meetingId: \(sharedDm.meetingId)")
+                            appViewModel.navigateTo(.groupResultView)
+                        }
                     }
                 }
             }
