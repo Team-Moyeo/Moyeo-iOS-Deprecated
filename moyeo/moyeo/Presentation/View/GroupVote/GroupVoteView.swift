@@ -11,6 +11,7 @@ struct GroupVoteView: View {
     
     @Environment(AppViewModel.self) var appViewModel
     @ObservedObject var createMeetingViewModel : CreateMeetingViewModel
+    @ObservedObject var candidatePlaceNetworkManager: CandidatePlaceNetworkManager
     @ObservedObject var sharedDm : SharedDateModel
     @State private var isPresentingMemberPopupView = false
     @State private var isPresentingMapWideView = false
@@ -97,9 +98,14 @@ struct GroupVoteView: View {
             
             print("createMeetingViewModel.meetingId☠️\(createMeetingViewModel.meetingId)")
             print("sharedDm.meetingId☠️\(sharedDm.meetingId)")
+
+
+            for place in createMeetingViewModel.places {
+                Task {
+                    await candidatePlaceNetworkManager.fetchAddCandidatePlace(meetingId: createMeetingViewModel.meetingId, placeId: place.placeId)
+                }
+            }
             
-//            sharedDm.places = createMeetingViewModel.places
-            // createPlace가지고 candidatePlace request
             sharedDm.deadLine = createMeetingViewModel.deadline
             
         }
