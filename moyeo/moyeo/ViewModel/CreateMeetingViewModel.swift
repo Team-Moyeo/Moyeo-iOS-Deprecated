@@ -74,36 +74,6 @@ extension CreateMeetingViewModel {
         }
     }
     
-    /// 임시
-    @MainActor
-    func getMeetings() async throws {
-        
-        // URL 객체 생성
-        guard let url = URL(string: APIEndpoints.basicURLString(path: .meetings) + "/\(self.meetingId)") else {
-            throw NetworkError.cannotCreateURL
-        }
-        do {
-            let accessToken = try SignInInfo.shared.readToken(.access)
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            
-            
-            let (data, httpResponse) = try await URLSession.shared.data(for: request)
-            print("❤️@생성된 모임조회: \(String(data: data, encoding: .utf8) ?? "")")
-            
-            if let httpResponse = httpResponse as? HTTPURLResponse,
-               !(200..<300).contains(httpResponse.statusCode) {
-                print("Error: \(httpResponse.statusCode) badRequest")
-                throw NetworkError.badRequest
-            }
-        } catch {
-            print("Error getMeetings: \(error.localizedDescription)")
-        }
-    }
-    
-    
     func prepareRequestPayload() -> [String: Any] {
         
         let startDateString = self.startDate.yearMonthDay()

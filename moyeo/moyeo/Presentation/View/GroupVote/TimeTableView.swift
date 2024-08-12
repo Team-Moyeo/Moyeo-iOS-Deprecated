@@ -111,7 +111,7 @@ struct TimeTableView: View {
     @State private var showAlertVote = false
     @State private var showSchedule = false
     @State private var showAllSchedule = false
-    @State private var  showTimeTableConfirmView = false
+    @State private var  isPresentingTimeTableConfirmView = false
     //    private let minY: CGFloat = -380
     //    private let maxY: CGFloat = 670
     //
@@ -214,13 +214,7 @@ struct TimeTableView: View {
                     Task {
                         await  getTimeTableHit(meetingID: sharedDm.meetingId)
                     }
-                    //                    for i in  0..<47 {
-                    //                        for j in 0..<7 {
-                    //                            let index = i * 7 + j
-                    //                            allSchedule[ index ] = Double (generateRandomNumber())
-                    //                            print(" \(allSchedule[ index ] )")
-                    //                        }
-                    //                    }
+
                     showAllSchedule.toggle()
                     print("showAllSchedule \(showAllSchedule)")
                     
@@ -233,23 +227,7 @@ struct TimeTableView: View {
                         .cornerRadius(4)
                 }
                 .frame(width: 30, height: 24)
-                //                Spacer()
-                //                Button(action: {
-                //
-                //                    deleteCheckAll()
-                //
-                //                }) {
-                //                    Text("지우기")
-                //                        .font(.system(size: 15))
-                //                        .padding(2)
-                //                        .background(Color.blue)
-                //                        .foregroundColor(.white)
-                //                        .cornerRadius(4)
-                //
-                //                }.frame(width: 80, height: 24)
-                
-                
-                
+
                 Spacer()
             }
             
@@ -511,70 +489,7 @@ struct TimeTableView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    
-                    var voteInfo : VoteInfo
-                    convertCheckedStatesToTimeTable()
-                    convertAvailableTimeFromSetToTuple()
-                    
-                    let apiService = APIService<VoteInfo ,BaseResponse<VoteInfoResult>>()
-                    // ParentView에서 전달 받는다.
-                    //   sharedDm.meetingId = 1
-                    guard let url = URL(string:"https://5techdong.store/meetings/\(sharedDm.meetingId)/vote-values") else {
-                        print("Invalid URL")
-                        return
-                    }
-                    
-                    let accessToken: String
-                    do {
-                        accessToken = try SignInInfo.shared.readToken(.access)
-                        print("get accessToken :\(accessToken)")
-                    } catch {
-                        print("Failed to retrieve access token: \(error)")
-                        return
-                    }
-                    
-                    
-                    var request = URLRequest(url: url)
-
-                    request.httpMethod = "POST"
-                    request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    
-                    let availableTimeSlot = Array(availableTimeSet)
-                    
-                    print("availableTimeSlot: \(availableTimeSlot)")
-                    let convertedAvailableTimeSlot  = convertDateStringTo24Hour(dateString: availableTimeSlot)
-                    print("convertedAvailableTimeSlot: \(convertedAvailableTimeSlot)")
-                    /// 장소 추가해야함
-                    voteInfo = VoteInfo(candidateTimes: convertedAvailableTimeSlot , candidatePlaces: [])
-                    print("😄\(voteInfo)")
-                    // JSON 인코더 생성
-                    let encoder = JSONEncoder()
-                    
-                    do {
-               
-                        let jsonData = try encoder.encode(voteInfo)
-                        
-                        request.httpBody = jsonData
-                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-                            print("JSONString: \(jsonString)")
-                        }
-                    }
-                    catch {
-                        print(error)
-                    }
-
-                    Task{
-                        do {
-                            try await getMeetings()
-                            let response =  try await apiService.asyncPost(for: request)
-                            print("asyncPost Success \(response)")
-                            
-                        } catch{
-                            print("asyncPost Fail : \(error) url: \(String(describing: request.url?.description ?? ""))")
-                        }
-                        
-                    }
+                    completeMyVote()
                 }) {
                     Text("투표완료하기")
                         .font(.system(size: 20))
@@ -588,8 +503,7 @@ struct TimeTableView: View {
                 if isManager {
                     Spacer()
                     Button(action: {
-                        showTimeTableConfirmView.toggle()
-                        print("showshowTimeTableConfirmView. \(showTimeTableConfirmView)")
+                        isPresentingTimeTableConfirmView.toggle()
                         
                     }) {
                         Text("투표마감하기")
@@ -600,7 +514,7 @@ struct TimeTableView: View {
                             .cornerRadius(4)
                     }
                     .frame(minWidth: 150, maxWidth: .infinity, minHeight: 52)
-                    .sheet(isPresented: $showTimeTableConfirmView) {
+                    .sheet(isPresented: $isPresentingTimeTableConfirmView) {
                         TimeTableConfirmView(sharedDm: sharedDm)
                     }
                     
@@ -629,35 +543,70 @@ struct TimeTableView: View {
         }
     }
     
-    /// 임시
-    @MainActor
-    func getMeetings() async throws {
+    private func completeMyVote() {
+        var voteInfo : VoteInfo
+        convertCheckedStatesToTimeTable()
+        convertAvailableTimeFromSetToTuple()
         
-        // URL 객체 생성
-        guard let url = URL(string: "https://5techdong.store/meetings/\(sharedDm.meetingId)") else {
-            throw NetworkError.cannotCreateURL
+        let apiService = APIService<VoteInfo ,BaseResponse<VoteInfoResult>>()
+        // ParentView에서 전달 받는다.
+        //   sharedDm.meetingId = 1
+        guard let url = URL(string:"https://5techdong.store/meetings/\(sharedDm.meetingId)/vote-values") else {
+            print("Invalid URL")
+            return
         }
+        
+        let accessToken: String
         do {
-            let accessToken = try SignInInfo.shared.readToken(.access)
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            
-            
-            let (data, httpResponse) = try await URLSession.shared.data(for: request)
-            print("❤️@생성된 모임조회@TIMETABLE: \(String(data: data, encoding: .utf8) ?? "")")
-            
-            if let httpResponse = httpResponse as? HTTPURLResponse,
-               !(200..<300).contains(httpResponse.statusCode) {
-                print("Error: \(httpResponse.statusCode) badRequest")
-                throw NetworkError.badRequest
-            }
+            accessToken = try SignInInfo.shared.readToken(.access)
+            print("get accessToken :\(accessToken)")
         } catch {
-            print("Error getMeetings: \(error.localizedDescription)")
+            print("Failed to retrieve access token: \(error)")
+            return
+        }
+        
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let availableTimeSlot = Array(availableTimeSet)
+        
+        print("availableTimeSlot: \(availableTimeSlot)")
+        let convertedAvailableTimeSlot  = convertDateStringTo24Hour(dateString: availableTimeSlot)
+        print("convertedAvailableTimeSlot: \(convertedAvailableTimeSlot)")
+        /// 장소 추가해야함
+        voteInfo = VoteInfo(candidateTimes: convertedAvailableTimeSlot , candidatePlaces: [])
+        print("😄\(voteInfo)")
+        // JSON 인코더 생성
+        let encoder = JSONEncoder()
+        
+        do {
+            
+            let jsonData = try encoder.encode(voteInfo)
+            
+            request.httpBody = jsonData
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSONString: \(jsonString)")
+            }
+        }
+        catch {
+            print(error)
+        }
+        
+        Task{
+            do {
+                let response =  try await apiService.asyncPost(for: request)
+                print("asyncPost Success \(response)")
+                
+            } catch{
+                print("asyncPost Fail : \(error) url: \(String(describing: request.url?.description ?? ""))")
+            }
+            
         }
     }
-    
     
     private func lastTwoDigits(year : Int) ->String {
         
@@ -1018,7 +967,6 @@ func generateRandomNumber() -> Double {
     return possibleValues.randomElement() ?? 0.1
 }
 
-///ㅁㅁㅁ
 
 #Preview {
     

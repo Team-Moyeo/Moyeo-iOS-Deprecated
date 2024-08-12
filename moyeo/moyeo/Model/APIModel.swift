@@ -138,3 +138,10 @@ struct VotedPlacesResult: Codable {
             let voteCount : Int        //      "voteCount": 0
         }
 }
+
+struct FixedSchedule: Codable {
+    
+    let fixedTimes: [String]?
+    let fixedPlace: PlaceInfo?
+    
+}

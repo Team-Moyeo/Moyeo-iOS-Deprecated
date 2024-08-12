@@ -217,7 +217,6 @@ struct GroupSetView: View {
                         createMeetingViewModel.deadline = deadLine.toString()
                         
                         await createMeetingViewModel.createMeeting()
-                        try await createMeetingViewModel.getMeetings()
                         
                         appViewModel.navigateTo(.groupVoteView)
                         isPresentingGroupSetView = false

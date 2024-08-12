@@ -69,14 +69,14 @@ class APIService<T: Decodable, S:Decodable> {
 
     
     // combine --> async await 이 간단함
-    func asyncLoad(for url: URL) async throws -> T {
+    func asyncLoad(for url: URL) async throws -> S {
       
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
 
-        guard let decoded = try? JSONDecoder().decode(T.self, from: data)
+        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
         else { throw URLError(.cannotDecodeContentData)}
 
         return decoded
@@ -123,7 +123,7 @@ class APIService<T: Decodable, S:Decodable> {
         
     
     // combine --> async await 이 간단함
-    func asyncLoad(for urlRequest: URLRequest) async throws -> T {
+    func asyncLoad(for urlRequest: URLRequest) async throws -> S {
       
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
@@ -133,10 +133,10 @@ class APIService<T: Decodable, S:Decodable> {
        
         print("AsyncLoad response  : \(response ) \n type:  \(T.self) ")
         
-        guard let decoded = try? JSONDecoder().decode(T.self, from: data)
+        guard let decoded = try? JSONDecoder().decode(S.self, from: data)
                 
         else {
-               print("Decoding Fail in url \(urlRequest.url ) \(data) \(T.self)")
+               print("Decoding Fail in url \(urlRequest.url ) \(data) \(S.self)")
                throw URLError(.cannotDecodeContentData)
         }
         print("asyncLoad Success: \(decoded) ")
