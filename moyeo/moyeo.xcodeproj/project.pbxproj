@@ -74,6 +74,10 @@
 		CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */; };
 		F3860CC92C6A2E8400F0EA61 /* BaseResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */; };
 		F3860CCB2C6A319C00F0EA61 /* PlaceNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */; };
+		F3860CCD2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CCC2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift */; };
+		F3860CD02C6A35DE00F0EA61 /* CandidateTimeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CCF2C6A35DE00F0EA61 /* CandidateTimeResponse.swift */; };
+		F3860CD32C6A381200F0EA61 /* CandidateTimeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CD22C6A381200F0EA61 /* CandidateTimeRequest.swift */; };
+		F3860CD72C6A3A5C00F0EA61 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
 		F3D0DEF12C44AF1800D5EB97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */; };
 		F3D0DEF32C44AF1A00D5EB97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D0DEF22C44AF1A00D5EB97 /* Assets.xcassets */; };
@@ -178,6 +182,10 @@
 		EE1379590200C73F61B69AAC /* Pods_moyeoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyeoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseProtocol.swift; sourceTree = "<group>"; };
 		F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceNetworkManager.swift; sourceTree = "<group>"; };
+		F3860CCC2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTimeNetworkManager.swift; sourceTree = "<group>"; };
+		F3860CCF2C6A35DE00F0EA61 /* CandidateTimeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTimeResponse.swift; sourceTree = "<group>"; };
+		F3860CD22C6A381200F0EA61 /* CandidateTimeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateTimeRequest.swift; sourceTree = "<group>"; };
+		F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		F3D0DEEB2C44AF1800D5EB97 /* moyeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moyeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moyeoApp.swift; sourceTree = "<group>"; };
 		F3D0DEF02C44AF1800D5EB97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -423,6 +431,8 @@
 			isa = PBXGroup;
 			children = (
 				F3860CCA2C6A319C00F0EA61 /* PlaceNetworkManager.swift */,
+				F3860CCC2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift */,
+				F3860CD62C6A3A5C00F0EA61 /* NetworkHelper.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -430,9 +440,27 @@
 		F3860CC62C6A2E6000F0EA61 /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				F3860CD12C6A380500F0EA61 /* Request */,
+				F3860CCE2C6A35CC00F0EA61 /* Response */,
 				F3860CC82C6A2E8400F0EA61 /* BaseResponseProtocol.swift */,
 			);
 			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		F3860CCE2C6A35CC00F0EA61 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				F3860CCF2C6A35DE00F0EA61 /* CandidateTimeResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		F3860CD12C6A380500F0EA61 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				F3860CD22C6A381200F0EA61 /* CandidateTimeRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		F3D0DEE22C44AF1800D5EB97 = {
@@ -753,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
+				F3860CD32C6A381200F0EA61 /* CandidateTimeRequest.swift in Sources */,
 				51F9DFF12C679095009E4239 /* CreateMeetingViewModel.swift in Sources */,
 				51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */,
 				51219E722C61BA72005EDDCD /* EventDataStore.swift in Sources */,
@@ -779,6 +808,7 @@
 				51219E712C61BA72005EDDCD /* EditButton.swift in Sources */,
 				BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */,
 				BF9795982C62541F000A121A /* PlaceModel.swift in Sources */,
+				F3860CD02C6A35DE00F0EA61 /* CandidateTimeResponse.swift in Sources */,
 				51219E922C61BAA8005EDDCD /* GroupVoteView.swift in Sources */,
 				F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */,
 				CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */,
@@ -802,7 +832,9 @@
 				51FD50AC2C5382A1008C5552 /* PlaceAddView.swift in Sources */,
 				51219E8E2C61BA72005EDDCD /* SharedDateModel.swift in Sources */,
 				F3860CC92C6A2E8400F0EA61 /* BaseResponseProtocol.swift in Sources */,
+				F3860CD72C6A3A5C00F0EA61 /* NetworkHelper.swift in Sources */,
 				BF4DAE492C604DD6002371DC /* ProfileViewModel.swift in Sources */,
+				F3860CCD2C6A354100F0EA61 /* CandidateTimeNetworkManager.swift in Sources */,
 				BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */,
 				BF4DAE452C5F9B70002371DC /* ProfileView.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,

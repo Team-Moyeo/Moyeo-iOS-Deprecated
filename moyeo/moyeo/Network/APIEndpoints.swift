@@ -10,6 +10,7 @@ import Foundation
 enum APIEndpoints {
     
     static let scheme = "https"
+    static let host = Bundle.main.object(forInfoDictionaryKey: "HOST_URL") as? String
     
     enum Path: String {
         
@@ -24,6 +25,9 @@ enum APIEndpoints {
         case meetings = "/meetings"
         case places = "/places"
         
+        // MARK: - candidate-times
+        case candidateTimes = "/candidate-times"
+        
     }
 }
 
@@ -36,5 +40,13 @@ extension APIEndpoints {
         else { return "" }
         
         return "\(scheme)://\(host)\(path.rawValue)"
+    }
+    
+    // basicUrlComponents 생성
+    static func getBasicUrlComponents() -> URLComponents {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = APIEndpoints.scheme
+        urlComponents.host = APIEndpoints.host
+        return urlComponents
     }
 }
