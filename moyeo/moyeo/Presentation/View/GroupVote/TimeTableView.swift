@@ -116,12 +116,18 @@ struct TimeTableView: View {
     //    private let maxY: CGFloat = 670
     //
     
+    var getMeetingDetail: MeetingResponse.GetMeetingDetail
+    var meetingId: Int
     
     
-    init(sharedDm: SharedDateModel) {
+    
+    
+    init(sharedDm: SharedDateModel, getMeetingDetail: MeetingResponse.GetMeetingDetail, meetingId: Int) {
         self.sharedDm = sharedDm
         _timeTHVm = StateObject(wrappedValue: TimeTableHeaderVM(sharedModel:sharedDm))
         _eventVm = StateObject(wrappedValue: EventViewModel(sharedModel: sharedDm))
+        self.getMeetingDetail = getMeetingDetail
+        self.meetingId = meetingId
     }
     
     
@@ -136,7 +142,7 @@ struct TimeTableView: View {
         VStack(alignment: .leading, spacing : 10 ){
             HStack{
                 
-                Text("\(sharedDm.meetingName)")
+                Text("\(getMeetingDetail.title == "" ? "제목 없음" : getMeetingDetail.title)")
                     .font(.largeTitle)
                 
                 Spacer()
@@ -157,7 +163,7 @@ struct TimeTableView: View {
             HStack{
                 Text("투표마감일")
                 Spacer()
-                Text("\(closingDate)")
+                Text("\(getMeetingDetail.deadline)")
             }   .font(.system(size: 24))
                 .padding(4)
                 .background(.myF1F1F1)
@@ -212,7 +218,7 @@ struct TimeTableView: View {
                 
                 Button(action: {
                     Task {
-                        await  getTimeTableHit(meetingID: sharedDm.meetingId)
+                        await  getTimeTableHit(meetingID: meetingId)
                     }
 
                     showAllSchedule.toggle()
@@ -800,7 +806,7 @@ struct TimeTableView: View {
         
     }
     
-    func getTimeTableHit(meetingID: Int64) async{
+    func getTimeTableHit(meetingID: Int) async{
         let apiService  = APIService< BaseResponse<VotedTimesResult>, BaseResponse<VotedTimesResult>>()
         var TimeCellToTuple : Set<IntTuple> = []
         var allSchedule = Array(repeating: 0, count: 48 * 7)
@@ -968,8 +974,8 @@ func generateRandomNumber() -> Double {
 }
 
 
-#Preview {
-    
-    TimeTableView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
-    
-}
+//#Preview {
+//    
+//    TimeTableView(sharedDm: SharedDateModel(startDate: Date(), endDate: Date(), numberOfDays: 7))
+//    
+//}

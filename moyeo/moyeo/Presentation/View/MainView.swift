@@ -26,6 +26,7 @@ struct MainView: View {
     
     @ObservedObject var meetingNetworkManager = MeetingNetworkManager()
     @State private var getMeetingsByStatusDTO = MeetingResponse.GetMeetingsByStatus()
+    @State private var meetingId = 0
     
     
     var body: some View {
@@ -44,7 +45,8 @@ struct MainView: View {
                 if selectedTab == "미확정" {
                     ForEach(meetingListViewModel.disconfirmedMeetings, id: \.self) { meeting in
                             Button {
-                                appViewModel.navigateTo(.groupVoteView(meetingId: Int(meeting.meetingId)))
+                                meetingId = meeting.meetingId
+                                appViewModel.navigateTo(.groupVoteView)
                             } label: {
                                 VStack(alignment: .leading) {
                                     Text(meeting.title == "" ? "제목 없음" : meeting.title)
@@ -59,12 +61,17 @@ struct MainView: View {
                     }
                 } else {
                     ForEach(meetingListViewModel.confirmedMeetings, id: \.self) { meeting in
-                        VStack(alignment: .leading) {
-                            Text(meeting.title == "" ? "제목 없음" : meeting.title)
-                                .font(.headline)
-                            Text("\(meeting.formattedDeadline) 마감 예정")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+                        Button {
+                            meetingId = meeting.meetingId
+                            appViewModel.navigateTo(.groupVoteView)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(meeting.title == "" ? "제목 없음" : meeting.title)
+                                    .font(.headline)
+                                Text("\(meeting.formattedDeadline) 마감 예정")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                 }
@@ -160,7 +167,7 @@ struct MainView: View {
         .navigationDestination(for: MainRoute.self) { destination in
             switch destination {
             case .groupVoteView:
-                GroupVoteView(createMeetingViewModel: createMeetingViewModel, sharedDm: sharedDm)
+                GroupVoteView(meetingId: meetingId, createMeetingViewModel: createMeetingViewModel, sharedDm: sharedDm)
             case .groupResultView:
                 GroupResultView()
             case .profileView:

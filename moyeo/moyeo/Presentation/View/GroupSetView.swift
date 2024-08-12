@@ -31,6 +31,8 @@ struct GroupSetView: View {
     
     //    @ObservedObject var sharedDm : SharedDateModel
     
+    @ObservedObject var meetingNetworkManager = MeetingNetworkManager()
+    
     var body: some View {
         ZStack {
             Form {
@@ -216,9 +218,12 @@ struct GroupSetView: View {
                         
                         createMeetingViewModel.deadline = deadLine.toString()
                         
-                        await createMeetingViewModel.createMeeting()
+//                        await createMeetingViewModel.createMeeting()
                         
-//                        appViewModel.navigateTo(.groupVoteView(meetingId: <#T##Int#>))
+                        var meetingId: Int = await meetingNetworkManager.fetchCreateMeeting(request: MeetingRequest.CreateMeeting(title: meetingName, startDate: startDate.toString(), endDate: endDate.toString(), startTime: startTime.toString(), endTime: endTime.toString(), deadline: deadLine.toString())).meetingId
+                        
+                        appViewModel.navigateTo(.groupVoteView)
+                        print(meetingId)
                         isPresentingGroupSetView = false
                     }
                     
