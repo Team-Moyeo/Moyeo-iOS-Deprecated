@@ -72,7 +72,7 @@ struct TimeTableView: View {
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
         var gridItems: [GridItem] = []
-        print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
+   //     print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
         
         for _ in 0..<Int(sharedDm.numberOfDays) {
             gridItems.append(GridItem(.fixed(CGFloat(fixedColumnWidth)), spacing: spacing))
@@ -158,14 +158,31 @@ struct TimeTableView: View {
                 Text("투표마감일")
                 Spacer()
                 Text("\(closingDate)")
-            }   .font(.system(size: 24))
+            }   .font(.system(size: 20))
                 .padding(4)
                 .background(.myF1F1F1)
                 .foregroundColor(.gray)
             
                 .onAppear(){
-                    closingDate = sharedDm.deadLine
-                    
+                    let tempClosingDate = sharedDm.deadLine
+                    if let tempDate = dateStringToDate2(dateString: tempClosingDate) {
+                        let calendar = Calendar.current
+                        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .weekday], from: tempDate)
+                        print("tempDate \(tempDate)")
+                        if let year = components.year,
+                           let month = components.month,
+                           let day = components.day,
+                           let hour = components.hour,
+                           let min =  components.minute,
+                           let weekday = components.weekday {
+                            
+                            let dateString = "\(year)년\(month)월\(day)일\(hour)시 \(min)분(\(Weekday(rawValue: weekday)?.name ?? "") )"
+                            print("투표마감일 \(dateString)")
+                            closingDate = dateString
+                        }
+                    } else {
+                        closingDate = sharedDm.deadLine
+                    }
                 }
             
             HStack(spacing: 10){
@@ -181,6 +198,7 @@ struct TimeTableView: View {
                         convertCheckedStatesToTimeTable()
                         convertAvailableTimeFromSetToTuple()
                         makeServerArray()
+                        
                     } else {
                         deleteCheckAll()
                     }

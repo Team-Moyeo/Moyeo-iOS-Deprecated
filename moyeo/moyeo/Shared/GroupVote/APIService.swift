@@ -24,10 +24,10 @@ class APIService<T: Decodable, S:Decodable> {
     
     //혹시 모르니  public
     var cancellables = Set<AnyCancellable>()
-    var responseData: T?
-    var response : S?
+    var responseData: S?
+    var saveDatea : T?
     
-    func get(for url: URL) -> AnyPublisher<T, Error> {
+    func get(for url: URL) -> AnyPublisher<S, Error> {
         URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { element -> Data in
@@ -38,7 +38,7 @@ class APIService<T: Decodable, S:Decodable> {
                 
                 return element.data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: S.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -53,7 +53,7 @@ class APIService<T: Decodable, S:Decodable> {
                             print("Failed with error: \(error)")
                         }
                     },
-                    receiveValue: { [weak self] (response: T) in
+                    receiveValue: { [weak self] (response: S) in
                         self?.responseData = response
                         print("Received value: \(response)")
                         // response에 대한 추가 작업 수행
@@ -63,7 +63,7 @@ class APIService<T: Decodable, S:Decodable> {
         }
         
     
-        func getResponseData() -> T? {
+        func getResponseData() -> S? {
             return responseData
         }
 
@@ -84,7 +84,7 @@ class APIService<T: Decodable, S:Decodable> {
     }
 // URLRequest Version
     
-    func get(for urlRequest: URLRequest) -> AnyPublisher<T, Error> {
+    func get(for urlRequest: URLRequest) -> AnyPublisher<S, Error> {
         URLSession.shared
             .dataTaskPublisher(for: urlRequest)
             .tryMap { element -> Data in
@@ -95,7 +95,7 @@ class APIService<T: Decodable, S:Decodable> {
                 
                 return element.data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: S.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -110,7 +110,7 @@ class APIService<T: Decodable, S:Decodable> {
                             print("Failed with error: \(error)")
                         }
                     },
-                    receiveValue: { [weak self] (response: T) in
+                    receiveValue: { [weak self] (response: S) in
                         self?.responseData = response
                         print("Received value: \(response)")
                         // response에 대한 추가 작업 수행
@@ -131,7 +131,7 @@ class APIService<T: Decodable, S:Decodable> {
         guard (response as? HTTPURLResponse)?.statusCode == 200
         else { throw URLError(.badServerResponse) }
        
-        print("AsyncLoad response  : \(response ) \n type:  \(T.self) ")
+        print("AsyncLoad response : \((response as? HTTPURLResponse)?.statusCode)\n type:  \(S.self) ")
         
         guard let decoded = try? JSONDecoder().decode(S.self, from: data)
                 
@@ -156,11 +156,9 @@ class APIService<T: Decodable, S:Decodable> {
         
       
         guard let decoded = try? JSONDecoder().decode(S.self, from: data)
-        else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(T.self)")
+        else { print("Decoding Fail in url \(String(describing: urlRequest.url)) \(data) \(S.self)")
                throw URLError(.cannotDecodeContentData)
         }
-        
-          
         print("In the asyncSave SUCCESS decoded : \(decoded) ")
       
        return decoded

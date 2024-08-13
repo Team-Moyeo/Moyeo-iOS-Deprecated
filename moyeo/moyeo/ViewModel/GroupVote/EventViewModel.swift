@@ -47,7 +47,7 @@ class EventViewModel : ObservableObject {
 //                
                     self.isFetching = true
                     
-                    if let start =  TimeFixToZero(date: start) , let end =  TimeFixToMidNight(date: end) {
+                    if let start =  timeFixToZero(date: start) , let end =  timeFixToMidNight(date: end) {
                         self.startDate = start
                         
                         self.endDate =  end

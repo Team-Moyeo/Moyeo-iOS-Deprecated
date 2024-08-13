@@ -104,7 +104,7 @@ class SharedDateModel: ObservableObject {
         
        $startDate
             .compactMap{
-                TimeFixToZero(date:$0)
+                timeFixToZero(date:$0)
             }
             .sink { [weak self] date in
                 guard let self = self else {

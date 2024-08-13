@@ -36,7 +36,7 @@ struct TimeTableConfirmView: View {
     private var columns: [GridItem] {
         //첫번째 열은 timeSlot의  String 표시
         var gridItems: [GridItem] = []
-        print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
+   //     print("TimeTable number Of Columns:\(sharedDm.numberOfDays)")
         
         for _ in 0..<Int(sharedDm.numberOfDays) {
             gridItems.append(GridItem(.fixed(CGFloat(fixedColumnWidth)), spacing: spacing))
@@ -274,10 +274,10 @@ struct TimeTableConfirmView: View {
                                                         
                                                         let index = rowIndex * Int(sharedDm.numberOfDays) + columnIndex
                                                         if checkedStates[index] == true {
-                                                            color = .red
+                                                            color = .yellow
                                                         }
                                                         if dragArray.contains(IntTuple(rowIndex: rowIndex, columnIndex: columnIndex)) {
-                                                            color = .red
+                                                            color = .yellow
                                                         }
                                                         return color
                                                         

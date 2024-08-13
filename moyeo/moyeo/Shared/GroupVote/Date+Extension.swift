@@ -104,7 +104,7 @@ func dateStringToDate2(dateString : String?) -> Date? {
     guard let dateString = dateString else { return nil}
     // DateFormatter를 생성합니다.
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z" // 문자열의 날짜 형식을 설정합니다.
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // 문자열의 날짜 형식을 설정합니다.
     dateFormatter.locale = Locale(identifier: "ko_KR") // 로케일을 한국으로 설정합니다.
     dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
     // 문자열을 Date 객체로 변환합니다.
@@ -123,7 +123,7 @@ func daysBetween(start: Date, end: Date, timeZone: TimeZone = TimeZone(identifie
     calendar.timeZone = timeZone
   
     
-    if let startDay = TimeFixToZero(date: start), let endDay = TimeFixToMidNight(date: end) {
+    if let startDay = timeFixToZero(date: start), let endDay = timeFixToMidNight(date: end) {
         print("daysBet: fixStart: \(startDay)  fixEnd: \(endDay)")
         let components = calendar.dateComponents([.day], from: startDay, to: endDay)
         
@@ -281,7 +281,7 @@ func weekdayFromDateString(dateString: String?, dateOffset: Int) -> Int? {
 }
 // 1은 일요일, 2는 월요일, ... , 7은 토요일
 
-func TimeFixToZero(date : Date) ->Date?{
+func timeFixToZero(date : Date) ->Date?{
    
     let calendar = Calendar.current
     
@@ -291,7 +291,7 @@ func TimeFixToZero(date : Date) ->Date?{
     
                                 
 }
-func TimeFixToMidNight(date : Date) -> Date?{
+func timeFixToMidNight(date : Date) -> Date?{
    
     let calendar = Calendar.current
     

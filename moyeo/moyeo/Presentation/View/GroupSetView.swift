@@ -11,7 +11,7 @@ struct GroupSetView: View {
     @Environment(AppViewModel.self) var appViewModel
     @EnvironmentObject var createMeetingViewModel : CreateMeetingViewModel
     
-    @State private var meetingName: String = ""
+    @State private var meetingName: String = "당장만나!!!"
     @State private var voteTime: Bool = false
     @State private var votePlace: Bool = false
     
@@ -87,7 +87,12 @@ struct GroupSetView: View {
                                 DatePicker("날짜", selection: $endDate, displayedComponents: .date)
                                     .datePickerStyle(CompactDatePickerStyle())
                                     .labelsHidden()
-                                    .onChange(of: endDate) { newEndDate in
+                                    .onAppear(){
+                                        if let sixdayAfterStartDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) {
+                                            self.endDate = sixdayAfterStartDate
+                                        }
+                                    }
+                                    .onChange(of: endDate) {  newEndDate in
                                         // If the new end date exceeds 7 days from the start date, adjust it
                                         if endDate < startDate {
                                             endDate = startDate
@@ -106,6 +111,7 @@ struct GroupSetView: View {
                                 HStack {
                                     Text("시간 범위")
                                     Spacer()
+                                    
                                     DatePicker("", selection: $startTime, displayedComponents: .hourAndMinute)
                                         .labelsHidden()
                                         .frame(maxWidth: 100)
@@ -113,6 +119,9 @@ struct GroupSetView: View {
                                     DatePicker("", selection: $endTime, displayedComponents: .hourAndMinute)
                                         .labelsHidden()
                                         .frame(maxWidth: 100)
+                                } .onAppear() {
+                                    startTime = Calendar.current.date(byAdding: .hour, value: 9, to: timeFixToZero(date: startDate)!) ?? timeFixToMidNight(date: endDate)!
+                                    endTime = Calendar.current.date(byAdding: .hour, value: 22, to: timeFixToZero(date: startDate)!) ?? timeFixToMidNight(date: endDate)!
                                 }
                             }
                         }

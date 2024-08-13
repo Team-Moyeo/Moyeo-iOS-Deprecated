@@ -83,11 +83,11 @@ struct GroupVoteView: View {
             sharedDm.meetingId = createMeetingViewModel.meetingId
             
             sharedDm.startDate = Calendar.current.startOfDay(for: createMeetingViewModel.startDate)
-            if let endDate = TimeFixToMidNight(date: createMeetingViewModel.endDate) {
+            if let endDate = timeFixToMidNight(date: createMeetingViewModel.endDate) {
                 sharedDm.endDate = endDate
             }
             
-            if let numberOfDays =  daysBetween(start: TimeFixToZero(date: createMeetingViewModel.startDate)! , end: TimeFixToMidNight(date: createMeetingViewModel.endDate)! ) {
+            if let numberOfDays =  daysBetween(start: timeFixToZero(date: createMeetingViewModel.startDate)! , end: timeFixToMidNight(date: createMeetingViewModel.endDate)! ) {
                 sharedDm.numberOfDays = numberOfDays
             } else {
                 sharedDm.numberOfDays = 7
