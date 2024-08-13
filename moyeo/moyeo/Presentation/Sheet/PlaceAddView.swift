@@ -69,7 +69,7 @@ extension PlaceAddView {
                     let addedPlace = await placeNetworkManager.fetchCreatePlace(request: placeRequest)
                     let addedPlaceInfo = AddedPlaceInfo(placeId: addedPlace.placeId, name: currentPlace.name)
                     createMeetingViewModel.places.append(addedPlaceInfo)
-                    print(addedPlaceInfo)
+                    print(createMeetingViewModel.places)
                 }
                 
             }) {
