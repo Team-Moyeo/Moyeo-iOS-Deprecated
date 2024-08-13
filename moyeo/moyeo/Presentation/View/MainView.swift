@@ -183,12 +183,6 @@ struct MainView: View {
                 await meetingListViewModel.fetchMeetings(meetingStatus: "")
             }
         }
-        .refreshable {
-            Task {
-                await meetingListViewModel.fetchMeetings(meetingStatus: "")
-            }
-
-        }
     }
 }
 

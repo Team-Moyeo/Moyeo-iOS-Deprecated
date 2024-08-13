@@ -221,7 +221,6 @@ struct GroupSetView: View {
                             .cornerRadius(8)
                     }
                     .frame(width: 360, height: 50)
-                    .background(Color.black)
                     .cornerRadius(10)
                     .padding(.bottom, 25)
                 }
