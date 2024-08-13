@@ -38,7 +38,7 @@ struct MainView: View {
             
             List {
                 if selectedTab == "미확정" {
-                    ForEach(meetingListViewModel.disconfirmedMeetings, id: \.self) { meeting in
+                    ForEach(meetingListViewModel.disconfirmedMeetings, id: \.meetingId) { meeting in
                         VStack(alignment: .leading) {
                             Text(meeting.title)
                                 .font(.headline)
@@ -46,15 +46,30 @@ struct MainView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            sharedDm.meetingId = meeting.meetingId
+                            print("메인뷰 미확정 shareDm의 meetingId: \(sharedDm.meetingId)")
+                            appViewModel.navigateTo(.groupVoteView)
+                        }
                     }
                 } else {
-                    ForEach(meetingListViewModel.confirmedMeetings, id: \.self) { meeting in
+                    ForEach(meetingListViewModel.confirmedMeetings, id: \.meetingId) { meeting in
                         VStack(alignment: .leading) {
                             Text(meeting.title)
                                 .font(.headline)
-                            Text("\(meeting.formattedDeadline) 마감 예정")
+                            // deadline과 현재날짜로 계산해서 D-n or 종료 로 표기 해주기
+                            Text("D-1")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            sharedDm.meetingId = meeting.meetingId
+                            print("메인뷰 확정 shareDm의 meetingId: \(sharedDm.meetingId)")
+                            appViewModel.navigateTo(.groupResultView)
                         }
                     }
                 }
@@ -65,6 +80,18 @@ struct MainView: View {
                     Task {
                         await meetingListViewModel.fetchMeetings(meetingStatus: "PENDING") // 초기값을 원하는 대로 설정
                     }
+                } else {
+                    Task {
+                        await meetingListViewModel.fetchMeetings(meetingStatus: "CONFIRM")
+                        await meetingListViewModel.fetchMeetings(meetingStatus: "END")
+                    }
+
+                }
+                
+            }
+            .refreshable {
+                Task {
+                    await meetingListViewModel.fetchMeetings(meetingStatus: "")
                 }
                 
             }
@@ -77,13 +104,14 @@ struct MainView: View {
                 isPresentingGroupSetView.toggle()
             }) {
                 Text("모임 생성하기")
+                    .pretendard(.bold, 17)
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color.black)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.myDD8686)
                     .cornerRadius(8)
             }
             .frame(width: 360, height: 50)
-            .background(Color.black)
             .cornerRadius(10)
             .sheet(isPresented: $isPresentingGroupSetView) {
                 GroupSetView(isPresentingGroupSetView: $isPresentingGroupSetView)
@@ -154,12 +182,6 @@ struct MainView: View {
             Task {
                 await meetingListViewModel.fetchMeetings(meetingStatus: "")
             }
-        }
-        .refreshable {
-            Task {
-                await meetingListViewModel.fetchMeetings(meetingStatus: "")
-            }
-
         }
     }
 }
