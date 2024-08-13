@@ -230,6 +230,7 @@ struct TimeTableView: View {
                 
                 Button(action: {
                     Task {
+                        
                         await  getTimeTableHit(meetingID: sharedDm.meetingId)
                     }
 
@@ -521,6 +522,7 @@ struct TimeTableView: View {
                 if isManager {
                     Spacer()
                     Button(action: {
+                        print("sharedDm \(sharedDm.meetingId)")
                         isPresentingTimeTableConfirmView.toggle()
                         
                     }) {

@@ -2,6 +2,25 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:moyeo/ViewModel/GroupVote/MapTableViewModel.swift">
+   </FileRef>
+   <Group
+      location = "group:moyeo/ViewModel/GroupVote"
+      name = "GroupVote">
+      <FileRef
+         location = "group:SharedDateModel.swift">
+      </FileRef>
+      <FileRef
+         location = "group:EventViewModel.swift">
+      </FileRef>
+      <FileRef
+         location = "group:TimeTableHeaderVM.swift">
+      </FileRef>
+      <FileRef
+         location = "group:MapTableViewModel.swift">
+      </FileRef>
+   </Group>
+   <FileRef
       location = "group:moyeo.xcodeproj">
    </FileRef>
    <FileRef

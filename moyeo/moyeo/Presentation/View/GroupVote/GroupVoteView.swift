@@ -46,6 +46,7 @@ struct GroupVoteView: View {
                     isPresentingMapWideView.toggle()
                 }) {
                     Text("지도")
+                  
                 }
                 .sheet(isPresented: $isPresentingMapWideView) {
                     MapWideView()

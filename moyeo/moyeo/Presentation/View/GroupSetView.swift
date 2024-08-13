@@ -193,6 +193,8 @@ struct GroupSetView: View {
                         
                         DatePicker("", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
                             .datePickerStyle(CompactDatePickerStyle())
+                    }.onAppear(){
+                        selectedDate = Calendar.current.startOfDay(for: endDate) 
                     }
                 }
             }

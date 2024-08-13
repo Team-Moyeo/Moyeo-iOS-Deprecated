@@ -67,6 +67,8 @@
 		BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F52C59CEC4001B31DE /* MemberResponse.swift */; };
 		BFD683F82C59D84F001B31DE /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD683F72C59D84F001B31DE /* BaseResponse.swift */; };
 		CE3885DE2C651EE1002F22BB /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3885DD2C651EE1002F22BB /* APIModel.swift */; };
+		CE5F0FDB2C6AEB670080B082 /* MapTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F0FDA2C6AEB670080B082 /* MapTableView.swift */; };
+		CE5F0FDD2C6AEB970080B082 /* MapTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F0FDC2C6AEB970080B082 /* MapTableViewModel.swift */; };
 		CECB7CCE2C6301A30013FAF9 /* TimeTableConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */; };
 		CECB7CD02C63FB2D0013FAF9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */; };
 		F3D0DEEF2C44AF1800D5EB97 /* moyeoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D0DEEE2C44AF1800D5EB97 /* moyeoApp.swift */; };
@@ -164,6 +166,8 @@
 		CC00E0548D5EB819A3FB0B19 /* Pods-moyeo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo.debug.xcconfig"; path = "Target Support Files/Pods-moyeo/Pods-moyeo.debug.xcconfig"; sourceTree = "<group>"; };
 		CD841525BB746CDEAE1FEAAA /* Pods-moyeo-moyeoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeo-moyeoUITests.debug.xcconfig"; path = "Target Support Files/Pods-moyeo-moyeoUITests/Pods-moyeo-moyeoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE3885DD2C651EE1002F22BB /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		CE5F0FDA2C6AEB670080B082 /* MapTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableView.swift; sourceTree = "<group>"; };
+		CE5F0FDC2C6AEB970080B082 /* MapTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewModel.swift; sourceTree = "<group>"; };
 		CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableConfirmView.swift; sourceTree = "<group>"; };
 		CECB7CCF2C63FB2D0013FAF9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E97B83C44CE683794A53AF28 /* Pods-moyeoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyeoTests.debug.xcconfig"; path = "Target Support Files/Pods-moyeoTests/Pods-moyeoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 				51219E5C2C61BA72005EDDCD /* MemberPopUpView.swift */,
 				CECB7CCD2C6301A30013FAF9 /* TimeTableConfirmView.swift */,
 				BF3F5E002C68D824000E1977 /* TimeTableView.swift */,
+				CE5F0FDA2C6AEB670080B082 /* MapTableView.swift */,
 			);
 			path = GroupVote;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 		51219E992C61CEAA005EDDCD /* GroupVote */ = {
 			isa = PBXGroup;
 			children = (
+				CE5F0FDC2C6AEB970080B082 /* MapTableViewModel.swift */,
 				51219E622C61BA72005EDDCD /* EventViewModel.swift */,
 				51219E642C61BA72005EDDCD /* SharedDateModel.swift */,
 				51219E652C61BA72005EDDCD /* TimeTableHeaderVM.swift */,
@@ -720,6 +726,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5F0FDD2C6AEB970080B082 /* MapTableViewModel.swift in Sources */,
 				BF4DAE432C5BA6F7002371DC /* Helper+Encryption.swift in Sources */,
 				51F9DFF12C679095009E4239 /* CreateMeetingViewModel.swift in Sources */,
 				51219E872C61BA72005EDDCD /* MemberPopUpView.swift in Sources */,
@@ -770,6 +777,7 @@
 				BFD683F62C59CEC4001B31DE /* MemberResponse.swift in Sources */,
 				BF4DAE452C5F9B70002371DC /* ProfileView.swift in Sources */,
 				5191A4582C5226D000550071 /* AppViewModel.swift in Sources */,
+				CE5F0FDB2C6AEB670080B082 /* MapTableView.swift in Sources */,
 				51219E6B2C61BA72005EDDCD /* FavoriteButton.swift in Sources */,
 				51219E802C61BA72005EDDCD /* TimeInterval+Extension.swift in Sources */,
 			);

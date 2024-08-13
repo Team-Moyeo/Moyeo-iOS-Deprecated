@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapWideView: View {
     var body: some View {
-        Text("MapWideView")
+      MapTableView()
     }
 }
 

@@ -127,7 +127,7 @@ struct VotedTimesResult: Codable {
 struct VotedPlacesResult: Codable {
   
         let myVotedPlaces: [String]
-        let totalCandidatePlaces: [votePlace]
+        let totalCandidatePlaces: [CandidatePlace]
         let numberOfPeople : Int
         
         struct CandidatePlace: Codable {
